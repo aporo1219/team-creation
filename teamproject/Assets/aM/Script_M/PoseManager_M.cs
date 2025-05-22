@@ -23,6 +23,11 @@ public class PoseManager_M : MonoBehaviour
         }
         if (showing_pose > 1)
             showing_pose = 0;
+
+        if(pose_obj.activeSelf == true)
+            Time.timeScale = 0.0f;
+        else
+            Time.timeScale = 1.0f;
     }
 
     //ポーズの表示非表示を管理する関数
