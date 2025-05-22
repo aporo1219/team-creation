@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController_y : MonoBehaviour
 {
@@ -11,17 +12,24 @@ public class PlayerController_y : MonoBehaviour
     public string State = ("");
     public float MoveSpeed = 5.0f;  //移動速度
     public float JumpPower = 5.0f;  //ジャンプ力
-    public float DodgeSpeed = 10.0f;
+    public float DodgeSpeed = 20.0f;
 
     //入力
-    private float InputH = 0.0f;    //横
-    private float InputV = 0.0f;    //縦
+    private InputAction moveAction;
+    private InputAction jumpAction;
+    private InputAction attackAction;
+    private InputAction dodgeAction;
+
+    private Vector2 moveValue;
 
     private bool onGround = false;  //接地判定
     private bool isJump = false;
     private bool DoubleJump = false;     //空中ジャンプが残っているか
     private int AirTime = 0;        //滞空時間
     public int JumpLimit = 10;      //ジャンプできる最大滞空時間
+
+    private bool canMove = true;
+    private bool canRotate = true;
 
     public bool isDodge = false;
     public int DodgeTimeCount = 30;
@@ -43,6 +51,11 @@ public class PlayerController_y : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //collider = GetComponent<CapsuleCollider>();
 
+        moveAction = InputSystem.actions.FindAction("Move");
+        jumpAction = InputSystem.actions.FindAction("Jump");
+        attackAction = InputSystem.actions.FindAction("Attack");
+        dodgeAction = InputSystem.actions.FindAction("Dodge");
+
         instance = this;
 
         layerMask = LayerMask.GetMask("Ground");
@@ -55,14 +68,14 @@ public class PlayerController_y : MonoBehaviour
         {
             return;
         }
-        
+
+
 
         //入力取得
-        InputH = Input.GetAxisRaw("Horizontal");
-        InputV = Input.GetAxisRaw("Vertical");
+        moveValue = moveAction.ReadValue<Vector2>();
 
         //地面判定取得
-        if(Physics.Raycast(rb.position, Vector3.down, transform.localScale.y, layerMask))
+        if(Physics.SphereCast(rb.position, transform.localScale.y/2-0.1f, Vector3.down, out RaycastHit h, transform.localScale.y/2+0.2f, layerMask))
         {//地面についている
             //接地状態にする
             onGround = true;
@@ -77,23 +90,26 @@ public class PlayerController_y : MonoBehaviour
             AirTime++;
         }
 
+        //Physics.Raycast(rb.position, Vector3.down, transform.localScale.y, layerMask)
+        //Physics.SphereCast(rb.position, 1.0f, Vector3.down, out RaycastHit h, transform.localScale.y, layerMask)
+
         if(AirTime > JumpLimit)
         {//一定時間空中にいる
             //接地判定をなくす
             onGround = false;
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (jumpAction.WasPressedThisFrame())
         {
             Jump();
         }
 
-        //if (Input.GetButtonDown("Attack"))
-        //{
-        //    Attack();
-        //}
+        if (attackAction.WasPressedThisFrame())
+        {
+            Attack();
+        }
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if(dodgeAction.WasPressedThisFrame())
         {
             Dodge();
         }
@@ -101,30 +117,28 @@ public class PlayerController_y : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //カメラの方向から、X-Z平面の単位ベクトルを取得
+        //カメラの方向からX-Z平面の単位ベクトルを取得
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-        //方向キーの入力値とカメラの向きから、移動方向を決定
-        Vector3 moveForward = cameraForward * InputV + Camera.main.transform.right * InputH;
+        //方向キーの入力値とカメラの向きから移動方向を決定
+        Vector3 moveForward = cameraForward * moveValue.y + Camera.main.transform.right * moveValue.x;
 
-        //移動方向にスピードを掛ける。
-        rb.linearVelocity = moveForward * MoveSpeed + new Vector3(0, rb.linearVelocity.y, 0);
-
-        //キャラクターの向きを進行方向に
-        if (moveForward != Vector3.zero)
+        if (canMove)
         {
-            transform.rotation = Quaternion.LookRotation(moveForward);
+            //移動方向にスピードを掛ける
+            rb.linearVelocity = moveForward * MoveSpeed + new Vector3(0, rb.linearVelocity.y, 0);
+
         }
 
+        if (canRotate)
+        {
+            //キャラクターの向きを進行方向に
+            if (moveForward != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(moveForward);
+            }
+        }
+        
 
-
-        if (DodgeTimeCount == DodgeCoolTime)
-            isDodge = true;
-        if (AirDodgeTimeCount == AirDodgeCoolTime)
-            isAirDodge = true;
-        if (!isDodge)
-            DodgeTimeCount++;
-        if (!isAirDodge)
-            AirDodgeTimeCount++;
 
     }
 
@@ -153,19 +167,6 @@ public class PlayerController_y : MonoBehaviour
 
     private void Dodge()
     {
-        if (onGround && isDodge)
-        {
-            nowDodge = true;
-            rb.AddForce(transform.forward * DodgeSpeed);
-
-
-            isDodge = false;
-            DodgeTimeCount = 0;
-        }
-
-        if (!onGround && isAirDodge)
-        {
-
-        }
+        Debug.Log("回避");
     }
 }
