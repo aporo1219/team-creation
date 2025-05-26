@@ -194,8 +194,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307a912f112a7964b942225507214068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  State: 
   MoveSpeed: 5
   JumpPower: 5
+  DodgeSpeed: 20
+  JumpLimit: 10
+  isDodge: 0
+  DodgeTimeCount: 30
+  DodgeCoolTime: 30
+  isAirDodge: 0
+  AirDodgeTimeCount: 120
+  AirDodgeCoolTime: 120
+  nowDodge: 0
 --- !u!136 &177380564
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -977,6 +987,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pose_obj: {fileID: 1269719894}
+  ReStart: {fileID: 341336691}
+  Status: {fileID: 1627179610}
+  OperationMethod: {fileID: 2083212452}
+  FinishStage: {fileID: 1143415717}
 --- !u!1 &1143415715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,8 +1317,8 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 0.2
+  m_Camera: {fileID: 861719388}
+  m_PlaneDistance: 0.4
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1543,7 +1557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1811,8 +1825,8 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 0.3
+  m_Camera: {fileID: 861719388}
+  m_PlaneDistance: 0.45
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0

@@ -65,13 +65,13 @@ public class PoseManager_M : MonoBehaviour
             if (selectValue.y != 0)
             {
                 if (selector_move_time >= 15) selector_move_time = 0;
-                if (selectValue.y > 0 && selector_move_time == 0)
+                if (selectValue.y > 0.5 && selector_move_time == 0)
                 {
                     selector_pos--;
                     if(selector_pos < 0)selector_pos = 0;
                     Debug.Log("selector_moveup");
                 }
-                if (selectValue.y < 0 && selector_move_time == 0)
+                if (selectValue.y < -0.5 && selector_move_time == 0)
                 {
                     selector_pos++;
                     if (selector_pos > 3) selector_pos = 3;
