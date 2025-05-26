@@ -10,7 +10,7 @@ public class PlayerController_y : MonoBehaviour
     //private CapsuleCollider collider;
 
     //ステータス変数
-    public string State = ("");
+    public string State = "";
     public float MoveSpeed = 5.0f;  //移動速度
     public float JumpPower = 5.0f;  //ジャンプ力
     public float DodgeSpeed = 20.0f;
@@ -40,6 +40,9 @@ public class PlayerController_y : MonoBehaviour
     private int AirDodgeCoolTime = 120;
 
     private bool nowDodge = false;
+
+    private int AttackNum = 0;
+    [SerializeField] private string AttackState = "";
 
     LayerMask layerMask;
 
@@ -170,6 +173,49 @@ public class PlayerController_y : MonoBehaviour
     private void Attack()
     {
         Debug.Log("攻撃");
+
+        switch(AttackNum)
+        {
+            case 0:
+
+                if (onGround)
+                    AttackState = "GroundFirst";
+                else
+                    AttackState = "AirFirst";
+
+                break;
+            case 1:
+
+                if (onGround)
+                    AttackState = "GroundSecond";
+                else
+                    AttackState = "AirSecond";
+
+                break;
+            case 2:
+
+                if (onGround)
+                    AttackState = "GroundThird";
+                else
+                    AttackState = "AirThird";
+
+                break;
+            case 3:
+
+                if (onGround)
+                    AttackState = "GroundFinish";
+                else
+                    AttackState = "AirFinish";
+
+                break;
+        }
+
+        AttackNum++;
+        
+        if (AttackNum > 3)
+        {
+            AttackNum = 0;
+        }
     }
 
     private void Dodge()
