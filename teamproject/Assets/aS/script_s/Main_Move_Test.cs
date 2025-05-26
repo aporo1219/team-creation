@@ -20,7 +20,7 @@ public class CubeMove : MonoBehaviour
         InputH = Input.GetAxisRaw("Horizontal");
         InputV = Input.GetAxisRaw("Vertical");
 
-        RB.linearVelocity = new Vector3(InputH, 0.0f, InputV);
+        RB.linearVelocity = 5.0f * new Vector3(InputH * 2, -2.0f, InputV * 2);
     }
 
     void OnTriggerEnter(Collider other)

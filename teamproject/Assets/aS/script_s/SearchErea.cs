@@ -6,12 +6,13 @@ public class SearchErea : MonoBehaviour
     public  GameObject SmallEnemy;
 
     public  bool Discovery_Main;
-    public bool Lost_Main;
+    public bool First_Time;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
      void Start()
     {
         Discovery_Main = false;
+        First_Time = false;
     }
 
     // Update is called once per frame
@@ -21,17 +22,18 @@ public class SearchErea : MonoBehaviour
         transform.position = SmallEnemy.transform.position;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         //主人公がサーチ領域に入ったら敵が主人公に向かう信号を送る
         if(other.gameObject.name == "Main")
         {
-           
+            First_Time = true;
           // Debug.Log("ヒット");
            Discovery_Main = true;
         }
        
     }
+
 
     void OnTriggerExit(Collider other)
     {
@@ -39,8 +41,8 @@ public class SearchErea : MonoBehaviour
         if (other.gameObject.name == "Main")
         {
 
-            Debug.Log("出た");
-            Lost_Main = false;
+            // Debug.Log("ヒット");
+            Discovery_Main = false;
         }
 
     }
