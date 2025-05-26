@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,23 +24,22 @@ public class PlayerController_y : MonoBehaviour
     private Vector2 moveValue;
 
     private bool onGround = false;  //接地判定
-    private bool isJump = false;
+    private bool canJump = false;  //
     private bool DoubleJump = false;     //空中ジャンプが残っているか
     private int AirTime = 0;        //滞空時間
     public int JumpLimit = 10;      //ジャンプできる最大滞空時間
 
     private bool canMove = true;
     private bool canRotate = true;
+    private bool canAction = true;
 
-    public bool isDodge = false;
-    public int DodgeTimeCount = 30;
-    public int DodgeCoolTime = 30;
+    private int DodgeTimeCount;
+    private int DodgeCoolTime = 10;
 
-    public bool isAirDodge = false;
-    public int AirDodgeTimeCount = 120;
-    public int AirDodgeCoolTime = 120;
+    private int AirDodgeTimeCount;
+    private int AirDodgeCoolTime = 120;
 
-    public bool nowDodge = false;
+    private bool nowDodge = false;
 
     LayerMask layerMask;
 
@@ -56,6 +56,9 @@ public class PlayerController_y : MonoBehaviour
         attackAction = InputSystem.actions.FindAction("Attack");
         dodgeAction = InputSystem.actions.FindAction("Dodge");
 
+        DodgeTimeCount = DodgeCoolTime;
+        AirDodgeTimeCount = AirDodgeCoolTime;
+
         instance = this;
 
         layerMask = LayerMask.GetMask("Ground");
@@ -69,13 +72,13 @@ public class PlayerController_y : MonoBehaviour
             return;
         }
 
-
+        //Debug.Log(Time.deltaTime);
 
         //入力取得
         moveValue = moveAction.ReadValue<Vector2>();
 
         //地面判定取得
-        if(Physics.SphereCast(rb.position, transform.localScale.y/2-0.1f, Vector3.down, out RaycastHit h, transform.localScale.y/2+0.2f, layerMask))
+        if(Physics.SphereCast(rb.position, transform.localScale.y/2-0.1f, Vector3.down, out RaycastHit h, transform.localScale.y/2+0.15f, layerMask))
         {//地面についている
             //接地状態にする
             onGround = true;
@@ -83,6 +86,8 @@ public class PlayerController_y : MonoBehaviour
             DoubleJump = true;
             //エアタイム初期化
             AirTime = 0;
+            //空中回避回復
+            AirDodgeTimeCount = 120;
         }
         else
         {//空中にいる
@@ -90,26 +95,23 @@ public class PlayerController_y : MonoBehaviour
             AirTime++;
         }
 
-        //Physics.Raycast(rb.position, Vector3.down, transform.localScale.y, layerMask)
-        //Physics.SphereCast(rb.position, 1.0f, Vector3.down, out RaycastHit h, transform.localScale.y, layerMask)
-
         if(AirTime > JumpLimit)
         {//一定時間空中にいる
             //接地判定をなくす
             onGround = false;
         }
 
-        if (jumpAction.WasPressedThisFrame())
+        if (jumpAction.WasPressedThisFrame() && canAction)
         {
             Jump();
         }
 
-        if (attackAction.WasPressedThisFrame())
+        if (attackAction.WasPressedThisFrame() && canAction)
         {
             Attack();
         }
 
-        if(dodgeAction.WasPressedThisFrame())
+        if(dodgeAction.WasPressedThisFrame() && canAction)
         {
             Dodge();
         }
@@ -137,9 +139,12 @@ public class PlayerController_y : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(moveForward);
             }
         }
-        
 
+        if (DodgeTimeCount < DodgeCoolTime)
+            DodgeTimeCount++;
 
+        if (AirDodgeTimeCount < AirDodgeCoolTime)
+            AirDodgeTimeCount++;
     }
 
     private void Jump()
@@ -156,6 +161,8 @@ public class PlayerController_y : MonoBehaviour
             //ジャンプする
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, JumpPower, rb.linearVelocity.z);
 
+            AirDodgeTimeCount = AirDodgeCoolTime;
+
             DoubleJump = false;
         }
     }
@@ -167,6 +174,58 @@ public class PlayerController_y : MonoBehaviour
 
     private void Dodge()
     {
-        Debug.Log("回避");
+        if (onGround)
+        {
+            if (DodgeTimeCount == DodgeCoolTime)
+            {
+                Debug.Log("地上回避");
+                canMove = false;
+                canRotate = false;
+                canAction = false;
+
+                rb.linearVelocity = transform.forward * DodgeSpeed;
+
+                StartCoroutine("ActionEnd", 0.3f);
+                DodgeTimeCount = 0;
+            }
+            
+        }
+        else
+        {
+            if (AirDodgeTimeCount == AirDodgeCoolTime)
+            {
+                Debug.Log("空中回避");
+                canMove = false;
+                canRotate = false;
+                canAction = false;
+                rb.useGravity = false;
+                rb.linearVelocity = transform.forward * DodgeSpeed;
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
+
+                StartCoroutine("ActionEnd", 0.5f);
+                AirDodgeTimeCount = 0;
+            }
+                
+        }
+        
+
+    }
+
+    private IEnumerator ActionEnd(float actiontime)
+    {
+        float time = 0.0f;
+        
+        while (time < actiontime) 
+        {
+            time += Time.deltaTime; 
+            yield return null; 
+        }
+
+        canMove = true;
+        canRotate = true;
+        canAction = true;
+        rb.useGravity = true;
+        
+        yield return null;
     }
 }
