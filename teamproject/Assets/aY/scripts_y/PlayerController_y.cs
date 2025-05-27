@@ -23,7 +23,7 @@ public class PlayerController_y : MonoBehaviour
 
     private Vector2 moveValue;
 
-    private bool onGround = false;  //接地判定
+    [SerializeField] private bool onGround = false;  //接地判定
     private bool canJump = false;  //
     private bool DoubleJump = false;     //空中ジャンプが残っているか
     private int AirTime = 0;        //滞空時間
@@ -32,6 +32,8 @@ public class PlayerController_y : MonoBehaviour
     private bool canMove = true;
     private bool canRotate = true;
     private bool canAction = true;
+
+    bool ATK = false;
 
     private int DodgeTimeCount;
     private int DodgeCoolTime = 10;
@@ -109,7 +111,7 @@ public class PlayerController_y : MonoBehaviour
             Jump();
         }
 
-        if (attackAction.WasPressedThisFrame() && canAction)
+        if (attackAction.WasPressedThisFrame() && canAction && AttackState == "")
         {
             Attack();
         }
@@ -173,49 +175,70 @@ public class PlayerController_y : MonoBehaviour
     private void Attack()
     {
         Debug.Log("攻撃");
-
-        switch(AttackNum)
+        ATK = true;
+        AttackNum++;
+        switch (AttackNum)
         {
-            case 0:
-
-                if (onGround)
-                    AttackState = "GroundFirst";
-                else
-                    AttackState = "AirFirst";
-
-                break;
             case 1:
 
                 if (onGround)
-                    AttackState = "GroundSecond";
+                {
+                    AttackState = "GroundFirst";
+                    StartCoroutine("AttackCombo", 0.5f);
+                }
                 else
-                    AttackState = "AirSecond";
+                {
+                    AttackState = "AirFirst";
+                    StartCoroutine("AttackCombo", 0.5f);
+                }
 
                 break;
             case 2:
 
                 if (onGround)
-                    AttackState = "GroundThird";
+                {
+                    AttackState = "GroundSecond";
+                    StartCoroutine("AttackCombo", 0.5f);
+                }
                 else
-                    AttackState = "AirThird";
+                {
+                    AttackState = "AirSecond";
+                    StartCoroutine("AttackCombo", 0.5f);
+                }
 
                 break;
             case 3:
 
                 if (onGround)
-                    AttackState = "GroundFinish";
+                {
+                    AttackState = "GroundThird";
+                    StartCoroutine("AttackCombo", 0.5f);
+                }
                 else
+                {
+                    AttackState = "AirThird";
+                    StartCoroutine("AttackCombo", 0.5f);
+                }
+
+                break;
+            case 4:
+
+                if (onGround)
+                {
+                    AttackState = "GroundFinish";
+                    StartCoroutine("AttackCombo", 0.5f);
+                }
+                else
+                {
                     AttackState = "AirFinish";
+                    StartCoroutine("AttackCombo", 0.5f);
+                }
 
                 break;
         }
 
-        AttackNum++;
         
-        if (AttackNum > 3)
-        {
-            AttackNum = 0;
-        }
+        
     }
 
     private void Dodge()
@@ -231,7 +254,7 @@ public class PlayerController_y : MonoBehaviour
 
                 rb.linearVelocity = transform.forward * DodgeSpeed;
 
-                StartCoroutine("ActionEnd", 0.3f);
+                StartCoroutine("ActionEnd", 0.2f);
                 DodgeTimeCount = 0;
             }
             
@@ -248,13 +271,61 @@ public class PlayerController_y : MonoBehaviour
                 rb.linearVelocity = transform.forward * DodgeSpeed;
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
 
-                StartCoroutine("ActionEnd", 0.5f);
+                StartCoroutine("ActionEnd", 0.3f);
                 AirDodgeTimeCount = 0;
             }
                 
         }
         
 
+    }
+
+    private IEnumerator AttackCombo(float inputlimit)
+    {
+        float time = 0.0f;
+        bool combo = false;
+
+        if (AttackNum > 3)
+        {
+            while (time <inputlimit)
+            {
+                time += Time.deltaTime;
+                yield return null;
+            }
+        }
+        else
+        {
+            while (time < inputlimit)
+            {
+                time += Time.deltaTime;
+
+                if (attackAction.WasPressedThisFrame() && !ATK)
+                {
+                    Debug.Log("コンボ受付");
+                    combo = true;
+                }
+
+                ATK = false;
+
+                yield return null;
+            }
+            Debug.Log("コンボ受付終了");
+        }
+
+        if (combo)
+        {
+            Debug.Log("コンボ派生");
+            Attack();
+        }
+        else
+        {
+            Debug.Log("コンボリセット");
+            AttackNum = 0;
+            AttackState = "";
+        }
+
+
+        yield return null;
     }
 
     private IEnumerator ActionEnd(float actiontime)

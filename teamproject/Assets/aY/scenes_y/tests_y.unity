@@ -159,9 +159,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   State: 
   MoveSpeed: 5
-  JumpPower: 5
-  DodgeSpeed: 10
+  JumpPower: 8
+  DodgeSpeed: 20
+  onGround: 0
   JumpLimit: 10
+  AttackState: 
 --- !u!54 &58580570
 Rigidbody:
   m_ObjectHideFlags: 0

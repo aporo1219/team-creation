@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using RPGCharacterAnims.Actions;
 using RPGCharacterAnims.Lookups;
+using UnityEngine.InputSystem;
 
 namespace RPGCharacterAnims
 {
@@ -27,6 +28,13 @@ namespace RPGCharacterAnims
         private float inputFacingVertical;
         private bool inputRoll;
 
+		InputAction MoveAction;
+        InputAction JumpAction;
+        InputAction AttackAction;
+		InputAction DodgeAction;
+
+		Vector2 movevalue;
+
         // Variables.
         private Vector3 moveInput;
         private bool isJumpHeld;
@@ -34,7 +42,15 @@ namespace RPGCharacterAnims
         private bool inputPaused = false;
 
         private void Awake()
-        { rpgCharacterController = GetComponent<RPGCharacterController>(); }
+        {
+
+			MoveAction = InputSystem.actions.FindAction("Move");
+            JumpAction = InputSystem.actions.FindAction("Jump");
+            AttackAction = InputSystem.actions.FindAction("Attack");
+            DodgeAction = InputSystem.actions.FindAction("Dodge");
+
+			rpgCharacterController = GetComponent<RPGCharacterController>();
+		}
 
         private void Update()
         {
@@ -43,6 +59,8 @@ namespace RPGCharacterAnims
 				if (Time.time > inputPauseTimeout) { inputPaused = false; }
 				else { return; }
 			}
+
+			movevalue = MoveAction.ReadValue<Vector2>();
 
 			if (!inputPaused) { Inputs(); }
 
@@ -73,21 +91,24 @@ namespace RPGCharacterAnims
         private void Inputs()
         {
 	        try {
-		        inputJump = Input.GetButtonDown("Jump");
-		        isJumpHeld = Input.GetButton("Jump");
-		        inputLightHit = Input.GetButtonDown("LightHit");
+				inputJump = JumpAction.WasPressedThisFrame();
+				isJumpHeld = JumpAction.IsPressed();
+                inputAttackL = AttackAction.WasPressedThisFrame();
+                inputHorizontal = movevalue.x;
+                inputVertical = movevalue.y;
+                inputRoll = DodgeAction.WasPressedThisFrame();
+                inputLightHit = Input.GetButtonDown("LightHit");
 		        inputKnockdown = Input.GetButtonDown("Knockdown");
-		        inputAttackL = Input.GetButtonDown("AttackL");
+		        
 		        inputAttackR = Input.GetButtonDown("AttackR");
 		        inputSwitchUpDown = Input.GetAxisRaw("SwitchUpDown");
 		        inputAimBlock = Input.GetAxisRaw("Aim");
 		        inputAiming = Input.GetButton("Aiming");
-		        inputHorizontal = Input.GetAxisRaw("Horizontal");
-		        inputVertical = Input.GetAxisRaw("Vertical");
+				
 		        inputFace = Input.GetMouseButton(1);
 		        inputFacingHorizontal = Input.GetAxisRaw("FacingHorizontal");
 		        inputFacingVertical = Input.GetAxisRaw("FacingVertical");
-		        inputRoll = Input.GetButtonDown("L3");
+		        
 
 		        // Slow time toggle.
 		        if (rpgCharacterController.HandlerExists(HandlerTypes.SlowTime)) {
