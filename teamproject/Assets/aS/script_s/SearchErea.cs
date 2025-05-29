@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SearchErea : MonoBehaviour
 {
-    
-    public  GameObject SmallEnemy;
+
+    [SerializeField] GameObject SmallEnemy;
 
     public  bool Discovery_Main;
     public bool First_Time;
