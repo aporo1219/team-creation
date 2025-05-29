@@ -12,26 +12,34 @@ public class PlayerController_y : MonoBehaviour
     //ステータス変数
     public string State = "";
     public float MoveSpeed = 5.0f;  //移動速度
-    public float JumpPower = 5.0f;  //ジャンプ力
+    public float DashSpeed = 10.0f;  //移動速度
+    public float JumpPower = 10.0f;  //ジャンプ力
+    public float DoubleJumpPower = 8.0f;  //空中ジャンプ力
     public float DodgeSpeed = 20.0f;
 
     //入力
     private InputAction moveAction;
+    private InputAction dashAction;
     private InputAction jumpAction;
     private InputAction attackAction;
     private InputAction dodgeAction;
+    private InputAction guardAction;
 
     private Vector2 moveValue;
 
+    private bool Dash = false;
+
     [SerializeField] private bool onGround = false;  //接地判定
-    private bool canJump = false;  //
+    private int JumpTime = 0;
+    private int LongJumpLimit = 20;
     private bool DoubleJump = false;     //空中ジャンプが残っているか
     private int AirTime = 0;        //滞空時間
-    public int JumpLimit = 10;      //ジャンプできる最大滞空時間
+    private int JumpLimit = 10;      //ジャンプできる最大滞空時間
 
-    private bool canMove = true;
-    private bool canRotate = true;
-    private bool canAction = true;
+    public bool canMove = true;
+    public bool canRotate = true;
+    public bool canJump = true;  //
+    public bool canAction = true;
 
     bool ATK = false;
 
@@ -57,9 +65,11 @@ public class PlayerController_y : MonoBehaviour
         //collider = GetComponent<CapsuleCollider>();
 
         moveAction = InputSystem.actions.FindAction("Move");
+        dashAction = InputSystem.actions.FindAction("Dash");
         jumpAction = InputSystem.actions.FindAction("Jump");
         attackAction = InputSystem.actions.FindAction("Attack");
         dodgeAction = InputSystem.actions.FindAction("Dodge");
+        guardAction = InputSystem.actions.FindAction("Guard");
 
         DodgeTimeCount = DodgeCoolTime;
         AirDodgeTimeCount = AirDodgeCoolTime;
@@ -106,9 +116,27 @@ public class PlayerController_y : MonoBehaviour
             onGround = false;
         }
 
+        if (dashAction.WasPressedThisFrame() && onGround)
+        {
+            if (Dash)
+            {
+                Dash = false;
+            }
+            else
+            {
+                Dash = true;
+            }
+                
+        }
+
+        if (moveValue.x == 0 && moveValue.y == 0)
+        {
+            Dash = false;
+        }
+
         if (jumpAction.WasPressedThisFrame() && canAction)
         {
-            Jump();
+            StartCoroutine("Jump");
         }
 
         if (attackAction.WasPressedThisFrame() && canAction && AttackState == "")
@@ -116,9 +144,14 @@ public class PlayerController_y : MonoBehaviour
             Attack();
         }
 
-        if(dodgeAction.WasPressedThisFrame() && canAction)
+        if (dodgeAction.WasPressedThisFrame() && canAction)
         {
             Dodge();
+        }
+
+        if (guardAction.WasPressedThisFrame() && canAction && onGround)
+        {
+            StartCoroutine("Guard");
         }
     }
 
@@ -131,8 +164,17 @@ public class PlayerController_y : MonoBehaviour
 
         if (canMove)
         {
-            //移動方向にスピードを掛ける
-            rb.linearVelocity = moveForward * MoveSpeed + new Vector3(0, rb.linearVelocity.y, 0);
+            if (Dash)
+            {
+                //移動方向にスピードを掛ける
+                rb.linearVelocity = moveForward * DashSpeed + new Vector3(0, rb.linearVelocity.y, 0);
+            }
+            else
+            {
+                //移動方向にスピードを掛ける
+                rb.linearVelocity = moveForward * MoveSpeed + new Vector3(0, rb.linearVelocity.y, 0);
+            }
+                
 
         }
 
@@ -152,24 +194,41 @@ public class PlayerController_y : MonoBehaviour
             AirDodgeTimeCount++;
     }
 
-    private void Jump()
+    private IEnumerator Jump()
     {
         if (onGround)
         {   //接地しているなら
-            //ジャンプする
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, JumpPower, rb.linearVelocity.z);
-            //接地判定をなくす
-            onGround = false;
+
+            while (JumpTime < LongJumpLimit && jumpAction.IsPressed() && canJump)
+            {
+                //接地判定をなくす
+                onGround = false;
+
+                //ジャンプする
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, JumpPower, rb.linearVelocity.z);
+
+                JumpTime++;
+
+                yield return null;
+            }
+
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 3.0f, rb.linearVelocity.z);
+                JumpTime = 0;
+
+
+            
         }
         else if (DoubleJump)
         {   //空中ジャンプが残っているなら
             //ジャンプする
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, JumpPower, rb.linearVelocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, DoubleJumpPower, rb.linearVelocity.z);
 
             AirDodgeTimeCount = AirDodgeCoolTime;
 
             DoubleJump = false;
         }
+
+        yield return null;
     }
 
     private void Attack()
@@ -249,6 +308,7 @@ public class PlayerController_y : MonoBehaviour
             {
                 Debug.Log("地上回避");
                 canMove = false;
+                canJump = false;
                 canRotate = false;
                 canAction = false;
 
@@ -265,9 +325,11 @@ public class PlayerController_y : MonoBehaviour
             {
                 Debug.Log("空中回避");
                 canMove = false;
+                canJump = false;
                 canRotate = false;
                 canAction = false;
                 rb.useGravity = false;
+
                 rb.linearVelocity = transform.forward * DodgeSpeed;
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
 
@@ -328,17 +390,43 @@ public class PlayerController_y : MonoBehaviour
         yield return null;
     }
 
+    private IEnumerator Guard()
+    {
+        
+
+        while (guardAction.IsPressed())
+        {
+            rb.linearVelocity = new Vector3(0.0f, rb.linearVelocity.y, 0.0f);
+
+            canMove = false;
+            canJump = false;
+            canRotate = false;
+            canAction = false;
+
+            yield return null;
+        }
+
+        canMove = true;
+        canJump = true;
+        canRotate = true;
+        canAction = true;
+
+        yield return null;
+    }
+
     private IEnumerator ActionEnd(float actiontime)
     {
         float time = 0.0f;
         
         while (time < actiontime) 
         {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
             time += Time.deltaTime; 
             yield return null; 
         }
 
         canMove = true;
+        canJump = true;
         canRotate = true;
         canAction = true;
         rb.useGravity = true;
