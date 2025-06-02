@@ -5,6 +5,7 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 
+
 public class Move_Enemy : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,10 +25,12 @@ public class Move_Enemy : MonoBehaviour
     private float Around_Position;
     private bool Turn;//回転の変数
 
+
     Vector3 Goal_Position;//目標時点の座標変数（雑魚敵）
     Vector3 Initial_Value;//初期地点の座標変数
     Vector3 Search_Position_Right;//周回する用のベクトル右
     Vector3 Search_Position_Left;//周回する用のベクトル左
+   
 
     void Start()
     {
@@ -35,7 +38,7 @@ public class Move_Enemy : MonoBehaviour
         //プレイヤーに近づく変数
         Goal_Position = MainCharacter.transform.position;
         Speed_Enemy = 2.0f;
-        MainCharacter = GameObject.Find("Player");
+        MainCharacter = GameObject.FindWithTag("Player");
         Erea = GameObject.Find("SearchErea");
         Search_Enemy = Erea.GetComponent<SearchErea>();
         Turn = false;//trueならば回転
@@ -45,11 +48,13 @@ public class Move_Enemy : MonoBehaviour
         Cool_Time = 5;
         //探索関連の変数
         Mode_Serch = false;
-        Search_Position_Right = new Vector3(10, (float)0.75, 0);
-        Search_Position_Left = new Vector3(-10, (float)0.75, 0);
+        Search_Position_Right = new Vector3(this.transform.position.x + 10, (float)0.75, 0);
+        Search_Position_Left = new Vector3(this.transform.position.x - 10, (float)0.75, 0);
         Right_Or_Left = false;//falseならば右,trueならば左
         Around_Position = 9.9f; 
-        Initial_Value = new Vector3(0,(float)2.08,0);
+        Initial_Value.x = this.transform.position.x;
+        Initial_Value.y = this.transform.position.y;
+        Initial_Value.z = this.transform.position.z;
         Time_Lapse = 0;
         Return = 5;
     }
@@ -59,6 +64,8 @@ public class Move_Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+       
+
         Attack_Enemy_Time += Time.deltaTime;
 
         Around();
@@ -119,13 +126,16 @@ public class Move_Enemy : MonoBehaviour
     //主人公を見つけた時の関数
     void Discovery()
     {
+        
+
         Debug.Log("見つけた");
         Time_Lapse = 0;
         Turn = true;
         if(Turn)
         {
-            Debug.Log("旋回");
-            transform.Rotate(Goal_Position);
+            transform.Rotate(Goal_Position,0,0);
+
+            Debug.Log("旋回");  
         }
         //目標時点まで移動する（Goal_Positionの値をPlayerの座標にすればPlayerに向かう）
         transform.position = Vector3.MoveTowards(transform.position, Goal_Position, Speed_Enemy * Time.deltaTime);

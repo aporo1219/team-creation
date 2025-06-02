@@ -25,7 +25,7 @@ public class SearchErea : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         //主人公がサーチ領域に入ったら敵が主人公に向かう信号を送る
-        if(other.gameObject.name == "Main")
+        if(other.gameObject.tag == "Player")
         {
             First_Time = true;
           // Debug.Log("ヒット");
@@ -38,7 +38,7 @@ public class SearchErea : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         //主人公がサーチ領域に入ったら敵が主人公に向かう信号を送る
-        if (other.gameObject.name == "Main")
+        if (other.gameObject.tag == "Player")
         {
 
             // Debug.Log("ヒット");
