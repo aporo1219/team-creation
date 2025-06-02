@@ -18,7 +18,7 @@ public class MapCamera_M : MonoBehaviour
     void Update()
     {
         pos = player.transform.position;
-        pos.y = camera.transform.position.y;
+        pos.y = pos.y + 30;
         camera.transform.position = pos;
     }
 }
