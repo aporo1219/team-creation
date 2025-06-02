@@ -7,14 +7,13 @@ public class PlayerController_y : MonoBehaviour
     public static PlayerController_y instance;
 
     private Rigidbody rb;
-    //private CapsuleCollider collider;
 
     //ステータス変数
     public string State = "";
     public float MoveSpeed = 5.0f;  //移動速度
     public float DashSpeed = 10.0f;  //移動速度
-    public float JumpPower = 10.0f;  //ジャンプ力
-    public float DoubleJumpPower = 8.0f;  //空中ジャンプ力
+    public float JumpPower = 20.0f;  //ジャンプ力
+    public float DoubleJumpPower = 30.0f;  //空中ジャンプ力
     public float DodgeSpeed = 20.0f;
 
     //入力
@@ -30,11 +29,13 @@ public class PlayerController_y : MonoBehaviour
     private bool Dash = false;
 
     [SerializeField] private bool onGround = false;  //接地判定
+    [SerializeField] private bool GroundHit = false;
     private int JumpTime = 0;
-    private int LongJumpLimit = 20;
+    private int LongJumpLimit = 10;
     private bool DoubleJump = false;     //空中ジャンプが残っているか
     private int AirTime = 0;        //滞空時間
     private int JumpLimit = 10;      //ジャンプできる最大滞空時間
+    private bool isJump = false;
 
     public bool canMove = true;
     public bool canRotate = true;
@@ -52,7 +53,7 @@ public class PlayerController_y : MonoBehaviour
     private bool nowDodge = false;
 
     private int AttackNum = 0;
-    [SerializeField] private string AttackState = "";
+    [SerializeField] public string AttackState = "";
 
     LayerMask layerMask;
 
@@ -62,7 +63,6 @@ public class PlayerController_y : MonoBehaviour
         Application.targetFrameRate = 60;
 
         rb = GetComponent<Rigidbody>();
-        //collider = GetComponent<CapsuleCollider>();
 
         moveAction = InputSystem.actions.FindAction("Move");
         dashAction = InputSystem.actions.FindAction("Dash");
@@ -115,6 +115,7 @@ public class PlayerController_y : MonoBehaviour
             //接地判定をなくす
             onGround = false;
         }
+        
 
         if (dashAction.WasPressedThisFrame() && onGround)
         {
@@ -165,17 +166,23 @@ public class PlayerController_y : MonoBehaviour
         if (canMove)
         {
             if (Dash)
-            {
-                //移動方向にスピードを掛ける
+            {//ダッシュ時
+                //移動方向にダッシュスピードを掛ける
                 rb.linearVelocity = moveForward * DashSpeed + new Vector3(0, rb.linearVelocity.y, 0);
             }
             else
-            {
-                //移動方向にスピードを掛ける
+            {//通常時
+                //移動方向に移動スピードを掛ける
                 rb.linearVelocity = moveForward * MoveSpeed + new Vector3(0, rb.linearVelocity.y, 0);
             }
                 
 
+        }
+
+        //ジャンプ以外で少し浮いた時に下向きに強い力を与える
+        if (onGround && !isJump && !GroundHit && canMove)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -10, rb.linearVelocity.z);
         }
 
         if (canRotate)
@@ -187,6 +194,8 @@ public class PlayerController_y : MonoBehaviour
             }
         }
 
+        rb.AddForce(new Vector3(0, -5, 0));
+
         if (DodgeTimeCount < DodgeCoolTime)
             DodgeTimeCount++;
 
@@ -194,15 +203,33 @@ public class PlayerController_y : MonoBehaviour
             AirDodgeTimeCount++;
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+
+        if (collision.gameObject.layer == 6)
+        {
+            GroundHit = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == 6)
+        {
+            GroundHit = false;
+        }
+    }
+
     private IEnumerator Jump()
     {
         if (onGround)
         {   //接地しているなら
 
-            while (JumpTime < LongJumpLimit && jumpAction.IsPressed() && canJump)
+            while (((JumpTime < LongJumpLimit && jumpAction.IsPressed()) || JumpTime < 3) && canJump)
             {
                 //接地判定をなくす
                 onGround = false;
+                isJump = true;
 
                 //ジャンプする
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, JumpPower, rb.linearVelocity.z);
@@ -212,21 +239,41 @@ public class PlayerController_y : MonoBehaviour
                 yield return null;
             }
 
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 3.0f, rb.linearVelocity.z);
-                JumpTime = 0;
-
-
+            
             
         }
         else if (DoubleJump)
         {   //空中ジャンプが残っているなら
-            //ジャンプする
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, DoubleJumpPower, rb.linearVelocity.z);
 
+            isJump = true;
+            //空中回避のクールタイムをなくす
             AirDodgeTimeCount = AirDodgeCoolTime;
+            while (JumpTime < 17 && canJump)
+            {
+                //ジャンプする
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, DoubleJumpPower, rb.linearVelocity.z);
+
+                JumpTime++;
+
+                yield return null;
+            }
+            
+            
 
             DoubleJump = false;
         }
+
+        if (canJump)
+            for(int i = 0; i < 2; i++)
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y / 2, rb.linearVelocity.z);
+
+                yield return null;
+            }
+           
+        JumpTime = 0;
+
+        isJump = false;
 
         yield return null;
     }
@@ -312,9 +359,7 @@ public class PlayerController_y : MonoBehaviour
                 canRotate = false;
                 canAction = false;
 
-                rb.linearVelocity = transform.forward * DodgeSpeed;
-
-                StartCoroutine("ActionEnd", 0.2f);
+                StartCoroutine("DodgeMove", 0.2f);
                 DodgeTimeCount = 0;
             }
             
@@ -330,10 +375,10 @@ public class PlayerController_y : MonoBehaviour
                 canAction = false;
                 rb.useGravity = false;
 
-                rb.linearVelocity = transform.forward * DodgeSpeed;
+                //rb.linearVelocity = transform.forward * DodgeSpeed;
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
 
-                StartCoroutine("ActionEnd", 0.3f);
+                StartCoroutine("AirDodgeMove", 0.3f);
                 AirDodgeTimeCount = 0;
             }
                 
@@ -414,13 +459,22 @@ public class PlayerController_y : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator ActionEnd(float actiontime)
+    private IEnumerator DodgeMove(float actiontime)
     {
         float time = 0.0f;
-        
+        //rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
+
         while (time < actiontime) 
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
+            rb.linearVelocity = transform.forward * DodgeSpeed;
+
+            if (!GroundHit && rb.linearVelocity.y > 0)
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            }
+
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -10, rb.linearVelocity.z);
+
             time += Time.deltaTime; 
             yield return null; 
         }
@@ -431,6 +485,32 @@ public class PlayerController_y : MonoBehaviour
         canAction = true;
         rb.useGravity = true;
         
+        yield return null;
+    }
+
+    private IEnumerator AirDodgeMove(float actiontime)
+    {
+        float time = 0.0f;
+
+        while (time < actiontime)
+        {
+            rb.linearVelocity = transform.forward * DodgeSpeed;
+
+            if (!GroundHit && rb.linearVelocity.y != 0)
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            }
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        canMove = true;
+        canJump = true;
+        canRotate = true;
+        canAction = true;
+        rb.useGravity = true;
+
         yield return null;
     }
 }
