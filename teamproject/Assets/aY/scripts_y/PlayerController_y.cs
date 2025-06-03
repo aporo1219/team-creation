@@ -14,7 +14,8 @@ public class PlayerController_y : MonoBehaviour
     public float DashSpeed = 10.0f;  //移動速度
     public float JumpPower = 20.0f;  //ジャンプ力
     public float DoubleJumpPower = 30.0f;  //空中ジャンプ力
-    public float DodgeSpeed = 20.0f;
+    public float DodgeSpeed = 30.0f;
+    public float AirDodgeSpeed = 50.0f;
 
     //入力
     private InputAction moveAction;
@@ -93,7 +94,7 @@ public class PlayerController_y : MonoBehaviour
         moveValue = moveAction.ReadValue<Vector2>();
 
         //地面判定取得
-        if(Physics.SphereCast(rb.position, transform.localScale.y/2-0.1f, Vector3.down, out RaycastHit h, transform.localScale.y/2+0.15f, layerMask))
+        if (Physics.SphereCast(rb.position, transform.localScale.y / 2 - 0.1f, Vector3.down, out RaycastHit h, transform.localScale.y / 2 + 0.15f, layerMask))
         {//地面についている
             //接地状態にする
             onGround = true;
@@ -110,49 +111,54 @@ public class PlayerController_y : MonoBehaviour
             AirTime++;
         }
 
-        if(AirTime > JumpLimit)
+        if (AirTime > JumpLimit)
         {//一定時間空中にいる
             //接地判定をなくす
             onGround = false;
         }
-        
 
-        if (dashAction.WasPressedThisFrame() && onGround)
+        //入力検知
         {
-            if (Dash)
+            //ダッシュ
+            if (dashAction.WasPressedThisFrame() && onGround)
             {
+                //ダッシュ切替
+                if (Dash)
+                {
+                    Dash = false;
+                }
+                else
+                {
+                    Dash = true;
+                }
+
+            }
+            //スティックの入力無し
+            if (moveValue.x == 0 && moveValue.y == 0)
+            {
+                //ダッシュ解除
                 Dash = false;
             }
-            else
+            //ジャンプ
+            if (jumpAction.WasPressedThisFrame() && canAction)
             {
-                Dash = true;
+                StartCoroutine("Jump");
             }
-                
-        }
-
-        if (moveValue.x == 0 && moveValue.y == 0)
-        {
-            Dash = false;
-        }
-
-        if (jumpAction.WasPressedThisFrame() && canAction)
-        {
-            StartCoroutine("Jump");
-        }
-
-        if (attackAction.WasPressedThisFrame() && canAction && AttackState == "")
-        {
-            Attack();
-        }
-
-        if (dodgeAction.WasPressedThisFrame() && canAction)
-        {
-            Dodge();
-        }
-
-        if (guardAction.WasPressedThisFrame() && canAction && onGround)
-        {
-            StartCoroutine("Guard");
+            //通常攻撃
+            if (attackAction.WasPressedThisFrame() && canAction && AttackState == "")
+            {
+                Attack();
+            }
+            //回避
+            if (dodgeAction.WasPressedThisFrame() && canAction)
+            {
+                Dodge();
+            }
+            //ガード
+            if (guardAction.WasPressedThisFrame() && canAction && onGround)
+            {
+                StartCoroutine("Guard");
+            }
         }
     }
 
@@ -193,19 +199,19 @@ public class PlayerController_y : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(moveForward);
             }
         }
-
+        //重力強化
         rb.AddForce(new Vector3(0, -5, 0));
-
+        //地上回避クールタイム
         if (DodgeTimeCount < DodgeCoolTime)
             DodgeTimeCount++;
-
+        //空中回避クールタイム
         if (AirDodgeTimeCount < AirDodgeCoolTime)
             AirDodgeTimeCount++;
     }
 
     private void OnCollisionStay(Collision collision)
     {
-
+        //地形との接触検知
         if (collision.gameObject.layer == 6)
         {
             GroundHit = true;
@@ -214,6 +220,7 @@ public class PlayerController_y : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+        //地形から離れたのを検知
         if (collision.gameObject.layer == 6)
         {
             GroundHit = false;
@@ -224,13 +231,13 @@ public class PlayerController_y : MonoBehaviour
     {
         if (onGround)
         {   //接地しているなら
+            //ジャンプ中に
+            isJump = true;
 
             while (((JumpTime < LongJumpLimit && jumpAction.IsPressed()) || JumpTime < 3) && canJump)
             {
                 //接地判定をなくす
                 onGround = false;
-                isJump = true;
-
                 //ジャンプする
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, JumpPower, rb.linearVelocity.z);
 
@@ -243,8 +250,8 @@ public class PlayerController_y : MonoBehaviour
             
         }
         else if (DoubleJump)
-        {   //空中ジャンプが残っているなら
-
+        {   //空中で空中ジャンプが残っているなら
+            //ジャンプ中に
             isJump = true;
             //空中回避のクールタイムをなくす
             AirDodgeTimeCount = AirDodgeCoolTime;
@@ -264,15 +271,16 @@ public class PlayerController_y : MonoBehaviour
         }
 
         if (canJump)
+            //上昇減速
             for(int i = 0; i < 2; i++)
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y / 2, rb.linearVelocity.z);
 
                 yield return null;
             }
-           
+        
         JumpTime = 0;
-
+        //非ジャンプ状態に
         isJump = false;
 
         yield return null;
@@ -285,57 +293,57 @@ public class PlayerController_y : MonoBehaviour
         AttackNum++;
         switch (AttackNum)
         {
-            case 1:
+            case 1://初段
 
                 if (onGround)
-                {
+                {//地上
                     AttackState = "GroundFirst";
                     StartCoroutine("AttackCombo", 0.5f);
                 }
                 else
-                {
+                {//空中
                     AttackState = "AirFirst";
                     StartCoroutine("AttackCombo", 0.5f);
                 }
 
                 break;
-            case 2:
+            case 2://二段目
 
                 if (onGround)
-                {
+                {//地上
                     AttackState = "GroundSecond";
                     StartCoroutine("AttackCombo", 0.5f);
                 }
                 else
-                {
+                {//空中
                     AttackState = "AirSecond";
                     StartCoroutine("AttackCombo", 0.5f);
                 }
 
                 break;
-            case 3:
+            case 3://三段目
 
                 if (onGround)
-                {
+                {//地上
                     AttackState = "GroundThird";
                     StartCoroutine("AttackCombo", 0.5f);
                 }
                 else
-                {
+                {//空中
                     AttackState = "AirThird";
                     StartCoroutine("AttackCombo", 0.5f);
                 }
 
                 break;
-            case 4:
+            case 4://フィニッシュ
 
                 if (onGround)
-                {
+                {//地上
                     AttackState = "GroundFinish";
                     StartCoroutine("AttackCombo", 0.5f);
                 }
                 else
-                {
+                {//空中
                     AttackState = "AirFinish";
                     StartCoroutine("AttackCombo", 0.5f);
                 }
@@ -494,7 +502,7 @@ public class PlayerController_y : MonoBehaviour
 
         while (time < actiontime)
         {
-            rb.linearVelocity = transform.forward * DodgeSpeed;
+            rb.linearVelocity = transform.forward * AirDodgeSpeed;
 
             if (!GroundHit && rb.linearVelocity.y != 0)
             {

@@ -228,7 +228,8 @@ MonoBehaviour:
   DashSpeed: 10
   JumpPower: 20
   DoubleJumpPower: 15
-  DodgeSpeed: 20
+  DodgeSpeed: 30
+  AirDodgeSpeed: 50
   onGround: 0
   GroundHit: 0
   canMove: 1
