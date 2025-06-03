@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
@@ -9,6 +10,9 @@ using static UnityEngine.GraphicsBuffer;
 public class Move_Enemy : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static Move_Enemy instance; 
+    public bool Attack_Enemy;//“G‚ÌUŒ‚‚Ì”»’è
+    public int Combo_Number;//ƒRƒ“ƒ{‚Ìí—Ş‚ÌŠm”F‚É•Ï”
 
     [SerializeField] GameObject MainCharacter;
     [SerializeField] GameObject Erea;//SearchErea‚ÌƒXƒNƒŠƒvƒg‚ğŒÄ‚Ño‚·GameObject
@@ -17,14 +21,14 @@ public class Move_Enemy : MonoBehaviour
     private float Speed_Enemy;//ƒXƒs[ƒh‚Ì•Ï”
     private float  Time_Lapse;//“G‚ªålŒö‚ğŒ©¸‚Á‚½‚Æ‚«‚ÌŒo‰ßŠÔ
     private int Return;//“G‚ª‰Šú’l‚É–ß‚éŠÔ‚Ì•Ï”
-    private bool Attack_Enemy;//“G‚ÌUŒ‚‚Ì”»’è
     private float Attack_Enemy_Time;//“G‚ÌUŒ‚‚ÌƒN[ƒ‹ƒ^ƒCƒ€
     private int Cool_Time;//UŒ‚‚ÌƒN[ƒ‹ŠÔ
     private bool Mode_Serch;//’Tõƒ‚[ƒh‚©‚Ì”»’è
     private bool  Right_Or_Left;//ü‰ñ‚Ì‰E‚©¶‚©‚Ì”»’è
     private float Around_Position;
     private bool Turn;//‰ñ“]‚Ì•Ï”
-
+    private bool Be_Attcked;//UŒ‚‚ğó‚¯‚½‚©‚Ì”»’è
+    private string Player_AttackQCombo;//ƒvƒŒƒCƒ„[‚ÌƒRƒ“ƒ{UŒ‚—p•Ï”
 
     Vector3 Goal_Position;//–Ú•W“_‚ÌÀ•W•Ï”iG‹›“Gj
     Vector3 Initial_Value;//‰Šú’n“_‚ÌÀ•W•Ï”
@@ -46,6 +50,9 @@ public class Move_Enemy : MonoBehaviour
         Attack_Enemy = false;
         Attack_Enemy_Time = 0;
         Cool_Time = 5;
+        Player_AttackQCombo = PlayerController_y.instance.AttackState;
+        Be_Attcked = PlayerController_y.instance.canAction;
+        Combo_Number = 0;
         //’TõŠÖ˜A‚Ì•Ï”
         Mode_Serch = false;
         Search_Position_Right = new Vector3(this.transform.position.x + 10, (float)0.75, 0);
@@ -59,7 +66,15 @@ public class Move_Enemy : MonoBehaviour
         Return = 5;
     }
 
+    public void Update()
+    {
+        if(Time.timeScale == 0)
+        {
+            return;
+        }
 
+
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -162,5 +177,42 @@ public class Move_Enemy : MonoBehaviour
     {
         Attack_Enemy = true;
         Attack_Enemy_Time = 0.0f;
+    }
+
+    //UŒ‚‚ğó‚¯‚½
+    public void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag == "Player" && Be_Attcked && Player_AttackQCombo == "GroundFirst")
+        {
+            Combo_Number = 1;
+        }
+        else if (other.gameObject.tag == "Player" && Be_Attcked && Player_AttackQCombo == "AirFirst")
+        {
+            Combo_Number = 2;
+        }
+        else if (other.gameObject.tag == "Player" && Be_Attcked && Player_AttackQCombo == "GroundSecound")
+        {
+            Combo_Number = 3;
+        }
+        else if (other.gameObject.tag == "Player" && Be_Attcked && Player_AttackQCombo == "AirSecound")
+        {
+            Combo_Number = 4;
+        }
+        else if (other.gameObject.tag == "Player" && Be_Attcked && Player_AttackQCombo == "GroundThird")
+        {
+            Combo_Number = 5;
+        }
+        else if (other.gameObject.tag == "Player" && Be_Attcked && Player_AttackQCombo == "AirThird")
+        {
+            Combo_Number = 6;
+        }
+        else if (other.gameObject.tag == "Player" && Be_Attcked && Player_AttackQCombo == "GroundFinish")
+        {
+            Combo_Number = 7;
+        }
+        else if (other.gameObject.tag == "Player" && Be_Attcked && Player_AttackQCombo == "GroundFinish")
+        {
+            Combo_Number = 8;
+        }
     }
 }               
