@@ -4,43 +4,84 @@ using UnityEngine;
 public class Enemy_Manager : MonoBehaviour
 {
    
-   [SerializeField] GameObject Enemy;
+   [SerializeField] GameObject Enemy_Object;//“G‚Ìƒ^ƒO‚ğŒ©‚Â‚¯‚é•Ï”
+    [SerializeField] Move_Enemy Enemy;//“G‚ÌƒXƒNƒŠƒvƒgæ“¾•Ï”
 
     private int Enemy_HP;
     private int Enemy_Power;
     private bool Enemy_Die;
     private int Enemy_Number;
-    private string Player_Attack;
+    
 
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Enemy_HP = 10;//‰¼”’l
+        Enemy_HP = 11;//‰¼”’l
         Enemy_Die = false;//true‚ÅÁ‚¦‚é
-        Enemy_Number = 10;//“G‚Ì”
-        Player_Attack = PlayerController_y.instance.AttackState;
+        Enemy_Number = 10;//‰¼“G‚Ì”
+        Enemy_Object = GameObject.FindWithTag("Enemy");
+        Enemy = Enemy_Object.GetComponent<Move_Enemy>();
     }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-    }
+    
 
 
     // Update is called once per frame
     void FixedUpdate()
     {
-            Debug.Log("Á‚¦‚½");
-            Enemy_Die = true; 
-            if(Enemy_Die)
-            {
-              After_Die();
-            }
+        if(Enemy.Combo_Number > 0)
+        {
+            Be_Attack();
+        }
+
+        if(Enemy_HP <= 0)
+        {
+             Debug.Log("Á‚¦‚½");
+             Enemy_Die = true; 
+             if(Enemy_Die)
+             {
+                After_Die();
+             }
+        }
+       
     }
 
+    //G‹›“G‚ÌUŒ‚‚ğó‚¯‚½ˆ—‚ÌŠÖ”
+    void Be_Attack()
+    {
+        switch(Enemy.Combo_Number)
+        {
+            //ƒRƒ“ƒ{‚Í‚¶‚ß
+            case 1:
+                Enemy_HP -= 1;
+                break;
+            case 2:
+                Enemy_HP -= 1;
+                break;
+            //ƒRƒ“ƒ{2”Ô–Ú
+            case 3:
+                Enemy_HP -= 2;
+                break;
+            case 4:
+                Enemy_HP -= 2;
+                break;
+            //ƒRƒ“ƒ{‚R”Ô–Ú
+            case 5:
+                Enemy_HP -= 3;
+                break;
+            case 6:
+                Enemy_HP -= 3;
+                break;
+            //ƒRƒ“ƒ{ÅI
+            case 7:
+                Enemy_HP -= 4;
+                break;
+            case 8:
+                Enemy_HP -= 4;
+                break;
+        }
+    }
 
     //G‹›“G‚ª€‚ñ‚¾Œã‚Ìˆ—
     void After_Die()
