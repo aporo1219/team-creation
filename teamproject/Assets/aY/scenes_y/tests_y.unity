@@ -496,9 +496,8 @@ GameObject:
   - component: {fileID: 280830731}
   - component: {fileID: 280830730}
   - component: {fileID: 280830729}
-  - component: {fileID: 280830734}
-  - component: {fileID: 280830733}
   - component: {fileID: 280830735}
+  - component: {fileID: 280830733}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -674,36 +673,6 @@ MonoBehaviour:
         DecelTime: 0.2
   PlayerIndex: -1
   AutoEnableInputs: 1
---- !u!114 &280830734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280830728}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca7de3aefa901374ba29464584a3109a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CameraRadius: 0.4
-  Decollision:
-    Enabled: 1
-    ObstacleLayers:
-      serializedVersion: 2
-      m_Bits: 65
-    UseFollowTarget:
-      Enabled: 0
-      YOffset: 0
-    Damping: 0
-    SmoothingTime: 0
-  TerrainResolution:
-    Enabled: 1
-    TerrainLayers:
-      serializedVersion: 2
-      m_Bits: 1
-    MaximumRaycast: 10
-    Damping: 0
 --- !u!114 &280830735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,7 +691,7 @@ MonoBehaviour:
   IgnoreTag: Player
   TransparentLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   MinimumDistanceFromTarget: 0.5
   AvoidObstacles:
     Enabled: 1
@@ -1982,7 +1951,7 @@ GameObject:
   - component: {fileID: 1735248879}
   - component: {fileID: 1735248878}
   - component: {fileID: 1735248877}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Enemy
   m_Icon: {fileID: 0}

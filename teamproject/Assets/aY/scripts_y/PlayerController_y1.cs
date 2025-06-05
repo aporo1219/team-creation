@@ -95,7 +95,7 @@ public class PlayerController_y1 : MonoBehaviour
         moveValue = moveAction.ReadValue<Vector2>();
 
         //ínñ îªíËéÊìæ
-        if (Physics.SphereCast(rb.position, transform.localScale.y / 2 - 0.1f, Vector3.down, out RaycastHit h, 0.0f, layerMask))
+        if (Physics.SphereCast(rb.position, transform.localScale.y / 2 - 0.1f, Vector3.down, out RaycastHit h, transform.localScale.y / 2 + 0.4f, layerMask))
         {//ínñ Ç…Ç¬Ç¢ÇƒÇ¢ÇÈ
             //ê⁄ínèÛë‘Ç…Ç∑ÇÈ
             onGround = true;
@@ -528,6 +528,6 @@ public class PlayerController_y1 : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(new Vector3(rb.position.x, rb.position.y, rb.position.z) + Vector3.down * 0.1f, transform.localScale.y / 2 - 0.0f);
+        Gizmos.DrawWireSphere(new Vector3(rb.position.x, rb.position.y - transform.localScale.y / 2-0.4f, rb.position.z), transform.localScale.y / 2 - 0.0f);
     }
 }
