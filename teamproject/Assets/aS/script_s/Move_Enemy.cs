@@ -13,6 +13,7 @@ public class Move_Enemy : MonoBehaviour
     public static Move_Enemy instance;
     public bool Attack_Enemy;//敵の攻撃の判定
     public bool Damede_Hit;
+    public int Combo_Number;
 
     [SerializeField] GameObject MainCharacter;
     [SerializeField] GameObject Erea;//SearchEreaのスクリプトを呼び出すGameObject
