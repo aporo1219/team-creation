@@ -2,7 +2,9 @@ using System.Security.Cryptography;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.GraphicsBuffer;
 
 
@@ -28,12 +30,16 @@ public class Move_Enemy : MonoBehaviour
     private bool  Right_Or_Left;//周回時の右か左かの判定
     private float Around_Position;
     private bool Turn;//回転の変数
- 
+    private bool Be_Attacked;//攻撃を受けたかの判定
+    private InputAction Player_Attack;
+
 
     Vector3 Goal_Position;//目標時点の座標変数（雑魚敵）
     Vector3 Initial_Value;//初期地点の座標変数
     Vector3 Search_Position_Right;//周回する用のベクトル右
     Vector3 Search_Position_Left;//周回する用のベクトル左
+    Vector3 Player_Distance;//プレイヤーの距離間のベクトル
+    [SerializeField] Vector3 Local_Space_Vec;//前方基準のローカル空間ベクトル
    
 
     void Start()
@@ -46,11 +52,16 @@ public class Move_Enemy : MonoBehaviour
         Erea = GameObject.Find("SearchErea");
         Search_Enemy = Erea.GetComponent<SearchErea>();
         Turn = false;//trueならば回転
-       //攻撃関連の変数
+        Local_Space_Vec = Vector3.up;
+        Player_Distance = MainCharacter.transform.position - this.transform.position;
+        //攻撃関連の変数
         Attack_Enemy = false;
         Attack_Enemy_Time = 0;
         Cool_Time = 5;
         Damede_Hit = false;
+        Be_Attacked = PlayerControllerTest_s.instance.T_Attack;
+        Player_Attack = InputSystem.actions.FindAction("Attack");
+
         //探索関連の変数
         Mode_Serch = false;
         Search_Position_Right = new Vector3(this.transform.position.x + 10, (float)0.75, 0);
@@ -141,14 +152,20 @@ public class Move_Enemy : MonoBehaviour
     {
         
 
-        Debug.Log("見つけた");
+        //Debug.Log("見つけた");
         Time_Lapse = 0;
         Turn = true;
         if(Turn)
         {
-            transform.Rotate(Goal_Position,0,0);
+            //主人公の方向に回転
+            var Rotate_Discovery = Quaternion.LookRotation(Player_Distance,Vector3.up); //プレイヤー発見の回転ベクトル
+            var Rotate_Correction = Quaternion.FromToRotation(Local_Space_Vec, Vector3.up);
 
-            Debug.Log("旋回");  
+
+            //回転補正
+            this.transform.rotation = Rotate_Discovery * Rotate_Correction;
+
+            //Debug.Log("旋回");  
         }
         //目標時点まで移動する（Goal_Positionの値をPlayerの座標にすればPlayerに向かう）
         transform.position = Vector3.MoveTowards(transform.position, Goal_Position, Speed_Enemy * Time.deltaTime);
@@ -181,8 +198,9 @@ public class Move_Enemy : MonoBehaviour
     public void OnCollisionEnter(Collision other)
     {
 
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player"&& Be_Attacked)
         {
+            Debug.Log("ヒット");
             Damede_Hit = true;
         }
     }
