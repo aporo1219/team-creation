@@ -937,6 +937,7 @@ MonoBehaviour:
   JumpPower: 5
   DoubleJumpPower: 8
   DodgeSpeed: 20
+  AirDodgeSpeed: 50
   onGround: 0
   GroundHit: 0
   canMove: 1
@@ -3765,7 +3766,7 @@ Canvas:
   m_GameObject: {fileID: 1269719894}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 861719388}
   m_PlaneDistance: 0.4
   m_PixelPerfect: 0
@@ -4763,7 +4764,7 @@ Canvas:
   m_GameObject: {fileID: 1850869185}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 861719388}
   m_PlaneDistance: 0.45
   m_PixelPerfect: 0
