@@ -59,6 +59,17 @@ public class PlayerController_y1 : MonoBehaviour
 
     LayerMask layerMask;
 
+    Animator animator;
+
+    private string NowAnime = "";
+    private string OldAnime = "";
+
+    public string JumpAnime;
+    public string DoubleJumpAnime;
+    public string FallAnime;
+    public string RunAnime;
+    public string NeutralAnime;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -79,6 +90,9 @@ public class PlayerController_y1 : MonoBehaviour
         instance = this;
 
         layerMask = LayerMask.GetMask("Ground");
+
+       
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -110,6 +124,9 @@ public class PlayerController_y1 : MonoBehaviour
         {//空中にいる
             //エアタイム増加
             AirTime++;
+            //
+            if (!isJump)
+                NowAnime = FallAnime;
         }
 
 
@@ -141,6 +158,13 @@ public class PlayerController_y1 : MonoBehaviour
             {
                 //ダッシュ解除
                 Dash = false;
+                //
+                if (onGround)
+                {
+                    NowAnime = NeutralAnime;
+                    //animator.SetBool("Moving", false);
+                }
+
             }
             //ジャンプ
             if (jumpAction.WasPressedThisFrame() && canAction)
@@ -163,6 +187,16 @@ public class PlayerController_y1 : MonoBehaviour
                 StartCoroutine("Guard");
             }
         }
+
+        animator.SetBool("Moving", true);
+
+        Debug.Log("Anime = " + NowAnime);
+        if (NowAnime != OldAnime)
+        {
+            animator.Play(NowAnime);
+
+            OldAnime = NowAnime;
+        }
     }
 
     private void FixedUpdate()
@@ -178,15 +212,24 @@ public class PlayerController_y1 : MonoBehaviour
             {//ダッシュ時
                 //移動方向にダッシュスピードを掛ける
                 rb.linearVelocity = moveForward * DashSpeed + new Vector3(0, rb.linearVelocity.y, 0);
+                //
+                if (onGround)
+                    NowAnime = RunAnime;
+                    //animator.SetBool("Moving", true);
             }
             else
             {//通常時
                 //移動方向に移動スピードを掛ける
                 rb.linearVelocity = moveForward * MoveSpeed + new Vector3(0, rb.linearVelocity.y, 0);
+                //
+                if (onGround)
+                    NowAnime = RunAnime;
+                    //animator.SetBool("Moving", true);
             }
                 
 
         }
+        
 
         //ジャンプ以外で少し浮いた時に下向きに強い力を与える
         if (onGround && !isJump && !GroundHit && canMove)
@@ -236,6 +279,8 @@ public class PlayerController_y1 : MonoBehaviour
         {   //接地しているなら
             //ジャンプ中に
             isJump = true;
+            //
+            NowAnime = JumpAnime;
 
             while (((JumpTime < LongJumpLimit && jumpAction.IsPressed()) || JumpTime < 3) && canJump)
             {
@@ -256,6 +301,8 @@ public class PlayerController_y1 : MonoBehaviour
         {   //空中で空中ジャンプが残っているなら
             //ジャンプ中に
             isJump = true;
+            //
+            NowAnime = DoubleJumpAnime;
             //空中回避のクールタイムをなくす
             AirDodgeTimeCount = AirDodgeCoolTime;
             while (JumpTime < 17 && canJump)
@@ -369,6 +416,9 @@ public class PlayerController_y1 : MonoBehaviour
                 canJump = false;
                 canRotate = false;
                 canAction = false;
+
+                //
+                
 
                 StartCoroutine("DodgeMove", 0.2f);
                 DodgeTimeCount = 0;
@@ -525,9 +575,9 @@ public class PlayerController_y1 : MonoBehaviour
         yield return null;
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(new Vector3(rb.position.x, rb.position.y - transform.localScale.y / 2-0.4f, rb.position.z), transform.localScale.y / 2 - 0.0f);
-    }
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(new Vector3(rb.position.x, rb.position.y - transform.localScale.y / 2-0.4f, rb.position.z), transform.localScale.y / 2 - 0.0f);
+    //}
 }
