@@ -14,8 +14,7 @@ public class Move_Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static Move_Enemy instance;
     public bool Attack_Enemy;//敵の攻撃の判定
-    public bool Damede_Hit;
-    public int Combo_Number;
+    public static  bool Damede_Hit;
 
     [SerializeField] GameObject MainCharacter;
     [SerializeField] GameObject Erea;//SearchEreaのスクリプトを呼び出すGameObject
@@ -31,7 +30,7 @@ public class Move_Enemy : MonoBehaviour
     private float Around_Position;
     private bool Turn;//回転の変数
     private bool Be_Attacked;//攻撃を受けたかの判定
-    private InputAction Player_Attack;
+   
 
 
     Vector3 Goal_Position;//目標時点の座標変数（雑魚敵）
@@ -59,8 +58,7 @@ public class Move_Enemy : MonoBehaviour
         Attack_Enemy_Time = 0;
         Cool_Time = 5;
         Damede_Hit = false;
-        //Be_Attacked = PlayerControllerTest_s.instance.T_Attack;
-        Player_Attack = InputSystem.actions.FindAction("Attack");
+        
 
         //探索関連の変数
         Mode_Serch = false;
@@ -198,9 +196,9 @@ public class Move_Enemy : MonoBehaviour
     public void OnCollisionEnter(Collision other)
     {
 
-        if(other.gameObject.tag == "Player"&& Be_Attacked)
+        if(other.gameObject.tag == "Player")
         {
-            Debug.Log("ヒット");
+            //Debug.Log("ヒット");
             Damede_Hit = true;
         }
     }
