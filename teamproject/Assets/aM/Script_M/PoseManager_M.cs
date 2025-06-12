@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PoseManager_M : MonoBehaviour
 {
-    int showing_pose;//ポーズが表示されてるか
+    public int showing_pose;//ポーズが表示されてるか
 
     public GameObject pose_obj;//ポーズキャンバスを読み込む
     InputAction poseAction;
@@ -14,7 +14,7 @@ public class PoseManager_M : MonoBehaviour
 
     int selector_move_time = 0;
 
-    int selector_pos = 0;
+    public int selector_pos = 0;
 
     [SerializeField] Image ReStart;
     [SerializeField] Image Status;
@@ -41,14 +41,8 @@ public class PoseManager_M : MonoBehaviour
     void Update()
     {
         //Escapeキーの入力でポーズ画面の切り替えを行う
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            Change_Pose(showing_pose);
-            showing_pose++;
-        }
-
         //コントローラーのポーズボタンでポーズ画面の切り替えを行う
-        if(poseAction.WasPressedThisFrame())
+        if (Input.GetKeyDown(KeyCode.Escape) || poseAction.WasPressedThisFrame())
         {
             Change_Pose(showing_pose);
             showing_pose++;
