@@ -27,10 +27,10 @@ public class Enemy_Manager : MonoBehaviour
         Enemy = Enemy_Object.GetComponent<Move_Enemy>();
         Player = GameObject.FindWithTag("Player");
         Player_Script = Player.GetComponent<PlayerController_y>();
-        for(int i = 0;i<5;i++)
+        /*for(int i = 0;i<5;i++)
         {
             Instantiate(Enemy_Object);
-        }
+        }*/
     }
     
 
