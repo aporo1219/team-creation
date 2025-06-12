@@ -59,7 +59,7 @@ public class Move_Enemy : MonoBehaviour
         Attack_Enemy_Time = 0;
         Cool_Time = 5;
         Damede_Hit = false;
-        Be_Attacked = PlayerControllerTest_s.instance.T_Attack;
+        //Be_Attacked = PlayerControllerTest_s.instance.T_Attack;
         Player_Attack = InputSystem.actions.FindAction("Attack");
 
         //’TõŠÖ˜A‚Ì•Ï”
