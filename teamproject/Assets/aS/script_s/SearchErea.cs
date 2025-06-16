@@ -7,9 +7,16 @@ public class SearchErea : MonoBehaviour
 
     public  bool Discovery_Main;
     public bool First_Time;
-
+    public static SearchErea Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-     void Start()
+    void Start()
     {
         Discovery_Main = false;
         First_Time = false;

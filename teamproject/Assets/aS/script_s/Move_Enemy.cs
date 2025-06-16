@@ -12,7 +12,7 @@ using static UnityEngine.GraphicsBuffer;
 public class Move_Enemy : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public static Move_Enemy instance;
+    public static Move_Enemy Instance;
     public bool Attack_Enemy;//“G‚ÌUŒ‚‚Ì”»’è
     public static  bool Damede_Hit;
 
@@ -47,7 +47,6 @@ public class Move_Enemy : MonoBehaviour
         //ƒvƒŒƒCƒ„[‚É‹ß‚Ã‚­•Ï”
         Goal_Position = MainCharacter.transform.position;
         Speed_Enemy = 2.0f;
-        MainCharacter = GameObject.FindWithTag("Player");
         Erea = GameObject.Find("SearchErea");
         Search_Enemy = Erea.GetComponent<SearchErea>();
         Turn = false;//true‚È‚ç‚Î‰ñ“]
@@ -58,7 +57,6 @@ public class Move_Enemy : MonoBehaviour
         Attack_Enemy_Time = 0;
         Cool_Time = 5;
         Damede_Hit = false;
-        
 
         //’TõŠÖ˜A‚Ì•Ï”
         Mode_Serch = false;
