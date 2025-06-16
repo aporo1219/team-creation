@@ -168,6 +168,8 @@ public class PlayerController_y : MonoBehaviour
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
         //方向キーの入力値とカメラの向きから移動方向を決定
         Vector3 moveForward = cameraForward * moveValue.y + Camera.main.transform.right * moveValue.x;
+        //
+        moveForward.Normalize();
 
         if (canMove)
         {
