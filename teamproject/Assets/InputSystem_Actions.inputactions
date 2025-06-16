@@ -659,6 +659,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PoseClick",
+                    "type": "Button",
+                    "id": "6cc90bb4-1c58-4097-992e-fbf60e739ba0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1189,6 +1198,17 @@
                     "action": "PoseSelect",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "e5b1b8db-f9fb-4aeb-9b57-d016355071a7",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PoseClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
