@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
@@ -10,16 +11,14 @@ public class Enemy_Manager : MonoBehaviour
     [SerializeField] PlayerController_y Player_Script;//プレイヤーのスクリプト取得変数
 
     private bool Enemy_Die;
-    private int Enemy_Number;
-    private string Player_Combo;//プレイヤーのコンボ状況を確認するスクリプト
+    private static int Enemy_Number;//ID割り当て
+    private static Dictionary<int, Enemy_Status> Enemys = new();
+   
+    public static Enemy_Manager Instance;
     
 
-    public int Enemy_HP;
-    public int Enemy_Power;
-    public Enemy_Manager Instance;
-
     //インスタンスの代入
-    private void Awake()
+    void Awake()
     {
         if(Instance == null)
         {
@@ -30,9 +29,9 @@ public class Enemy_Manager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Enemy_HP = 100;//仮数値
+        
         Enemy_Die = false;//trueで消える
-        Enemy_Number = 10;//仮敵の数
+        Enemy_Number = 0;//仮敵の数
         Enemy_Object = GameObject.FindWithTag("Enemy");
         Enemy = Enemy_Object.GetComponent<Move_Enemy>();
         Player = GameObject.FindWithTag("Player");
@@ -50,14 +49,37 @@ public class Enemy_Manager : MonoBehaviour
 
    
     //IDの登録
-    public void Entry_Enemy(Enemy_Status Enemy)
+    public static int Entry_Enemy_ID(Enemy_Status Enemy)
     {
-
+        int Enemy_Tag = Enemy_Number++;
+        Enemys[Enemy_Tag] = Enemy;
+        return Enemy_Tag ;
     }
 
-    //IDの登録解除
-    public void Delite_ListEnemy(Enemy_Status Enemy)
+    //IDの登録解除(破壊されたとき）
+    public static void Delite_ListEnemy(int Enemy_Tag)
     {
+        Enemys.Remove(Enemy_Tag);
+       
+    }
 
+    //ID指定での敵の破壊
+    public static void Destroy_Enemy_ID(int Enemy_Tag)
+    {
+        if(Enemys.TryGetValue(Enemy_Tag, out Enemy_Status Enemy))
+        {
+            if(Enemy != null)
+            {
+                Object.Destroy(Enemy.gameObject);
+            }
+            else
+            {
+                Debug.Log($"敵ID{Enemy_Tag}のオブジェクトはnullです");
+            }
+        }
+        else
+        {
+            Debug.Log($"敵ID{Enemy_Tag}は存在しない");
+        }
     }
 }

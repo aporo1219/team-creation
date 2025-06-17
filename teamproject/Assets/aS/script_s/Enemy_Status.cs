@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy_Status : MonoBehaviour
@@ -8,11 +9,13 @@ public class Enemy_Status : MonoBehaviour
     private string Player_Combo;//プレイヤーのコンボ状況を確認するスクリプト
     private int Count;
     private Enemy_Manager Enemy_manager;
+   
 
     public static Enemy_Status Instance;
     public int Enemy_HP;
     public int Enemy_Power;
-    public string Enemy_Name;//IDの設定
+    //敵のID
+    public int Enemy_ID { get; private set; }
 
      void Awake()
     {
@@ -20,15 +23,16 @@ public class Enemy_Status : MonoBehaviour
         {
             Instance = this;
         }
+       Enemy_ID = Enemy_Manager.Entry_Enemy_ID(this);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Count = 5;
-        Enemy_HP = 100;//仮数値
+        Enemy_HP = 120;//仮数値
         Enemy_Power = 5;//仮数値
-        //Enemy_Manager.Instance.Entry_Enemy(this);
+        
     }
 
     // Update is called once per frame
@@ -36,7 +40,7 @@ public class Enemy_Status : MonoBehaviour
     {
         if (Enemy_HP < 0)
         {
-            After_Die();
+            Die();
         }
 
         if (Move_Enemy.Damede_Hit)
@@ -52,21 +56,25 @@ public class Enemy_Status : MonoBehaviour
         //コンボ一段階目
         if (Combo == "GroundFirst" || Combo == "AirFirst")
         {
+            Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
             Enemy_HP -= 1;
         }
         //コンボ二段目
         if (Combo == "GroundSecond" || Combo == "AirSecond")
         {
+            Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
             Enemy_HP -= 2;
         }
         //コンボ三段目
         if (Combo == "GroundThird" || Combo == "AirThird")
         {
+            Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
             Enemy_HP -= 3;
         }
         //コンボ四段目
         if (Combo == "GroundFinish" || Combo == "AirFinish")
         {
+            Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
             Enemy_HP -= 4;
         }
 
@@ -74,10 +82,16 @@ public class Enemy_Status : MonoBehaviour
     }
 
     //雑魚敵が死んだ後の処理
-    void After_Die()
+    void OnDestroy()
     {
+        Enemy_Manager.Delite_ListEnemy(Enemy_ID);
         Debug.Log("死亡");
-        //Enemy_Manager.Instance.Delite_ListEnemy(this);
-        //Destroy();
+        //Enemy_Manager.Destroy_Enemy_ID(1);
+    }
+
+    //死亡時の関数
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }
