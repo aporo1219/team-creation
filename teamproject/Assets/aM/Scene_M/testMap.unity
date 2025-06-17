@@ -3072,6 +3072,8 @@ MonoBehaviour:
   pose_obj: {fileID: 1269719894}
   game_obj: {fileID: 1231012627}
   selector_pos: 0
+  BackGround: {fileID: 1341619905}
+  Map: {fileID: 0}
   ReStart: {fileID: 341336691}
   Status: {fileID: 1627179610}
   OperationMethod: {fileID: 2083212452}
@@ -4113,7 +4115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1269719895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4401,7 +4403,7 @@ GameObject:
   - component: {fileID: 1341619906}
   - component: {fileID: 1341619905}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
