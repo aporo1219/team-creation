@@ -28,7 +28,7 @@ public class Enemy_Status : MonoBehaviour
         Count = 5;
         Enemy_HP = 100;//‰¼”’l
         Enemy_Power = 5;//‰¼”’l
-        Enemy_Manager.Instance.Entry_Enemy(this);
+        //Enemy_Manager.Instance.Entry_Enemy(this);
     }
 
     // Update is called once per frame
@@ -77,7 +77,7 @@ public class Enemy_Status : MonoBehaviour
     void After_Die()
     {
         Debug.Log("€–S");
-        Enemy_Manager.Instance.Delite_ListEnemy(this);
+        //Enemy_Manager.Instance.Delite_ListEnemy(this);
         //Destroy();
     }
 }
