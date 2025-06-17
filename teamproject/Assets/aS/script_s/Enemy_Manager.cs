@@ -16,6 +16,16 @@ public class Enemy_Manager : MonoBehaviour
 
     public int Enemy_HP;
     public int Enemy_Power;
+    public Enemy_Manager Instance;
+
+    //ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì‘ã“ü
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,10 +37,6 @@ public class Enemy_Manager : MonoBehaviour
         Enemy = Enemy_Object.GetComponent<Move_Enemy>();
         Player = GameObject.FindWithTag("Player");
         Player_Script = Player.GetComponent<PlayerController_y>();
-        /*for(int i = 0;i<5;i++)
-        {
-            Instantiate(Enemy_Object);
-        }*/
     }
     
 
@@ -39,48 +45,19 @@ public class Enemy_Manager : MonoBehaviour
     void FixedUpdate()
     {
         
-       if(Move_Enemy.Damede_Hit)
-        {
-            Debug.Log("UŒ‚‚ðŽó‚¯‚½");
-            Be_Attack(PlayerController_y.instance.AttackState);
-        }
-
-       if(Enemy_HP < 0)
-        {
-            After_Die();
-        }
+       
     }
 
-    //ŽG‹›“G‚ÌUŒ‚‚ðŽó‚¯‚½ˆ—‚ÌŠÖ”
-    void Be_Attack(string Combo)
+   
+    //ID‚Ì“o˜^
+    public void Entry_Enemy(Enemy_Status Enemy)
     {
-        //ƒRƒ“ƒ{ˆê’iŠK–Ú
-       if(Combo == "GroundFirst" || Combo == "AirFirst" )
-       {
-            Enemy_HP -= 1;
-       }
-       //ƒRƒ“ƒ{“ñ’i–Ú
-       if(Combo == "GroundSecond" || Combo == "AirSecond")
-       {
-            Enemy_HP -= 2;
-       }
-       //ƒRƒ“ƒ{ŽO’i–Ú
-      if (Combo == "GroundThird" || Combo == "AirThird")
-      {
-            Enemy_HP -= 3;
-      }
-      //ƒRƒ“ƒ{Žl’i–Ú
-      if(Combo == "GroundFinish" || Combo == "AirFinish")
-      {
-            Enemy_HP -= 4;
-      }
 
-        
     }
 
-    //ŽG‹›“G‚ªŽ€‚ñ‚¾Œã‚Ìˆ—
-    void After_Die()
+    //ID‚Ì“o˜^‰ðœ
+    public void Delite_ListEnemy(Enemy_Status Enemy)
     {
-        Destroy(Enemy_Object);
+
     }
 }

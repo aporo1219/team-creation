@@ -14,7 +14,7 @@ public class Enemy_Status : MonoBehaviour
     public int Enemy_Power;
     public string Enemy_Name;//ID‚Ìİ’è
 
-    private void Awake()
+     void Awake()
     {
         if (Instance == null)
         {
