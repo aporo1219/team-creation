@@ -2,31 +2,30 @@ using UnityEngine;
 
 public class SearchErea : MonoBehaviour
 {
+    //敵の位置取得の変数
+    private Transform EnemyPos;
+    private Move_Enemy Move;//スクリプト取得
 
-    [SerializeField] GameObject SmallEnemy;
-
-    public  bool Discovery_Main;
-    public bool First_Time;
-    public static SearchErea Instance;
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
+    public bool Find;
+    public bool FirstTime;
+  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Discovery_Main = false;
-        First_Time = false;
+        //追跡対象の設定
+        EnemyPos = transform.parent;
+
+        FirstTime = false;
+        Find = false;
+
+        Move = transform.parent.GetComponent<Move_Enemy>();  
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         //敵のサーチ領域を雑魚敵に追従するようにする
-        transform.position = SmallEnemy.transform.position;
+        transform.position = EnemyPos.position;
     }
 
     void OnTriggerStay(Collider other)
@@ -34,9 +33,9 @@ public class SearchErea : MonoBehaviour
         //主人公がサーチ領域に入ったら敵が主人公に向かう信号を送る
         if(other.gameObject.tag == "Player")
         {
-            First_Time = true;
-          // Debug.Log("ヒット");
-           Discovery_Main = true;
+            Find = true;
+            FirstTime = true;
+            Move.Discovery();
         }
        
     }
@@ -46,10 +45,9 @@ public class SearchErea : MonoBehaviour
     {
         //主人公がサーチ領域に入ったら敵が主人公に向かう信号を送る
         if (other.gameObject.tag == "Player")
-        {
-
-            // Debug.Log("ヒット");
-            Discovery_Main = false;
+        { 
+            Find = false;
+            //Move.Lost();
         }
 
     }
