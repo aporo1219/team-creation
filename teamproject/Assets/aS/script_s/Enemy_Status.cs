@@ -9,7 +9,8 @@ public class Enemy_Status : MonoBehaviour
     private string Player_Combo;//プレイヤーのコンボ状況を確認するスクリプト
     private int Count;
     private Enemy_Manager Enemy_manager;
-
+    private Animator Anim;//アニメーター取得の変数
+    private int CoolTime;//攻撃のクールタイム
 
     //public static Enemy_Status Instance;
     public int Enemy_HP;
@@ -18,16 +19,18 @@ public class Enemy_Status : MonoBehaviour
     public int Enemy_ID { get; private set; }
 
 
-
+    Vector3 Distance;//プレイヤーの距離の計算ベクトル
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Anim = GetComponent<Animator>();
         Count = 5;
-        Enemy_HP = 100;//仮数値
+        Enemy_HP = 1;//仮数値
         Enemy_Power = 5;//仮数値
         Enemy_ID = Enemy_Manager.Entry_Enemy_ID(this);//IDの登録
+        CoolTime = 3;
     }
 
     // Update is called once per frame
@@ -35,7 +38,7 @@ public class Enemy_Status : MonoBehaviour
     {
         if (Enemy_HP < 0)
         {
-            Die();
+           Death_Before();
         }
 
     }
@@ -72,10 +75,14 @@ public class Enemy_Status : MonoBehaviour
     }
 
     //雑魚敵が死んだ後の処理
-    void OnDestroy()
+    void Death_Before()
     {
+        //アニメーション切り替え
+        Anim.SetBool("Die", true);
         Enemy_Manager.Delite_ListEnemy(Enemy_ID);
         Debug.Log("死亡");
+        //1秒後にDestroy
+        Invoke(nameof(Die), 1.0f);
         //Enemy_Manager.Destroy_Enemy_ID(1);
     }
 
@@ -87,13 +94,19 @@ public class Enemy_Status : MonoBehaviour
 
     //攻撃
     private void OnCollisionEnter(Collision collision)
-    {
+    {//アニメーション切り替え（攻撃）
+           // Anim.SetBool("Attack", true);
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerController_y player = collision.gameObject.GetComponent<PlayerController_y>();
-            if (player != null)
+            int time = 0;
+            time = (int)Time.deltaTime;
+            
+      　　　
+            if ( time >= CoolTime)
             {
-                //player.TakeDamage(Enemy_Power)
+                Debug.Log("攻撃敵");
+                
+                time = 0;
             }
 
         }

@@ -19,6 +19,7 @@ public class Move_Enemy : MonoBehaviour
     [SerializeField] GameObject MainCharacter;
     [SerializeField] GameObject Erea;//SearchEreaのスクリプトを呼び出すGameObject
     [SerializeField] SearchErea Search_Enemy;//主人公を探す変数
+    [SerializeField] private Transform ModelRoot;// ← モデル（JR-1）を指定する用
 
     private float Speed_Enemy;//スピードの変数
     private float Time_Lapse;//敵が主人公を見失ったときの経過時間
@@ -30,7 +31,7 @@ public class Move_Enemy : MonoBehaviour
     private float Around_Position;
     private bool Turn;//回転の変数
     private bool Be_Attacked;//攻撃を受けたかの判定
-    
+    private Animator Anim;//アニメーションコンポーネントの取得
 
 
     Vector3 Goal_Position;//目標時点の座標変数（雑魚敵）
@@ -44,21 +45,20 @@ public class Move_Enemy : MonoBehaviour
     void Start()
     {
         //初期化
+        Search_Enemy = GetComponentInChildren<SearchErea>();
+        Anim = GetComponent<Animator>();
         //プレイヤーに近づく変数
         //MainCharacter = GameObject.FindWithTag("Player");
         Goal_Position = MainCharacter.transform.position;
         Speed_Enemy = 2.0f;
-        Erea = GameObject.Find("SearchErea");
-        Search_Enemy = Erea.GetComponent<SearchErea>();
         Turn = false;//trueならば回転
         Local_Space_Vec = Vector3.up;
-        Player_Distance = MainCharacter.transform.position - this.transform.position;
+        Player_Distance = MainCharacter.transform.position - ModelRoot.position;
         //攻撃関連の変数
         Attack_Enemy = false;
         Attack_Enemy_Time = 0;
         Cool_Time = 5;
         Damede_Hit = false;
-
         //探索関連の変数
         Mode_Serch = false;
         Search_Position_Right.x = this.transform.position.x + 10;
@@ -89,8 +89,13 @@ public class Move_Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Around();
+        //Around();
 
+        //発見
+        if(Search_Enemy.Find)
+        {
+            Discovery();
+        }
         //プレイヤーを見失う
         if (!Search_Enemy.Find && Search_Enemy.FirstTime)
         {
@@ -99,7 +104,7 @@ public class Move_Enemy : MonoBehaviour
     }
 
     //周回する関数
-    void Around()
+    /*void Around()
     {
         if (!Search_Enemy.Find)
         {
@@ -109,45 +114,54 @@ public class Move_Enemy : MonoBehaviour
                 //目標地点についたら、その場で回転し逆方向に行く
                 if (transform.position.x >= Around_Position)
                 {
+                    Around_Position = -8.0f;
                     Right_Or_Left = true;
-                    transform.Rotate(0, 180, 0);
+                    ModelRoot.Rotate(0, , 0);
                 }
             }
 
             //逆方向に行く
             else if (Right_Or_Left)
             {
+                Debug.Log("回転");
                 transform.position = Vector3.MoveTowards(transform.position, Search_Position_Left, Speed_Enemy * Time.deltaTime);
 
-                if (transform.position.x <= -Around_Position)
+                if (transform.position.x <= Around_Position)
                 {
-                    transform.Rotate(0, 180, 0);
+                    Around_Position = 9.9f;
+                    Debug.Log("回転1");
+                    ModelRoot.Rotate(0, 180, 0);
                     Right_Or_Left = false;
                 }
 
             }
         }
-    }
+    }*/
 
     //主人公を見つけた時の関数
     public void Discovery()
     {
         Time_Lapse = 0;
         Turn = true;
+
+      
+        //プレイヤーの位置を取得して方向更新
+        Player_Distance = MainCharacter.transform.position - ModelRoot.position;
         if (Turn)
         {
+            //アニメーション切り替え
+            Anim.SetBool("Walk", true);
             //主人公の方向に回転
-            var Rotate_Discovery = Quaternion.LookRotation(Player_Distance, Vector3.up); //プレイヤー発見の回転ベクトル
-            var Rotate_Correction = Quaternion.FromToRotation(Local_Space_Vec, Vector3.up);
+            var Rotate_Discovery = Quaternion.LookRotation(Player_Distance.normalized, Vector3.up); //プレイヤー発見の回転ベクトル
+            ModelRoot.rotation = Rotate_Discovery;
 
-
-            //回転補正
-            this.transform.rotation = Rotate_Discovery * Rotate_Correction;
 
             //Debug.Log("旋回");  
         }
+        //Goal位置の更新
+        Goal_Position = MainCharacter.transform.position;
         //目標時点まで移動する（Goal_Positionの値をPlayerの座標にすればPlayerに向かう）
-        transform.position = Vector3.MoveTowards(transform.position, Goal_Position, Speed_Enemy * Time.deltaTime);
+        ModelRoot.position = Vector3.MoveTowards(ModelRoot.position, Goal_Position, Speed_Enemy * Time.deltaTime);
 
         Mode_Serch = true;
     }
@@ -156,12 +170,14 @@ public class Move_Enemy : MonoBehaviour
     public void Lost()
     {
         Time_Lapse += Time.deltaTime;
+        //アニメーション切り替え（止まる）
+        Anim.SetBool("Walk", false);
 
         if (Time_Lapse > Return && Mode_Serch == true)
         {
             Debug.Log("戻る");
             //初期値に戻す
-            transform.position = Initial_Value;
+            ModelRoot.position = Initial_Value;
             Time_Lapse = 0;
             Mode_Serch = false;
         }
@@ -174,8 +190,11 @@ public class Move_Enemy : MonoBehaviour
         {
             Debug.Log("攻撃を受けた");
             var Enemy = GetComponent<Enemy_Status>();
-            string combo = PlayerController_y.instance.AttackState;
-            Enemy.Be_Attack(combo);
+            if(Enemy != null)
+            {
+               string combo = PlayerController_y.instance.AttackState;
+               Enemy.Be_Attack(combo);
+            }
         }
     }
 }
