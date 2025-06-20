@@ -215,6 +215,7 @@ public class PlayerController_y1 : MonoBehaviour
         //
         moveForward.Normalize();
 
+        //移動処理
         if (canMove)
         {
             if (Dash)
@@ -222,7 +223,7 @@ public class PlayerController_y1 : MonoBehaviour
                 //移動方向にダッシュスピードを掛ける
                 rb.linearVelocity = moveForward * DashSpeed + new Vector3(0, rb.linearVelocity.y, 0);
                 //
-                if (onGround && moveValue.x != 0 && moveValue.y != 0)
+                if (onGround && (moveValue.x != 0 || moveValue.y != 0))
                 {
                     NowAnime = RunAnime;
                     animator.SetBool("Moving", true);
@@ -238,7 +239,7 @@ public class PlayerController_y1 : MonoBehaviour
                 //移動方向に移動スピードを掛ける
                 rb.linearVelocity = moveForward * MoveSpeed + new Vector3(0, rb.linearVelocity.y, 0);
                 //
-                if (onGround && moveValue.x != 0 && moveValue.y != 0)
+                if (onGround && (moveValue.x != 0 || moveValue.y != 0))
                 {
                     NowAnime = RunAnime;
                     animator.SetBool("Moving", true);
@@ -252,7 +253,6 @@ public class PlayerController_y1 : MonoBehaviour
                 
 
         }
-        
 
         //ジャンプ以外で少し浮いた時に下向きに強い力を与える
         if (onGround && !isJump && !GroundHit && canMove)
@@ -355,8 +355,8 @@ public class PlayerController_y1 : MonoBehaviour
                 yield return null;
             }
         }
-            
-        
+        animator.SetInteger("Jumping", -1);
+
         JumpTime = 0;
         //非ジャンプ状態に
         isJump = false;
@@ -616,7 +616,9 @@ public class PlayerController_y1 : MonoBehaviour
     {
         float time = 0.0f;
 
-        while (time < actiontime)
+        animator.SetFloat("Idle", 2);
+
+        while (time < actiontime * 0.6f)
         {
             rb.linearVelocity = transform.forward * AirDodgeSpeed;
 
@@ -624,6 +626,22 @@ public class PlayerController_y1 : MonoBehaviour
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             }
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        animator.SetFloat("Idle", -1);
+
+        while (time < actiontime)
+        {
+
+            if (!GroundHit && rb.linearVelocity.y > 0)
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            }
+
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x * 0.9f, rb.linearVelocity.y, rb.linearVelocity.z * 0.9f);
 
             time += Time.deltaTime;
             yield return null;
