@@ -668,6 +668,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PoseCancel",
+                    "type": "Button",
+                    "id": "346a362f-db6b-45b6-948c-5c832b904aaf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1207,6 +1216,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PoseClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5e2ef63-e443-479d-ae88-2c760bdd288b",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PoseCancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
