@@ -100,10 +100,11 @@ public class PoseManager_M : MonoBehaviour
         //コントローラーのポーズボタンでポーズ画面の切り替えを行う
         if (Input.GetKeyDown(KeyCode.Escape) || poseAction.WasPressedThisFrame())
         {
-            if (pose_start == 0)
-                Change_Pose(showing_pose);
             showing_pose++;
         }
+
+        if (pose_start == 0)
+            Change_Pose(showing_pose);
 
         //数値が１より大きくなったら０に戻す
         if (showing_pose > 1)
@@ -203,7 +204,7 @@ public class PoseManager_M : MonoBehaviour
                 }
 
                 //キャンセルボタンが押されたら
-                if(poseCancel.WasPressedThisFrame() && !push_selector)
+                if(poseCancel.WasPressedThisFrame() && !push_selector && comment_num == selector_pos)
                 {
                     push_cancel = true;
                 }
@@ -238,7 +239,7 @@ public class PoseManager_M : MonoBehaviour
                     }
                 }
                 //UIがキャンセルされたら
-                if(push_cancel)
+                if(push_cancel && (selector_pos == 1 || selector_pos == 2))
                 {
                     push_selector = true;
                     Click_UI = false;
@@ -266,6 +267,10 @@ public class PoseManager_M : MonoBehaviour
                         comment_num = 0;
                         Remove_Color(selector_pos);
                     }
+                }
+                else
+                {
+                    push_cancel = false;
                 }
             }
         }
@@ -302,7 +307,7 @@ public class PoseManager_M : MonoBehaviour
     //ポーズの表示非表示を管理する関数
     void Change_Pose(int showing)
     {
-        if (showing == 0)
+        if (showing == 1)
         {
             ReStart.color = new Color32(255, 255, 255, 255);
             pose_obj.SetActive(true);
