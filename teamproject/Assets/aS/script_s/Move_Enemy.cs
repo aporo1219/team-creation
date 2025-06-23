@@ -20,6 +20,7 @@ public class Move_Enemy : MonoBehaviour
     [SerializeField] GameObject Erea;//SearchEreaのスクリプトを呼び出すGameObject
     [SerializeField] SearchErea Search_Enemy;//主人公を探す変数
     [SerializeField] private Transform ModelRoot;// ← モデル（JR-1）を指定する用
+    [SerializeField] private float RotationOffsetY = 0f;//向きの補正
 
     private float Speed_Enemy;//スピードの変数
     private float Time_Lapse;//敵が主人公を見失ったときの経過時間
@@ -39,6 +40,7 @@ public class Move_Enemy : MonoBehaviour
     Vector3 Search_Position_Right;//周回する用のベクトル右
     Vector3 Search_Position_Left;//周回する用のベクトル左
     Vector3 Player_Distance;//プレイヤーの距離間のベクトル
+
     [SerializeField] Vector3 Local_Space_Vec;//前方基準のローカル空間ベクトル
 
 
@@ -146,22 +148,22 @@ public class Move_Enemy : MonoBehaviour
 
       
         //プレイヤーの位置を取得して方向更新
-        Player_Distance = MainCharacter.transform.position - ModelRoot.position;
-        if (Turn)
+        Player_Distance = MainCharacter.transform.position - transform.position;
+        Player_Distance.y = 0;
+        //回転
+        if (Player_Distance != Vector3.zero)
         {
-            //アニメーション切り替え
-            Anim.SetBool("Walk", true);
-            //主人公の方向に回転
-            var Rotate_Discovery = Quaternion.LookRotation(Player_Distance.normalized, Vector3.up); //プレイヤー発見の回転ベクトル
-            ModelRoot.rotation = Rotate_Discovery;
-
-
+            Quaternion targetRot = Quaternion.LookRotation(Player_Distance.normalized);
+            targetRot = Quaternion.Euler(0,RotationOffsetY,90);
+            ModelRoot.rotation = Quaternion.Slerp(ModelRoot.rotation, targetRot, Time.deltaTime * 5f);
             //Debug.Log("旋回");  
         }
+        //アニメーション切り替え
+        Anim.SetBool("Walk", true);
         //Goal位置の更新
         Goal_Position = MainCharacter.transform.position;
         //目標時点まで移動する（Goal_Positionの値をPlayerの座標にすればPlayerに向かう）
-        ModelRoot.position = Vector3.MoveTowards(ModelRoot.position, Goal_Position, Speed_Enemy * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(ModelRoot.position, Goal_Position, Speed_Enemy * Time.deltaTime);
 
         Mode_Serch = true;
     }
@@ -172,12 +174,12 @@ public class Move_Enemy : MonoBehaviour
         Time_Lapse += Time.deltaTime;
         //アニメーション切り替え（止まる）
         Anim.SetBool("Walk", false);
-
+        Anim.SetBool("Attack", false);
         if (Time_Lapse > Return && Mode_Serch == true)
         {
             Debug.Log("戻る");
             //初期値に戻す
-            ModelRoot.position = Initial_Value;
+            transform.position = Initial_Value;
             Time_Lapse = 0;
             Mode_Serch = false;
         }

@@ -11,6 +11,7 @@ public class Enemy_Status : MonoBehaviour
     private Enemy_Manager Enemy_manager;
     private Animator Anim;//ƒAƒjƒ[ƒ^[Žæ“¾‚Ì•Ï”
     private int CoolTime;//UŒ‚‚ÌƒN[ƒ‹ƒ^ƒCƒ€
+    private int time = 0;
 
     //public static Enemy_Status Instance;
     public int Enemy_HP;
@@ -30,7 +31,7 @@ public class Enemy_Status : MonoBehaviour
         Enemy_HP = 1;//‰¼”’l
         Enemy_Power = 5;//‰¼”’l
         Enemy_ID = Enemy_Manager.Entry_Enemy_ID(this);//ID‚Ì“o˜^
-        CoolTime = 3;
+        CoolTime = 5;
     }
 
     // Update is called once per frame
@@ -93,21 +94,28 @@ public class Enemy_Status : MonoBehaviour
     }
 
     //UŒ‚
-    private void OnCollisionEnter(Collision collision)
-    {//ƒAƒjƒ[ƒVƒ‡ƒ“Ø‚è‘Ö‚¦iUŒ‚j
-           // Anim.SetBool("Attack", true);
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            int time = 0;
+    private void OnCollisionStay(Collision collision)
+    {
+          
+        if (collision.gameObject.tag == ("Player"))
+        { 
+            //Debug.Log("UŒ‚“G");
             time = (int)Time.deltaTime;
-            
-      @@@
-            if ( time >= CoolTime)
+            var EB = GetComponent<Ballet_Enemy>();
+            if ( time < CoolTime)
             {
-                Debug.Log("UŒ‚“G");
-                
+                Debug.Log("UŒ‚“G1");
+                //ƒAƒjƒ[ƒVƒ‡ƒ“Ø‚è‘Ö‚¦iUŒ‚j
+                Anim.SetBool("Attack", true);
                 time = 0;
+               //’e‚Ì”­ŽË
+                if( EB != null )
+                {
+                    EB.Shot();
+                }
+                
             }
+          
 
         }
     }

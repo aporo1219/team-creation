@@ -42,7 +42,8 @@ public class SearchErea : MonoBehaviour
     {
         //主人公がサーチ領域に入ったら敵が主人公に向かう信号を送る
         if (other.gameObject.tag == "Player")
-        { 
+        {
+            Debug.Log("でた");
             Find = false;
             //Move.Lost();
         }
