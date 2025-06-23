@@ -13,74 +13,74 @@ public class PlayerController_y1 : MonoBehaviour
 
     //ステータス変数
     public string State = "";
-    public float MoveSpeed = 5.0f;  //移動速度
-    public float DashSpeed = 10.0f;  //移動速度
-    public float JumpPower = 20.0f;  //ジャンプ力
-    public float DoubleJumpPower = 30.0f;  //空中ジャンプ力
-    public float DodgeSpeed = 30.0f;
-    public float AirDodgeSpeed = 50.0f;
+    public float MoveSpeed = 5.0f;          //移動速度
+    public float DashSpeed = 10.0f;         //移動速度
+    public float JumpPower = 20.0f;         //ジャンプ力
+    public float DoubleJumpPower = 30.0f;   //空中ジャンプ力
+    public float DodgeSpeed = 30.0f;        //地上回避速度
+    public float AirDodgeSpeed = 50.0f;     //空中回避速度
 
     //入力
-    private InputAction moveAction;
-    private InputAction dashAction;
-    private InputAction jumpAction;
-    private InputAction attackAction;
-    private InputAction dodgeAction;
-    private InputAction guardAction;
+    private InputAction moveAction;     //左スティック
+    private InputAction dashAction;     //左スティック押し込み
+    private InputAction jumpAction;     //Aボタン
+    public InputAction attackAction;   //Xボタン
+    private InputAction dodgeAction;    //Rトリガー
+    private InputAction guardAction;    //Lトリガー
 
-    private Vector2 moveValue;
+    private Vector2 moveValue;          //左スティック入力量
 
     private bool Dash = false;
 
-    [SerializeField] private bool onGround = false;  //接地判定
-    [SerializeField] private bool GroundHit = false;
-    private int JumpTime = 0;
-    private int LongJumpLimit = 10;
-    private bool DoubleJump = false;     //空中ジャンプが残っているか
-    private int AirTime = 0;        //滞空時間
-    private int JumpLimit = 10;      //ジャンプできる最大滞空時間
-    private bool isJump = false;
+    [SerializeField] private bool onGround = false;     //接地判定
+    [SerializeField] private bool GroundHit = false;    //地形との衝突判定
+    private int JumpTime = 0;           //ジャンプ持続
+    private int LongJumpLimit = 10;     //最大ジャンプ時間
+    private bool DoubleJump = false;    //空中ジャンプが残っているか
+    private int AirTime = 0;            //滞空時間
+    private int JumpLimit = 10;         //ジャンプできる最大滞空時間
+    private bool isJump = false;        //ジャンプ中か
 
-    public bool canMove = true;
-    public bool canRotate = true;
-    public bool canJump = true;  //
-    public bool canAction = true;
+    //行動許可
+    public bool canMove = true;     //移動
+    public bool canRotate = true;   //回転
+    public bool canJump = true;     //ジャンプ
+    public bool canAction = true;   //アクション
 
     bool ATK = false;
 
-    private int DodgeTimeCount;
-    private int DodgeCoolTime = 10;
+    private int DodgeTimeCount;         //地上回避タイムカウント
+    private int DodgeCoolTime = 10;     //地上回避クールタイム
 
-    private int AirDodgeTimeCount;
-    private int AirDodgeCoolTime = 120;
+    private int AirDodgeTimeCount;      //空中回避タイムカウント
+    private int AirDodgeCoolTime = 120; //空中回避クールタイム
 
-    private bool nowDodge = false;
+    //攻撃の種類
+    public enum AttackType
+    {
+        None,
+        G1, G2, G3, GF,
+        A1, A2, A3, AF,
+    }
 
-    private int AttackNum = 0;
-    [SerializeField] public string AttackState = "";
+    public int AttackNum = 0;      //攻撃の段階
+    [SerializeField] public AttackType AttackState;        //どの攻撃か
 
+    //地上レイヤー
     LayerMask layerMask;
 
-    Animator animator;
-
-    private string NowAnime = "";
-    private string OldAnime = "";
-
-    public string kariAnime;
-    public string JumpAnime;
-    public string DoubleJumpAnime;
-    public string FallAnime;
-    public string RunAnime;
-    public string DodgeAnime;
-    public string NeutralAnime;
+    //アニメーター
+    public Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Application.targetFrameRate = 60;
 
+        //Rigidbody取得
         rb = GetComponent<Rigidbody>();
 
+        //インプットシステム取得
         moveAction = InputSystem.actions.FindAction("Move");
         dashAction = InputSystem.actions.FindAction("Dash");
         jumpAction = InputSystem.actions.FindAction("Jump");
@@ -88,30 +88,31 @@ public class PlayerController_y1 : MonoBehaviour
         dodgeAction = InputSystem.actions.FindAction("Dodge");
         guardAction = InputSystem.actions.FindAction("Guard");
 
+        //回避クールタイム初期化
         DodgeTimeCount = DodgeCoolTime;
         AirDodgeTimeCount = AirDodgeCoolTime;
 
+        //インスタンス設定
         instance = this;
 
+        //レイヤーマスクにグラウンドレイヤー設定
         layerMask = LayerMask.GetMask("Ground");
 
-       
+        //アニメーター取得
         animator = GetComponentInChildren<Animator>();
 
-        animator.Play(kariAnime);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //ゲームが動いていないなら処理を行わない
         if (Time.timeScale == 0)
         {
             return;
         }
 
-        //Debug.Log(Time.deltaTime);
-
-        //入力取得
+        //左スティック入力取得
         moveValue = moveAction.ReadValue<Vector2>();
 
         //地面判定取得
@@ -126,7 +127,7 @@ public class PlayerController_y1 : MonoBehaviour
             //空中回避回復
             AirDodgeTimeCount = 120;
 
-            animator.SetBool("Aiming", true);
+            animator.SetBool("onGround", true);
         }
         else
         {//空中にいる
@@ -134,7 +135,7 @@ public class PlayerController_y1 : MonoBehaviour
             AirTime++;
             //
             if (!isJump && canMove)
-                animator.SetBool("Aiming", false);
+                animator.SetBool("onGround", false);
         }
 
 
@@ -169,7 +170,7 @@ public class PlayerController_y1 : MonoBehaviour
                 //
                 if (onGround && canMove)
                 {
-                    animator.SetBool("Moving", false);
+                    animator.SetBool("Move", false);
                 }
 
             }
@@ -179,7 +180,7 @@ public class PlayerController_y1 : MonoBehaviour
                 StartCoroutine("Jump");
             }
             //通常攻撃
-            if (attackAction.WasPressedThisFrame() && canAction && AttackState == "")
+            if (attackAction.WasPressedThisFrame() && canAction && AttackState == AttackType.None)
             {
                 Attack();
             }
@@ -194,16 +195,6 @@ public class PlayerController_y1 : MonoBehaviour
                 StartCoroutine("Guard");
             }
         }
-
-        
-
-        //Debug.Log("Anime = " + NowAnime);
-        //if (NowAnime != OldAnime)
-        //{
-        //    animator.PlayInFixedTime(NowAnime);
-
-        //    OldAnime = NowAnime;
-        //}
     }
 
     private void FixedUpdate()
@@ -225,13 +216,11 @@ public class PlayerController_y1 : MonoBehaviour
                 //
                 if (onGround && (moveValue.x != 0 || moveValue.y != 0))
                 {
-                    NowAnime = RunAnime;
-                    animator.SetBool("Moving", true);
+                    animator.SetBool("Move", true);
                 }
 
                 else if(onGround)
                 {
-                    NowAnime = NeutralAnime;
                 }
             }
             else
@@ -241,13 +230,11 @@ public class PlayerController_y1 : MonoBehaviour
                 //
                 if (onGround && (moveValue.x != 0 || moveValue.y != 0))
                 {
-                    NowAnime = RunAnime;
-                    animator.SetBool("Moving", true);
+                    animator.SetBool("Move", true);
                 }
                    
                 else if (onGround)
                 {
-                    NowAnime = NeutralAnime;
                 }
             }
                 
@@ -303,7 +290,7 @@ public class PlayerController_y1 : MonoBehaviour
             //ジャンプ中に
             isJump = true;
             //
-            animator.SetInteger("Jumping", 2);
+            animator.SetBool("Jump", true);
 
             while (((JumpTime < LongJumpLimit && jumpAction.IsPressed()) || JumpTime < 3) && canJump)
             {
@@ -325,7 +312,7 @@ public class PlayerController_y1 : MonoBehaviour
             //ジャンプ中に
             isJump = true;
             //
-            animator.SetInteger("Jumping", 2);
+            animator.SetBool("Jump", true);
             //空中回避のクールタイムをなくす
             AirDodgeTimeCount = AirDodgeCoolTime;
             while (JumpTime < 17 && canJump)
@@ -345,7 +332,7 @@ public class PlayerController_y1 : MonoBehaviour
 
         if (canJump&&isJump)
         {
-            animator.SetInteger("Jumping", -1);
+            animator.SetBool("Jump", false);
 
             //上昇減速
             for (int i = 0; i < 2; i++)
@@ -355,7 +342,7 @@ public class PlayerController_y1 : MonoBehaviour
                 yield return null;
             }
         }
-        animator.SetInteger("Jumping", -1);
+        animator.SetBool("Jump", false);
 
         JumpTime = 0;
         //非ジャンプ状態に
@@ -364,7 +351,7 @@ public class PlayerController_y1 : MonoBehaviour
         yield return null;
     }
 
-    private void Attack()
+    public void Attack()
     {
         Debug.Log("攻撃");
         ATK = true;
@@ -375,13 +362,11 @@ public class PlayerController_y1 : MonoBehaviour
 
                 if (onGround)
                 {//地上
-                    AttackState = "GroundFirst";
-                    StartCoroutine("AttackCombo", 0.5f);
+                    AttackState = AttackType.G1;
                 }
                 else
                 {//空中
-                    AttackState = "AirFirst";
-                    StartCoroutine("AttackCombo", 0.5f);
+                    AttackState = AttackType.A1;
                 }
 
                 break;
@@ -389,13 +374,11 @@ public class PlayerController_y1 : MonoBehaviour
 
                 if (onGround)
                 {//地上
-                    AttackState = "GroundSecond";
-                    StartCoroutine("AttackCombo", 0.5f);
+                    AttackState = AttackType.G2;
                 }
                 else
                 {//空中
-                    AttackState = "AirSecond";
-                    StartCoroutine("AttackCombo", 0.5f);
+                    AttackState = AttackType.A2;
                 }
 
                 break;
@@ -403,13 +386,11 @@ public class PlayerController_y1 : MonoBehaviour
 
                 if (onGround)
                 {//地上
-                    AttackState = "GroundThird";
-                    StartCoroutine("AttackCombo", 0.5f);
+                    AttackState = AttackType.G3;
                 }
                 else
                 {//空中
-                    AttackState = "AirThird";
-                    StartCoroutine("AttackCombo", 0.5f);
+                    AttackState = AttackType.A3;
                 }
 
                 break;
@@ -417,20 +398,18 @@ public class PlayerController_y1 : MonoBehaviour
 
                 if (onGround)
                 {//地上
-                    AttackState = "GroundFinish";
-                    StartCoroutine("AttackCombo", 0.5f);
+                    AttackState = AttackType.GF;
                 }
                 else
                 {//空中
-                    AttackState = "AirFinish";
-                    StartCoroutine("AttackCombo", 0.5f);
+                    AttackState = AttackType.AF;
                 }
 
                 break;
         }
 
-        
-        
+        PlayerAttack.instance.Attack(AttackState);
+
     }
 
     private void Dodge()
@@ -480,6 +459,7 @@ public class PlayerController_y1 : MonoBehaviour
     {
         float time = 0.0f;
         bool combo = false;
+        animator.SetInteger("Attack", AttackNum);
 
         if (AttackNum > 3)
         {
@@ -517,7 +497,8 @@ public class PlayerController_y1 : MonoBehaviour
         {
             Debug.Log("コンボリセット");
             AttackNum = 0;
-            AttackState = "";
+            AttackState = AttackType.None;
+            animator.SetInteger("Attack", AttackNum);
         }
 
 
@@ -552,7 +533,7 @@ public class PlayerController_y1 : MonoBehaviour
     {
         float time = 0.0f;
         //rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
-        animator.SetFloat("Idle", 2);
+        animator.SetBool("Dodge", true);
 
         rb.linearVelocity = transform.forward * MoveSpeed;
 
@@ -587,7 +568,7 @@ public class PlayerController_y1 : MonoBehaviour
             yield return null; 
         }
 
-        animator.SetFloat("Idle", -1);
+        animator.SetBool("Dodge", false);
 
         while (time < actiontime)
         {
@@ -616,7 +597,7 @@ public class PlayerController_y1 : MonoBehaviour
     {
         float time = 0.0f;
 
-        animator.SetFloat("Idle", 2);
+        animator.SetBool("Dodge", true);
 
         while (time < actiontime * 0.6f)
         {
@@ -631,7 +612,7 @@ public class PlayerController_y1 : MonoBehaviour
             yield return null;
         }
 
-        animator.SetFloat("Idle", -1);
+        animator.SetBool("Dodge", false);
 
         while (time < actiontime)
         {

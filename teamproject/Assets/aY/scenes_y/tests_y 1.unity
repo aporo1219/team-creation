@@ -1010,6 +1010,7 @@ GameObject:
   - component: {fileID: 728810873}
   - component: {fileID: 728810876}
   - component: {fileID: 728810877}
+  - component: {fileID: 728810878}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1102,20 +1103,63 @@ MonoBehaviour:
   DoubleJumpPower: 30
   DodgeSpeed: 20
   AirDodgeSpeed: 50
+  attackAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 44c1f5a8-bedb-4698-ae9c-9da66f04f7c9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   onGround: 0
   GroundHit: 0
   canMove: 1
   canRotate: 1
   canJump: 1
   canAction: 1
-  AttackState: 
-  kariAnime: Unarmed-Idle-Static
-  JumpAnime: Unarmed-Jump
-  DoubleJumpAnime: Unarmed-Jump-Flip
-  FallAnime: Unarmed-Fall
-  RunAnime: Unarmed-Run-Forward
-  DodgeAnime: Unarmed-DiveRoll-Forward1
-  NeutralAnime: Unarmed-Idle
+  AttackNum: 0
+  AttackState: 0
+  animator: {fileID: 0}
+--- !u!114 &728810878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728810871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 741cefda48de52545aa41a4b8c0bc767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackMotiontime:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  AttackInputLimit:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  AttackInputStart:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!1 &741722625
 GameObject:
   m_ObjectHideFlags: 0
