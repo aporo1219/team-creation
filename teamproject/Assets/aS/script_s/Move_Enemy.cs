@@ -33,6 +33,7 @@ public class Move_Enemy : MonoBehaviour
     private bool Turn;//回転の変数
     private bool Be_Attacked;//攻撃を受けたかの判定
     private Animator Anim;//アニメーションコンポーネントの取得
+    private float Distance;//距離の計算
 
 
     Vector3 Goal_Position;//目標時点の座標変数（雑魚敵）
@@ -40,6 +41,7 @@ public class Move_Enemy : MonoBehaviour
     Vector3 Search_Position_Right;//周回する用のベクトル右
     Vector3 Search_Position_Left;//周回する用のベクトル左
     Vector3 Player_Distance;//プレイヤーの距離間のベクトル
+
 
     [SerializeField] Vector3 Local_Space_Vec;//前方基準のローカル空間ベクトル
 
@@ -49,6 +51,8 @@ public class Move_Enemy : MonoBehaviour
         //初期化
         Search_Enemy = GetComponentInChildren<SearchErea>();
         Anim = GetComponent<Animator>();
+        Local_Space_Vec = Vector3.forward;
+
         //プレイヤーに近づく変数
         //MainCharacter = GameObject.FindWithTag("Player");
         Goal_Position = MainCharacter.transform.position;
@@ -144,26 +148,29 @@ public class Move_Enemy : MonoBehaviour
     public void Discovery()
     {
         Time_Lapse = 0;
-        Turn = true;
 
-      
-        //プレイヤーの位置を取得して方向更新
-        Player_Distance = MainCharacter.transform.position - transform.position;
-        Player_Distance.y = 0;
-        //回転
-        if (Player_Distance != Vector3.zero)
+        //this.transform.Rotate(MainCharacter.transform.position);
+        Vector3 direction = MainCharacter.transform.position - this.transform.position;
+        direction.y = 0; // 上下を無視して水平だけ向く
+
+        if (direction.magnitude > 0.01f)
         {
-            Quaternion targetRot = Quaternion.LookRotation(Player_Distance.normalized);
-            targetRot = Quaternion.Euler(0,RotationOffsetY,90);
-            ModelRoot.rotation = Quaternion.Slerp(ModelRoot.rotation, targetRot, Time.deltaTime * 5f);
-            //Debug.Log("旋回");  
+            float Rotation_Speed = 5.0f;
+            Quaternion rot = Quaternion.LookRotation(direction);
+            rot *= Quaternion.Euler(0, -90, 0); // X-が前向きの補正
+            ModelRoot.rotation = Quaternion.Slerp(ModelRoot.rotation, rot, Time.deltaTime * Rotation_Speed);
         }
+
         //アニメーション切り替え
         Anim.SetBool("Walk", true);
+        // 前向き（モデルのforward方向）に進む
+        Vector3 moveDir = ModelRoot.forward;
+        moveDir.y = 0;
+        transform.position += moveDir.normalized * Speed_Enemy * Time.deltaTime;
         //Goal位置の更新
-        Goal_Position = MainCharacter.transform.position;
+        /*Goal_Position = MainCharacter.transform.position;
         //目標時点まで移動する（Goal_Positionの値をPlayerの座標にすればPlayerに向かう）
-        transform.position = Vector3.MoveTowards(ModelRoot.position, Goal_Position, Speed_Enemy * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(ModelRoot.position, Goal_Position, Speed_Enemy * Time.deltaTime);*/
 
         Mode_Serch = true;
     }

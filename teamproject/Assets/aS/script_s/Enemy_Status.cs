@@ -101,7 +101,9 @@ public class Enemy_Status : MonoBehaviour
         { 
             //Debug.Log("çUåÇìG");
             time = (int)Time.deltaTime;
-            var EB = GetComponent<Ballet_Enemy>();
+            var EB = GetComponent<Bullet_Enemy>();
+            var Bullet = GameObject.FindWithTag("Bullet");
+
             if ( time < CoolTime)
             {
                 Debug.Log("çUåÇìG1");
