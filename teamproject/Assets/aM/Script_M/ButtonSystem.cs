@@ -16,7 +16,6 @@ public class ButtonSystem : MonoBehaviour
             ChangeColor_Time--;
         if (ChangeColor_Time <= 0)
         {
-            Pusher.GetComponent<Renderer>().material.color = Color.green;
             push_button = false;
         }
         if (ChangeColor_Time <= 0 && !push_button)
@@ -36,6 +35,7 @@ public class ButtonSystem : MonoBehaviour
         {
             Debug.Log("ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚æ™");
             anim.SetBool("StartAnim", true);
+            Pusher.GetComponent<Renderer>().material.color = Color.green;
             push_button = true;
         }
     }
