@@ -9,7 +9,7 @@ public class PlayerController_y1 : MonoBehaviour
 {
     public static PlayerController_y1 instance;
 
-    private Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
 
     //ステータス変数
     public string State = "";
@@ -24,7 +24,7 @@ public class PlayerController_y1 : MonoBehaviour
     private InputAction moveAction;     //左スティック
     private InputAction dashAction;     //左スティック押し込み
     private InputAction jumpAction;     //Aボタン
-    public InputAction attackAction;   //Xボタン
+    [HideInInspector] public InputAction attackAction;   //Xボタン
     private InputAction dodgeAction;    //Rトリガー
     private InputAction guardAction;    //Lトリガー
 
@@ -32,7 +32,7 @@ public class PlayerController_y1 : MonoBehaviour
 
     private bool Dash = false;
 
-    [SerializeField] private bool onGround = false;     //接地判定
+    public bool onGround = false;     //接地判定
     [SerializeField] private bool GroundHit = false;    //地形との衝突判定
     private int JumpTime = 0;           //ジャンプ持続
     private int LongJumpLimit = 10;     //最大ジャンプ時間
@@ -56,6 +56,7 @@ public class PlayerController_y1 : MonoBehaviour
     private int AirDodgeCoolTime = 120; //空中回避クールタイム
 
     //攻撃の種類
+    [HideInInspector]
     public enum AttackType
     {
         None,
@@ -70,7 +71,7 @@ public class PlayerController_y1 : MonoBehaviour
     LayerMask layerMask;
 
     //アニメーター
-    public Animator animator;
+    [HideInInspector] public Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

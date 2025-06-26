@@ -2387,9 +2387,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8479532311379651370, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
+      propertyPath: a
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479532311379651370, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
+      propertyPath: Combo
+      value: 
+      objectReference: {fileID: 1250817198}
+    - target: {fileID: 8479532311379651370, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
       propertyPath: combo
       value: 
       objectReference: {fileID: 1250817198}
+    - target: {fileID: 8479532311379651370, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
+      propertyPath: Finish
+      value: 
+      objectReference: {fileID: 679782139}
     - target: {fileID: 8479532311379651370, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
       propertyPath: finish
       value: 
@@ -2408,15 +2420,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8479532311379651370, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
       propertyPath: 'AttackInputLimit.Array.data[4]'
-      value: 0.35
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8479532311379651370, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
       propertyPath: 'AttackInputLimit.Array.data[5]'
-      value: 0.35
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8479532311379651370, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
       propertyPath: 'AttackInputLimit.Array.data[6]'
-      value: 0.35
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8479532311379651370, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
       propertyPath: 'AttackInputStart.Array.data[0]'

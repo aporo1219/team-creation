@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb2bff2959b4d0f4fa9a7a9c10dc2bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   State: 
   MoveSpeed: 5
   DashSpeed: 10
@@ -224,6 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Combo: {fileID: 5657630410656655247}
   Finish: {fileID: 1267362944150144665}
+  a: 5
   AttackMotionTime:
   - 1.2
   - 1.2
@@ -238,37 +240,37 @@ MonoBehaviour:
   - 0.8
   - 1
   - 0
-  - 0.35
-  - 0.35
-  - 0.35
+  - 0.7
+  - 0.8
+  - 1
   - 0
   AttackMigrationTime:
   - 0.6
   - 0.7
   - 0.7
   - 0
-  - 0.05
-  - 0.05
-  - 0.05
+  - 0.6
+  - 0.7
+  - 0.7
   - 0
   AttackStartTime:
   - 0.4
   - 0.43
   - 0.4
   - 0.43
-  - 0.05
-  - 0.05
-  - 0.05
-  - 0
+  - 0.4
+  - 0.43
+  - 0.4
+  - 0.43
   AttackEndTime:
   - 0.5
   - 0.53
   - 0.5
   - 0.5
-  - 0.05
-  - 0.05
-  - 0.05
-  - 0
+  - 0.5
+  - 0.53
+  - 0.5
+  - 0.5
 --- !u!1 &5657630410656655247
 GameObject:
   m_ObjectHideFlags: 0

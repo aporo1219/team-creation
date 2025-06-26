@@ -11,11 +11,13 @@ public class PlayerAttack : MonoBehaviour
     public GameObject Combo;
     public GameObject Finish;
 
+    public float a = 1.0f;
+
     [SerializeField] private float[] AttackMotionTime = new float[8] { 1.2f, 1.2f, 1.2f, 1.2f, 1.2f, 1.2f, 1.2f, 1.2f };
-    [SerializeField] private float[] AttackInputLimit = new float[8] { 0.7f, 0.8f, 1.0f, 0.0f, 0.35f, 0.35f, 0.35f, 0.0f };
-    [SerializeField] private float[] AttackMigrationTime = new float[8] { 0.6f, 0.7f, 0.7f, 0.0f, 0.05f, 0.05f, 0.05f, 0.0f };
-    [SerializeField] private float[] AttackStartTime = new float[8] { 0.4f, 0.43f, 0.4f, 0.43f, 0.05f, 0.05f, 0.05f, 0.0f };
-    [SerializeField] private float[] AttackEndTime = new float[8] { 0.5f, 0.53f, 0.5f, 0.5f, 0.05f, 0.05f, 0.05f, 0.0f };
+    [SerializeField] private float[] AttackInputLimit = new float[8] { 0.7f, 0.8f, 1.0f, 0.0f, 0.7f, 0.8f, 1.0f, 0.0f };
+    [SerializeField] private float[] AttackMigrationTime = new float[8] { 0.6f, 0.7f, 0.7f, 0.0f, 0.6f, 0.7f, 0.7f, 0.0f };
+    [SerializeField] private float[] AttackStartTime = new float[8] { 0.4f, 0.43f, 0.4f, 0.43f, 0.4f, 0.43f, 0.4f, 0.43f };
+    [SerializeField] private float[] AttackEndTime = new float[8] { 0.5f, 0.53f, 0.5f, 0.5f, 0.5f, 0.53f, 0.5f, 0.5f };
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -86,6 +88,7 @@ public class PlayerAttack : MonoBehaviour
         bool combo = false;
 
         
+        
 
         PlayerController_y1.instance.animator.SetInteger("Attack", PlayerController_y1.instance.AttackNum);
 
@@ -101,6 +104,14 @@ public class PlayerAttack : MonoBehaviour
                 }
                 else if (start < time)
                 {
+                    if(!Finish.activeInHierarchy)
+                    {
+                        if (!PlayerController_y1.instance.onGround)
+                        {
+                            PlayerController_y1.instance.rb.linearVelocity = Vector3.up * a;
+                        }
+                    }
+                    
                     Finish.SetActive(true);
                 }
 
@@ -119,6 +130,14 @@ public class PlayerAttack : MonoBehaviour
                 }
                 else if (start < time)
                 {
+                    if (!Combo.activeInHierarchy)
+                    {
+                        if (!PlayerController_y1.instance.onGround)
+                        {
+                            PlayerController_y1.instance.rb.linearVelocity = Vector3.up * a;
+                        }
+                    }
+
                     Combo.SetActive(true);
                 }
 
