@@ -34,7 +34,7 @@ public class Move_Enemy : MonoBehaviour
     private bool Be_Attacked;//攻撃を受けたかの判定
     private Animator Anim;//アニメーションコンポーネントの取得
     private float Distance;//距離の計算
-
+    private Rigidbody rd;
 
     Vector3 Goal_Position;//目標時点の座標変数（雑魚敵）
     Vector3 Initial_Value;//初期地点の座標変数
@@ -52,7 +52,7 @@ public class Move_Enemy : MonoBehaviour
         Search_Enemy = GetComponentInChildren<SearchErea>();
         Anim = GetComponent<Animator>();
         Local_Space_Vec = Vector3.forward;
-
+        rd = GetComponent<Rigidbody>();
         //プレイヤーに近づく変数
         //MainCharacter = GameObject.FindWithTag("Player");
         Goal_Position = MainCharacter.transform.position;
@@ -193,17 +193,24 @@ public class Move_Enemy : MonoBehaviour
     }
 
     //攻撃を受けた時
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.tag == ("Player"))
+        if (collision.gameObject.name == "GC")
         {
-            Debug.Log("攻撃を受けた");
             var Enemy = GetComponent<Enemy_Status>();
-            if(Enemy != null)
-            {
-               string combo = PlayerController_y.instance.AttackState;
-               Enemy.Be_Attack(combo);
-            }
+            string combo = PlayerController_y.instance.AttackState;
+            rd.linearVelocity = new Vector3(0, 5, 0);
+            Enemy.Be_Attack(combo);
+            Debug.Log("hit,C");
+        }
+
+        if (collision.gameObject.name == "GF")
+        {
+            var Enemy = GetComponent<Enemy_Status>();
+            string combo = PlayerController_y.instance.AttackState;
+            rd.linearVelocity = new Vector3(0, 10, 0);
+            Enemy.Be_Attack(combo);
+            Debug.Log("hit,F");
         }
     }
 }

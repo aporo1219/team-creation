@@ -5,44 +5,49 @@ using UnityEngine;
 public class Bullet_Enemy : MonoBehaviour
 { 
     [SerializeField] GameObject Bullet_OBJ;
-
-    Vector3 Enemy_Pos;
-    Vector3 Bullet_Pos;
+    [SerializeField] Transform Enemy;
+   
  
     private float Bullet_Speed;
-   
 
+    Vector3 SpawnBullet;
+    Vector3 Enemy_Pos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Bullet_Speed = 10.0f;
-       Bullet_OBJ.SetActive(false);
+        Enemy_Pos = Enemy.position;
+        SpawnBullet = transform.position + new Vector3(Enemy_Pos.x,1.15f,Enemy_Pos.z);
+       
     }
 
-    // Update is called once per frame
-    
+  
 
-    //’e‚Ì”­Ë
+    
+    //å¼¾ç™ºå°„
     public void Shot()
     {
-        Bullet_OBJ.SetActive(true);
-        Debug.Log("”­Ë");
-        //ˆÚ“®
-        Bullet_OBJ.transform.Translate(Vector3.left * Time.deltaTime * Bullet_Speed);
-        //‚P‚O•bŒo‰ß‚ÅÁ‚¦‚é
-        Invoke(nameof(Delite), 1.0f);
+        Enemy_Pos = Enemy.position;
+        SpawnBullet = transform.position + new Vector3(Enemy_Pos.x, 1.15f, Enemy_Pos.z);
+        GameObject bullet = Instantiate(Bullet_OBJ,SpawnBullet, Quaternion.identity);
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        if (rb != null)
+        { 
+            rb.AddForce( Vector3.left * Bullet_Speed, ForceMode.VelocityChange); // å‘ãã‚’é©å®œå¤‰æ›´
+        }
+
+        Destroy(Bullet_OBJ,3f);
+
     }
 
-    //’e‚ªÁ‚¦‚é
+    //ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void Delite()
     {
-        GameObject new_Bullet = Instantiate(Bullet_OBJ, Enemy_Pos, transform.rotation);
         Destroy(gameObject);
-        
     }
 
-    //ƒvƒŒƒCƒ„[‚Æ‚ ‚Á‚½‚½‚çÁ‚¦‚é
+    //ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void OnTriggerEnter(Collider other)
     {
        if(gameObject.tag == ("Player"))

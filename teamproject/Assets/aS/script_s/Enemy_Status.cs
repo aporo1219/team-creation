@@ -19,7 +19,8 @@ public class Enemy_Status : MonoBehaviour
     //敵のID
     public int Enemy_ID { get; private set; }
 
-
+    private float nextShotTime = 0f; // 次に撃てる時刻
+    [SerializeField] float shotInterval = 2f; // 発射間隔（秒）
     Vector3 Distance;//プレイヤーの距離の計算ベクトル
 
 
@@ -98,26 +99,25 @@ public class Enemy_Status : MonoBehaviour
     {
           
         if (collision.gameObject.tag == ("Player"))
-        { 
-            //Debug.Log("攻撃敵");
-            time = (int)Time.deltaTime;
-            var EB = GetComponent<Bullet_Enemy>();
-            var Bullet = GameObject.FindWithTag("Bullet");
-
-            if ( time < CoolTime)
+        {
+            if (Time.time >= nextShotTime)
             {
-                Debug.Log("攻撃敵1");
-                //アニメーション切り替え（攻撃）
+                nextShotTime = Time.time + shotInterval;
+
+                // 攻撃アニメーション再生
                 Anim.SetBool("Attack", true);
-                time = 0;
-               //弾の発射
-                if( EB != null )
+
+                // 弾の発射
+                Bullet_Enemy EB = GetComponent<Bullet_Enemy>();
+                if (EB != null)
                 {
+                    
                     EB.Shot();
                 }
-                
+
+                //Debug.Log("敵が弾を撃ちました");
             }
-          
+
 
         }
     }
