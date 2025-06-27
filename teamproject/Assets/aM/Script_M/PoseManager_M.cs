@@ -390,15 +390,18 @@ public class PoseManager_M : MonoBehaviour
         switch(spos)
         {
             case 0:
+                Comment_Text.fontSize = 60;
                 Comment_Text.text = "テスト１";
                 break;
             case 1:
-
+                Comment_Text.fontSize = 60;
                 Comment_Text.text = "テスト２";
                 break;
             case 2:
-
-                Comment_Text.text = "テスト３";
+                Comment_Text.fontSize = 40;
+                Comment_Text.text = "\n\n移動：左スティック｜攻撃：Xボタン\n\n" +
+                                    "視点：右スティック｜ジャンプ：Aボタン\n\n" +
+                                    "回避：RTボタン｜ダッシュ：左スティック押し込み\n\n";
                 break;
         }
     }
