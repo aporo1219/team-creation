@@ -21,6 +21,7 @@ public class Move_Enemy : MonoBehaviour
     [SerializeField] SearchErea Search_Enemy;//主人公を探す変数
     [SerializeField] private Transform ModelRoot;// ← モデル（JR-1）を指定する用
     [SerializeField] private float RotationOffsetY = 0f;//向きの補正
+    [SerializeField] private GameObject[] ModelPrefabs;
 
     private float Speed_Enemy;//スピードの変数
     private float Time_Lapse;//敵が主人公を見失ったときの経過時間
@@ -54,8 +55,12 @@ public class Move_Enemy : MonoBehaviour
         Local_Space_Vec = Vector3.forward;
         rd = GetComponent<Rigidbody>();
         //プレイヤーに近づく変数
-        //MainCharacter = GameObject.FindWithTag("Player");
-        Goal_Position = MainCharacter.transform.position;
+        MainCharacter = GameObject.FindGameObjectWithTag("Player");
+        if(MainCharacter != null)
+        {
+            Goal_Position = MainCharacter.transform.position;
+        }
+      
         Speed_Enemy = 2.0f;
         Turn = false;//trueならば回転
         Local_Space_Vec = Vector3.up;
@@ -153,7 +158,7 @@ public class Move_Enemy : MonoBehaviour
         Vector3 direction = MainCharacter.transform.position - this.transform.position;
         direction.y = 0; // 上下を無視して水平だけ向く
 
-        if (direction.magnitude > 0.01f)
+        if (direction.magnitude > 0.1f)
         {
             float Rotation_Speed = 5.0f;
             Quaternion rot = Quaternion.LookRotation(direction);
@@ -167,10 +172,7 @@ public class Move_Enemy : MonoBehaviour
         Vector3 moveDir = ModelRoot.forward;
         moveDir.y = 0;
         transform.position += moveDir.normalized * Speed_Enemy * Time.deltaTime;
-        //Goal位置の更新
-        /*Goal_Position = MainCharacter.transform.position;
-        //目標時点まで移動する（Goal_Positionの値をPlayerの座標にすればPlayerに向かう）
-        transform.position = Vector3.MoveTowards(ModelRoot.position, Goal_Position, Speed_Enemy * Time.deltaTime);*/
+        
 
         Mode_Serch = true;
     }
