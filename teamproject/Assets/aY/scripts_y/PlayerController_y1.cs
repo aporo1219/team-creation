@@ -367,7 +367,6 @@ public class PlayerController_y1 : MonoBehaviour
 
         canMove = false;
         canAction = false;
-        rb.linearVelocity =new Vector3(0, 0, 0);
 
         AttackNum++;
         switch (AttackNum)

@@ -35,6 +35,11 @@ public class PlayerAttack : MonoBehaviour
 
     public int Attack(AttackType attack)
     {
+        if (!PlayerCont.onGround)
+        {
+            PlayerCont.rb.linearVelocity = new Vector3(PlayerCont.rb.linearVelocity.x, 0, PlayerCont.rb.linearVelocity.z);
+        }
+
         PlayerCont.canMove = false;
         PlayerCont.canAction = false;
 
@@ -93,7 +98,7 @@ public class PlayerAttack : MonoBehaviour
         bool combo = false;
         bool finish = false;
 
-
+        
 
         PlayerCont.animator.SetInteger("Attack", PlayerCont.AttackNum);
         yield return null;
@@ -114,14 +119,16 @@ public class PlayerAttack : MonoBehaviour
                 {
                     if(!Finish.activeInHierarchy)
                     {
+                        PlayerCont.rb.linearVelocity = PlayerCont.transform.forward * 100;
                         if (!PlayerCont.onGround)
                         {
-                            PlayerCont.rb.linearVelocity = Vector3.up * a;
+                            PlayerCont.rb.linearVelocity = new Vector3(PlayerCont.rb.linearVelocity.x, a, PlayerCont.rb.linearVelocity.z);
                         }
                     }
-                    
                     Finish.SetActive(true);
                 }
+
+                PlayerCont.rb.linearVelocity = new Vector3(PlayerCont.rb.linearVelocity.x * 0.8f, PlayerCont.rb.linearVelocity.y, PlayerCont.rb.linearVelocity.z * 0.8f);
 
                 yield return null;
             }
@@ -140,9 +147,10 @@ public class PlayerAttack : MonoBehaviour
                 {
                     if (!Combo.activeInHierarchy)
                     {
+                        PlayerCont.rb.linearVelocity = PlayerCont.transform.forward * 50;
                         if (!PlayerCont.onGround)
                         {
-                            PlayerCont.rb.linearVelocity = Vector3.up * a;
+                            PlayerCont.rb.linearVelocity = new Vector3(PlayerCont.rb.linearVelocity.x, a, PlayerCont.rb.linearVelocity.z);
                         }
                     }
 
@@ -160,6 +168,7 @@ public class PlayerAttack : MonoBehaviour
                     break;
                 }
 
+                PlayerCont.rb.linearVelocity = new Vector3(PlayerCont.rb.linearVelocity.x * 0.8f, PlayerCont.rb.linearVelocity.y, PlayerCont.rb.linearVelocity.z * 0.8f);
                 ATK = true;
                 yield return null;
             }
@@ -202,7 +211,7 @@ public class PlayerAttack : MonoBehaviour
             PlayerCont.canAction = true;
         }
 
-        
+
         yield return null;
     }
 
