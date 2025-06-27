@@ -40,6 +40,8 @@ public class PlayerController_y1 : MonoBehaviour
     private int AirTime = 0;            //滞空時間
     private int JumpLimit = 10;         //ジャンプできる最大滞空時間
     private bool isJump = false;        //ジャンプ中か
+    private int LandCount;
+    private int LandTime = 0;
 
     //行動許可
     public bool canMove = true;     //移動
@@ -89,6 +91,8 @@ public class PlayerController_y1 : MonoBehaviour
         dodgeAction = InputSystem.actions.FindAction("Dodge");
         guardAction = InputSystem.actions.FindAction("Guard");
 
+        LandCount = LandTime;
+
         //回避クールタイム初期化
         DodgeTimeCount = DodgeCoolTime;
         AirDodgeTimeCount = AirDodgeCoolTime;
@@ -125,6 +129,9 @@ public class PlayerController_y1 : MonoBehaviour
             DoubleJump = true;
             //エアタイム初期化
             AirTime = 0;
+
+            if (LandCount < LandTime)
+                LandCount++;
             //空中回避回復
             AirDodgeTimeCount = 120;
 
@@ -134,6 +141,8 @@ public class PlayerController_y1 : MonoBehaviour
         {//空中にいる
             //エアタイム増加
             AirTime++;
+
+            LandCount = 0;
             //
             if (!isJump && canMove)
                 animator.SetBool("onGround", false);
@@ -169,7 +178,7 @@ public class PlayerController_y1 : MonoBehaviour
                 //ダッシュ解除
                 Dash = false;
                 //
-                if (onGround && canMove)
+                if (onGround)
                 {
                     animator.SetBool("Move", false);
                 }
@@ -200,12 +209,19 @@ public class PlayerController_y1 : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+
         //カメラの方向からX-Z平面の単位ベクトルを取得
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
         //方向キーの入力値とカメラの向きから移動方向を決定
         Vector3 moveForward = cameraForward * moveValue.y + Camera.main.transform.right * moveValue.x;
         //
         moveForward.Normalize();
+
+        if (onGround && (moveValue.x != 0 || moveValue.y != 0))
+        {
+            animator.SetBool("Move", true);
+        }
 
         //移動処理
         if (canMove)
@@ -215,28 +231,17 @@ public class PlayerController_y1 : MonoBehaviour
                 //移動方向にダッシュスピードを掛ける
                 rb.linearVelocity = moveForward * DashSpeed + new Vector3(0, rb.linearVelocity.y, 0);
                 //
-                if (onGround && (moveValue.x != 0 || moveValue.y != 0))
-                {
-                    animator.SetBool("Move", true);
-                }
+               
 
-                else if(onGround)
-                {
-                }
+                
             }
             else
             {//通常時
                 //移動方向に移動スピードを掛ける
                 rb.linearVelocity = moveForward * MoveSpeed + new Vector3(0, rb.linearVelocity.y, 0);
                 //
-                if (onGround && (moveValue.x != 0 || moveValue.y != 0))
-                {
-                    animator.SetBool("Move", true);
-                }
-                   
-                else if (onGround)
-                {
-                }
+                
+               
             }
                 
 
@@ -288,22 +293,26 @@ public class PlayerController_y1 : MonoBehaviour
     {
         if (onGround)
         {   //接地しているなら
-            //ジャンプ中に
-            isJump = true;
-            //
-            animator.SetBool("Jump", true);
-
-            while (((JumpTime < LongJumpLimit && jumpAction.IsPressed()) || JumpTime < 3) && canJump)
+            if (LandCount == LandTime)
             {
-                //接地判定をなくす
-                onGround = false;
-                //ジャンプする
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, JumpPower, rb.linearVelocity.z);
+                //ジャンプ中に
+                isJump = true;
+                //
+                animator.SetBool("Jump", true);
 
-                JumpTime++;
+                while (((JumpTime < LongJumpLimit && jumpAction.IsPressed()) || JumpTime < 3) && canJump)
+                {
+                    //接地判定をなくす
+                    onGround = false;
+                    //ジャンプする
+                    rb.linearVelocity = new Vector3(rb.linearVelocity.x, JumpPower, rb.linearVelocity.z);
 
-                yield return null;
+                    JumpTime++;
+
+                    yield return null;
+                }
             }
+            
 
             
             

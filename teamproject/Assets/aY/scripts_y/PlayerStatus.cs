@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
@@ -10,6 +12,8 @@ public class PlayerStatus : MonoBehaviour
     public int HP;
     private int DefaultAttack;
     private int DefaultDefense;
+    public float AttackRate;
+    public float DefenseRate;
     public int Attack;
     public int Defense;
 
@@ -18,13 +22,13 @@ public class PlayerStatus : MonoBehaviour
     {
         
 
-        Instance = this;
+        Instance = this; 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Attack = DefaultAttack;
-        Defense = DefaultDefense;
+        Attack  = (int)(DefaultAttack * AttackRate);
+        Defense = (int)(DefaultDefense * DefenseRate);
     }
 }
