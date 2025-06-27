@@ -16,12 +16,15 @@ public class Move_Enemy : MonoBehaviour
     public bool Attack_Enemy;//敵の攻撃の判定
     public static bool Damede_Hit;
 
+    [SerializeField] float x, y, z, w;
+
     [SerializeField] GameObject MainCharacter;
     [SerializeField] GameObject Erea;//SearchEreaのスクリプトを呼び出すGameObject
     [SerializeField] SearchErea Search_Enemy;//主人公を探す変数
     [SerializeField] private Transform ModelRoot;// ← モデル（JR-1）を指定する用
     [SerializeField] private float RotationOffsetY = 0f;//向きの補正
     [SerializeField] private GameObject[] ModelPrefabs;
+    [SerializeField] EnemyModelSwitcher MS;
 
     private float Speed_Enemy;//スピードの変数
     private float Time_Lapse;//敵が主人公を見失ったときの経過時間
@@ -36,6 +39,7 @@ public class Move_Enemy : MonoBehaviour
     private Animator Anim;//アニメーションコンポーネントの取得
     private float Distance;//距離の計算
     private Rigidbody rd;
+    
 
     Vector3 Goal_Position;//目標時点の座標変数（雑魚敵）
     Vector3 Initial_Value;//初期地点の座標変数
@@ -54,6 +58,7 @@ public class Move_Enemy : MonoBehaviour
         Anim = GetComponent<Animator>();
         Local_Space_Vec = Vector3.forward;
         rd = GetComponent<Rigidbody>();
+        MS = GetComponent<EnemyModelSwitcher>();
         //プレイヤーに近づく変数
         MainCharacter = GameObject.FindGameObjectWithTag("Player");
         if(MainCharacter != null)
@@ -102,8 +107,9 @@ public class Move_Enemy : MonoBehaviour
     {
         //Around();
 
+
         //発見
-        if(Search_Enemy.Find)
+        if (Search_Enemy.Find)
         {
             Discovery();
         }
@@ -153,26 +159,45 @@ public class Move_Enemy : MonoBehaviour
     public void Discovery()
     {
         Time_Lapse = 0;
+        //MainCharacter.transform.position = 
 
-        //this.transform.Rotate(MainCharacter.transform.position);
-        Vector3 direction = MainCharacter.transform.position - this.transform.position;
-        direction.y = 0; // 上下を無視して水平だけ向く
+        Debug.Log("見つけた");
+        Time_Lapse = 0;
+        
+        Vector3 Distance = MainCharacter.transform.position - ModelRoot.transform.position;
+        
+            Distance = new Vector3(Distance.x, 0, Distance.z);
 
-        if (direction.magnitude > 0.1f)
+            Quaternion Rotation = Quaternion.LookRotation(Distance);
+
+        //Vector3 rot = Rotation.eulerAngles;
+
+        //transform.rotation = Rotation;
+
+        x = Rotation.x;
+        y = Rotation.y;
+        z = Rotation.z;
+        w = Rotation.w;
+        if (Rotation.y < 0)
         {
-            float Rotation_Speed = 5.0f;
-            Quaternion rot = Quaternion.LookRotation(direction);
-            rot *= Quaternion.Euler(0, -90, 0); // X-が前向きの補正
-            ModelRoot.rotation = Quaternion.Slerp(ModelRoot.rotation, rot, Time.deltaTime * Rotation_Speed);
+            Rotation = new Quaternion(Rotation.x, Rotation.y + 0.5f, Rotation.z, Rotation.w);
+        }
+        else
+        {
+            Rotation = new Quaternion(Rotation.x, Rotation.y - 0.5f, Rotation.z, Rotation.w);
         }
 
-        //アニメーション切り替え
-        Anim.SetBool("Walk", true);
-        // 前向き（モデルのforward方向）に進む
-        Vector3 moveDir = ModelRoot.forward;
-        moveDir.y = 0;
-        transform.position += moveDir.normalized * Speed_Enemy * Time.deltaTime;
+        //Rotation = new Quaternion(Rotation.x, Rotation.y + 0.5f, Rotation.z, Rotation.w);
+
+        transform.rotation = Rotation;
+
+            Debug.Log("旋回");
         
+
+        Distance.Normalize();
+        //目標時点まで移動する（Goal_Positionの値をPlayerの座標にすればPlayerに向かう）
+        this.rd.linearVelocity = Distance;
+
 
         Mode_Serch = true;
     }
@@ -182,8 +207,10 @@ public class Move_Enemy : MonoBehaviour
     {
         Time_Lapse += Time.deltaTime;
         //アニメーション切り替え（止まる）
-        Anim.SetBool("Walk", false);
-        Anim.SetBool("Attack", false);
+        bool isWalking = false;
+        MS.SetWalk(isWalking);
+        bool isAttack = true;
+        MS.SetAttack(isAttack);
         if (Time_Lapse > Return && Mode_Serch == true)
         {
             Debug.Log("戻る");
@@ -216,3 +243,4 @@ public class Move_Enemy : MonoBehaviour
         }
     }
 }
+

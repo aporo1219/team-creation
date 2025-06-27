@@ -6,6 +6,8 @@ public class EnemyModelSwitcher : MonoBehaviour
     [SerializeField] private Transform modelRoot; // モデルを入れ替える親
     [SerializeField] private GameObject[] modelPrefabs; // 差し替え候補
     [SerializeField] private RuntimeAnimatorController sharedAnimatorController; // 共通アニメーター
+    private Animator currentAnimator;
+
 
     private GameObject currentModel;
 
@@ -39,4 +41,24 @@ public class EnemyModelSwitcher : MonoBehaviour
             Debug.LogWarning("Animatorまたはコントローラーが未設定です");
         }
     }
+
+    // アニメーション制御の例（ここに追記可）
+    public void SetWalk(bool isWalking)
+    {
+        if (currentAnimator != null)
+            currentAnimator.SetBool("Walk", isWalking);
+    }
+
+    public void SetAttack(bool IsAttack)
+    {
+        if (currentAnimator != null)
+            currentAnimator.SetTrigger("Attack");
+    }
+
+    public void SetDeath(bool IsDeath)
+    {
+        if (currentAnimator != null)
+            currentAnimator.SetTrigger("Death");
+    }
 }
+
