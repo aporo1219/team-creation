@@ -17,10 +17,22 @@ public class PlayerStatus : MonoBehaviour
     public int Attack;
     public int Defense;
 
+    [HideInInspector]
+    public enum ColliderMode
+    {
+        Neutral,Guard,Invincible,
+    }
+
+    public ColliderMode ColliderStste;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        ColliderStste = ColliderMode.Neutral;
+
+        AttackRate = 1.0f;
+        DefenseRate = 1.0f;
 
         Instance = this; 
     }

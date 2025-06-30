@@ -9,6 +9,12 @@ public class PlayerController_y1 : MonoBehaviour
 {
     public static PlayerController_y1 instance;
 
+    private PlayerStatus Status;
+
+    [SerializeField] private GameObject Barrier;
+    [SerializeField] private GameObject ActiveSword;
+    [SerializeField] private GameObject DisposeSword;
+
     [HideInInspector] public Rigidbody rb;
 
     //ステータス変数
@@ -80,6 +86,8 @@ public class PlayerController_y1 : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
+        Status = GetComponent<PlayerStatus>();
+
         //Rigidbody取得
         rb = GetComponent<Rigidbody>();
 
@@ -105,6 +113,8 @@ public class PlayerController_y1 : MonoBehaviour
 
         //アニメーター取得
         animator = GetComponentInChildren<Animator>();
+
+        Barrier.SetActive(false);
 
     }
 
@@ -231,7 +241,10 @@ public class PlayerController_y1 : MonoBehaviour
                 //移動方向にダッシュスピードを掛ける
                 rb.linearVelocity = moveForward * DashSpeed + new Vector3(0, rb.linearVelocity.y, 0);
                 //
-               
+                animator.SetBool("Dash", true);
+
+                ActiveSword.SetActive(false);
+                DisposeSword.SetActive(true);
 
                 
             }
@@ -240,8 +253,11 @@ public class PlayerController_y1 : MonoBehaviour
                 //移動方向に移動スピードを掛ける
                 rb.linearVelocity = moveForward * MoveSpeed + new Vector3(0, rb.linearVelocity.y, 0);
                 //
-                
-               
+                animator.SetBool("Dash", false);
+
+                ActiveSword.SetActive(true);
+                DisposeSword.SetActive(false);
+
             }
                 
 
@@ -365,7 +381,12 @@ public class PlayerController_y1 : MonoBehaviour
     {
         Debug.Log("攻撃");
 
+        ActiveSword.SetActive(true);
+        DisposeSword.SetActive(false);
+        Dash = false;
+
         canMove = false;
+        canRotate = false;
         canAction = false;
 
         AttackNum++;
@@ -468,56 +489,6 @@ public class PlayerController_y1 : MonoBehaviour
 
     }
 
-    private IEnumerator AttackCombo(float inputlimit)
-    {
-        float time = 0.0f;
-        bool combo = false;
-        animator.SetInteger("Attack", AttackNum);
-
-        if (AttackNum > 3)
-        {
-            while (time <inputlimit)
-            {
-                time += Time.deltaTime;
-                yield return null;
-            }
-        }
-        else
-        {
-            while (time < inputlimit)
-            {
-                time += Time.deltaTime;
-
-                if (attackAction.WasPressedThisFrame() && !ATK)
-                {
-                    Debug.Log("コンボ受付");
-                    combo = true;
-                }
-
-                ATK = false;
-
-                yield return null;
-            }
-            Debug.Log("コンボ受付終了");
-        }
-
-        if (combo)
-        {
-            Debug.Log("コンボ派生");
-            Attack();
-        }
-        else
-        {
-            Debug.Log("コンボリセット");
-            AttackNum = 0;
-            AttackState = AttackType.None;
-            animator.SetInteger("Attack", AttackNum);
-        }
-
-
-        yield return null;
-    }
-
     private IEnumerator Guard()
     {
         
@@ -525,6 +496,15 @@ public class PlayerController_y1 : MonoBehaviour
         while (guardAction.IsPressed())
         {
             rb.linearVelocity = new Vector3(0.0f, rb.linearVelocity.y, 0.0f);
+
+            animator.SetBool("Guard", true);
+            for (float i=0;i<0.3f;i+=Time.deltaTime)
+            {
+                yield return null;
+            }
+
+            Barrier.SetActive(true);
+            Status.ColliderStste = PlayerStatus.ColliderMode.Guard;
 
             canMove = false;
             canJump = false;
@@ -534,6 +514,17 @@ public class PlayerController_y1 : MonoBehaviour
             yield return null;
         }
 
+        animator.SetBool("Guard", false);
+
+        Barrier.SetActive(false);
+        Status.ColliderStste = PlayerStatus.ColliderMode.Neutral;
+
+        for (float i = 0; i < 0.3f; i += Time.deltaTime)
+        {
+            yield return null;
+        }
+
+        
         canMove = true;
         canJump = true;
         canRotate = true;
@@ -566,6 +557,8 @@ public class PlayerController_y1 : MonoBehaviour
             yield return null;
         }
 
+        Status.ColliderStste = PlayerStatus.ColliderMode.Invincible;
+
         while (time < actiontime * 0.6f) 
         {
             rb.linearVelocity = transform.forward * DodgeSpeed;
@@ -582,6 +575,7 @@ public class PlayerController_y1 : MonoBehaviour
         }
 
         animator.SetBool("Dodge", false);
+        Status.ColliderStste = PlayerStatus.ColliderMode.Neutral;
 
         while (time < actiontime)
         {
@@ -612,6 +606,8 @@ public class PlayerController_y1 : MonoBehaviour
 
         animator.SetBool("Dodge", true);
 
+        Status.ColliderStste = PlayerStatus.ColliderMode.Invincible;
+
         while (time < actiontime * 0.6f)
         {
             rb.linearVelocity = transform.forward * AirDodgeSpeed;
@@ -626,6 +622,7 @@ public class PlayerController_y1 : MonoBehaviour
         }
 
         animator.SetBool("Dodge", false);
+        Status.ColliderStste = PlayerStatus.ColliderMode.Neutral;
 
         while (time < actiontime)
         {

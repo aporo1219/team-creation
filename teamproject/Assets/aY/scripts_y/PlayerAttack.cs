@@ -15,11 +15,11 @@ public class PlayerAttack : MonoBehaviour
 
     public float a = 1.0f;
 
-    private float[] AttackMotionTime = new float[8] { 1.2f, 1.2f, 1.2f, 1.2f, 1.2f, 1.2f, 1.2f, 1.2f };
-    private float[] AttackInputLimit = new float[8] { 0.7f, 0.8f, 1.0f, 0.0f, 0.7f, 0.8f, 1.0f, 0.0f };
-    private float[] AttackMigrationTime = new float[8] { 0.6f, 0.7f, 0.7f, 0.0f, 0.6f, 0.7f, 0.7f, 0.0f };
-    private float[] AttackStartTime = new float[8] { 0.4f, 0.43f, 0.4f, 0.43f, 0.4f, 0.43f, 0.4f, 0.43f };
-    private float[] AttackEndTime = new float[8] { 0.5f, 0.53f, 0.5f, 0.5f, 0.5f, 0.53f, 0.5f, 0.5f };
+    private float[] AttackMotionTime = new float[8] { 0.93f, 0.93f, 0.93f, 0.93f, 0.93f, 0.93f, 0.93f, 0.93f };
+    private float[] AttackInputLimit = new float[8] { 0.43f, 0.53f, 0.73f, 0.0f, 0.43f, 0.53f, 0.73f, 0.0f };
+    private float[] AttackMigrationTime = new float[8] { 0.33f, 0.43f, 0.43f, 0.0f, 0.33f, 0.43f, 0.43f, 0.0f };
+    private float[] AttackStartTime = new float[8] { 0.13f, 0.16f, 0.13f, 0.16f, 0.13f, 0.16f, 0.13f, 0.16f };
+    private float[] AttackEndTime = new float[8] { 0.23f, 0.26f, 0.23f, 0.23f, 0.23f, 0.26f, 0.23f, 0.23f };
     private float[] FinishAfterTime = new float[2] { 0.2f, 0.2f };
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,6 +41,7 @@ public class PlayerAttack : MonoBehaviour
         }
 
         PlayerCont.canMove = false;
+        PlayerCont.canRotate = false;
         PlayerCont.canAction = false;
 
         switch (attack)
@@ -147,7 +148,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     if (!Combo.activeInHierarchy)
                     {
-                        PlayerCont.rb.linearVelocity = PlayerCont.transform.forward * 50;
+                        PlayerCont.rb.linearVelocity = PlayerCont.transform.forward * 30;
                         if (!PlayerCont.onGround)
                         {
                             PlayerCont.rb.linearVelocity = new Vector3(PlayerCont.rb.linearVelocity.x, a, PlayerCont.rb.linearVelocity.z);
@@ -208,6 +209,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
             PlayerCont.canMove = true;
+            PlayerCont.canRotate = true;
             PlayerCont.canAction = true;
         }
 
