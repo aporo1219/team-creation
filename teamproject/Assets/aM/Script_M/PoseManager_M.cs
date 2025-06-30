@@ -4,8 +4,10 @@ using UnityEngine.UI;
 
 public class PoseManager_M : MonoBehaviour
 {
-    public int x = 0;
-    public int y = 0;
+    //public int x = 0;
+    //public int y = 0;
+
+    [SerializeField] ShowTaskSystem tasksystem;
 
     public int showing_pose;//ポーズが表示されてるか
 
@@ -87,19 +89,20 @@ public class PoseManager_M : MonoBehaviour
     void Update()
     {
         //UIの移動処理
-        ReStart.rectTransform.position = new Vector3(UI_pos[0].x, UI_pos[0].y, 0);
-        Status.rectTransform.position = new Vector3(UI_pos[1].x, UI_pos[1].y, 0);
-        OperationMethod.rectTransform.position = new Vector3(UI_pos[2].x, UI_pos[2].y, 0);
-        FinishStage.rectTransform.position = new Vector3(UI_pos[3].x, UI_pos[3].y, 0);
-        Map.rectTransform.position = new Vector3(UI_pos[4].x, UI_pos[4].y, 0);
-        Passive.rectTransform.position = new Vector3(UI_pos[5].x, UI_pos[5].y, 0);
-        Active.rectTransform.position = new Vector3(UI_pos[6].x, UI_pos[6].y, 0);
-        Comment_Panel.rectTransform.position = new Vector3(UI_pos[7].x, UI_pos[7].y, 0);
+        ReStart.rectTransform.position = UI_pos[0];
+        Status.rectTransform.position = UI_pos[1];
+        OperationMethod.rectTransform.position = UI_pos[2];
+        FinishStage.rectTransform.position = UI_pos[3];
+        Map.rectTransform.position = UI_pos[4];
+        Passive.rectTransform.position = UI_pos[5];
+        Active.rectTransform.position = UI_pos[6];
+        Comment_Panel.rectTransform.position = UI_pos[7];
 
         //Escapeキーの入力でポーズ画面の切り替えを行う
         //コントローラーのポーズボタンでポーズ画面の切り替えを行う
-        if (Input.GetKeyDown(KeyCode.Escape) || poseAction.WasPressedThisFrame())
+        if ((Input.GetKeyDown(KeyCode.Escape) || poseAction.WasPressedThisFrame()) && !Click_UI)
         {
+            Comment_Text.text = tasksystem.task;
             showing_pose++;
         }
 
@@ -242,7 +245,6 @@ public class PoseManager_M : MonoBehaviour
                 if(push_cancel && (selector_pos == 1 || selector_pos == 2))
                 {
                     push_selector = true;
-                    Click_UI = false;
                     if (comment_move_time < 30 && !comment_move)
                     {
                         comment_move_time++;
@@ -265,6 +267,7 @@ public class PoseManager_M : MonoBehaviour
                         comment_num = 0;
                         push_cancel = false;
                         comment_num = 0;
+                        Click_UI = false;
                         Remove_Color(selector_pos);
                     }
                 }
@@ -391,7 +394,7 @@ public class PoseManager_M : MonoBehaviour
         {
             case 0:
                 Comment_Text.fontSize = 60;
-                Comment_Text.text = "テスト１";
+                Comment_Text.text = tasksystem.task;
                 break;
             case 1:
                 Comment_Text.fontSize = 60;
