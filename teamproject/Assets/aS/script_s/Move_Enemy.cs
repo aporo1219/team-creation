@@ -12,24 +12,20 @@ using static UnityEngine.GraphicsBuffer;
 public class Move_Enemy : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    public bool Attack_Enemy;//敵の攻撃の判定
     public static bool Damede_Hit;
 
     [SerializeField] float x, y, z, w;
 
     [SerializeField] GameObject MainCharacter;
-    [SerializeField] GameObject Erea;//SearchEreaのスクリプトを呼び出すGameObject
     [SerializeField] SearchErea Search_Enemy;//主人公を探す変数
     [SerializeField] private Transform ModelRoot;// ← モデル（JR-1）を指定する用
     [SerializeField] private float RotationOffsetY = 0f;//向きの補正
     [SerializeField] private GameObject[] ModelPrefabs;
-    [SerializeField] EnemyModelSwitcher MS;
+    
 
     private float Speed_Enemy;//スピードの変数
     private float Time_Lapse;//敵が主人公を見失ったときの経過時間
     private int Return;//敵が初期値に戻る時間の変数
-    private float Attack_Enemy_Time;//敵の攻撃のクールタイム
     private int Cool_Time;//攻撃のクール時間
     private bool Mode_Serch;//探索モードかの判定
     private bool Right_Or_Left;//周回時の右か左かの判定
@@ -45,7 +41,7 @@ public class Move_Enemy : MonoBehaviour
     Vector3 Initial_Value;//初期地点の座標変数
     Vector3 Search_Position_Right;//周回する用のベクトル右
     Vector3 Search_Position_Left;//周回する用のベクトル左
-    Vector3 Player_Distance;//プレイヤーの距離間のベクトル
+  
 
 
     [SerializeField] Vector3 Local_Space_Vec;//前方基準のローカル空間ベクトル
@@ -58,7 +54,6 @@ public class Move_Enemy : MonoBehaviour
         Anim = GetComponent<Animator>();
         Local_Space_Vec = Vector3.forward;
         rd = GetComponent<Rigidbody>();
-        MS = GetComponent<EnemyModelSwitcher>();
         //プレイヤーに近づく変数
         MainCharacter = GameObject.FindGameObjectWithTag("Player");
         if(MainCharacter != null)
@@ -69,10 +64,7 @@ public class Move_Enemy : MonoBehaviour
         Speed_Enemy = 2.0f;
         Turn = false;//trueならば回転
         Local_Space_Vec = Vector3.up;
-        Player_Distance = MainCharacter.transform.position - ModelRoot.position;
         //攻撃関連の変数
-        Attack_Enemy = false;
-        Attack_Enemy_Time = 0;
         Cool_Time = 5;
         Damede_Hit = false;
         //探索関連の変数
@@ -114,8 +106,9 @@ public class Move_Enemy : MonoBehaviour
             Discovery();
         }
         //プレイヤーを見失う
-        if (!Search_Enemy.Find && Search_Enemy.FirstTime)
+        if (!Search_Enemy.Find)
         {
+            Debug.Log("見失った１");
             Lost();
         }
     }
@@ -163,7 +156,19 @@ public class Move_Enemy : MonoBehaviour
 
         Debug.Log("見つけた");
         Time_Lapse = 0;
-        
+        if(gameObject.tag == "Enemy")
+        {
+           Anim.SetBool("Walk", true);
+        }
+        else if (gameObject.tag == "WheelEnemy")
+        {
+            Anim.SetBool("Walk_1", true);
+        }
+        else if (gameObject.tag == "FlyEnemy")
+        {
+            Anim.SetBool("Walk_2", true);
+        }
+
         Vector3 Distance = MainCharacter.transform.position - ModelRoot.transform.position;
         
             Distance = new Vector3(Distance.x, 0, Distance.z);
@@ -178,7 +183,7 @@ public class Move_Enemy : MonoBehaviour
         y = Rotation.y;
         z = Rotation.z;
         w = Rotation.w;
-        if (Rotation.y < 0)
+        if (Rotation.y <= 1)
         {
             Rotation = new Quaternion(Rotation.x, Rotation.y + 0.5f, Rotation.z, Rotation.w);
         }
@@ -207,10 +212,22 @@ public class Move_Enemy : MonoBehaviour
     {
         Time_Lapse += Time.deltaTime;
         //アニメーション切り替え（止まる）
-        bool isWalking = false;
-        MS.SetWalk(isWalking);
-        bool isAttack = true;
-        MS.SetAttack(isAttack);
+        if(gameObject.tag == "Enemy")
+        {
+           Anim.SetBool("Walk", false);
+           Anim.SetBool("Attack", false);
+        }
+        else if (gameObject.tag == "WheelEnemy")
+        {
+            Anim.SetBool("Walk_1", false);
+            Anim.SetBool("Attack_1", false);
+        }
+        else if (gameObject.tag == "FlyEnemy")
+        {
+            Anim.SetBool("Walk_2", false);
+            Anim.SetBool("Attack_2", false);
+        }
+
         if (Time_Lapse > Return && Mode_Serch == true)
         {
             Debug.Log("戻る");
@@ -227,7 +244,7 @@ public class Move_Enemy : MonoBehaviour
         if (collision.gameObject.name == "GC")
         {
             var Enemy = GetComponent<Enemy_Status>();
-            string combo = PlayerController_y.instance.AttackState;
+           int combo = PlayerController_y1.instance.AttackNum;
             rd.linearVelocity = new Vector3(0, 5, 0);
             Enemy.Be_Attack(combo);
             Debug.Log("hit,C");
@@ -236,7 +253,7 @@ public class Move_Enemy : MonoBehaviour
         if (collision.gameObject.name == "GF")
         {
             var Enemy = GetComponent<Enemy_Status>();
-            string combo = PlayerController_y.instance.AttackState;
+            int combo = PlayerController_y1.instance.AttackNum;
             rd.linearVelocity = new Vector3(0, 10, 0);
             Enemy.Be_Attack(combo);
             Debug.Log("hit,F");

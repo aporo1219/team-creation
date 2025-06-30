@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SearchErea : MonoBehaviour
@@ -24,6 +25,7 @@ public class SearchErea : MonoBehaviour
      
     }
 
+   
     void OnTriggerStay(Collider other)
     {
         //主人公がサーチ領域に入ったら敵が主人公に向かう信号を送る

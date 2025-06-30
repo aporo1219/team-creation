@@ -1,58 +1,73 @@
+using System.Runtime.CompilerServices;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet_Enemy : MonoBehaviour
-{ 
-    [SerializeField] GameObject Bullet_OBJ;
-    [SerializeField] Transform Enemy;
-   
- 
-    private float Bullet_Speed;
+{
+    private GameObject Bullet;
+    [SerializeField] GameObject Enemy;
 
-    Vector3 SpawnBullet;
-    Vector3 Enemy_Pos;
+    private GameObject _Bullet;
+
+
+    private int Bullet_Speed;
+    public int Power;
+    private Vector3 Spawn;
+    private Vector3 Flont;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Bullet_Speed = 10.0f;
-        Enemy_Pos = Enemy.position;
-        SpawnBullet = transform.position + new Vector3(Enemy_Pos.x,1.15f,Enemy_Pos.z);
-       
+        Bullet = GameObject.FindWithTag("Bullet");
+        Bullet.SetActive(false);
+        Bullet_Speed = 500;
+        Power = 5;
     }
 
-  
 
-    
+
+
     //弾発射
     public void Shot()
     {
-        Enemy_Pos = Enemy.position;
-        SpawnBullet = transform.position + new Vector3(Enemy_Pos.x, 1.15f, Enemy_Pos.z);
-        GameObject bullet = Instantiate(Bullet_OBJ,SpawnBullet, Quaternion.identity);
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        if (rb != null)
-        { 
-            rb.AddForce( Vector3.left * Bullet_Speed, ForceMode.VelocityChange); // 向きを適宜変更
+        if(gameObject.tag == "Enemy")
+        {
+            //スポーン位置の更新
+            Spawn.x = transform.position.x;
+            Spawn.y = transform.position.y + 2;
+            Spawn.z = transform.position.z;
         }
-
-        Destroy(Bullet_OBJ,3f);
-
+        
+        //スポーン位置の更新
+        Spawn.x = transform.position.x; 
+        Spawn.y = transform.position.y + 2;
+        Spawn.z = transform.position.z;
+        //出現
+        Bullet.SetActive(true);
+        //敵のRigidbodyを取得
+        Rigidbody Enemy_RB = Enemy.GetComponent<Rigidbody>();
+        Vector3 Move_Vector = Enemy_RB.linearVelocity;
+       //弾の複製
+         _Bullet = Instantiate(Bullet,Spawn, Quaternion.identity);
+        Rigidbody _BulletRB = _Bullet.GetComponent<Rigidbody>();
+        //弾の移動
+        _BulletRB.AddForce(transform.forward * Bullet_Speed);
+        //弾の削除
+        Destroy(_Bullet, 3.0f);
+       
+        
     }
 
-    //�e��������
-    void Delite()
-    {
-        Destroy(gameObject);
-    }
+   
 
     //�v���C���[�Ƃ��������������
     void OnTriggerEnter(Collider other)
     {
-       if(gameObject.tag == ("Player"))
+       if(other.gameObject.tag == ("Player"))
        {
-            Delite();
+            Debug.Log("当たった");
+            Destroy(_Bullet);
        }
     }
         

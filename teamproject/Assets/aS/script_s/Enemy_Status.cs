@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Enemy_Status : MonoBehaviour
 {
-    [SerializeField] GameObject Player;//プレイヤーのタグを見つける変数
-    [SerializeField] PlayerController_y Player_Script;//プレイヤーのスクリプト取得変数
-
     private string Player_Combo;//プレイヤーのコンボ状況を確認するスクリプト
     private int Count;
     private Enemy_Manager Enemy_manager;
@@ -15,7 +12,6 @@ public class Enemy_Status : MonoBehaviour
 
     //public static Enemy_Status Instance;
     public int Enemy_HP;
-    public int Enemy_Power;
     //敵のID
     public int Enemy_ID { get; private set; }
 
@@ -30,7 +26,6 @@ public class Enemy_Status : MonoBehaviour
         Anim = GetComponent<Animator>();
         Count = 5;
         Enemy_HP = 1;//仮数値
-        Enemy_Power = 5;//仮数値
         Enemy_ID = Enemy_Manager.Entry_Enemy_ID(this);//IDの登録
         CoolTime = 5;
     }
@@ -46,28 +41,28 @@ public class Enemy_Status : MonoBehaviour
     }
 
     //雑魚敵の攻撃を受けた処理の関数
-    public void Be_Attack(string Combo)
+    public void Be_Attack(int Combo)
     {
         //コンボ一段階目
-        if (Combo == "GroundFirst" || Combo == "AirFirst")
+        if (Combo ==  1)
         {
             Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
             Enemy_HP -= 1;
         }
         //コンボ二段目
-        if (Combo == "GroundSecond" || Combo == "AirSecond")
+        if (Combo ==  2)
         {
             Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
             Enemy_HP -= 2;
         }
         //コンボ三段目
-        if (Combo == "GroundThird" || Combo == "AirThird")
+        if (Combo == 3)
         {
             Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
             Enemy_HP -= 3;
         }
         //コンボ四段目
-        if (Combo == "GroundFinish" || Combo == "AirFinish")
+        if (Combo == 4)
         {
             Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
             Enemy_HP -= 4;
@@ -80,7 +75,18 @@ public class Enemy_Status : MonoBehaviour
     void Death_Before()
     {
         //アニメーション切り替え
-        Anim.SetBool("Die", true);
+        if(gameObject.tag == "Enemy")
+        {
+           Anim.SetBool("Die", true);
+        }
+        else if (gameObject.tag == "WheelEnemy")
+        {
+            Anim.SetBool("Die_1", true);
+        }
+        else if (gameObject.tag == "FlyEnemy")
+        {
+            Anim.SetBool("Die_2", true);
+        }
         Enemy_Manager.Delite_ListEnemy(Enemy_ID);
         Debug.Log("死亡");
         //1秒後にDestroy
@@ -105,13 +111,25 @@ public class Enemy_Status : MonoBehaviour
                 nextShotTime = Time.time + shotInterval;
 
                 // 攻撃アニメーション再生
-                Anim.SetBool("Attack", true);
+                if(gameObject.tag == "Enemy")
+                {
+                   Anim.SetBool("Attack", true);
+                }
+                if (gameObject.tag == "WheelEnemy")
+                {
+                    Anim.SetBool("Attack_1", true);
+                }
+
+                if (gameObject.tag == "FlyEnemy")
+                {
+                    Anim.SetBool("Attack_2", true);
+                }
 
                 // 弾の発射
                 Bullet_Enemy EB = GetComponent<Bullet_Enemy>();
                 if (EB != null)
                 {
-                    
+                    Debug.Log("発射");
                     EB.Shot();
                 }
 
