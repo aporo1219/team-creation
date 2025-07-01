@@ -63,6 +63,9 @@ public class PlayerController_y1 : MonoBehaviour
     private int AirDodgeTimeCount;      //空中回避タイムカウント
     private int AirDodgeCoolTime = 120; //空中回避クールタイム
 
+    private string NowAnime = "Idle";
+    private string OldAnime = "";
+
     //攻撃の種類
     [HideInInspector]
     public enum AttackType
@@ -215,6 +218,11 @@ public class PlayerController_y1 : MonoBehaviour
                 StartCoroutine("Guard");
             }
         }
+        //ジャンプ以外で少し浮いた時に下向きに強い力を与える
+        if (onGround && !isJump && !GroundHit && canMove)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -10, rb.linearVelocity.z);
+        }
     }
 
     private void FixedUpdate()
@@ -263,11 +271,7 @@ public class PlayerController_y1 : MonoBehaviour
 
         }
 
-        //ジャンプ以外で少し浮いた時に下向きに強い力を与える
-        if (onGround && !isJump && !GroundHit && canMove)
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -10, rb.linearVelocity.z);
-        }
+        
 
         if (canRotate)
         {
@@ -285,6 +289,8 @@ public class PlayerController_y1 : MonoBehaviour
         //空中回避クールタイム
         if (AirDodgeTimeCount < AirDodgeCoolTime)
             AirDodgeTimeCount++;
+
+
     }
 
     private void OnCollisionStay(Collision collision)
@@ -645,6 +651,18 @@ public class PlayerController_y1 : MonoBehaviour
         rb.useGravity = true;
 
         yield return null;
+    }
+
+    void AnimationPlay(string animasion_name)
+    {
+        NowAnime = animasion_name;
+
+        if(NowAnime!=OldAnime)
+        {
+            OldAnime = NowAnime;
+            animator.CrossFade(NowAnime, 0.1f);
+        }
+        
     }
 
     //void OnDrawGizmos()
