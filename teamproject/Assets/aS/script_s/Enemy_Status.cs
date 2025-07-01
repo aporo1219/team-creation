@@ -79,7 +79,7 @@ public class Enemy_Status : MonoBehaviour
         {
            Anim.SetBool("Die", true);
         }
-        else if (gameObject.tag == "WheelEnemy")
+        else if (gameObject.tag == "WheellEnemy")
         {
             Anim.SetBool("Die_1", true);
         }
@@ -115,7 +115,7 @@ public class Enemy_Status : MonoBehaviour
                 {
                    Anim.SetBool("Attack", true);
                 }
-                if (gameObject.tag == "WheelEnemy")
+                if (gameObject.tag == "WheellEnemy")
                 {
                     Anim.SetBool("Attack_1", true);
                 }

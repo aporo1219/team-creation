@@ -207,7 +207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &231813813
 Transform:
   m_ObjectHideFlags: 0
@@ -751,6 +751,10 @@ PrefabInstance:
     - target: {fileID: 7613735717204793670, guid: 3102344a2b0b99a44aaa4b518479acd6, type: 3}
       propertyPath: m_Name
       value: JR-1 mod2 run
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613735717204793670, guid: 3102344a2b0b99a44aaa4b518479acd6, type: 3}
+      propertyPath: m_TagString
+      value: FlyEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1484,7 +1488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2122243120596801939, guid: d8743d6741734af41be8040b22e58111, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: WheellEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1781,7 +1785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5766460336002742878, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5988939250124889083, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
       propertyPath: Player
