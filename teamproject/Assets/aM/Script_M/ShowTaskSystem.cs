@@ -3,16 +3,17 @@ using UnityEngine.UI;
 
 public class ShowTaskSystem : MonoBehaviour
 {
-    //1180,760
+    //1180,760,1f14
 
     public string task;
     public string change_task;
 
-    public int move_time = 0;
-    public int stay_time = 0;
-    public bool show_task_flag = false;
+    int move_time = 0;
+    int remove_time = 0;
+    int stay_time = 0;
+    public bool change_task_flag = false;
 
-    int show_pos = 774;
+    bool pop_now = false;
 
     [SerializeField] GameObject Main_Show_Task;
     [SerializeField] Text Task_Text;
@@ -31,30 +32,28 @@ public class ShowTaskSystem : MonoBehaviour
     {
         Main_Show_Task.transform.position = pos;
 
-        if (task != change_task)
+        //現在のタスクと変更前のタスクが違う場合同じにしてポップする
+        if (change_task_flag && !pop_now && remove_time == 0) Show_Task();
+        if (move_time > 0)
         {
-            Show_Task();
+            move_time--;
+            pos.y -= 13;
+            stay_time = 120;
         }
-
-        if (move_time != 0) move_time--;
-        if (stay_time != 0) stay_time--;
-        //タスクを出すモーション
-        if (move_time != 0 && !show_task_flag)
+        if(move_time == 0 && stay_time > 0)
         {
-            pos.y -= 14;
+            stay_time--;
         }
-        if (stay_time == 0 && pos.y == show_pos && !show_task_flag) Remove_Task();
-        if (stay_time == 0 && move_time == 0 && !show_task_flag) stay_time = 120;
-        //タスクをしまうモーション
-        if (move_time != 0 && show_task_flag)
+        if(remove_time > 0)
         {
+            remove_time--;
             pos.y += 14;
         }
-        else
+        if(stay_time == 0 && pop_now && remove_time == 0)
         {
-            show_task_flag = false;
+            remove_time = 30;
+            pop_now = false;
         }
-        
     }
 
     void Show_Task()
@@ -62,11 +61,12 @@ public class ShowTaskSystem : MonoBehaviour
         task = change_task;
         Task_Text.text = task;
         move_time = 30;
+        pop_now = true;
+        change_task_flag = false;
     }
 
     void Remove_Task()
     {
         move_time = 30;
-        show_task_flag = true;
     }
 }

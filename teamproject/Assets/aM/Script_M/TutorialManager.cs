@@ -13,7 +13,7 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         Tutorial_Obj[0].SetActive(true);
-        for(int i = 1;i<Tutorial_Obj.Count;i++)
+        for (int i = 1; i < Tutorial_Obj.Count; i++)
         {
             Tutorial_Obj[i].SetActive(false);
         }
@@ -24,16 +24,40 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void Start_Tutorial()
     {
-        tasksystem.change_task = "スティックを倒して前に進んでください";
+        tasksystem.change_task = "マゼンタのエリアまで進んでください";
+        tasksystem.change_task_flag = true;
     }
 
     void Now_Tutorial()
     {
-        
+
+    }
+
+    public void Tutorial_Clear(int route_num)
+    {
+        Tutorial_Obj[route_num - 1].SetActive(false);
+        Tutorial_Obj[route_num].SetActive(true);
+        switch (route_num)
+        {
+            case 1:
+                tasksystem.change_task = "次のマゼンタのエリアまで進んでください";
+                tasksystem.change_task_flag = true;
+                break;
+            case 2:
+                tasksystem.change_task = "次のマゼンタのエリアまで進んでください";
+                tasksystem.change_task_flag = true;
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+        }
     }
 }
