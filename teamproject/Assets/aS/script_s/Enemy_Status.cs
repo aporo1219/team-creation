@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Enemy_Status : MonoBehaviour
 {
+    [SerializeField] GameObject Die_Enemy;
+
     private string Player_Combo;//プレイヤーのコンボ状況を確認するスクリプト
     private int Count;
     private Enemy_Manager Enemy_manager;
@@ -28,6 +30,7 @@ public class Enemy_Status : MonoBehaviour
         Enemy_HP = 10;//仮数値
         Enemy_ID = Enemy_Manager.Entry_Enemy_ID(this);//IDの登録
         CoolTime = 5;
+        Die_Enemy.SetActive(false);
     }
 
     // Update is called once per frame
@@ -35,9 +38,9 @@ public class Enemy_Status : MonoBehaviour
     {
         if (Enemy_HP < 0)
         {
-           Death_Before();
+            Die_Enemy.SetActive(true);
+            Death_Before();
         }
-
     }
 
     //雑魚敵の攻撃を受けた処理の関数
@@ -101,19 +104,18 @@ public class Enemy_Status : MonoBehaviour
     }
 
     //攻撃
-    private void OnCollisionStay(Collision collision)
+    void OnCollisionStay(Collision other)
     {
-          
-        if (collision.gameObject.tag == ("Player"))
+        if(other.gameObject.tag == "Player")
         {
             if (Time.time >= nextShotTime)
             {
                 nextShotTime = Time.time + shotInterval;
 
                 // 攻撃アニメーション再生
-                if(gameObject.tag == "Enemy")
+                if (gameObject.tag == "Enemy")
                 {
-                   Anim.SetBool("Attack", true);
+                    Anim.SetBool("Attack", true);
                 }
                 if (gameObject.tag == "WheellEnemy")
                 {
@@ -135,7 +137,6 @@ public class Enemy_Status : MonoBehaviour
 
                 //Debug.Log("敵が弾を撃ちました");
             }
-
 
         }
     }

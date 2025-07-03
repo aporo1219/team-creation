@@ -100,14 +100,17 @@ public class Move_Enemy : MonoBehaviour
         //Around();
 
         //è„ï˚å¸ÇÃêßå‰
-        /*bool isMovingUp = Vector3.Dot(rd.linearVelocity.normalized, Vector3.up) > 0.7f;
-
-        if (isMovingUp && gameObject.tag == "FlyEnemy")
+        if (Initial_Value.y < this.transform.position.y  && gameObject.tag == "FlyEnemy")
         {
-                Debug.Log("è„ï˚å¸Ç…à⁄ìÆÇµÇƒÇ¢ÇÈÇΩÇﬂíÜé~");
-                this.rd.linearVelocity = Initial_Value;
-                return;
-        }*/
+            Debug.Log("è„ï˚å¸Ç…à⁄ìÆÇµÇƒÇ¢ÇÈÇΩÇﬂíÜé~");
+            rd.linearVelocity = Vector3.zero;
+
+            if (this.transform.position.y > 1)
+            {
+                Debug.Log("â∫ç~");
+                rd.AddForce(0,-50,0);
+            } 
+        }
         
 
         //î≠å©
