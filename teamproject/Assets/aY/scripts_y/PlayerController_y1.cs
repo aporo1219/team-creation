@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using RPGCharacterAnims.Actions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,7 +18,7 @@ public class PlayerController_y1 : MonoBehaviour
 
     [HideInInspector] public Rigidbody rb;
 
-    //ステータス変数
+    //ステータス変数---------------------------------------
     public string State = "";
     public float MoveSpeed = 5.0f;          //移動速度
     public float DashSpeed = 10.0f;         //移動速度
@@ -25,16 +26,17 @@ public class PlayerController_y1 : MonoBehaviour
     public float DoubleJumpPower = 30.0f;   //空中ジャンプ力
     public float DodgeSpeed = 30.0f;        //地上回避速度
     public float AirDodgeSpeed = 50.0f;     //空中回避速度
+    //-----------------------------------------------------
 
-    //入力
+    //入力-------------------------------------------------
     private InputAction moveAction;     //左スティック
     private InputAction dashAction;     //左スティック押し込み
     private InputAction jumpAction;     //Aボタン
     [HideInInspector] public InputAction attackAction;   //Xボタン
     private InputAction dodgeAction;    //Rトリガー
     private InputAction guardAction;    //Lトリガー
-
     private Vector2 moveValue;          //左スティック入力量
+    //-----------------------------------------------------
 
     private bool Dash = false;
 
@@ -49,11 +51,12 @@ public class PlayerController_y1 : MonoBehaviour
     private int LandCount;
     private int LandTime = 0;
 
-    //行動許可
+    //行動許可---------------------------------------------
     public bool canMove = true;     //移動
     public bool canRotate = true;   //回転
     public bool canJump = true;     //ジャンプ
     public bool canAction = true;   //アクション
+    //-----------------------------------------------------
 
     bool ATK = false;
 
@@ -63,8 +66,15 @@ public class PlayerController_y1 : MonoBehaviour
     private int AirDodgeTimeCount;      //空中回避タイムカウント
     private int AirDodgeCoolTime = 120; //空中回避クールタイム
 
+    //アニメーション管理用変数-----------------------------
     private string NowAnime = "Idle";
     private string OldAnime = "";
+    private string PlayAnime = "";
+    private bool ChangeAnime = true;
+    private bool Move;
+    private bool isDodge = false;
+    private bool isGuard = false;
+    //-----------------------------------------------------
 
     //攻撃の種類
     [HideInInspector]
@@ -129,6 +139,8 @@ public class PlayerController_y1 : MonoBehaviour
         {
             return;
         }
+
+        PlayAnime = "";
 
         //左スティック入力取得
         moveValue = moveAction.ReadValue<Vector2>();
@@ -213,7 +225,7 @@ public class PlayerController_y1 : MonoBehaviour
                 Dodge();
             }
             //ガード
-            if (guardAction.WasPressedThisFrame() && canAction && onGround)
+            if (guardAction.WasPressedThisFrame() && canAction)
             {
                 StartCoroutine("Guard");
             }
@@ -223,6 +235,7 @@ public class PlayerController_y1 : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, -10, rb.linearVelocity.z);
         }
+
     }
 
     private void FixedUpdate()
@@ -238,11 +251,12 @@ public class PlayerController_y1 : MonoBehaviour
 
         if (onGround && (moveValue.x != 0 || moveValue.y != 0))
         {
+            Move = true;
             animator.SetBool("Move", true);
         }
 
         //移動処理
-        if (canMove)
+        if (canMove && LandCount == LandTime)
         {
             if (Dash)
             {//ダッシュ時
@@ -321,6 +335,15 @@ public class PlayerController_y1 : MonoBehaviour
                 isJump = true;
                 //
                 animator.SetBool("Jump", true);
+                if (Dash)
+                {
+                    AnimationPlay("Dash-Jump");
+                }
+                else
+                {
+                    AnimationPlay("Jump");
+                }
+                   
 
                 while (((JumpTime < LongJumpLimit && jumpAction.IsPressed()) || JumpTime < 3) && canJump)
                 {
@@ -345,6 +368,15 @@ public class PlayerController_y1 : MonoBehaviour
             isJump = true;
             //
             animator.SetBool("Jump", true);
+            if (Dash)
+            {
+                AnimationPlay("Dash-Jump-Flip");
+            }
+            else
+            {
+                AnimationPlay("Jump-Flip");
+            }
+                
             //空中回避のクールタイムをなくす
             AirDodgeTimeCount = AirDodgeCoolTime;
             while (JumpTime < 17 && canJump)
@@ -501,22 +533,27 @@ public class PlayerController_y1 : MonoBehaviour
 
         while (guardAction.IsPressed())
         {
-            rb.linearVelocity = new Vector3(0.0f, rb.linearVelocity.y, 0.0f);
-
-            animator.SetBool("Guard", true);
-            for (float i=0;i<0.3f;i+=Time.deltaTime)
+            if(onGround)
             {
+                rb.linearVelocity = new Vector3(0.0f, rb.linearVelocity.y, 0.0f);
+
+                animator.SetBool("Guard", true);
+                AnimationPlay("Guard-In");
+                for (float i = 0; i < 0.3f; i += Time.deltaTime)
+                {
+                    yield return null;
+                }
+
+                Barrier.SetActive(true);
+                Status.ColliderStste = PlayerStatus.ColliderMode.Guard;
+
+                canMove = false;
+                canJump = false;
+                canRotate = false;
+                canAction = false;
+
                 yield return null;
             }
-
-            Barrier.SetActive(true);
-            Status.ColliderStste = PlayerStatus.ColliderMode.Guard;
-
-            canMove = false;
-            canJump = false;
-            canRotate = false;
-            canAction = false;
-
             yield return null;
         }
 
@@ -544,6 +581,15 @@ public class PlayerController_y1 : MonoBehaviour
         float time = 0.0f;
         //rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
         animator.SetBool("Dodge", true);
+        if (Dash)
+        {
+            AnimationPlay("Dash-DodgeRoll");
+        }
+        else
+        {
+            AnimationPlay("DodgeRoll");
+        }
+            
 
         rb.linearVelocity = transform.forward * MoveSpeed;
 
@@ -611,8 +657,16 @@ public class PlayerController_y1 : MonoBehaviour
         float time = 0.0f;
 
         animator.SetBool("Dodge", true);
+        if(Dash)
+        {
+            AnimationPlay("Dash-Air-Roll");
+        }
+        else
+        {
+            AnimationPlay("Air-Roll");
+        }
 
-        Status.ColliderStste = PlayerStatus.ColliderMode.Invincible;
+            Status.ColliderStste = PlayerStatus.ColliderMode.Invincible;
 
         while (time < actiontime * 0.6f)
         {
@@ -653,16 +707,75 @@ public class PlayerController_y1 : MonoBehaviour
         yield return null;
     }
 
-    void AnimationPlay(string animasion_name)
+    public void AnimationPlay(string animasion_name, float crosstime = 0.1f)
     {
-        NowAnime = animasion_name;
+        if(animator.runtimeAnimatorController.name != "Animation-Controller_y")
+            return;
 
-        if(NowAnime!=OldAnime)
-        {
-            OldAnime = NowAnime;
-            animator.CrossFade(NowAnime, 0.1f);
-        }
-        
+        animator.CrossFade(animasion_name, crosstime);
+
+        //if (animasion_name == "")
+        //{
+        //    if(Dash)
+        //    {
+        //        if (!onGround)
+        //        {
+        //            NowAnime = "Dash-Fall";
+        //        }
+        //        else
+        //        {
+        //            if (rb.linearVelocity.x != 0 || rb.linearVelocity.z != 0)
+        //            {
+        //                NowAnime = "Dash";
+        //            }
+        //            else
+        //            {
+        //                NowAnime = "Idle";
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (!onGround)
+        //        {
+        //            NowAnime = "Fall";
+        //        }
+        //        else
+        //        {
+        //            if (rb.linearVelocity.x != 0 || rb.linearVelocity.z != 0)
+        //            {
+        //                NowAnime = "Run";
+        //            }
+        //            else
+        //            {
+        //                NowAnime = "Idle";
+        //            }
+        //        }
+        //    }
+
+        //    if (NowAnime != OldAnime && ChangeAnime)
+        //    {
+        //        OldAnime = NowAnime;
+        //        animator.CrossFade(NowAnime, crosstime);
+        //    }
+
+        //}
+        //else
+        //{
+        //    NowAnime = animasion_name;
+
+        //    if (NowAnime != OldAnime)
+        //    {
+        //        OldAnime = NowAnime;
+        //        animator.CrossFade(NowAnime, crosstime);
+        //    }
+
+        //    ChangeAnime = false;
+        //}
+
+
+
+
     }
 
     //void OnDrawGizmos()

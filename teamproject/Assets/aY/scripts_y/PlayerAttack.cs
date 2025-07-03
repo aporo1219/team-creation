@@ -102,6 +102,18 @@ public class PlayerAttack : MonoBehaviour
         
 
         PlayerCont.animator.SetInteger("Attack", PlayerCont.AttackNum);
+        if(PlayerCont.AttackNum == 1)
+        {
+            if(PlayerCont.onGround)
+            {
+                PlayerCont.AnimationPlay("GroundAttack1");
+            }
+            else
+            {
+                PlayerCont.AnimationPlay("AirAttack1");
+            }
+        }
+
         yield return null;
         PlayerCont.animator.SetBool("Move", false);
 
