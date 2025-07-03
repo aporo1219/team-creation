@@ -100,14 +100,14 @@ public class Move_Enemy : MonoBehaviour
         //Around();
 
         //上方向の制御
-        bool isMovingUp = Vector3.Dot(rd.linearVelocity.normalized, Vector3.up) > 0.7f;
+        /*bool isMovingUp = Vector3.Dot(rd.linearVelocity.normalized, Vector3.up) > 0.7f;
 
         if (isMovingUp && gameObject.tag == "FlyEnemy")
         {
                 Debug.Log("上方向に移動しているため中止");
                 this.rd.linearVelocity = Initial_Value;
                 return;
-        }
+        }*/
         
 
         //発見
@@ -174,10 +174,7 @@ public class Move_Enemy : MonoBehaviour
         {
             Anim.SetBool("Walk_1", true);
         }
-        else if (gameObject.tag == "FlyEnemy")
-        {
-            Anim.SetBool("Walk_2", true);
-        }
+       
 
         Vector3 Distance = MainCharacter.transform.position - ModelRoot.transform.position;
         
@@ -220,6 +217,11 @@ public class Move_Enemy : MonoBehaviour
     //主人王を見失たった時の関数
     public void Lost()
     {
+        //移動を止める
+        if (gameObject.tag == "FlyEnemy")
+        {
+            rd.linearVelocity = Vector3.zero;
+        }
         Time_Lapse += Time.deltaTime;
         //アニメーション切り替え（止まる）
         if(gameObject.tag == "Enemy")
@@ -233,8 +235,7 @@ public class Move_Enemy : MonoBehaviour
             Anim.SetBool("Attack_1", false);
         }
         else if (gameObject.tag == "FlyEnemy")
-        {
-            Anim.SetBool("Walk_2", false);
+        { 
             Anim.SetBool("Attack_2", false);
         }
 
@@ -254,8 +255,12 @@ public class Move_Enemy : MonoBehaviour
         if (collision.gameObject.name == "GC")
         {
             var Enemy = GetComponent<Enemy_Status>();
-           int combo = PlayerController_y1.instance.AttackNum;
-            rd.linearVelocity = new Vector3(0, 5, 0);
+            int combo = PlayerController_y1.instance.AttackNum;
+            //敵を浮かす
+            if(gameObject.tag == "Enemy" || gameObject.tag == "WheellEnemy")
+            {
+              rd.linearVelocity = new Vector3(0, 5, 0);
+            }
             Enemy.Be_Attack(combo);
             Debug.Log("hit,C");
         }
@@ -264,7 +269,10 @@ public class Move_Enemy : MonoBehaviour
         {
             var Enemy = GetComponent<Enemy_Status>();
             int combo = PlayerController_y1.instance.AttackNum;
-            rd.linearVelocity = new Vector3(0, 10, 0);
+            if(gameObject.tag == "Enemy" || gameObject.tag == "WheellEnemy")
+            {
+                rd.linearVelocity = new Vector3(0, 10, 0);
+            }
             Enemy.Be_Attack(combo);
             Debug.Log("hit,F");
         }

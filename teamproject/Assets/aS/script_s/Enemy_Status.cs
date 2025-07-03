@@ -25,7 +25,7 @@ public class Enemy_Status : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         Count = 5;
-        Enemy_HP = 1;//‰¼”’l
+        Enemy_HP = 10;//‰¼”’l
         Enemy_ID = Enemy_Manager.Entry_Enemy_ID(this);//ID‚Ì“o˜^
         CoolTime = 5;
     }
