@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -79,22 +80,35 @@ public class Enemy_Status : MonoBehaviour
     {
         //アニメーション切り替え
         if(gameObject.tag == "Enemy")
-        {
-           Anim.SetBool("Die", true);
+        { 
+            Anim.SetBool("Walk", false);
+            Anim.SetBool("Attack",false);
+            Anim.CrossFade("Die", 0.0f);
+            Enemy_Manager.Delite_ListEnemy(Enemy_ID);
+            Debug.Log("死亡");
+            //アニメーション再生後にDestroy
+            Invoke(nameof(Die),0.30f);
         }
-        else if (gameObject.tag == "WheellEnemy")
+        if (gameObject.tag == "WheellEnemy")
         {
-            Anim.SetBool("Die_1", true);
+            Anim.SetBool("Walk", false);
+            Anim.SetBool("Attack_1", false);
+            Anim.CrossFade("Die_1", 0.0f);
+            Enemy_Manager.Delite_ListEnemy(Enemy_ID);
+            Debug.Log("死亡");
+            //アニメーション再生後にDestroy
+            Invoke(nameof(Die),0.30f);
         }
-        else if (gameObject.tag == "FlyEnemy")
+        if (gameObject.tag == "FlyEnemy")
         {
-            Anim.SetBool("Die_2", true);
+            Anim.SetBool("Walk", false);
+            Anim.SetBool("Attack_2", false);
+            Anim.CrossFade("Die_2", 0.0f);
+            Enemy_Manager.Delite_ListEnemy(Enemy_ID);
+            Debug.Log("死亡");
+            //アニメーション再生後にDestroy
+            Invoke(nameof(Die),0.35f);
         }
-        Enemy_Manager.Delite_ListEnemy(Enemy_ID);
-        Debug.Log("死亡");
-        //1秒後にDestroy
-        Invoke(nameof(Die), 1.0f);
-        //Enemy_Manager.Destroy_Enemy_ID(1);
     }
 
     //死亡時の関数
