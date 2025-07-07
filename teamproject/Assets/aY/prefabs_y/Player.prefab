@@ -59,8 +59,8 @@ Transform:
   m_GameObject: {fileID: 1267362944150144665}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.015446663, y: 0.03333664, z: 3.63}
-  m_LocalScale: {x: 8, y: 2, z: 6}
+  m_LocalPosition: {x: 0, y: 0, z: 3.25}
+  m_LocalScale: {x: 8, y: 2, z: 6.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8833219850076064858}
@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 6994619166277509466}
   - component: {fileID: 8479532311379651370}
   - component: {fileID: 973185730918463769}
+  - component: {fileID: -1768000193555337359}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -251,6 +252,21 @@ MonoBehaviour:
   Attack: 0
   Defense: 0
   ColliderStste: 0
+--- !u!114 &-1768000193555337359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316293656765052143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f7b419714fcc8d4b9d9a0cf9ea98813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EquipActiveSkills: []
+  EquipPassiveSkills: []
+  SelectSkill: 0
 --- !u!1 &5657630410656655247
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,8 +293,8 @@ Transform:
   m_GameObject: {fileID: 5657630410656655247}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.015446663, y: 0.03333664, z: 2.58}
-  m_LocalScale: {x: 6, y: 2, z: 4}
+  m_LocalPosition: {x: 0, y: 0, z: 2.25}
+  m_LocalScale: {x: 6, y: 2, z: 4.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8833219850076064858}

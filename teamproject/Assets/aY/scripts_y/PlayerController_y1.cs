@@ -148,6 +148,19 @@ public class PlayerController_y1 : MonoBehaviour
         //地面判定取得
         if (Physics.SphereCast(rb.position, transform.localScale.y / 2 - 0.1f, Vector3.down, out RaycastHit h, transform.localScale.y / 2 + 0.4f, layerMask))
         {//地面についている
+            if (!onGround)
+            {
+                //if (Dash)
+                //{
+                //    AnimationPlay("Dash-Land");
+                //}
+                //else
+                //{
+                //    AnimationPlay("Land");
+                //}
+                
+            }
+
             //接地状態にする
             onGround = true;
             ////空中ジャンプを回復させる

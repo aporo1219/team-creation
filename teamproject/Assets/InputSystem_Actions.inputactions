@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skil",
+                    "name": "Skill",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
                     "expectedControlType": "",
@@ -108,6 +108,24 @@
                     "name": "Guard",
                     "type": "Button",
                     "id": "f8e01f84-b06c-4b6b-95f6-acd0703b9577",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextSkill",
+                    "type": "Button",
+                    "id": "9165b203-e37b-49cf-afc3-291be685fd85",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PreviousSkill",
+                    "type": "Button",
+                    "id": "2fe6539e-c5c9-4bdc-b460-4af8e34a62f7",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -459,11 +477,11 @@
                 {
                     "name": "",
                     "id": "1c04ea5f-b012-41d1-a6f7-02e963b52893",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Skil",
+                    "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -474,7 +492,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Skil",
+                    "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -552,6 +570,50 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Guard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "301dcdb0-34e4-4fd1-9926-69281c432eb1",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f40bf321-6a15-4fda-b6e4-93f3b4071023",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6786f05d-50fb-4be2-9819-4a3f694fd6bd",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9a1ef944-e152-48cd-ba8d-8d75c4554fbd",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousSkill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
