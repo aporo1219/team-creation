@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonSystem : MonoBehaviour
+public class TutorialButtonSystem : MonoBehaviour
 {
     [SerializeField] Animator anim;
     [SerializeField] GameObject Pusher;
     [SerializeField] List<GameObject> Move_Obj = new List<GameObject>();
 
     [SerializeField] ShowTaskSystem tasksystem;
+    [SerializeField] TutorialManager manager;
 
     int ChangeColor_Time = 60;
     bool push_button = false;
@@ -40,6 +41,10 @@ public class ButtonSystem : MonoBehaviour
             push_button = true;
             if (this.name == "Button")
                 Pusher.GetComponent<Renderer>().material.color = Color.green;
+            if (tasksystem.assist_text == "UŒ‚‚ğ“–‚Ä‚é‚Æ‚Ç‚±‚©‚ÌdŠ|‚¯‚ª“®‚­")
+            {
+                manager.Tutorial_Clear(8);
+            }
         }
     }
 }

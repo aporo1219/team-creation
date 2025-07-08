@@ -13,15 +13,17 @@ public class TutorialManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //初めのタスク以外表示しない
         Tutorial_Obj[0].SetActive(true);
         for (int i = 1; i < Tutorial_Obj.Count; i++)
         {
             Tutorial_Obj[i].SetActive(false);
         }
-
+        //チュートリアルタスクを表示
         Start_Tutorial();
     }
 
+    //チュートリアルタスクの表示
     void Start_Tutorial()
     {
         tasksystem.change_task = "影を追いかけよう";
@@ -29,17 +31,13 @@ public class TutorialManager : MonoBehaviour
         tasksystem.assist_text = "Lスティックを傾けて移動";
     }
 
-    void Now_Tutorial()
-    {
-
-    }
-
+    //2個目以降のチュートリアルタスクの表示
     public void Tutorial_Clear(int route_num)
     {
-        if (route_num != 6)
+        if (route_num < 6)
         {
             Tutorial_Obj[route_num - 1].SetActive(false);
-            if (route_num != 5)
+            if (route_num < 5)
                 Tutorial_Obj[route_num].SetActive(true);
         }
         switch (route_num)
@@ -68,6 +66,7 @@ public class TutorialManager : MonoBehaviour
                 tasksystem.change_task = "敵を倒そう";
                 tasksystem.change_task_flag = true;
                 tasksystem.assist_text = "Xボタンを押して攻撃\nRTボタンを押して回避";
+                tasksystem.kill_enemy_num = 2;
                 break;
             case 6:
                 tasksystem.change_task = "宝箱を開けよう";

@@ -27,12 +27,12 @@ public class TreasureBox_y : MonoBehaviour
     {
         if (collision.gameObject.name == "GC" || collision.gameObject.name == "GF")
         {
+            rb.linearVelocity = new Vector3(0, 3, 0);
+            animator.SetBool("Hit", true);
             if (tasksystem.task == "•ó” ‚ðŠJ‚¯‚æ‚¤")
             {
                 manager.Tutorial_Clear(7);
             }
-            rb.linearVelocity = new Vector3(0, 3, 0);
-            animator.SetBool("Hit", true);
         }
     }
 }

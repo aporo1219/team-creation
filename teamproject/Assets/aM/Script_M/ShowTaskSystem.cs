@@ -6,9 +6,14 @@ public class ShowTaskSystem : MonoBehaviour
     //1180,760,1f14
     //
 
+    public int now_scene = 0;
+
     public string task;
     public string change_task;
     public string assist_text;
+
+    public int kill_enemy_num = 0;
+    public int now_kill_num = 0;
 
     int move_time = 0;
     int remove_time = 0;
@@ -24,6 +29,8 @@ public class ShowTaskSystem : MonoBehaviour
     [SerializeField] GameObject Actionassist;
     [SerializeField] Text Actionassist_Text;
 
+    [SerializeField] TutorialManager manager;
+
     Vector3 task_pos;
     Vector3 assist_pos;
 
@@ -32,7 +39,10 @@ public class ShowTaskSystem : MonoBehaviour
     {
         task = change_task = "現在タスクはありません。";
         task_pos = new Vector3(960, 1180, 0);
-        assist_pos = new Vector3(960, 300, 0);
+        if (now_scene == 0)
+            assist_pos = new Vector3(960, 300, 0);
+        else
+            assist_pos = new Vector3(960, -300, 0);
     }
 
     // Update is called once per frame
@@ -66,6 +76,22 @@ public class ShowTaskSystem : MonoBehaviour
         {
             remove_time = 30;
             pop_now = false;
+        }
+
+        //敵を倒すタスクの処理
+        if(kill_enemy_num != 0 && now_kill_num == kill_enemy_num)
+        {
+            //チュートリアル
+            if(assist_text == "Xボタンを押して攻撃\nRTボタンを押して回避")
+            {
+                manager.Tutorial_Clear(6);
+                now_kill_num = kill_enemy_num = 0;
+            }
+            //通常タスク
+            else
+            {
+
+            }
         }
     }
 
