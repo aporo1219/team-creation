@@ -1,67 +1,21 @@
-using System.Collections;
 using UnityEngine;
 
 public class Skill_FireBall : MonoBehaviour
 {
-    public PlayerController_y1 PlayerCont;
+    PlayerController_y1 PlayerCont;
 
-    Rigidbody rb;
-    Vector3 moveForward;
-
-    public GameObject Ball;
-    public GameObject Explosion;
-
-    float MoveSpeed = 20.0f;
-    float ExplosionTime = 0.5f;
+    public GameObject Fireball;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
-        Explosion.SetActive(false);
-
-        moveForward = PlayerCont.transform.forward;
+        PlayerCont = FindAnyObjectByType<PlayerController_y1>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UseSkill()
     {
-        ////カメラの方向からX-Z平面の単位ベクトルを取得
-        //Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 1, 1)).normalized;
-        ////カメラの向きから移動方向を決定
-        //moveForward = cameraForward * 1 + Camera.main.transform.right * 0;
-        ////
-        moveForward.Normalize();
-
-        rb.linearVelocity = moveForward * MoveSpeed;
-
-        //キャラクターの向きを進行方向に
-        if (moveForward != Vector3.zero)
-        {
-            transform.rotation = Quaternion.LookRotation(moveForward);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        StartCoroutine(HitExplosion());
-    }
-
-    private IEnumerator HitExplosion()
-    {
-        Ball.SetActive(false);
-        Explosion.SetActive(true);
-
-        MoveSpeed = 0.0f;
-
-        for(float time = 0.0f;time<ExplosionTime;time+=Time.deltaTime)
-        {
-            yield return null;
-        }
-
-        Destroy(gameObject);
-
-        yield return null;
+        Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2, PlayerCont.transform.rotation);
+        Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2 + PlayerCont.transform.right * 2, PlayerCont.transform.rotation);
+        Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2 + PlayerCont.transform.right *-2, PlayerCont.transform.rotation);
     }
 }

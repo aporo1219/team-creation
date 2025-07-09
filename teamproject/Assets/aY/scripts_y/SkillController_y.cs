@@ -11,6 +11,8 @@ public class SkillController_y : MonoBehaviour
 
     public int SelectSkill;
 
+    public Skill_FireBall Skill_FireBall;
+
     private InputAction SkillAction;
     private InputAction NextAction;
     private InputAction PreviousAction;
@@ -53,7 +55,7 @@ public class SkillController_y : MonoBehaviour
 
     void UseSkill()
     {
-
+        Skill_FireBall.UseSkill();
     }
 
     void NextSkill()
