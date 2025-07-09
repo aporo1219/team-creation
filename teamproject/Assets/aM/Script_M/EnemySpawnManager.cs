@@ -8,9 +8,11 @@ public class EnemySpawnManager : MonoBehaviour
 
     public int spawn_time = 0;
 
-    int spawn_count = 0;
+    public int spawn_count = 0;
     public int spawn_max = 0;
     public int spawn_min = 0;
+
+    public int death_num;
 
     public Vector3 maxspawn_pos;
     public Vector3 minspawn_pos;
@@ -18,8 +20,6 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] BoxCollider boxcol;
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject spawn_obj;
-
-    public List<GameObject> enemy_obj = new List<GameObject>();
 
     Vector3 spawn_obj_pos;
 
@@ -62,8 +62,11 @@ public class EnemySpawnManager : MonoBehaviour
         }
 
         //“G‚ª‘S‚Ä“|‚³‚ê‚½‚ç“–‚½‚è”»’è‚ğ•œŠˆ‚³‚¹‚Ä‚Ü‚½“G‚ªƒXƒ|[ƒ“‚Å‚«‚é‚æ‚¤‚É‚·‚é
-        //boxcol.enabled = true;
-        //do_spawn = false;
+        if(death_num == spawn_count)
+        {
+            boxcol.enabled = true;
+            do_spawn = false;
+        }
     }
 
     void Spawn()

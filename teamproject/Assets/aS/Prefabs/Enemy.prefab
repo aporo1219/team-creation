@@ -1323,6 +1323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e787d90d3109247be6772fbf897f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnManager: {fileID: 0}
+  viability_obj: {fileID: 5329387971498145004}
 --- !u!1 &8634460895014166281
 GameObject:
   m_ObjectHideFlags: 0
