@@ -9,6 +9,7 @@ public class StageSelectUI : MonoBehaviour
 {
     private int f;
     private int Level_Floor = 1;
+    private string Arrow = "ª";
     private Gamepad GP;
     //[SerializeField] InputSystem Select_Push;
 
@@ -85,7 +86,7 @@ public class StageSelectUI : MonoBehaviour
 
     void FloorDisplay()
     {
-        Floor_Display.text =  "BF" + Level_Floor ; 
+        Floor_Display.text =  Arrow + "B" + Level_Floor ; 
     }
 
     //ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Ìˆ—
