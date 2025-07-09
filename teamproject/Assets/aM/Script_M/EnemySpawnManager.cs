@@ -1,11 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
     bool in_player = false;
-    bool do_spawn = false;
+    public bool do_spawn = false;
 
     public int spawn_time = 0;
+
+    int spawn_count = 0;
+    public int spawn_max = 0;
+    public int spawn_min = 0;
 
     public Vector3 maxspawn_pos;
     public Vector3 minspawn_pos;
@@ -14,11 +19,9 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject spawn_obj;
 
-    Vector3 spawn_obj_pos;
+    public List<GameObject> enemy_obj = new List<GameObject>();
 
-    int spawn_num = 0;
-    int spawn_max = 5;
-    int spawn_min = 7;
+    Vector3 spawn_obj_pos;
 
     private void Start()
     {
@@ -43,15 +46,17 @@ public class EnemySpawnManager : MonoBehaviour
         //プレイヤーが範囲に入ったら当たり判定を消して敵をスポーンさせる
         if (in_player)
         {
+            in_player = false;
             if (!do_spawn)
             {
-                spawn_num = Random.Range(spawn_min, spawn_max);
-                for (int i = 0; i < spawn_num; i++)
+                spawn_count = Random.Range(spawn_min, spawn_max);
+                for (int i = 0; i < spawn_count; i++)
                 {
                     Spawn();
                 }
                 do_spawn = true;
-                spawn_time--;
+                if (spawn_time > 0)
+                    spawn_time--;
             }
             boxcol.enabled = false;
         }
@@ -63,9 +68,12 @@ public class EnemySpawnManager : MonoBehaviour
 
     void Spawn()
     {
+        Vector3 pos = new Vector3(Random.Range(minspawn_pos.x, maxspawn_pos.x), Random.Range(minspawn_pos.y, maxspawn_pos.y), Random.Range(minspawn_pos.z, maxspawn_pos.z));
+
         if(spawn_time == -1)
         {
-
+            Instantiate(enemy, pos, Quaternion.identity, spawn_obj.transform);
+            Debug.Log("敵召喚☆彡");
         }
         else if(spawn_time > 0)
         {
@@ -75,7 +83,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == "Player")
+        if(other.name == "Player" && !do_spawn)
         {
             in_player = true;
         }

@@ -1901,12 +1901,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d87f75a11196c24d8cee41a9aad3c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn_time: 0
-  maxspawn_pos: {x: 340.4, y: 2.04, z: 216.4}
-  minspawn_pos: {x: 276.1, y: 2.04, z: 172.2}
+  do_spawn: 0
+  spawn_time: -1
+  maxspawn_pos: {x: 340.4, y: 3, z: 216.4}
+  minspawn_pos: {x: 276.1, y: 2.5, z: 172.2}
   boxcol: {fileID: 232917217}
   enemy: {fileID: 8309916417629757886, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
   spawn_obj: {fileID: 232917215}
+  spawn_max: 5
+  spawn_min: 7
 --- !u!65 &232917217
 BoxCollider:
   m_ObjectHideFlags: 0
