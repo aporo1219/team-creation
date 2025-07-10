@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class EnemyStore : MonoBehaviour
 {
+    int destroy_time = -1;
+
     GameObject spawn_obj;
     EnemySpawnManager spawnManager;
     DualEnemySpawnManager dualspawnManager;
 
     [SerializeField] GameObject viability_obj;
+    [SerializeField] ViabilityChecker viability_scr;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,13 +23,16 @@ public class EnemyStore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(viability_obj.activeSelf)
+        if (destroy_time > 0) destroy_time--;
+        if (destroy_time == 0) Destroy(gameObject);
+
+        if(viability_obj.activeSelf && viability_scr.do_puls)
         {
             if (spawnManager != null)
                 spawnManager.death_num++;
             else if (dualspawnManager != null)
                 dualspawnManager.death_num++;
-                Destroy(gameObject);
+            destroy_time = 240;
         }
     }
 }

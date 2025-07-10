@@ -88,9 +88,11 @@ public class ShowTaskSystem : MonoBehaviour
                 now_kill_num = kill_enemy_num = 0;
             }
             //通常タスク
-            else
+            else if(task == "敵を倒そう")
             {
-
+                change_task = "現在タスクはありません。";
+                change_task_flag = true;
+                now_kill_num = kill_enemy_num = 0;
             }
         }
     }
@@ -100,8 +102,11 @@ public class ShowTaskSystem : MonoBehaviour
         task = change_task;
         Task_Text.text = task;
         Actionassist_Text.text = assist_text;
-        move_time = 30;
-        pop_now = true;
+        if (task != "現在タスクはありません。")
+        {
+            move_time = 30;
+            pop_now = true;
+        }
         change_task_flag = false;
     }
 }

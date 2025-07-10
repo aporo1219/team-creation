@@ -3,17 +3,27 @@ using UnityEngine.Assertions.Must;
 
 public class ViabilityChecker : MonoBehaviour
 {
-    bool do_puls = false;
+    public bool do_puls = false;
 
     [SerializeField] GameObject viability_obj;
-    [SerializeField] ShowTaskSystem tasksystem;
+    GameObject Camera;
+    ShowTaskSystem tasksystem;
+
+    private void Start()
+    {
+        Camera = GameObject.Find("Main Camera");
+        tasksystem = Camera.GetComponent<ShowTaskSystem>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(viability_obj.activeSelf && !do_puls)
+        if (viability_obj.activeSelf && !do_puls)
         {
-            tasksystem.now_kill_num++;
+            if (tasksystem.task == "“G‚ð“|‚»‚¤")
+            {
+                tasksystem.now_kill_num++;
+            }
             do_puls = true;
         }
     }

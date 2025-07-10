@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4778531955590413283}
   - component: {fileID: 5691171179512127105}
+  - component: {fileID: 6363206878876685984}
   m_Layer: 0
   m_Name: Enemy_Wheel
   m_TagString: Enemy
@@ -78,6 +79,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e787d90d3109247be6772fbf897f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viability_obj: {fileID: 2573715872253118944}
+  viability_scr: {fileID: 6363206878876685984}
+--- !u!114 &6363206878876685984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3587917099420412790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975c94160b7a0fe4c8ad15a1a5638514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  do_puls: 0
   viability_obj: {fileID: 2573715872253118944}
 --- !u!1 &7754545004076104879
 GameObject:

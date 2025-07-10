@@ -1882,6 +1882,7 @@ GameObject:
   - component: {fileID: 232917218}
   - component: {fileID: 232917217}
   - component: {fileID: 232917216}
+  - component: {fileID: 232917219}
   m_Layer: 0
   m_Name: Enemy_Spawn
   m_TagString: Untagged
@@ -1907,8 +1908,8 @@ MonoBehaviour:
   do_spawn: 0
   spawn_time: -1
   spawn_count: 0
-  spawn_max: 5
-  spawn_min: 7
+  spawn_max: 40
+  spawn_min: 30
   death_num: 0
   maxspawn_pos: {x: -23.4, y: 3, z: 134.1}
   minspawn_pos: {x: -85.2, y: 2.5, z: 93.6}
@@ -1947,12 +1948,27 @@ Transform:
   m_GameObject: {fileID: 232917215}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 55.360016, y: 2.04, z: 55.630005}
+  m_LocalPosition: {x: 132.3, y: 2.04, z: 55.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1230915231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &232917219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232917215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf680620fabaa5e4390a63d3dd27258e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: "\u6575\u3092\u5012\u305D\u3046"
+  now_text: "\u968E\u6BB5\u3078\u5411\u304B\u304A\u3046"
+  tasksystem: {fileID: 437327294}
 --- !u!1001 &235664363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2598,11 +2614,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: spawn_max
-      value: 7
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: spawn_min
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: spawn_obj
@@ -17327,6 +17343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: "\u968E\u6BB5\u3078\u5411\u304B\u304A\u3046"
+  now_text: "\u73FE\u5728\u30BF\u30B9\u30AF\u306F\u3042\u308A\u307E\u305B\u3093\u3002"
   tasksystem: {fileID: 437327294}
 --- !u!65 &2008081630
 BoxCollider:
