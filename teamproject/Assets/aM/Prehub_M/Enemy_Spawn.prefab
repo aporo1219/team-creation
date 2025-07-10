@@ -66,6 +66,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d87f75a11196c24d8cee41a9aad3c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normal_enemy_flag: 0
+  wheel_enemy_flag: 0
+  fry_enemy_flag: 0
   do_spawn: 0
   spawn_time: 0
   spawn_count: 0
@@ -75,5 +78,7 @@ MonoBehaviour:
   maxspawn_pos: {x: 0, y: 0, z: 0}
   minspawn_pos: {x: 0, y: 0, z: 0}
   boxcol: {fileID: 3221089006317535336}
-  enemy: {fileID: 8309916417629757886, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
   spawn_obj: {fileID: 1175360812628712319}
+  normal_enemy: {fileID: 8309916417629757886, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
+  wheel_enemy: {fileID: 3587917099420412790, guid: 77cfc61eaa6702d4f8f7093863204d49, type: 3}
+  fry_enemy: {fileID: 7827168785373322010, guid: 37a5ed73fdd7d1545bc91f3c295589e8, type: 3}

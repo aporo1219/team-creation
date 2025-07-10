@@ -104,9 +104,4 @@ public class ShowTaskSystem : MonoBehaviour
         pop_now = true;
         change_task_flag = false;
     }
-
-    void Remove_Task()
-    {
-        move_time = 30;
-    }
 }
