@@ -42,9 +42,13 @@ public class StageSelectUI : MonoBehaviour
                 int index = i;
                 Button[i].onClick.AddListener(() => OnButtonPressed(index));
                 //G_Button[i].SetActive(false);
-                if (i == 0)
+                if (Release(index) || G_Button[i] == First_Button)
                 {
                     G_Button[i].SetActive(true);
+                }
+                else
+                {
+                    G_Button[i].SetActive(false);
                 }
                 Debug.Log($"Button[{i}] にリスナー登録完了");
                 Debug.Log($"GB[{i}] にリスナー登録完了");
@@ -77,15 +81,28 @@ public class StageSelectUI : MonoBehaviour
         {
             Renderer R = GB[i].GetComponent<Renderer>();
 
+            if(R == null)
+            {
+                continue;
+            }
             if (Selected == G_Button[i])
             {
                 R.material = Change_M[i];
             }
-            else
+            else　
             {
                 R.material = Normal_M[i];
             }
         }
+    }
+
+    //ステージ解放
+    bool Release(int stage)
+    {
+        return PlayerPrefs.GetInt("Release_" + stage, 0) == 1;
+
+        PlayerPrefs.SetInt("StageUnlocked_1", 1); // ステージ1を解放
+        PlayerPrefs.Save();
     }
 
     //ボタンが押された時の処理

@@ -1998,7 +1998,11 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 086ddc9b847ad344a8db3f4069afb137, type: 2}
   - {fileID: 2100000, guid: 086ddc9b847ad344a8db3f4069afb137, type: 2}
   - {fileID: 2100000, guid: 086ddc9b847ad344a8db3f4069afb137, type: 2}
-  Change_M: []
+  Change_M:
+  - {fileID: 2100000, guid: 92dfcf994e0320246acaa0c8711da145, type: 2}
+  - {fileID: 2100000, guid: 92dfcf994e0320246acaa0c8711da145, type: 2}
+  - {fileID: 2100000, guid: 92dfcf994e0320246acaa0c8711da145, type: 2}
+  - {fileID: 2100000, guid: 92dfcf994e0320246acaa0c8711da145, type: 2}
 --- !u!4 &1981571892
 Transform:
   m_ObjectHideFlags: 0
