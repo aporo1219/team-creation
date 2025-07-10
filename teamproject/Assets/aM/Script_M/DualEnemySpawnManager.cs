@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnManager : MonoBehaviour
+public class DualEnemySpawnManager : MonoBehaviour
 {
-    bool in_player = false;
+    public bool in_player = false;
+    public bool dual_in_player = false;
     public bool do_spawn = false;
 
     public int spawn_time = 0;
@@ -16,8 +16,11 @@ public class EnemySpawnManager : MonoBehaviour
 
     public Vector3 maxspawn_pos;
     public Vector3 minspawn_pos;
+    public Vector3 dualmaxspawn_pos;
+    public Vector3 dualminspawn_pos;
 
     [SerializeField] BoxCollider boxcol;
+    [SerializeField] BoxCollider dualboxcol;
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject spawn_obj;
 
@@ -36,9 +39,12 @@ public class EnemySpawnManager : MonoBehaviour
         //ƒ{ƒbƒNƒX‚Ì’†S‚ÆƒTƒCƒY‚ğŒvZ
         Vector3 center = (minspawn_pos + maxspawn_pos) * 0.5f;
         Vector3 size = maxspawn_pos - minspawn_pos;
+        Vector3 dualcenter = (dualminspawn_pos + dualmaxspawn_pos) * 0.5f;
+        Vector3 dualsize = dualmaxspawn_pos - dualminspawn_pos;
 
         //ƒƒCƒ„[ƒtƒŒ[ƒ€ƒ{ƒbƒNƒX‚ğ•`‰æ
         Gizmos.DrawWireCube(center, size);
+        Gizmos.DrawWireCube(dualcenter, dualsize);
     }
 
     private void Update()
@@ -59,12 +65,31 @@ public class EnemySpawnManager : MonoBehaviour
                     spawn_time--;
             }
             boxcol.enabled = false;
+            dualboxcol.enabled = false;
+        }
+        if (dual_in_player)
+        {
+            dual_in_player = false;
+            if (!do_spawn)
+            {
+                spawn_count = Random.Range(spawn_min, spawn_max);
+                for (int i = 0; i < spawn_count; i++)
+                {
+                    Dual_Spawn();
+                }
+                do_spawn = true;
+                if (spawn_time > 0)
+                    spawn_time--;
+            }
+            boxcol.enabled = false;
+            dualboxcol.enabled = false;
         }
 
         //“G‚ª‘S‚Ä“|‚³‚ê‚½‚ç“–‚½‚è”»’è‚ğ•œŠˆ‚³‚¹‚Ä‚Ü‚½“G‚ªƒXƒ|[ƒ“‚Å‚«‚é‚æ‚¤‚É‚·‚é
-        if(death_num == spawn_count)
+        if (death_num == spawn_count)
         {
             boxcol.enabled = true;
+            dualboxcol.enabled = true;
             do_spawn = false;
         }
     }
@@ -73,23 +98,31 @@ public class EnemySpawnManager : MonoBehaviour
     {
         Vector3 pos = new Vector3(Random.Range(minspawn_pos.x, maxspawn_pos.x), Random.Range(minspawn_pos.y, maxspawn_pos.y), Random.Range(minspawn_pos.z, maxspawn_pos.z));
 
-        if(spawn_time == -1)
+        if (spawn_time == -1)
         {
             Instantiate(enemy, pos, Quaternion.identity, spawn_obj.transform);
             Debug.Log("“G¢Š«™œc");
         }
-        else if(spawn_time > 0)
+        else if (spawn_time > 0)
         {
             Instantiate(enemy, pos, Quaternion.identity, spawn_obj.transform);
             Debug.Log("“G¢Š«™œc");
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void Dual_Spawn()
     {
-        if(other.name == "Player" && !do_spawn)
+        Vector3 pos = new Vector3(Random.Range(dualminspawn_pos.x, dualmaxspawn_pos.x), Random.Range(dualminspawn_pos.y, dualmaxspawn_pos.y), Random.Range(dualminspawn_pos.z, dualmaxspawn_pos.z));
+
+        if (spawn_time == -1)
         {
-            in_player = true;
+            Instantiate(enemy, pos, Quaternion.identity, spawn_obj.transform);
+            Debug.Log("“G¢Š«™œc");
+        }
+        else if (spawn_time > 0)
+        {
+            Instantiate(enemy, pos, Quaternion.identity, spawn_obj.transform);
+            Debug.Log("“G¢Š«™œc");
         }
     }
 }
