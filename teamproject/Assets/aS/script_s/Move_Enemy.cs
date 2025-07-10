@@ -16,8 +16,9 @@ public class Move_Enemy : MonoBehaviour
 
     [SerializeField] float x, y, z, w;
 
-    [SerializeField] GameObject MainCharacter;
-    [SerializeField] SearchErea Search_Enemy;//主人公を探す変数
+    [SerializeField] private GameObject MainCharacter;
+    [SerializeField] GameObject SearchErea;
+    [SerializeField] private SearchErea Search_Enemy;//主人公を探す変数
     [SerializeField] private Transform ModelRoot;// ← モデル（JR-1）を指定する用
     [SerializeField] private float RotationOffsetY = 0f;//向きの補正
     [SerializeField] private GameObject[] ModelPrefabs;
@@ -50,7 +51,7 @@ public class Move_Enemy : MonoBehaviour
     void Start()
     {
         //初期化
-        Search_Enemy = GetComponentInChildren<SearchErea>();
+        Search_Enemy = SearchErea.GetComponent<SearchErea>();
         Anim = GetComponent<Animator>();
         Local_Space_Vec = Vector3.forward;
         rd = GetComponent<Rigidbody>();
@@ -262,7 +263,9 @@ public class Move_Enemy : MonoBehaviour
             //敵を浮かす
             if(gameObject.tag == "Enemy" || gameObject.tag == "WheellEnemy")
             {
-              rd.linearVelocity = new Vector3(0, 5, 0);
+              var D = MainCharacter.transform.position - ModelRoot.transform.position;
+                D.Normalize();
+                rd.linearVelocity = D;
             }
             Enemy.Be_Attack(combo);
             Debug.Log("hit,C");

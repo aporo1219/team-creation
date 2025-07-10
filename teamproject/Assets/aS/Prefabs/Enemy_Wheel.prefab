@@ -293,6 +293,7 @@ MonoBehaviour:
   z: 0
   w: 0
   MainCharacter: {fileID: 0}
+  SearchErea: {fileID: 7754545004076104879}
   Search_Enemy: {fileID: 0}
   ModelRoot: {fileID: 194147244394099095}
   RotationOffsetY: 0
