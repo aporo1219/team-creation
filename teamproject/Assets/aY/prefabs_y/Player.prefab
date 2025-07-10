@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 5005272769489393719}
   m_Layer: 0
   m_Name: GF
-  m_TagString: Untagged
+  m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 5360489749783767553}
   m_Layer: 0
   m_Name: GC
-  m_TagString: Untagged
+  m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

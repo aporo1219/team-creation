@@ -11,6 +11,9 @@ public class FireBall : MonoBehaviour
     public GameObject Ball;
     public GameObject Explosion;
 
+    int LifeTimeLimit = 120;
+    int LifeTime = 0;
+
     float MoveSpeed = 20.0f;
     float ExplosionTime = 0.5f;
 
@@ -45,9 +48,17 @@ public class FireBall : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        LifeTime++;
+
+        if(LifeTime == LifeTimeLimit)
+            StartCoroutine(HitExplosion());
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag!="Player")
+        if(collision.gameObject.tag!="Player"&&collision.gameObject.tag!="PlayerSkill")
         StartCoroutine(HitExplosion());
     }
 

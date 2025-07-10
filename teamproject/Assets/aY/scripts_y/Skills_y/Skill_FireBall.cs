@@ -5,17 +5,34 @@ public class Skill_FireBall : MonoBehaviour
     PlayerController_y1 PlayerCont;
 
     public GameObject Fireball;
+    int CoolTime = 600;
+    int TimeCount = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         PlayerCont = FindAnyObjectByType<PlayerController_y1>();
+
+        TimeCount = CoolTime;
+    }
+
+    private void FixedUpdate()
+    {
+        if (TimeCount < CoolTime)
+        {
+            TimeCount++;
+        }
     }
 
     public void UseSkill()
     {
-        Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2, PlayerCont.transform.rotation);
-        Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2 + PlayerCont.transform.right * 2, PlayerCont.transform.rotation);
-        Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2 + PlayerCont.transform.right *-2, PlayerCont.transform.rotation);
+        if (TimeCount >= CoolTime)
+        {
+            Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2, PlayerCont.transform.rotation);
+            Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2 + PlayerCont.transform.right * 2, PlayerCont.transform.rotation);
+            Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2 + PlayerCont.transform.right * -2, PlayerCont.transform.rotation);
+            TimeCount = 0;
+        }
+        
     }
 }
