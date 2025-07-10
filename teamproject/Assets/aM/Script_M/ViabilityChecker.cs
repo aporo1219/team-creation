@@ -20,10 +20,6 @@ public class ViabilityChecker : MonoBehaviour
     {
         if (viability_obj.activeSelf && !do_puls)
         {
-            if (tasksystem.task == "“G‚ð“|‚»‚¤")
-            {
-                tasksystem.now_kill_num++;
-            }
             do_puls = true;
         }
     }

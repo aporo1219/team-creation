@@ -26,7 +26,7 @@ public class EnemyStore : MonoBehaviour
         if (destroy_time > 0) destroy_time--;
         if (destroy_time == 0) Destroy(gameObject);
 
-        if(viability_obj.activeSelf && viability_scr.do_puls)
+        if(viability_obj.activeSelf && viability_scr.do_puls && destroy_time == -1)
         {
             if (spawnManager != null)
                 spawnManager.death_num++;
