@@ -8,7 +8,10 @@ public class PlayerChecker : MonoBehaviour
     {
         if(other.name == "Player" && !spawnmanager.do_spawn)
         {
-            spawnmanager.in_player = true;
+            if (this.name == "Enemy_Spawn")
+                spawnmanager.in_player = true;
+            else if(this.name == "Dual_Enemy_Spawn")
+                spawnmanager.dual_in_player = true;
         }
     }
 }

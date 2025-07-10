@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6520329982746785760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone021
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8883259580363540858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone022
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5488463782073356724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7643238336643704252}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6077468272218414551}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 223528206717715312}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5143846657726984327}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2787440033581813277}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3270690837881516162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3256362869557282206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7131254523848747545}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3379750462312923255}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8614594359951172462}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -501,7 +501,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3414546728172679110}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6041179737310311013}
   - component: {fileID: 2591855081790945693}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JR-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +640,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 973390312401265989}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2126746328024720655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +704,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5362287516433129665}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -735,7 +735,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2171439690705484536}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -767,7 +767,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8560751343892438827}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -829,7 +829,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9082464985987500528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -861,7 +861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 825797525022073285}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -898,7 +898,7 @@ GameObject:
   - component: {fileID: 5269564877415110519}
   - component: {fileID: 387784292066714821}
   - component: {fileID: 1293716309851095303}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JR-1 idle(1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1056,7 +1056,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8987564359298176293}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1087,7 +1087,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8425489635614764476}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1118,7 +1118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5433274179632803645}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,7 +1154,7 @@ GameObject:
   - component: {fileID: 8017388415272137741}
   - component: {fileID: 6720961544726842907}
   - component: {fileID: 1933335851596994877}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -1334,7 +1334,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8763382054819020637}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1365,7 +1365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4974101243586672736}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1397,7 +1397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4860952486566533994}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1429,7 +1429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8394662099666040781}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
