@@ -113,7 +113,7 @@ public class DualEnemySpawnManager : MonoBehaviour
         if (death_num != spawn_count && spawn_count != 0) remove_player = wait_spawn;
 
         //“G‚ª‘S‚Ä“|‚³‚ê‚½‚ç“–‚½‚è”»’è‚ğ•œŠˆ‚³‚¹‚Ä‚Ü‚½“G‚ªƒXƒ|[ƒ“‚Å‚«‚é‚æ‚¤‚É‚·‚é
-        if (death_num == spawn_count)
+        if (death_num == spawn_count && do_spawn)
         {
             do_spawn = false;
             spawn_count = death_num = 0;

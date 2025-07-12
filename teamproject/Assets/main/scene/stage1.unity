@@ -2634,7 +2634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.x
-      value: -171.2
+      value: -177.8
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.y
@@ -2646,7 +2646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.x
-      value: -219.1
+      value: -216.5
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.y
@@ -2666,7 +2666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.x
-      value: -171.2
+      value: -177.8
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.y
@@ -2678,7 +2678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.x
-      value: -219.1
+      value: -216.5
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.y
