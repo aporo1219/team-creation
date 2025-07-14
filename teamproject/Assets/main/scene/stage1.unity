@@ -2126,8 +2126,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normal_enemy_flag: 1
-  wheel_enemy_flag: 0
+  wheel_enemy_flag: 1
   fry_enemy_flag: 0
+  nspawn_num: 0
+  wspawn_num: 0
+  fspawn_num: 0
   do_spawn: 0
   spawn_time: -1
   spawn_count: 0

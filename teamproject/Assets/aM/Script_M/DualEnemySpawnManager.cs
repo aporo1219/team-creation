@@ -192,13 +192,27 @@ public class DualEnemySpawnManager : MonoBehaviour
         int max = spawn_count;
         if (normal_enemy_flag)
         {
-            nspawn_num = Random.Range(1, max);
-            max -= nspawn_num;
+            if (wheel_enemy_flag || fry_enemy_flag)
+            {
+                nspawn_num = Random.Range(1, max);
+                max -= nspawn_num;
+            }
+            else
+            {
+                nspawn_num = max;
+            }
         }
         if (wheel_enemy_flag)
         {
-            wspawn_num = Random.Range(1, max);
-            max -= wspawn_num;
+            if (fry_enemy_flag)
+            {
+                wspawn_num = Random.Range(1, max);
+                max -= wspawn_num;
+            }
+            else
+            {
+                wspawn_num = max;
+            }
         }
         if (fry_enemy_flag)
         {
