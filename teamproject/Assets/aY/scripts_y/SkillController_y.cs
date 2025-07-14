@@ -6,12 +6,10 @@ public class SkillController_y : MonoBehaviour
 {
     PlayerController_y1 PlayerCont;
 
-    public List<GameObject> EquipActiveSkills = new List<GameObject>();
+    public List<SkillManager> EquipActiveSkills = new List<SkillManager>();
     public List<GameObject> EquipPassiveSkills = new List<GameObject>();
 
     public int SelectSkill;
-
-    public Skill_FireBall Skill_FireBall;
 
     private InputAction SkillAction;
     private InputAction NextAction;
@@ -55,16 +53,24 @@ public class SkillController_y : MonoBehaviour
 
     void UseSkill()
     {
-        Skill_FireBall.UseSkill();
+        EquipActiveSkills[SelectSkill].UseSkill();
     }
 
     void NextSkill()
     {
-
+        SelectSkill++;
+        if (SelectSkill > EquipActiveSkills.Count - 1)
+        {
+            SelectSkill = 0;
+        }
     }
 
     void PreviousSkill()
     {
-
+        SelectSkill--;
+        if (SelectSkill < 0)
+        {
+            SelectSkill = EquipActiveSkills.Count - 1;
+        }
     }
 }

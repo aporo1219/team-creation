@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Skill_FireBall : SkillManager
+public class Skill_Thunder : SkillManager
 {
     PlayerController_y1 PlayerCont;
 
-    public GameObject Fireball;
+    public GameObject Thunder;
     int CoolTime = 0;
     int TimeCount = 0;
 
@@ -28,11 +28,9 @@ public class Skill_FireBall : SkillManager
     {
         if (TimeCount >= CoolTime)
         {
-            Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2, PlayerCont.transform.rotation);
-            Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2 + PlayerCont.transform.right * 2, PlayerCont.transform.rotation);
-            Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2 + PlayerCont.transform.right * -2, PlayerCont.transform.rotation);
+            Instantiate(Thunder, PlayerCont.transform.position + PlayerCont.transform.forward * 10, PlayerCont.transform.rotation);
             TimeCount = 0;
         }
-        
+
     }
 }

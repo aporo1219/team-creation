@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 5d7d6a70e9ed17d4e8c5d67819c63b55
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Thunder: {fileID: 7545315647080500942, guid: d53954c2f9b84e845a49368300aabf2b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
