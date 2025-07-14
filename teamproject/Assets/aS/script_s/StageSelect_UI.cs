@@ -10,16 +10,19 @@ public class StageSelectUI : MonoBehaviour
     private int f;
     private int Level_Floor = 0;
     private Gamepad GP;
-    private Color Choice = Color.yellow;
-    private Color Default = Color.white;
 
     [SerializeField] Text Floor_Display;
     [SerializeField] Button[] Button;
     [SerializeField] GameObject[] G_Button;
     [SerializeField] GameObject First_Button;
     [SerializeField] GameObject[] GB;
-    [SerializeField] Material[] Normal_M;
-    [SerializeField] Material[] Change_M;
+
+    //SE
+    [SerializeField] private AudioSource AS;
+    [SerializeField] private AudioClip Select_SE;
+    [SerializeField] private AudioClip Push_SE;
+    private float Select_SE_v = 0.5f;
+    private float Push_SE_v = 0.5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,7 +45,7 @@ public class StageSelectUI : MonoBehaviour
                 int index = i;
                 Button[i].onClick.AddListener(() => OnButtonPressed(index));
                 //G_Button[i].SetActive(false);
-                if (Release(index) || G_Button[i] == First_Button)
+                if (Release(index) || G_Button[i] == First_Button || i == 1)
                 {
                     G_Button[i].SetActive(true);
                 }
@@ -76,24 +79,20 @@ public class StageSelectUI : MonoBehaviour
         }
         Vector2 Right_Stick = GP.rightStick.ReadValue();
 
-        //選択のマテリアル変更処理
-        for (int i = 0; i < GB.Length; i++)
-        {
-            Renderer R = GB[i].GetComponent<Renderer>();
 
-            if(R == null)
+        //ボタンの色の変更
+        for (int i = 0; i < Button.Length; i++)
+        {
+            if (Button[i] != null)
             {
-                continue;
-            }
-            if (Selected == G_Button[i])
-            {
-                R.material = Change_M[i];
-            }
-            else　
-            {
-                R.material = Normal_M[i];
+                if (Button[i].GetComponent<Button_s>() == null)
+                {
+                    Button[i].gameObject.AddComponent<Button_s>();
+
+                }
             }
         }
+
     }
 
     //ステージ解放
@@ -116,6 +115,9 @@ public class StageSelectUI : MonoBehaviour
                 f = 3;
                 Level_Floor = 10;
                 FloorDisplay(Level_Floor);
+                //SE
+                AS.PlayOneShot(Push_SE);
+                AS.volume = Push_SE_v;
                 break;
             case 2:
                 Debug.Log("2ステージへ");
@@ -123,6 +125,9 @@ public class StageSelectUI : MonoBehaviour
                 f = 2;
                 Level_Floor = 1;
                 FloorDisplay(Level_Floor);
+                //SE
+                AS.PlayOneShot(Push_SE);
+                AS.volume = Push_SE_v;
                 break;
             case 1:
                 Debug.Log("1ステージへ");
@@ -130,6 +135,9 @@ public class StageSelectUI : MonoBehaviour
                 f = 1;
                 Level_Floor = 2;
                 FloorDisplay(Level_Floor);
+                //SE
+                AS.PlayOneShot(Push_SE);
+                AS.volume = Push_SE_v;
                 break;
             case 0:
                 Debug.Log("チュートリアルステージへ");
@@ -137,6 +145,9 @@ public class StageSelectUI : MonoBehaviour
                 f = 0;
                 Level_Floor = 0;
                 FloorDisplay(Level_Floor);
+                //SE
+                AS.PlayOneShot(Push_SE);
+                AS.volume = Push_SE_v;
                 break;
         }
     }
@@ -166,20 +177,20 @@ public class StageSelectUI : MonoBehaviour
     {
         F = Level_Floor;
         //一階
-        if(F == 10)
+        if (F == 10)
         {
-            Floor_Display.text ="1";
+            Floor_Display.text = "1";
         }
         //チュートリアル
-        else if(F == 0)
+        else if (F == 0)
         {
             Floor_Display.text = "BT" + 2;
         }
         else
         {
-             Floor_Display.text = "B" + F ;
+            Floor_Display.text = "B" + F;
         }
-           
+
     }
 
 }

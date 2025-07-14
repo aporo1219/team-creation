@@ -47,7 +47,12 @@ public class Move_Enemy : MonoBehaviour
 
     [SerializeField] Vector3 Local_Space_Vec;//前方基準のローカル空間ベクトル
 
-
+    //SE
+    [SerializeField] private AudioSource AS;
+    [SerializeField] private AudioClip BeHit_SE;
+    [SerializeField] private AudioClip Walk_SE;
+    private float Be_Hit_v = 2.0f;
+    private float Walk_v = 1.0f;
     void Start()
     {
         //初期化
@@ -118,6 +123,8 @@ public class Move_Enemy : MonoBehaviour
         if (Search_Enemy.Find)
         {
             Discovery();
+            float time = 0;
+            time += (float)Time.deltaTime;
         }
         //プレイヤーを見失う
         if (!Search_Enemy.Find)
@@ -168,17 +175,29 @@ public class Move_Enemy : MonoBehaviour
         Time_Lapse = 0;
         //MainCharacter.transform.position = 
 
+        float time = 0;
+        time += (float)Time.deltaTime;
         Debug.Log("見つけた");
         Time_Lapse = 0;
         if(gameObject.tag == "Enemy")
         {
            Anim.SetBool("Walk", true);
+            //歩くSEを流す
+            AS.PlayOneShot(Walk_SE);
+            AS.volume = Walk_v;
+           time = 0;
+
         }
         else if (gameObject.tag == "WheellEnemy")
         {
             Anim.SetBool("Walk_1", true);
+            AS.PlayOneShot(Walk_SE);
+            AS.volume = Walk_v;
         }
-       
+        else if (gameObject.tag == "FlyEnemy")
+        {
+           
+        }
 
         Vector3 Distance = MainCharacter.transform.position - ModelRoot.transform.position;
         
@@ -260,15 +279,18 @@ public class Move_Enemy : MonoBehaviour
         {
             var Enemy = GetComponent<Enemy_Status>();
             int combo = PlayerController_y1.instance.AttackNum;
-            //敵を浮かす
+            //敵を近づけさせる
             if(gameObject.tag == "Enemy" || gameObject.tag == "WheellEnemy")
             {
-              var D = MainCharacter.transform.position - ModelRoot.transform.position;
+                var D = MainCharacter.transform.position - ModelRoot.transform.position;
                 D.Normalize();
                 rd.linearVelocity = D;
             }
             Enemy.Be_Attack(combo);
             Debug.Log("hit,C");
+            //攻撃を受けたSEを流す
+            AS.PlayOneShot(BeHit_SE);
+            AS.volume = Be_Hit_v;
         }
 
         if (collision.gameObject.name == "GF")
@@ -277,10 +299,15 @@ public class Move_Enemy : MonoBehaviour
             int combo = PlayerController_y1.instance.AttackNum;
             if(gameObject.tag == "Enemy" || gameObject.tag == "WheellEnemy")
             {
-                rd.linearVelocity = new Vector3(0, 10, 0);
+                var D = MainCharacter.transform.position - ModelRoot.transform.position;
+                D.Normalize();
+                rd.linearVelocity = D;
             }
             Enemy.Be_Attack(combo);
             Debug.Log("hit,F");
+            //攻撃を受けたSEを流す
+            AS.PlayOneShot(BeHit_SE);
+            AS.volume = Be_Hit_v;
         }
     }
 }

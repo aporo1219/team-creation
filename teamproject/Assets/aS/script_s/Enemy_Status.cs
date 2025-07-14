@@ -22,7 +22,10 @@ public class Enemy_Status : MonoBehaviour
     [SerializeField] float shotInterval = 2f; // 発射間隔（秒）
     Vector3 Distance;//プレイヤーの距離の計算ベクトル
 
-
+    //SE
+    [SerializeField] private AudioSource AS;
+    [SerializeField] private AudioClip Attack_SE;
+    private float Attack_v = 0.3f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -147,6 +150,9 @@ public class Enemy_Status : MonoBehaviour
                 {
                     Debug.Log("発射");
                     EB.Shot();
+                    //弾発射時のSEを流す
+                    AS.PlayOneShot(Attack_SE);
+                    AS.volume = Attack_v;
                 }
 
                 //Debug.Log("敵が弾を撃ちました");

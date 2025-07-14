@@ -4,7 +4,8 @@ using UnityEngine;
 public class SearchErea : MonoBehaviour
 {
     //“G‚ÌˆÊ’uæ“¾‚Ì•Ï”
-    private Transform EnemyPos;
+    [SerializeField] GameObject EnemyPos;
+    //[SerializeField] Transform SE;
 
     public bool Find;
     public bool FirstTime;
@@ -13,7 +14,7 @@ public class SearchErea : MonoBehaviour
     void Start()
     {
         //’ÇÕ‘ÎÛ‚Ìİ’è
-        EnemyPos = transform.parent;
+        //SE = EnemyPos;
 
         FirstTime = false;
         Find = false;
@@ -22,7 +23,8 @@ public class SearchErea : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-     
+        //“G‚ÌƒT[ƒ`—Ìˆæ‚ğG‹›“G‚É’Ç]‚·‚é‚æ‚¤‚É‚·‚é
+        transform.position = EnemyPos.transform.position;
     }
 
    
