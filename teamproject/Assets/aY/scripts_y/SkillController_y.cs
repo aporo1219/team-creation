@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -35,9 +36,9 @@ public class SkillController_y : MonoBehaviour
             return;
         }
 
-        if (SkillAction.WasPressedThisFrame())
+        if (SkillAction.WasPressedThisFrame() && PlayerCont.canAction)
         {
-            UseSkill();
+            StartCoroutine(UseSkill(SelectSkill));
         }
 
         if (NextAction.WasPressedThisFrame())
@@ -51,9 +52,40 @@ public class SkillController_y : MonoBehaviour
         }
     }
 
-    void UseSkill()
+    IEnumerator UseSkill(int select)
     {
-        EquipActiveSkills[SelectSkill].UseSkill();
+        PlayerCont.canAction = false;
+        PlayerCont.canMove = false;
+        PlayerCont.canRotate = false;
+        PlayerCont.canJump = false;
+
+        PlayerCont.rb.linearVelocity = Vector3.zero;
+
+        PlayerCont.Dash = false;
+
+        PlayerCont.AnimationPlay("Skill");
+
+        bool useSkill = false;
+
+        for(float time = 0.0f;time < 0.9f;time += Time.deltaTime)
+        {
+
+            PlayerCont.rb.linearVelocity = Vector3.zero;
+            if (time > 0.45f && !useSkill)
+            {
+                EquipActiveSkills[select].UseSkill();
+                useSkill = true;
+            }
+
+            yield return null;
+        }
+
+        PlayerCont.canAction = true;
+        PlayerCont.canMove = true;
+        PlayerCont.canRotate = true;
+        PlayerCont.canJump = true;
+
+        yield return null;
     }
 
     void NextSkill()

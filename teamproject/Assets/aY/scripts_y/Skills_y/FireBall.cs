@@ -7,6 +7,7 @@ public class FireBall : MonoBehaviour
 
     Rigidbody rb;
     Vector3 moveForward;
+    Vector3 playerForward;
 
     public GameObject Ball;
     public GameObject Explosion;
@@ -26,7 +27,13 @@ public class FireBall : MonoBehaviour
 
         Explosion.SetActive(false);
 
-        moveForward = PlayerCont.transform.forward;
+        moveForward = transform.position - PlayerCont.transform.position;
+        moveForward.y = 0;
+        moveForward.Normalize();
+        playerForward = PlayerCont.transform.forward;
+        playerForward.Normalize();
+        moveForward += playerForward * 2;
+        moveForward.Normalize();
     }
 
     // Update is called once per frame
@@ -37,7 +44,7 @@ public class FireBall : MonoBehaviour
         ////ƒJƒƒ‰‚ÌŒü‚«‚©‚çˆÚ“®•ûŒü‚ğŒˆ’è
         //moveForward = cameraForward * 1 + Camera.main.transform.right * 0;
         ////
-        moveForward.Normalize();
+        
 
         rb.linearVelocity = moveForward * MoveSpeed;
 

@@ -13,6 +13,9 @@ public class PlayerAttack : MonoBehaviour
     public GameObject Combo;
     public GameObject Finish;
 
+    [SerializeField] GameObject Trail;
+    [SerializeField] GameObject Trail1;
+
     public float a = 1.0f;
 
     private float[] AttackMotionTime = new float[8] { 0.93f, 0.93f, 0.93f, 0.93f, 0.93f, 0.93f, 0.93f, 0.93f };
@@ -29,6 +32,8 @@ public class PlayerAttack : MonoBehaviour
 
         Combo.SetActive(false);
         Finish.SetActive(false);
+        Trail.SetActive(false);
+        Trail1.SetActive(false);
 
         instance = this;
     }
@@ -127,6 +132,8 @@ public class PlayerAttack : MonoBehaviour
                 if(end < time)
                 {
                     Finish.SetActive(false);
+                    Trail.SetActive(false);
+                    Trail1.SetActive(false);
                 }
                 else if (start < time)
                 {
@@ -139,6 +146,8 @@ public class PlayerAttack : MonoBehaviour
                         }
                     }
                     Finish.SetActive(true);
+                    Trail.SetActive(true);
+                    Trail1.SetActive(true);
                 }
 
                 PlayerCont.rb.linearVelocity = new Vector3(PlayerCont.rb.linearVelocity.x * 0.8f, PlayerCont.rb.linearVelocity.y, PlayerCont.rb.linearVelocity.z * 0.8f);
@@ -155,6 +164,8 @@ public class PlayerAttack : MonoBehaviour
                 if (end < time)
                 {
                     Combo.SetActive(false);
+                    Trail.SetActive(false);
+                    Trail1.SetActive(false);
                 }
                 else if (start < time)
                 {
@@ -168,6 +179,8 @@ public class PlayerAttack : MonoBehaviour
                     }
 
                     Combo.SetActive(true);
+                    Trail.SetActive(true);
+                    Trail1.SetActive(true);
                 }
 
                 if (PlayerCont.attackAction.WasPressedThisFrame() && ATK && time < inputlimit)

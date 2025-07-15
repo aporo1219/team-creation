@@ -38,7 +38,7 @@ public class PlayerController_y1 : MonoBehaviour
     private Vector2 moveValue;          //左スティック入力量
     //-----------------------------------------------------
 
-    private bool Dash = false;
+    [HideInInspector] public bool Dash = false;
 
     public bool onGround = false;     //接地判定
     [SerializeField] private bool GroundHit = false;    //地形との衝突判定
