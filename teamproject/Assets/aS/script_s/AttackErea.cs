@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class AttackErea : MonoBehaviour
 {
-    private Transform EnemyPos;
+    [SerializeField] GameObject  EnemyPos;
     public bool Find;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        EnemyPos = transform.parent;
+        this.transform.position = EnemyPos.transform.position;
         Find = false;
     }
 

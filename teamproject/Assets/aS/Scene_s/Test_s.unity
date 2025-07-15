@@ -603,6 +603,9 @@ MonoBehaviour:
   RotationOffsetY: 0
   ModelPrefabs: []
   Local_Space_Vec: {x: 0, y: 0, z: 0}
+  AS: {fileID: 0}
+  BeHit_SE: {fileID: 0}
+  Walk_SE: {fileID: 0}
 --- !u!136 &1126038957
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1262,8 +1265,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Fly
       objectReference: {fileID: 0}
+    - target: {fileID: 7827168785373322010, guid: 37a5ed73fdd7d1545bc91f3c295589e8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7538986043942060647, guid: 37a5ed73fdd7d1545bc91f3c295589e8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37a5ed73fdd7d1545bc91f3c295589e8, type: 3}
@@ -1332,9 +1340,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 630418914347117132, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
+      propertyPath: m_Radius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5714690653104014428, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714690653104014428, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7156261173769157853, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1393,7 +1409,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 587375091}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4857088978687474852, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5714690653104014428, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
@@ -1412,6 +1429,10 @@ PrefabInstance:
       propertyPath: EnemyPos
       value: 
       objectReference: {fileID: 23200792}
+    - target: {fileID: 2473982720825158191, guid: 77cfc61eaa6702d4f8f7093863204d49, type: 3}
+      propertyPath: Bullet
+      value: 
+      objectReference: {fileID: 4013797773552339561, guid: dffd55c1064d59b4295d32ef17df3d72, type: 3}
     - target: {fileID: 3587917099420412790, guid: 77cfc61eaa6702d4f8f7093863204d49, type: 3}
       propertyPath: m_Name
       value: Enemy_Wheel
@@ -1456,8 +1477,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5309088323307740095, guid: 77cfc61eaa6702d4f8f7093863204d49, type: 3}
+      propertyPath: m_Radius
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6468106214640571669, guid: 77cfc61eaa6702d4f8f7093863204d49, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77cfc61eaa6702d4f8f7093863204d49, type: 3}

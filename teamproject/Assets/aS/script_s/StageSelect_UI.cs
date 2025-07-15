@@ -45,7 +45,7 @@ public class StageSelectUI : MonoBehaviour
                 int index = i;
                 Button[i].onClick.AddListener(() => OnButtonPressed(index));
                 //G_Button[i].SetActive(false);
-                if (Release(index) || G_Button[i] == First_Button || i == 1)
+                if (Release(index) || G_Button[i] == First_Button || i == 2)
                 {
                     G_Button[i].SetActive(true);
                 }
