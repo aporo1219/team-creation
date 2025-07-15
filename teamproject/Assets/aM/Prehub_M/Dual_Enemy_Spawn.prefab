@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1724211459186327058
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2493838142405850257}
-  m_Layer: 0
-  m_Name: Enemy_Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2493838142405850257
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724211459186327058}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5251896714765440282}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4552804879840360688
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +32,6 @@ Transform:
   m_Children:
   - {fileID: 2056545105924344684}
   - {fileID: 7426130985706588672}
-  - {fileID: 2493838142405850257}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &188225742620726797
@@ -95,7 +63,7 @@ MonoBehaviour:
   dualminspawn_pos: {x: 0, y: 0, z: 0}
   boxcol: {fileID: 299859392778181866}
   dualboxcol: {fileID: 9200267649395449222}
-  spawn_obj: {fileID: 1724211459186327058}
+  spawn_obj: {fileID: 4552804879840360688}
   normal_enemy: {fileID: 5714690653104014428, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
   wheel_enemy: {fileID: 3587917099420412790, guid: 77cfc61eaa6702d4f8f7093863204d49, type: 3}
   fry_enemy: {fileID: 7827168785373322010, guid: 37a5ed73fdd7d1545bc91f3c295589e8, type: 3}

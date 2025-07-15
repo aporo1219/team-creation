@@ -35,6 +35,8 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] GameObject wheel_enemy;
     [SerializeField] GameObject fry_enemy;
 
+    [SerializeField] KillTaskSystem killtasksystem;
+
     private void OnDrawGizmos()
     {
         //ワイヤーフレームボックスの色
@@ -89,6 +91,8 @@ public class EnemySpawnManager : MonoBehaviour
             do_spawn = false;
             spawn_count = death_num = 0;
             remove_player = wait_spawn;
+            if (killtasksystem != null)
+                killtasksystem.Next_Task();
         }
     }
 

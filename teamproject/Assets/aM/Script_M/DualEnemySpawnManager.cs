@@ -30,13 +30,13 @@ public class DualEnemySpawnManager : MonoBehaviour
     public Vector3 dualmaxspawn_pos;
     public Vector3 dualminspawn_pos;
 
-    [SerializeField] BoxCollider boxcol;
-    [SerializeField] BoxCollider dualboxcol;
     [SerializeField] GameObject spawn_obj;
 
     [SerializeField] GameObject normal_enemy;
     [SerializeField] GameObject wheel_enemy;
     [SerializeField] GameObject fry_enemy;
+
+    [SerializeField] KillTaskSystem killtasksystem;
 
     private void OnDrawGizmos()
     {
@@ -118,6 +118,8 @@ public class DualEnemySpawnManager : MonoBehaviour
             do_spawn = false;
             spawn_count = death_num = 0;
             remove_player = wait_spawn;
+            if (killtasksystem != null)
+                killtasksystem.Next_Task();
         }
     }
 

@@ -17,24 +17,22 @@ public class KillTaskSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    public void Next_Task()
+    {
         if (spawnmanager != null)
         {
-            //敵をすべて倒したら次のタスクに進む
-            if(spawnmanager.spawn_count == spawnmanager.death_num && spawnmanager.spawn_count != 0)
-            {
-                tasksystem.change_task = text;
-                tasksystem.change_task_flag = true;
-                Destroy(this);
-            }
+            tasksystem.change_task = text;
+            tasksystem.change_task_flag = true;
+            Destroy(this);
         }
         else if (dualspawnmanager != null)
         {
-            if (dualspawnmanager.spawn_count == dualspawnmanager.death_num && dualspawnmanager.spawn_count != 0)
-            {
-                tasksystem.change_task = text;
-                tasksystem.change_task_flag = true;
-                Destroy(this);
-            }
+            tasksystem.change_task = text;
+            tasksystem.change_task_flag = true;
+            Destroy(this);
         }
     }
 }
