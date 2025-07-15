@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bullet_Enemy : MonoBehaviour
 {
-    private GameObject Bullet;
+    [SerializeField]  GameObject Bullet;
     [SerializeField] GameObject Enemy;
 
     private GameObject _Bullet;
@@ -19,7 +19,6 @@ public class Bullet_Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Bullet = GameObject.FindWithTag("Bullet");
         Bullet.SetActive(false);
         Bullet_Speed = 500;
         Power = 5;

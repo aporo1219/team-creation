@@ -35,7 +35,10 @@ public class Move_Enemy : MonoBehaviour
     private bool Be_Attacked;//攻撃を受けたかの判定
     private Animator Anim;//アニメーションコンポーネントの取得
     private float Distance;//距離の計算
+    public bool OnGround = false;
     private Rigidbody rd;
+    [SerializeField] LayerMask GroundLayer;//レイヤーの取得
+    [SerializeField] float Ground_Distance = 0.2f;
     
 
     Vector3 Goal_Position;//目標時点の座標変数（雑魚敵）
@@ -60,14 +63,24 @@ public class Move_Enemy : MonoBehaviour
         Anim = GetComponent<Animator>();
         Local_Space_Vec = Vector3.forward;
         rd = GetComponent<Rigidbody>();
+        GroundLayer = LayerMask.GetMask("Ground");
         //プレイヤーに近づく変数
         MainCharacter = GameObject.FindGameObjectWithTag("Player");
-        if(MainCharacter != null)
+        if (MainCharacter != null)
         {
             Goal_Position = MainCharacter.transform.position;
         }
-      
-        Speed_Enemy = 2.0f;
+        //車輪の敵だったらスピードが6、それ以外だったら
+        if(gameObject.tag == "WheellEnemy")
+        {
+            Speed_Enemy = 6.0f;
+        }
+        else
+        {
+              Speed_Enemy = 5.0f;
+        }
+           
+       
         Turn = false;//trueならば回転
         Local_Space_Vec = Vector3.up;
         //攻撃関連の変数
@@ -103,7 +116,23 @@ public class Move_Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Around();
+        //地面についているかのチェック
+        if (gameObject.tag == "Enemy" || gameObject.tag == "WheellEnemy")
+        {
+            if (IsGrond())
+            {
+                if (!OnGround)
+                {
+                    rd.linearVelocity = Vector3.zero;
+                    OnGround = true;
+                }
+            }
+            else
+            {
+                OnGround = false;
+                rd.AddForce(0, -100, 0);
+            }
+        }
 
         //上方向の制御
         if (Initial_Value.y < this.transform.position.y  && gameObject.tag == "FlyEnemy")
@@ -117,57 +146,27 @@ public class Move_Enemy : MonoBehaviour
                 rd.AddForce(0,-50,0);
             } 
         }
-        
+
 
         //発見
-        if (Search_Enemy.Find)
+        if (OnGround)
         {
-            Discovery();
-            float time = 0;
-            time += (float)Time.deltaTime;
-        }
-        //プレイヤーを見失う
-        if (!Search_Enemy.Find)
-        {
-            Debug.Log("見失った１");
-            Lost();
+            if (Search_Enemy.Find)
+            {
+                Discovery();
+                float time = 0;
+                time += (float)Time.deltaTime;
+            }
+
+            //プレイヤーを見失う
+            if (!Search_Enemy.Find)
+            {
+                Debug.Log("見失った１");
+                Lost();
+            }
         }
     }
 
-    //周回する関数
-    /*void Around()
-    {
-        if (!Search_Enemy.Find)
-        {
-            if (!Right_Or_Left)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, Search_Position_Right, Speed_Enemy * Time.deltaTime);
-                //目標地点についたら、その場で回転し逆方向に行く
-                if (transform.position.x >= Around_Position)
-                {
-                    Around_Position = -8.0f;
-                    Right_Or_Left = true;
-                    ModelRoot.Rotate(0, , 0);
-                }
-            }
-
-            //逆方向に行く
-            else if (Right_Or_Left)
-            {
-                Debug.Log("回転");
-                transform.position = Vector3.MoveTowards(transform.position, Search_Position_Left, Speed_Enemy * Time.deltaTime);
-
-                if (transform.position.x <= Around_Position)
-                {
-                    Around_Position = 9.9f;
-                    Debug.Log("回転1");
-                    ModelRoot.Rotate(0, 180, 0);
-                    Right_Or_Left = false;
-                }
-
-            }
-        }
-    }*/
 
     //主人公を見つけた時の関数
     public void Discovery()
@@ -182,17 +181,12 @@ public class Move_Enemy : MonoBehaviour
         if(gameObject.tag == "Enemy")
         {
            Anim.SetBool("Walk", true);
-            //歩くSEを流す
-            AS.PlayOneShot(Walk_SE);
-            AS.volume = Walk_v;
            time = 0;
 
         }
         else if (gameObject.tag == "WheellEnemy")
         {
             Anim.SetBool("Walk_1", true);
-            AS.PlayOneShot(Walk_SE);
-            AS.volume = Walk_v;
         }
         else if (gameObject.tag == "FlyEnemy")
         {
@@ -203,7 +197,7 @@ public class Move_Enemy : MonoBehaviour
         
             Distance = new Vector3(Distance.x, 0, Distance.z);
 
-            Quaternion Rotation = Quaternion.LookRotation(Distance);
+            Quaternion Rotation = Quaternion.LookRotation(new Vector3(Distance.z,0,Distance.x * -1));
 
         //Vector3 rot = Rotation.eulerAngles;
 
@@ -215,11 +209,11 @@ public class Move_Enemy : MonoBehaviour
         w = Rotation.w;
         if (Rotation.y <= 1)
         {
-            Rotation = new Quaternion(Rotation.x, Rotation.y + 0.5f, Rotation.z, Rotation.w);
+            Rotation = new Quaternion(Rotation.x, Rotation.y, Rotation.z, Rotation.w);
         }
         else
         {
-            Rotation = new Quaternion(Rotation.x, Rotation.y - 0.5f, Rotation.z, Rotation.w);
+            Rotation = new Quaternion(Rotation.x, Rotation.y, Rotation.z, Rotation.w);
         }
 
         //Rotation = new Quaternion(Rotation.x, Rotation.y + 0.5f, Rotation.z, Rotation.w);
@@ -231,7 +225,7 @@ public class Move_Enemy : MonoBehaviour
 
         Distance.Normalize();
         //目標時点まで移動する（Goal_Positionの値をPlayerの座標にすればPlayerに向かう）
-        this.rd.linearVelocity = Distance;
+        this.rd.linearVelocity = Distance * Speed_Enemy;
 
 
         Mode_Serch = true;
@@ -309,6 +303,12 @@ public class Move_Enemy : MonoBehaviour
             AS.PlayOneShot(BeHit_SE);
             AS.volume = Be_Hit_v;
         }
+    }
+
+    //地面判定
+    bool IsGrond()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, Ground_Distance, GroundLayer);
     }
 }
 
