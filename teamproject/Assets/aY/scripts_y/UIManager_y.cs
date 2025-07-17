@@ -35,5 +35,7 @@ public class UIManager_y : MonoBehaviour
 
         HP_Ber_Range *= HP_Percentage;
 
+       
+
     }
 }
