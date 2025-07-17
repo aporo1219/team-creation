@@ -24,6 +24,8 @@ public class StageSelectUI : MonoBehaviour
     private float Select_SE_v = 0.5f;
     private float Push_SE_v = 0.5f;
 
+    public SceneChenger SC;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -111,7 +113,7 @@ public class StageSelectUI : MonoBehaviour
         {
             case 3:
                 Debug.Log("最終ステージへ");
-                Invoke(nameof(ChangeScene), 0.1f);
+                Invoke(nameof(ChangeScene1), 0.1f);
                 f = 3;
                 Level_Floor = 10;
                 FloorDisplay(Level_Floor);
@@ -121,7 +123,7 @@ public class StageSelectUI : MonoBehaviour
                 break;
             case 2:
                 Debug.Log("2ステージへ");
-                Invoke(nameof(ChangeScene), 0.1f);
+                Invoke(nameof(ChangeScene1), 0.1f);
                 f = 2;
                 Level_Floor = 1;
                 FloorDisplay(Level_Floor);
@@ -131,7 +133,7 @@ public class StageSelectUI : MonoBehaviour
                 break;
             case 1:
                 Debug.Log("1ステージへ");
-                Invoke(nameof(ChangeScene), 0.1f);
+                Invoke(nameof(ChangeScene1), 0.1f);
                 f = 1;
                 Level_Floor = 2;
                 FloorDisplay(Level_Floor);
@@ -141,7 +143,8 @@ public class StageSelectUI : MonoBehaviour
                 break;
             case 0:
                 Debug.Log("チュートリアルステージへ");
-                Invoke(nameof(ChangeScene), 0.1f);
+                Button[floor].onClick.Invoke();
+                Invoke(nameof(ChangeScene1), 0.1f);
                 f = 0;
                 Level_Floor = 0;
                 FloorDisplay(Level_Floor);
@@ -153,7 +156,7 @@ public class StageSelectUI : MonoBehaviour
     }
 
     //シーン移動
-    private void ChangeScene()
+    private void ChangeScene1()
     {
        switch(f)
         {
@@ -161,13 +164,13 @@ public class StageSelectUI : MonoBehaviour
                 SceneManager.LoadScene("Finalstage");
                 break;
             case 2:
-                SceneManager.LoadScene("stage2");
+                StartCoroutine("SceneChenger.instance.ChangeScene()",3);
                 break;
             case 1:
-                SceneManager.LoadScene("stage1");
+                SceneChenger.instance.ChangeScene(2);
                 break;
             case 0:
-                SceneManager.LoadScene("tutorial");
+                SC.ChangeScene(1);
                 break;
         }
     }

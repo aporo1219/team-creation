@@ -38,8 +38,8 @@ public class SceneChenger : MonoBehaviour
         SceneChange = false;
         Gameend = false;
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
 
         gameState = "loading";
         sr = GetComponent<Image>();
