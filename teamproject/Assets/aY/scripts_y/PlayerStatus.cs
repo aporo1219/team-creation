@@ -40,7 +40,18 @@ public class PlayerStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Attack  = (int)(DefaultAttack * AttackRate);
+        if(HP > MaxHP)
+        {
+            HP = MaxHP;
+        }
+        else if(HP < 0)
+        {
+            HP = 0;
+        }
+
+        Attack = (int)(DefaultAttack * AttackRate);
         Defense = (int)(DefaultDefense * DefenseRate);
+
+
     }
 }

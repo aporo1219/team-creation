@@ -5,13 +5,13 @@ public class Skill_Thunder : SkillManager
     PlayerController_y1 PlayerCont;
 
     public GameObject Thunder;
-    int CoolTime = 0;
-    int TimeCount = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         PlayerCont = FindAnyObjectByType<PlayerController_y1>();
+
+        CoolTime = 300;
 
         TimeCount = CoolTime;
     }

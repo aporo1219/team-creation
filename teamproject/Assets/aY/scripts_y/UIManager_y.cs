@@ -8,7 +8,8 @@ public class UIManager_y : MonoBehaviour
     SkillController_y skillController;
 
     //
-    public Image Health;
+    public Slider HP_Ber;
+    public Image BerContent;
 
     //•Ï”
     float HP_Percentage;
@@ -24,18 +25,20 @@ public class UIManager_y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        HP_Ber_Control();
     }
 
     void HP_Ber_Control()
     {
-        HP_Ber_Range = Health.flexibleWidth;
+        HP_Ber.value = (float)playerStatus.HP / (float)playerStatus.MaxHP;
 
-        HP_Percentage = playerStatus.HP / playerStatus.MaxHP;
-
-        HP_Ber_Range *= HP_Percentage;
-
-       
-
+        if(HP_Ber.value > 0.2f )
+        {
+            BerContent.color = Color.green;
+        }
+        else
+        {
+            BerContent.color = Color.red;
+        }
     }
 }

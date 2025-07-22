@@ -5,8 +5,6 @@ public class Skill_Heal : SkillManager
     PlayerController_y1 PlayerCont;
 
     public GameObject Heal;
-    int CoolTime = 0;
-    int TimeCount = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
