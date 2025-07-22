@@ -50,34 +50,36 @@ public class Enemy_Status : MonoBehaviour
     //雑魚敵の攻撃を受けた処理の関数
     public void Be_Attack(int Combo)
     {
-        //コンボ一段階目
+        //コンボ
         if (Combo ==  1)
-        {
-            Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
-            Enemy_HP -= 1;
-        }
-        //コンボ二段目
-        if (Combo ==  2)
-        {
-            Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
-            Enemy_HP -= 2;
-        }
-        //コンボ三段目
-        if (Combo == 3)
         {
             Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
             Enemy_HP -= 3;
         }
-        //コンボ四段目
-        if (Combo == 4)
+        //コンボ最終
+        if (Combo == 2)
         {
             Debug.Log($"敵ID {Enemy_ID} は {Enemy_HP} HP");
-            Enemy_HP -= 4;
+            Enemy_HP -= 7;
         }
 
 
     }
 
+　　//雑魚敵がスキルを受けた処理の関数
+    public void Be_Skill(string skill)
+    {
+        //ファイヤーボール
+        if(skill == "FireBall")
+        {
+            Enemy_HP -= 8;
+        }
+        //サンダー
+        if (skill == "Thunder")
+        {
+            Enemy_HP -= 8;
+        }
+    }
     //雑魚敵が死んだ後の処理
     void Death_Before()
     {

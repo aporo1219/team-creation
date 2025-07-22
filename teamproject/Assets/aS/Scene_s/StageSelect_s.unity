@@ -537,6 +537,115 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 750207900275589323, guid: f0aba4f5e78ccb746849594bc053c459, type: 3}
+--- !u!1001 &405256243
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 513298886}
+    m_Modifications:
+    - target: {fileID: 7015771868439916, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_Name
+      value: Fade
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638534695026345695, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638534695026345695, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638534695026345695, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
 --- !u!1 &475106749
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +808,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 495582518}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 647238564}
+        m_TargetAssemblyTypeName: SceneChenger, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &495582518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,6 +971,7 @@ RectTransform:
   - {fileID: 829810541}
   - {fileID: 2129807661}
   - {fileID: 495582516}
+  - {fileID: 647238563}
   m_Father: {fileID: 98905332}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1006,6 +1128,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 16118211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &647238563 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6012297502571063844, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+  m_PrefabInstance: {fileID: 405256243}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &647238564 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5233394250858072286, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
+  m_PrefabInstance: {fileID: 405256243}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef7c456052624b47889b4c30ea47a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &813523531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,7 +1399,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 829810542}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 647238564}
+        m_TargetAssemblyTypeName: SceneChenger, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &829810545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2171,14 +2321,9 @@ MonoBehaviour:
   - {fileID: 829810540}
   - {fileID: 813523531}
   First_Button: {fileID: 495582515}
-  GB:
-  - {fileID: 933342258}
-  - {fileID: 1836553179}
-  - {fileID: 151607358}
-  - {fileID: 557803113}
   AS: {fileID: 1981571893}
-  Select_SE: {fileID: 8300000, guid: 5c8a001cdcfaad2489801a6770d1c561, type: 3}
-  Push_SE: {fileID: 8300000, guid: 4ba9cf428121a5a48806af51f087a7bc, type: 3}
+  Push_SE: {fileID: 8300000, guid: 2ab3bc7c42ad84e4f93eb56af299d6de, type: 3}
+  SC: {fileID: 647238564}
 --- !u!4 &1981571892
 Transform:
   m_ObjectHideFlags: 0
@@ -2433,7 +2578,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2129807659}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 647238564}
+        m_TargetAssemblyTypeName: SceneChenger, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2129807659
 MonoBehaviour:
   m_ObjectHideFlags: 0

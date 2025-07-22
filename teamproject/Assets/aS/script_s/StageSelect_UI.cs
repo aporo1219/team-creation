@@ -15,14 +15,12 @@ public class StageSelectUI : MonoBehaviour
     [SerializeField] Button[] Button;
     [SerializeField] GameObject[] G_Button;
     [SerializeField] GameObject First_Button;
-    [SerializeField] GameObject[] GB;
+    private GameObject Last_Button;
 
     //SE
     [SerializeField] private AudioSource AS;
-    [SerializeField] private AudioClip Select_SE;
     [SerializeField] private AudioClip Push_SE;
-    private float Select_SE_v = 0.5f;
-    private float Push_SE_v = 0.5f;
+    private float Push_SE_v = 0.7f;
 
     public SceneChenger SC;
 
@@ -32,6 +30,8 @@ public class StageSelectUI : MonoBehaviour
         FloorDisplay(Level_Floor);
         //コントローラとUIボタンの紐づけ
         EventSystem.current.SetSelectedGameObject(First_Button);
+
+        Last_Button = First_Button;
 
         f = 0;
         //ボタンの管理
@@ -47,7 +47,7 @@ public class StageSelectUI : MonoBehaviour
                 int index = i;
                 Button[i].onClick.AddListener(() => OnButtonPressed(index));
                 //G_Button[i].SetActive(false);
-                if (Release(index) || G_Button[i] == First_Button || i == 2)
+                if (Release(index) || G_Button[i] == First_Button || i == 2|| i == 1)
                 {
                     G_Button[i].SetActive(true);
                 }
@@ -73,13 +73,19 @@ public class StageSelectUI : MonoBehaviour
     private void FixedUpdate()
     {
         GameObject Selected = EventSystem.current.currentSelectedGameObject;
+        GameObject CrossKey = EventSystem.current.currentSelectedGameObject;
+
         //ゲームパッドの入力
         GP = Gamepad.current;
         if (GP == null)
         {
             return;
         }
+
+        //スティックの方向取得
         Vector2 Right_Stick = GP.rightStick.ReadValue();
+        //十字キーの方向取得
+        Vector2 Cross = GP.dpad.ReadValue();
 
 
         //ボタンの色の変更
@@ -95,6 +101,38 @@ public class StageSelectUI : MonoBehaviour
             }
         }
 
+        // 現在の選択が無効 or null なら復帰
+        if (Selected == null || !IsButtonCheck(Selected))
+        {
+            if (Last_Button != null)
+            {
+                EventSystem.current.SetSelectedGameObject(Last_Button);
+            }
+            else
+            {
+                // 最後の選択が未設定なら First_Button に戻す
+                EventSystem.current.SetSelectedGameObject(First_Button);
+            }
+        }
+        else
+        {
+            // 有効なUIボタンが選ばれていれば記録しておく
+            Last_Button = Selected;
+        }
+    }
+
+    //gameObjectがUIボタン配列に入っているかの確認
+    bool IsButtonCheck(GameObject b)
+    {
+        foreach(var bt in Button)
+        {
+            if(bt != null && bt.gameObject == b)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //ステージ解放
@@ -143,7 +181,6 @@ public class StageSelectUI : MonoBehaviour
                 break;
             case 0:
                 Debug.Log("チュートリアルステージへ");
-                Button[floor].onClick.Invoke();
                 Invoke(nameof(ChangeScene1), 0.1f);
                 f = 0;
                 Level_Floor = 0;
@@ -170,7 +207,7 @@ public class StageSelectUI : MonoBehaviour
                 SceneChenger.instance.ChangeScene(2);
                 break;
             case 0:
-                SC.ChangeScene(1);
+                SceneChenger.instance.ChangeScene(1);
                 break;
         }
     }

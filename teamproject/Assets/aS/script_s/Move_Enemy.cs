@@ -53,9 +53,11 @@ public class Move_Enemy : MonoBehaviour
     //SE
     [SerializeField] private AudioSource AS;
     [SerializeField] private AudioClip BeHit_SE;
-    [SerializeField] private AudioClip Walk_SE;
+    [SerializeField] private AudioClip HitThunder_SE;
+    [SerializeField] private AudioClip HitFireBall_SE;
     private float Be_Hit_v = 2.0f;
-    private float Walk_v = 1.0f;
+    private float HitThunder_v = 2.0f;
+    private float HitFireBall_v = 2.0f;
     void Start()
     {
         //初期化
@@ -269,10 +271,11 @@ public class Move_Enemy : MonoBehaviour
     //攻撃を受けた時
     private void OnTriggerEnter(Collider collision)
     {
+        int combo = 0;
         if (collision.gameObject.name == "GC")
         {
             var Enemy = GetComponent<Enemy_Status>();
-            int combo = PlayerController_y1.instance.AttackNum;
+            combo = 1;
             //敵を近づけさせる
             if(gameObject.tag == "Enemy" || gameObject.tag == "WheellEnemy")
             {
@@ -290,7 +293,7 @@ public class Move_Enemy : MonoBehaviour
         if (collision.gameObject.name == "GF")
         {
             var Enemy = GetComponent<Enemy_Status>();
-            int combo = PlayerController_y1.instance.AttackNum;
+            combo = 2;
             if(gameObject.tag == "Enemy" || gameObject.tag == "WheellEnemy")
             {
                 var D = MainCharacter.transform.position - ModelRoot.transform.position;
@@ -302,6 +305,31 @@ public class Move_Enemy : MonoBehaviour
             //攻撃を受けたSEを流す
             AS.PlayOneShot(BeHit_SE);
             AS.volume = Be_Hit_v;
+        }
+
+        string Skill = "";
+        //スキルを受けた時
+        //ファイヤーボール
+        if(collision.gameObject.name == "Explosion")
+        {
+            var Enemy = GetComponent<Enemy_Status>();
+            Skill = "FireBall";
+            Enemy.Be_Skill(Skill);
+            Debug.Log("hit,FB");
+            //HitSE
+            AS.PlayOneShot(HitFireBall_SE);
+            AS.volume = HitFireBall_v;
+        }
+        //サンダー
+        if (collision.gameObject.name == "Lightning")
+        {
+            var Enemy = GetComponent<Enemy_Status>();
+            Skill = "Thunder";
+            Enemy.Be_Skill(Skill);
+            Debug.Log("hit,Th");
+            //SE
+            AS.PlayOneShot(HitThunder_SE);
+            AS.volume = HitThunder_v;
         }
     }
 

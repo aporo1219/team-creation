@@ -1092,8 +1092,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Die_Enemy: {fileID: 2013843430177349519}
-  AttackErea: {fileID: 0}
-  Attack_Erea: {fileID: 0}
   Enemy_HP: 0
   shotInterval: 2
   AS: {fileID: 4713694004404022146}
@@ -1128,7 +1126,8 @@ MonoBehaviour:
   Local_Space_Vec: {x: 0, y: 0, z: 0}
   AS: {fileID: 4713694004404022146}
   BeHit_SE: {fileID: 8300000, guid: 11d14c63ca287ac46bbd397e696ba42c, type: 3}
-  Walk_SE: {fileID: 8300000, guid: 5d550c4aeaab45648ac70c9c444bf1e8, type: 3}
+  HitThunder_SE: {fileID: 8300000, guid: b97c96ce8f8243149afd2731ea0b80e6, type: 3}
+  HitFireBall_SE: {fileID: 8300000, guid: a414081b78497f24aa22e7393a92e594, type: 3}
 --- !u!114 &8400297569591447614
 MonoBehaviour:
   m_ObjectHideFlags: 0
