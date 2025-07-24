@@ -4,6 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - image: {fileID: 21300000, guid: a10be7e75f843d841972ae603c9bd83d, type: 3}
   - Thunder: {fileID: 7545315647080500942, guid: d53954c2f9b84e845a49368300aabf2b, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}

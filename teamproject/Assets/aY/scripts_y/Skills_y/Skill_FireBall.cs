@@ -11,6 +11,7 @@ public class Skill_FireBall : SkillManager
     {
         PlayerCont = FindAnyObjectByType<PlayerController_y1>();
 
+        CoolTime = 300;
         TimeCount = CoolTime;
     }
 

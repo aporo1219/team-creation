@@ -11,7 +11,7 @@ public class Skill_Thunder : SkillManager
     {
         PlayerCont = FindAnyObjectByType<PlayerController_y1>();
 
-        CoolTime = 300;
+        CoolTime = 600;
 
         TimeCount = CoolTime;
     }

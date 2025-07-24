@@ -6,7 +6,7 @@ public class SkillManager : MonoBehaviour
     public int CoolTime;
     public int TimeCount;
 
-    public Image image;
+    public Sprite image;
 
     public virtual void UseSkill()
     {
