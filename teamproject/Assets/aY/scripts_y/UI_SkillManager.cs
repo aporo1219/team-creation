@@ -8,6 +8,7 @@ public class UI_SkillManager : MonoBehaviour
 {
     private RectTransform r;
     [SerializeField] private GameObject SkillCardObj;
+    [SerializeField] private Image Cursor;
 
     public SkillController_y skillController;
     public List<UI_SkillCoolTime> UI_skillcooltime = new List<UI_SkillCoolTime>();
@@ -32,7 +33,7 @@ public class UI_SkillManager : MonoBehaviour
 
         SetCard();
 
-
+        SetCursor();
     }
 
     void GetCard()
@@ -71,5 +72,10 @@ public class UI_SkillManager : MonoBehaviour
             UI_skillcooltime[i].Skill = skillController.EquipActiveSkills[i].GetComponent<SkillManager>();
         }
         
+    }
+
+    void SetCursor()
+    {
+        Cursor.rectTransform.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (skillController.SelectSkill + 1), 55, 0);
     }
 }

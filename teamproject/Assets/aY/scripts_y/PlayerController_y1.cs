@@ -10,7 +10,7 @@ public class PlayerController_y1 : MonoBehaviour
 {
     public static PlayerController_y1 instance;
 
-    private PlayerStatus Status;
+    public PlayerStatus Status;
 
     [SerializeField] private GameObject Barrier;
     [SerializeField] private GameObject ActiveSword;
@@ -318,6 +318,25 @@ public class PlayerController_y1 : MonoBehaviour
             AirDodgeTimeCount++;
 
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bullet")
+        {
+            if (Status.ColliderStste == PlayerStatus.ColliderMode.Neutral)
+            {
+                Status.HP -= 5;
+            }
+            else if(Status.ColliderStste == PlayerStatus.ColliderMode.Guard)
+            {
+                Status.HP -= 2;
+            }
+            else if (Status.ColliderStste == PlayerStatus.ColliderMode.Invincible)
+            {
+                Status.HP -= 0;
+            }
+        }
     }
 
     private void OnCollisionStay(Collision collision)

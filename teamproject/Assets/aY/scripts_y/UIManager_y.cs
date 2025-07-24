@@ -10,6 +10,8 @@ public class UIManager_y : MonoBehaviour
     //
     public Slider HP_Ber;
     public Image BerContent;
+    public Text HPValue_Text;
+    public Text HP_Text;
 
     //•Ï”
     float HP_Percentage;
@@ -26,19 +28,35 @@ public class UIManager_y : MonoBehaviour
     void Update()
     {
         HP_Ber_Control();
+        HP_Text_Control();
     }
 
     void HP_Ber_Control()
     {
-        HP_Ber.value = (float)playerStatus.HP / (float)playerStatus.MaxHP;
+        HP_Percentage = (float)playerStatus.HP / (float)playerStatus.MaxHP;
+        HP_Ber.value = HP_Percentage;
 
-        if(HP_Ber.value > 0.2f )
+        if (HP_Ber.value > 0.2f )
         {
             BerContent.color = Color.green;
         }
         else
         {
             BerContent.color = Color.red;
+        }
+    }
+
+    void HP_Text_Control()
+    {
+        HPValue_Text.text = playerStatus.HP.ToString() + " / " + playerStatus.MaxHP.ToString();
+
+        if (HP_Percentage > 0.2f)
+        {
+            HP_Text.color = Color.green;
+        }
+        else
+        {
+            HP_Text.color = Color.red;
         }
     }
 }

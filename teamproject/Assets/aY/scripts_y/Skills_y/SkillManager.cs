@@ -8,6 +8,9 @@ public class SkillManager : MonoBehaviour
 
     public Sprite image;
 
+    public int Damage;
+    public int HealValue;
+
     public virtual void UseSkill()
     {
 

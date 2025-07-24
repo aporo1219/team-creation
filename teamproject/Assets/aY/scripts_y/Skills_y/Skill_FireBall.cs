@@ -17,6 +17,8 @@ public class Skill_FireBall : SkillManager
 
     private void FixedUpdate()
     {
+        Damage = (int)(PlayerCont.Status.Attack * 3.0f);
+
         if (TimeCount < CoolTime)
         {
             TimeCount++;

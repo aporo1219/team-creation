@@ -18,6 +18,8 @@ public class Skill_Thunder : SkillManager
 
     private void FixedUpdate()
     {
+        Damage = (int)(PlayerCont.Status.Attack * 6.0f);
+
         if (TimeCount < CoolTime)
         {
             TimeCount++;

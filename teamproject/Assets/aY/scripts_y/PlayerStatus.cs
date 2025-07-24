@@ -10,8 +10,8 @@ public class PlayerStatus : MonoBehaviour
     private int Exp;
     public int MaxHP;
     public int HP;
-    private int DefaultAttack;
-    private int DefaultDefense;
+    private int DefaultAttack = 5;
+    private int DefaultDefense = 5;
     public float AttackRate;
     public float DefenseRate;
     public int Attack;
