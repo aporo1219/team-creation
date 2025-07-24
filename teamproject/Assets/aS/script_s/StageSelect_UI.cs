@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using Unity.Cinemachine;
 
 public class StageSelectUI : MonoBehaviour
 {
@@ -17,6 +18,13 @@ public class StageSelectUI : MonoBehaviour
     [SerializeField] GameObject First_Button;
     private GameObject Last_Button;
 
+    GameObject cinemachineCamera;
+    CinemachinePanTilt cinemachine;
+
+    GameObject player;
+    int playerpos_changetime = 0;
+    int floor_num;
+
     //SE
     [SerializeField] private AudioSource AS;
     [SerializeField] private AudioClip Push_SE;
@@ -27,6 +35,11 @@ public class StageSelectUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        cinemachineCamera = GameObject.Find("CinemachineCamera");
+        cinemachine = cinemachineCamera.GetComponent<CinemachinePanTilt>();
+
+        player = GameObject.Find("Player");
+
         FloorDisplay(Level_Floor);
         //コントローラとUIボタンの紐づけ
         EventSystem.current.SetSelectedGameObject(First_Button);
@@ -64,9 +77,35 @@ public class StageSelectUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.timeScale == 0)
+        //if(Time.timeScale == 0)
+        //{
+        //    return;
+        //}
+
+        if (playerpos_changetime != 0) playerpos_changetime--;
+        if (playerpos_changetime == 1)
         {
-            return;
+            if (floor_num == 1)
+            {
+                player.gameObject.transform.position = new Vector3(-52, 1.5f, -58);
+                player.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                cinemachine.PanAxis.Value = 0;
+                cinemachine.TiltAxis.Value = 10;
+            }
+            if (floor_num == 2)
+            {
+                player.gameObject.transform.position = new Vector3(0, 1.5f, 23);
+                player.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                cinemachine.PanAxis.Value = 0;
+                cinemachine.TiltAxis.Value = 10;
+            }
+            if(floor_num == 0)
+            {
+                player.gameObject.transform.position = new Vector3(-118, 22, 5);
+                player.gameObject.transform.rotation = new Quaternion(0, 180, 0, 0);
+                cinemachine.PanAxis.Value = 180;
+                cinemachine.TiltAxis.Value = 10;
+            }
         }
     }
 
@@ -190,6 +229,12 @@ public class StageSelectUI : MonoBehaviour
                 AS.volume = Push_SE_v;
                 break;
         }
+    }
+
+    public void OnButtonPressed2(int floor)
+    {
+        floor_num = floor;
+        playerpos_changetime = 35;
     }
 
     //シーン移動

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MapCamera_M : MonoBehaviour
 {
-    [SerializeField] Transform player;
+    GameObject player;
     [SerializeField] Transform camera;
 
     Vector3 pos;
@@ -11,7 +11,7 @@ public class MapCamera_M : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
