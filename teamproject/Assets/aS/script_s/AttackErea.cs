@@ -17,6 +17,11 @@ public class AttackErea : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+        this.transform.position = EnemyPos.transform.position;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")

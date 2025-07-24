@@ -349,6 +349,74 @@ Transform:
   - {fileID: 2284680912329726029}
   m_Father: {fileID: 4586551578349274425}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3475769317299596006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7352007262453780576}
+  - component: {fileID: 4829954342266076286}
+  - component: {fileID: 1071795074990912282}
+  m_Layer: 0
+  m_Name: AttackErea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7352007262453780576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475769317299596006}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.2000823, y: 1.9, z: 5.76}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7156261173769157853}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4829954342266076286
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475769317299596006}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1071795074990912282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475769317299596006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb9f0aeb3e9884a4e98a36bf29343ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyPos: {fileID: 5880869778800872639}
+  Find: 0
 --- !u!1 &3537308826021280913
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,6 +909,7 @@ Transform:
   - {fileID: 5081703877412791106}
   - {fileID: 5257545100471245903}
   - {fileID: 7436958184143112157}
+  - {fileID: 7352007262453780576}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &350264408186009404
@@ -1092,6 +1161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Die_Enemy: {fileID: 2013843430177349519}
+  Attack_Erea: {fileID: 1071795074990912282}
   Enemy_HP: 0
   shotInterval: 2
   AS: {fileID: 4713694004404022146}
@@ -1118,6 +1188,7 @@ MonoBehaviour:
   ModelRoot: {fileID: 5081703877412791106}
   RotationOffsetY: 0
   ModelPrefabs: []
+  AttackErea: {fileID: 1071795074990912282}
   OnGround: 0
   GroundLayer:
     serializedVersion: 2

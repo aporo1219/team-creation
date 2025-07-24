@@ -13,6 +13,7 @@ public class Enemy_Status : MonoBehaviour
     private int CoolTime;//UŒ‚‚ÌƒN[ƒ‹ƒ^ƒCƒ€
     private int time = 0;
 
+    [SerializeField] AttackErea Attack_Erea;
     //public static Enemy_Status Instance;
     public int Enemy_HP;
     //“G‚ÌID
@@ -45,6 +46,40 @@ public class Enemy_Status : MonoBehaviour
             Die_Enemy.SetActive(true);
             Death_Before();
         }
+
+        if (Time.time >= nextShotTime && Attack_Erea.Find)
+        {
+            nextShotTime = Time.time + shotInterval;
+
+            // UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+            if (gameObject.tag == "Enemy")
+            {
+                Anim.SetBool("Attack", true);
+            }
+            if (gameObject.tag == "WheellEnemy")
+            {
+                Anim.SetBool("Attack_1", true);
+            }
+
+            if (gameObject.tag == "FlyEnemy")
+            {
+                Anim.SetBool("Attack_2", true);
+            }
+
+            // ’e‚Ì”­Ë
+            Bullet_Enemy EB = GetComponent<Bullet_Enemy>();
+            if (EB != null)
+            {
+                Debug.Log("”­Ë");
+                EB.Shot();
+                //’e”­Ë‚ÌSE‚ğ—¬‚·
+                AS.PlayOneShot(Attack_SE);
+                AS.volume = Attack_v;
+            }
+
+            //Debug.Log("“G‚ª’e‚ğŒ‚‚¿‚Ü‚µ‚½");
+        }
+
     }
 
     //G‹›“G‚ÌUŒ‚‚ğó‚¯‚½ˆ—‚ÌŠÖ”
@@ -123,43 +158,43 @@ public class Enemy_Status : MonoBehaviour
     }
 
     //UŒ‚
-    void OnCollisionStay(Collision other)
-    {
-        if(other.gameObject.tag == "Player")
-        {
-            if (Time.time >= nextShotTime)
-            {
-                nextShotTime = Time.time + shotInterval;
+    //void OnCollisionStay(Collision other)
+    //{
+    //    if(other.gameObject.tag == "Player")
+    //    {
+    //        if (Time.time >= nextShotTime)
+    //        {
+    //            nextShotTime = Time.time + shotInterval;
 
-                // UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
-                if (gameObject.tag == "Enemy")
-                {
-                    Anim.SetBool("Attack", true);
-                }
-                if (gameObject.tag == "WheellEnemy")
-                {
-                    Anim.SetBool("Attack_1", true);
-                }
+    //            // UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+    //            if (gameObject.tag == "Enemy")
+    //            {
+    //                Anim.SetBool("Attack", true);
+    //            }
+    //            if (gameObject.tag == "WheellEnemy")
+    //            {
+    //                Anim.SetBool("Attack_1", true);
+    //            }
 
-                if (gameObject.tag == "FlyEnemy")
-                {
-                    Anim.SetBool("Attack_2", true);
-                }
+    //            if (gameObject.tag == "FlyEnemy")
+    //            {
+    //                Anim.SetBool("Attack_2", true);
+    //            }
 
-                // ’e‚Ì”­Ë
-                Bullet_Enemy EB = GetComponent<Bullet_Enemy>();
-                if (EB != null)
-                {
-                    Debug.Log("”­Ë");
-                    EB.Shot();
-                    //’e”­Ë‚ÌSE‚ğ—¬‚·
-                    AS.PlayOneShot(Attack_SE);
-                    AS.volume = Attack_v;
-                }
+    //            // ’e‚Ì”­Ë
+    //            Bullet_Enemy EB = GetComponent<Bullet_Enemy>();
+    //            if (EB != null)
+    //            {
+    //                Debug.Log("”­Ë");
+    //                EB.Shot();
+    //                //’e”­Ë‚ÌSE‚ğ—¬‚·
+    //                AS.PlayOneShot(Attack_SE);
+    //                AS.volume = Attack_v;
+    //            }
 
-                //Debug.Log("“G‚ª’e‚ğŒ‚‚¿‚Ü‚µ‚½");
-            }
+    //            //Debug.Log("“G‚ª’e‚ğŒ‚‚¿‚Ü‚µ‚½");
+    //        }
 
-        }
-    }
+    //    }
+    //}
 }

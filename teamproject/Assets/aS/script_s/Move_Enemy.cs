@@ -22,6 +22,7 @@ public class Move_Enemy : MonoBehaviour
     [SerializeField] private Transform ModelRoot;// ← モデル（JR-1）を指定する用
     [SerializeField] private float RotationOffsetY = 0f;//向きの補正
     [SerializeField] private GameObject[] ModelPrefabs;
+    [SerializeField] private AttackErea AttackErea;
     
 
     private float Speed_Enemy;//スピードの変数
@@ -39,6 +40,7 @@ public class Move_Enemy : MonoBehaviour
     private Rigidbody rd;
     [SerializeField] LayerMask GroundLayer;//レイヤーの取得
     [SerializeField] float Ground_Distance = 0.2f;
+    private bool Not_Move = false;//動きを止める(trueならば止まる)
     
 
     Vector3 Goal_Position;//目標時点の座標変数（雑魚敵）
@@ -55,6 +57,7 @@ public class Move_Enemy : MonoBehaviour
     [SerializeField] private AudioClip BeHit_SE;
     [SerializeField] private AudioClip HitThunder_SE;
     [SerializeField] private AudioClip HitFireBall_SE;
+    //[SerializeField] private AudioClip Find;
     private float Be_Hit_v = 2.0f;
     private float HitThunder_v = 2.0f;
     private float HitFireBall_v = 2.0f;
@@ -153,9 +156,10 @@ public class Move_Enemy : MonoBehaviour
         //発見
         if (OnGround)
         {
-            if (Search_Enemy.Find)
+            if (Search_Enemy.Find && !Not_Move)
             {
                 Discovery();
+                //AS.PlayOneShot(Find);
                 float time = 0;
                 time += (float)Time.deltaTime;
             }
@@ -246,16 +250,25 @@ public class Move_Enemy : MonoBehaviour
         if(gameObject.tag == "Enemy")
         {
            Anim.SetBool("Walk", false);
-           Anim.SetBool("Attack", false);
+            if (!AttackErea.Find)
+            {
+                Anim.SetBool("Attack", false);
+            }
         }
         else if (gameObject.tag == "WheellEnemy")
         {
             Anim.SetBool("Walk_1", false);
-            Anim.SetBool("Attack_1", false);
+            if (!AttackErea.Find)
+            {
+                Anim.SetBool("Attack_1", false);
+            }
         }
         else if (gameObject.tag == "FlyEnemy")
-        { 
-            Anim.SetBool("Attack_2", false);
+        {
+            if (!AttackErea.Find)
+            {
+                Anim.SetBool("Attack_2", false);
+            }
         }
 
         if (Time_Lapse > Return && Mode_Serch == true)
@@ -327,6 +340,8 @@ public class Move_Enemy : MonoBehaviour
             Skill = "Thunder";
             Enemy.Be_Skill(Skill);
             Debug.Log("hit,Th");
+            Not_Move = true;
+            Invoke(nameof(Mobile), 2.0f);
             //SE
             AS.PlayOneShot(HitThunder_SE);
             AS.volume = HitThunder_v;
@@ -338,5 +353,11 @@ public class Move_Enemy : MonoBehaviour
     {
         return Physics.Raycast(transform.position, Vector3.down, Ground_Distance, GroundLayer);
     }
+    
+    //移動可能にする関数
+   void  Mobile()
+   {
+        Not_Move = false;
+   }
 }
 

@@ -8,6 +8,8 @@ public class TitleScene : MonoBehaviour
 {
     [SerializeField] Button Button;
     [SerializeField] GameObject GB;
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip Push_Button;
 
     private Gamepad Gp;
     private GameObject LB;
@@ -83,6 +85,7 @@ public class TitleScene : MonoBehaviour
 
     void OnButtonPressed()
     {
+        AS.PlayOneShot(Push_Button);
         SceneChenger.instance.ChangeScene(1);
     }
 

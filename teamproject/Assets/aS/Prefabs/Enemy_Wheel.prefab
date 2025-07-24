@@ -66,6 +66,7 @@ Transform:
   - {fileID: 194147244394099095}
   - {fileID: 7214362182668690668}
   - {fileID: 2276330216608095373}
+  - {fileID: 2907805202244241303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5691171179512127105
@@ -193,6 +194,74 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &4656293334966425020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2907805202244241303}
+  - component: {fileID: 7543767395855133797}
+  - component: {fileID: 2770575457592104277}
+  m_Layer: 0
+  m_Name: AttackErea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2907805202244241303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656293334966425020}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 18.24, y: 1.9, z: 22.940374}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4778531955590413283}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7543767395855133797
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656293334966425020}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2770575457592104277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656293334966425020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb9f0aeb3e9884a4e98a36bf29343ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyPos: {fileID: 668759991348343304}
+  Find: 0
 --- !u!1 &7754545004076104879
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +611,7 @@ MonoBehaviour:
   ModelRoot: {fileID: 194147244394099095}
   RotationOffsetY: 0
   ModelPrefabs: []
+  AttackErea: {fileID: 2770575457592104277}
   OnGround: 0
   GroundLayer:
     serializedVersion: 2
@@ -565,6 +635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Die_Enemy: {fileID: 2573715872253118944}
+  Attack_Erea: {fileID: 2770575457592104277}
   Enemy_HP: 0
   shotInterval: 2
   AS: {fileID: 4304269253222655401}
