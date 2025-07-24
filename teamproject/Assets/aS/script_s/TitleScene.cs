@@ -13,8 +13,8 @@ public class TitleScene : MonoBehaviour
     private GameObject LB;
 
     private Image TargetImage;
-    private Color Push = Color.yellow;
-    private Color Default = Color.white;
+    private Color Push;
+    private Color Default;
     private bool IsHover = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,15 +41,19 @@ public class TitleScene : MonoBehaviour
         GameObject Selected = EventSystem.current.currentSelectedGameObject;
         GameObject CrossKey = EventSystem.current.currentSelectedGameObject;
 
-        if (EventSystem.current.currentSelectedGameObject == gameObject && !IsHover)
+        //押されたときに色変更
+        //if()
+        if(Gamepad.current.buttonSouth.wasPressedThisFrame)
         {
-            TargetImage.color = Push;
+            Default = TargetImage.color;
+            TargetImage.color = Color.yellow;
         }
-        else if (!IsHover)
+
+        //デフォルト
+        if (Gamepad.current.buttonSouth.wasReleasedThisFrame)
         {
             TargetImage.color = Default;
         }
-
         //ゲームパッドの入力
         Gp = Gamepad.current;
         if (Gp == null)
@@ -81,4 +85,5 @@ public class TitleScene : MonoBehaviour
     {
         SceneChenger.instance.ChangeScene(1);
     }
+
 }
