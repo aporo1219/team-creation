@@ -550,7 +550,7 @@ MonoBehaviour:
   Local_Space_Vec: {x: 0, y: 0, z: 0}
   AS: {fileID: 4304269253222655401}
   BeHit_SE: {fileID: 8300000, guid: 11d14c63ca287ac46bbd397e696ba42c, type: 3}
-  HitThunder_SE: {fileID: 8300000, guid: b97c96ce8f8243149afd2731ea0b80e6, type: 3}
+  HitThunder_SE: {fileID: 8300000, guid: a5b52904a9ff62844ad0a1d5c105fecb, type: 3}
   HitFireBall_SE: {fileID: 8300000, guid: a414081b78497f24aa22e7393a92e594, type: 3}
 --- !u!114 &7667509878056762058
 MonoBehaviour:
