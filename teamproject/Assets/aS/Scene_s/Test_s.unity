@@ -602,6 +602,11 @@ MonoBehaviour:
   ModelRoot: {fileID: 0}
   RotationOffsetY: 0
   ModelPrefabs: []
+  OnGround: 0
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  Ground_Distance: 0.2
   Local_Space_Vec: {x: 0, y: 0, z: 0}
   AS: {fileID: 0}
   BeHit_SE: {fileID: 0}

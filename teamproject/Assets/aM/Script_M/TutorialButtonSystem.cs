@@ -10,6 +10,9 @@ public class TutorialButtonSystem : MonoBehaviour
     [SerializeField] ShowTaskSystem tasksystem;
     [SerializeField] TutorialManager manager;
 
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip Push;
+
     int ChangeColor_Time = 60;
     bool push_button = false;
 
@@ -38,6 +41,7 @@ public class TutorialButtonSystem : MonoBehaviour
         {
             Debug.Log("É{É^ÉìÇ™âüÇ≥ÇÍÇΩÇÊÅô");
             anim.SetBool("StartAnim", true);
+            AS.PlayOneShot(Push);
             push_button = true;
             if (this.name == "Button")
                 Pusher.GetComponent<Renderer>().material.color = Color.green;
