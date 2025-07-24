@@ -58,7 +58,15 @@ public class UI_SkillManager : MonoBehaviour
         {
             RectTransform Rect = SkillCards[i].GetComponent<RectTransform>();
 
-            Rect.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (i + 1), 50, 0);
+            if (skillController.SelectSkill == i)
+            {
+                Rect.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (i + 1), 55, 0);
+            }
+            else
+            {
+                Rect.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (i + 1), 45, 0);
+            }
+                
 
             UI_skillcooltime[i].Skill = skillController.EquipActiveSkills[i].GetComponent<SkillManager>();
         }

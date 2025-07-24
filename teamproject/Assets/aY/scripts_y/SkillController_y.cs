@@ -38,7 +38,11 @@ public class SkillController_y : MonoBehaviour
 
         if (SkillAction.WasPressedThisFrame() && PlayerCont.canAction)
         {
-            StartCoroutine(UseSkill(SelectSkill));
+            if (EquipActiveSkills[SelectSkill].TimeCount >= EquipActiveSkills[SelectSkill].CoolTime)
+            {
+                StartCoroutine(UseSkill(SelectSkill));
+            }
+            
         }
 
         if (NextAction.WasPressedThisFrame())
