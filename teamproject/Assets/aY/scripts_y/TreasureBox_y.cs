@@ -6,6 +6,9 @@ public class TreasureBox_y : MonoBehaviour
 
     Animator animator;
 
+    [SerializeField] private AudioSource AS;
+    [SerializeField] private AudioClip Open;
+
     [SerializeField] ShowTaskSystem tasksystem;
     [SerializeField] TutorialManager manager;
 
@@ -29,9 +32,11 @@ public class TreasureBox_y : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(0, 3, 0);
             animator.SetBool("Hit", true);
+            AS.PlayOneShot(Open);
             if (tasksystem.task == "•ó” ‚ðŠJ‚¯‚æ‚¤")
             {
                 manager.Tutorial_Clear(7);
+               
             }
         }
     }
