@@ -47,8 +47,8 @@ public class Bullet_Enemy : MonoBehaviour
         
 
         //弾の移動補正
-        Vector3 Forward = transform.forward;
-        Forward.x -= 2;
+        Vector3 Forward = Enemy.transform.right.normalized * -1;
+        //Forward.x -= 2;
         Vector3 Oblique = (Enemy.transform.forward + Vector3.down).normalized;
         //出現
         Bullet.SetActive(true);
@@ -63,14 +63,12 @@ public class Bullet_Enemy : MonoBehaviour
         {
            _BulletRB.AddForce(Forward * Bullet_Speed);
         }
-       else
+        else
         {
             _BulletRB.AddForce(Oblique * Bullet_Speed);
         }
             //弾の削除
             Destroy(_Bullet, 3.0f);
-       
-        
     }
 
    
