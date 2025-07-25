@@ -59,7 +59,7 @@ public class stairs : MonoBehaviour
                 if (ClearChecker != null)
                     if (ClearChecker.clear_flag[Change_Scene - 1] != true && Change_Scene == 2)
                         ClearChecker.clear_flag[Change_Scene - 1] = true;
-                SceneChenger.instance.ChangeScene(Change_Scene + 1);
+                SceneChenger.instance.ChangeScene(Change_Scene + 2);
                 playerpos_changetime = 34;
             }
         }

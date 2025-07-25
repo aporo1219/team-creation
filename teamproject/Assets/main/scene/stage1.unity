@@ -4702,6 +4702,7 @@ GameObject:
   - component: {fileID: 581360274}
   - component: {fileID: 581360273}
   - component: {fileID: 581360272}
+  - component: {fileID: 581360276}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -4798,6 +4799,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1230915231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &581360276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581360271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc98d0da93081b24496d70adbbadbef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stage_Num: 1
 --- !u!1 &591328994
 GameObject:
   m_ObjectHideFlags: 0
@@ -13738,6 +13752,7 @@ GameObject:
   - component: {fileID: 1526275070}
   - component: {fileID: 1526275069}
   - component: {fileID: 1526275068}
+  - component: {fileID: 1526275072}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -13834,6 +13849,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1230915231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1526275072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526275067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc98d0da93081b24496d70adbbadbef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stage_Num: 1
 --- !u!1 &1528808542
 GameObject:
   m_ObjectHideFlags: 0
@@ -18467,6 +18495,7 @@ GameObject:
   - component: {fileID: 2008081631}
   - component: {fileID: 2008081630}
   - component: {fileID: 2008081629}
+  - component: {fileID: 2008081632}
   m_Layer: 0
   m_Name: Task
   m_TagString: Untagged
@@ -18525,6 +18554,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2008081632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008081628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc98d0da93081b24496d70adbbadbef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stage_Num: 1
 --- !u!1001 &2009202872
 PrefabInstance:
   m_ObjectHideFlags: 0

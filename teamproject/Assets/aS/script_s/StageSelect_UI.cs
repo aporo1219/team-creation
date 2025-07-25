@@ -246,13 +246,14 @@ public class StageSelectUI : MonoBehaviour
                 SceneManager.LoadScene("Finalstage");
                 break;
             case 2:
-                StartCoroutine("SceneChenger.instance.ChangeScene()",3);
+                //StartCoroutine("SceneChenger.instance.ChangeScene()", 4);
+                SceneChenger.instance.ChangeScene(4);
                 break;
             case 1:
-                SceneChenger.instance.ChangeScene(2);
+                SceneChenger.instance.ChangeScene(3);
                 break;
             case 0:
-                SceneChenger.instance.ChangeScene(1);
+                SceneChenger.instance.ChangeScene(2);
                 break;
         }
     }

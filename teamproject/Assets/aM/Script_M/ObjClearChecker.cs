@@ -3,6 +3,7 @@ using UnityEngine;
 public class ObjClearChecker : MonoBehaviour
 {
     GameObject player;
+    StageClearChecker clearchecker;
 
     public int Stage_Num;
 
@@ -10,11 +11,11 @@ public class ObjClearChecker : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-    }
+        clearchecker = player.GetComponent<StageClearChecker>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(clearchecker.clear_flag[Stage_Num] == true)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

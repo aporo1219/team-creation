@@ -21,7 +21,7 @@ public class ElevatorManager : MonoBehaviour
     { 
         if (near_elevator && selectAction.WasPressedThisFrame())
         {
-            SceneChenger.instance.ChangeScene(0);
+            SceneChenger.instance.ChangeScene(1);
             playerpos_changetime = 34;
         }
 
