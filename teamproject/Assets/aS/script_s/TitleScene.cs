@@ -86,7 +86,7 @@ public class TitleScene : MonoBehaviour
     void OnButtonPressed()
     {
         AS.PlayOneShot(Push_Button);
-        SceneChenger.instance.ChangeScene(1);
+        SceneChenger.instance.ChangeScene(2);
     }
 
 }
