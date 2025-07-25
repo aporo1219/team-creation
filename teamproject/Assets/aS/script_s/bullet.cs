@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    private GameObject Enemy;
+    public GameObject Enemy;
     private Enemy_Status Enemy_Status;
 
     private int Damege;
@@ -21,9 +21,9 @@ public class bullet : MonoBehaviour
     {
         
     }
-@@
+
     //“GUŒ‚‚ğ—^‚¦‚é
-    void OnCollisionEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {

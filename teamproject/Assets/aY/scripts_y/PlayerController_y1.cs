@@ -19,7 +19,6 @@ public class PlayerController_y1 : MonoBehaviour
     [HideInInspector] public Rigidbody rb;
 
     //ステータス変数---------------------------------------
-    public string State = "";
     public float MoveSpeed = 5.0f;          //移動速度
     public float DashSpeed = 10.0f;         //移動速度
     public float JumpPower = 20.0f;         //ジャンプ力
@@ -320,24 +319,24 @@ public class PlayerController_y1 : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Bullet")
-        {
-            if (Status.ColliderStste == PlayerStatus.ColliderMode.Neutral)
-            {
-                Status.HP -= 5;
-            }
-            else if(Status.ColliderStste == PlayerStatus.ColliderMode.Guard)
-            {
-                Status.HP -= 2;
-            }
-            else if (Status.ColliderStste == PlayerStatus.ColliderMode.Invincible)
-            {
-                Status.HP -= 0;
-            }
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Bullet")
+    //    {
+    //        if (Status.ColliderStste == PlayerStatus.ColliderMode.Neutral)
+    //        {
+    //            Status.HP -= 5;
+    //        }
+    //        else if(Status.ColliderStste == PlayerStatus.ColliderMode.Guard)
+    //        {
+    //            Status.HP -= 2;
+    //        }
+    //        else if (Status.ColliderStste == PlayerStatus.ColliderMode.Invincible)
+    //        {
+    //            Status.HP -= 0;
+    //        }
+    //    }
+    //}
 
     private void OnCollisionStay(Collision collision)
     {

@@ -53,31 +53,70 @@ public class PlayerStatus : MonoBehaviour
         Defense = (int)(DefaultDefense * DefenseRate);
     }
 
+    /// <summary>
+    /// プレイヤーにダメージを与える関数
+    /// </summary>
+    /// <param name="damage">ダメージ量</param>
     public void PlayerDamage(int damage)
     {
-        if ((damage - (int)(Defense / 4)) > 0)
-            HP -= damage - (int)(Defense / 4);
+        if (ColliderStste == ColliderMode.Neutral)
+        {
+            //防御力を加味して計算し、ダメージが0以下なら固定で1ダメージ与える
+            if ((damage - (int)(Defense / 4)) > 0)
+                HP -= damage - (int)(Defense / 4);
+            else
+                HP -= 1;
+        }
+        else if (ColliderStste == ColliderMode.Guard)
+        {
+            //防御力とガードのダメージ軽減を加味して計算し、ダメージが0以下なら固定で1ダメージ与える
+            if ((int)((damage - (int)(Defense / 4)) * 0.2f) > 0)
+                HP -= (int)((damage - (int)(Defense / 4)) * 0.2f);
+            else
+                HP -= 1;
+        }
+        else if (ColliderStste == ColliderMode.Invincible)
+        {
+            
+        }
+
     }
 
+    /// <summary>
+    /// プレイヤーの攻撃力の倍率を変更する関数
+    /// </summary>
+    /// <param name="ratevalue">変化倍率</param>
+    /// <param name="second">効果時間(秒)</param>
+    /// <returns></returns>
     public IEnumerator SetAttackRate(float ratevalue, float second)
     {
-        AttackRate += ratevalue - 1.0f;
+        if (ratevalue >= 0)
+        {
+            AttackRate += ratevalue - 1.0f;
 
-        for (float i = 0.0f; i < second; i += Time.deltaTime) ;
+            for (float i = 0.0f; i < second; i += Time.deltaTime) ;
 
-        AttackRate -= ratevalue - 1.0f;
-
+            AttackRate -= ratevalue - 1.0f;
+        }
         yield return null;
     }
 
+    /// <summary>
+    /// プレイヤーの防御力の倍率を変更する関数
+    /// </summary>
+    /// <param name="ratevalue">変化倍率</param>
+    /// <param name="second">効果時間(秒)</param>
+    /// <returns></returns>
     public IEnumerator SetDefenseRate(float ratevalue, float second)
     {
-        DefenseRate += ratevalue - 1.0f;
+        if (ratevalue >= 0)
+        {
+            DefenseRate += ratevalue - 1.0f;
 
-        for (float i = 0.0f; i < second; i += Time.deltaTime) ;
+            for (float i = 0.0f; i < second; i += Time.deltaTime) ;
 
-        DefenseRate -= ratevalue - 1.0f;
-
+            DefenseRate -= ratevalue - 1.0f;
+        }
         yield return null;
     }
 }
