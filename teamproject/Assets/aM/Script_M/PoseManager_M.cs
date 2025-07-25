@@ -100,7 +100,7 @@ public class PoseManager_M : MonoBehaviour
 
         //Escapeキーの入力でポーズ画面の切り替えを行う
         //コントローラーのポーズボタンでポーズ画面の切り替えを行う
-        if ((Input.GetKeyDown(KeyCode.Escape) || poseAction.WasPressedThisFrame()) && !Click_UI)
+        if ((Input.GetKeyDown(KeyCode.Escape) || poseAction.WasPressedThisFrame()) && !Click_UI && SceneChenger.gameState == "playing")
         {
             Comment_Text.text = tasksystem.task;
             showing_pose++;

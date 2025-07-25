@@ -26,6 +26,10 @@ public class TitleScene : MonoBehaviour
     GameObject cinemachineCamera;
     CinemachinePanTilt cinemachine;
 
+    InputAction selectAction;
+
+    bool On_Click = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +37,8 @@ public class TitleScene : MonoBehaviour
         rb = player.GetComponent<Rigidbody>();
         cinemachineCamera = GameObject.Find("CinemachineCamera");
         cinemachine = cinemachineCamera.GetComponent<CinemachinePanTilt>();
+
+        selectAction = InputSystem.actions.FindAction("Select");
 
         //コントローラとUIボタンの紐づけ
         EventSystem.current.SetSelectedGameObject(GB);
@@ -58,11 +64,23 @@ public class TitleScene : MonoBehaviour
             cinemachine.TiltAxis.Value = 10;
             rb.isKinematic = false;
         }
+
+        if (selectAction.WasPressedThisFrame() && !On_Click)
+        {
+            OnButtonPressed();
+            On_Click = true;
+            Default = TargetImage.color;
+            TargetImage.color = Color.yellow;
+        }
+        if(selectAction.WasReleasedThisFrame())
+        {
+            TargetImage.color = Default;
+        }
     }
 
     private void FixedUpdate()
     {
-        GameObject Selected = EventSystem.current.currentSelectedGameObject;
+        /*GameObject Selected = EventSystem.current.currentSelectedGameObject;
         GameObject CrossKey = EventSystem.current.currentSelectedGameObject;
 
         //押されたときに色変更
@@ -102,7 +120,7 @@ public class TitleScene : MonoBehaviour
         {
             // 有効なUIボタンが選ばれていれば記録しておく
             LB = Selected;
-        }
+        }*/
     }
 
     void OnButtonPressed()
