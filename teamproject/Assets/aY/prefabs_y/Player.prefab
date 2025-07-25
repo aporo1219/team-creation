@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb2bff2959b4d0f4fa9a7a9c10dc2bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Status: {fileID: 0}
   Barrier: {fileID: 6511797547023309377}
   ActiveSword: {fileID: 1374540529810324924}
   DisposeSword: {fileID: 1836214337368875540}
@@ -669,6 +670,8 @@ MonoBehaviour:
   CoolTime: 0
   TimeCount: 0
   image: {fileID: 21300000, guid: 6c600e0bec4540f40a6f0deabf028798, type: 3}
+  Damage: 0
+  HealValue: 0
   Fireball: {fileID: 896024239160105329, guid: 2d6435aee284fea499b7959517951848, type: 3}
 --- !u!1 &6840673716583542121
 GameObject:
@@ -717,6 +720,8 @@ MonoBehaviour:
   CoolTime: 0
   TimeCount: 0
   image: {fileID: 21300000, guid: a10be7e75f843d841972ae603c9bd83d, type: 3}
+  Damage: 0
+  HealValue: 0
   Thunder: {fileID: 7545315647080500942, guid: d53954c2f9b84e845a49368300aabf2b, type: 3}
 --- !u!1 &7576580568917246873
 GameObject:
@@ -765,6 +770,8 @@ MonoBehaviour:
   CoolTime: 0
   TimeCount: 0
   image: {fileID: 21300000, guid: a834068accf966349850d536b96028ee, type: 3}
+  Damage: 0
+  HealValue: 0
   Heal: {fileID: 4554972078764500126, guid: f853a34b44416e04f923e131c6d3adb8, type: 3}
 --- !u!1 &8142831644456180862
 GameObject:
