@@ -19,6 +19,8 @@ public class Enemy_Status : MonoBehaviour
     //敵のID
     public int Enemy_ID { get; private set; }
 
+    public int Enemy_Power = 5;
+
     private float nextShotTime = 0f; // 次に撃てる時刻
     [SerializeField] float shotInterval = 2f; // 発射間隔（秒）
     Vector3 Distance;//プレイヤーの距離の計算ベクトル
