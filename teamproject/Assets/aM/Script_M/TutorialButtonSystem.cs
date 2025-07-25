@@ -41,7 +41,7 @@ public class TutorialButtonSystem : MonoBehaviour
         {
             Debug.Log("ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚æ™");
             anim.SetBool("StartAnim", true);
-            AS.PlayOneShot(Push);
+            //AS.PlayOneShot(Push);
             push_button = true;
             if (this.name == "Button")
                 Pusher.GetComponent<Renderer>().material.color = Color.green;
