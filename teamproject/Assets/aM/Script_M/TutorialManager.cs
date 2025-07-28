@@ -10,6 +10,10 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] ShowTaskSystem tasksystem;
 
+    [SerializeField] BoxCollider treasure1;
+    [SerializeField] CapsuleCollider treasure2;
+    [SerializeField] BoxCollider button;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -72,11 +76,14 @@ public class TutorialManager : MonoBehaviour
                 tasksystem.change_task = "宝箱を開けよう";
                 tasksystem.change_task_flag = true;
                 tasksystem.assist_text = "攻撃を当てると開く";
+                treasure1.enabled = true;
+                treasure2.enabled = true;
                 break;
             case 7:
                 tasksystem.change_task = "ボタンを押そう";
                 tasksystem.change_task_flag = true;
                 tasksystem.assist_text = "攻撃を当てるとどこかの仕掛けが動く";
+                button.enabled = true;
                 break;
             case 8:
                 tasksystem.change_task = "エレベーターまで行こう";

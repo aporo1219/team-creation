@@ -941,7 +941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.z
@@ -953,7 +953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.z
@@ -973,7 +973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.z
@@ -985,7 +985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.z
@@ -2333,7 +2333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b156e1a391a612d449096e363e01588a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: "\u968E\u6BB5\u3092\u89E3\u653E\u3057\u3088\u3046"
+  text: "\u968E\u6BB5\u3092\u958B\u653E\u3057\u3088\u3046"
   tasksystem: {fileID: 437327294}
 --- !u!1001 &235664363
 PrefabInstance:
@@ -3008,7 +3008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.z
@@ -3020,7 +3020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.z
@@ -3040,7 +3040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.z
@@ -3052,7 +3052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.z
@@ -10746,7 +10746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.z
-      value: 314.6
+      value: 312
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.x
@@ -10754,11 +10754,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.y
-      value: 2.13
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.z
-      value: 257.65
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: wheel_enemy_flag
@@ -10778,7 +10778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.z
-      value: 314.6
+      value: 312
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.x
@@ -10786,11 +10786,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.y
-      value: 2.13
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.z
-      value: 257.65
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 299859392778181866, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: m_Size.x
@@ -10951,7 +10951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b156e1a391a612d449096e363e01588a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: "\u968E\u6BB5\u3092\u89E3\u653E\u3057\u3088\u3046"
+  text: "\u968E\u6BB5\u3092\u958B\u653E\u3057\u3088\u3046"
   tasksystem: {fileID: 437327294}
 --- !u!114 &1256567708 stripped
 MonoBehaviour:
@@ -18620,7 +18620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: "\u968E\u6BB5\u3078\u623B\u308D\u3046"
-  now_text: "\u968E\u6BB5\u3092\u89E3\u653E\u3057\u3088\u3046"
+  now_text: "\u968E\u6BB5\u3092\u958B\u653E\u3057\u3088\u3046"
   tasksystem: {fileID: 437327294}
 --- !u!1 &2008081628
 GameObject:

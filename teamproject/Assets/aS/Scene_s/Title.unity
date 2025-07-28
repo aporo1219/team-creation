@@ -147,6 +147,10 @@ PrefabInstance:
       propertyPath: clear_flag.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7262160204386673963, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
+      propertyPath: 'clear_flag.Array.data[0]'
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8245418336972001371, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
