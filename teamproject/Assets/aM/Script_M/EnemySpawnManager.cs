@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawnManager : MonoBehaviour
 {
@@ -19,11 +20,11 @@ public class EnemySpawnManager : MonoBehaviour
 
     public int spawn_time = 0;
 
-    public int spawn_count = 0;
+    public float spawn_count = 0;
     public int spawn_max = 0;
     public int spawn_min = 0;
 
-    public int death_num;
+    public float death_num;
 
     public Vector3 maxspawn_pos;
     public Vector3 minspawn_pos;
@@ -34,6 +35,8 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] GameObject normal_enemy;
     [SerializeField] GameObject wheel_enemy;
     [SerializeField] GameObject fry_enemy;
+
+    [SerializeField] Slider Kill_Slider;
 
     [SerializeField] KillTaskSystem killtasksystem;
 
@@ -62,6 +65,8 @@ public class EnemySpawnManager : MonoBehaviour
                 if (!do_spawn)
                 {
                     spawn_count = Random.Range(spawn_min, spawn_max);
+                    if (killtasksystem != null)
+                        killtasksystem.tasksystem.kill_enemy_num = spawn_count;
                     Spawn_Num();
                     for (int i = 0; i < nspawn_num; i++)
                     {
@@ -93,6 +98,12 @@ public class EnemySpawnManager : MonoBehaviour
             remove_player = wait_spawn;
             if (killtasksystem != null)
                 killtasksystem.Next_Task();
+        }
+
+        if (spawn_count != 0 && killtasksystem != null)
+        {
+            killtasksystem.tasksystem.now_kill_num = death_num;
+            Kill_Slider.value = (float)death_num / (float)spawn_count;
         }
     }
 
@@ -131,7 +142,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     void Spawn_Num()
     {
-        int max = spawn_count;
+        int max = (int)spawn_count;
         if (normal_enemy_flag)
         {
             if(wheel_enemy_flag || fry_enemy_flag)

@@ -12,8 +12,8 @@ public class ShowTaskSystem : MonoBehaviour
     public string change_task;
     public string assist_text;
 
-    public int kill_enemy_num = 0;
-    public int now_kill_num = 0;
+    public float kill_enemy_num = 0;
+    public float now_kill_num = 0;
 
     int move_time = 0;
     int remove_time = 0;
@@ -28,6 +28,8 @@ public class ShowTaskSystem : MonoBehaviour
     [SerializeField] Text Task_Text;
     [SerializeField] GameObject Actionassist;
     [SerializeField] Text Actionassist_Text;
+
+    [SerializeField] GameObject Kill_Slider;
 
     [SerializeField] TutorialManager manager;
 
@@ -87,19 +89,24 @@ public class ShowTaskSystem : MonoBehaviour
                 manager.Tutorial_Clear(6);
                 now_kill_num = kill_enemy_num = 0;
             }
-            //通常タスク
-            else if(task == "敵を倒そう")
-            {
-                change_task = "現在タスクはありません。";
-                change_task_flag = true;
-                now_kill_num = kill_enemy_num = 0;
-            }
+        }
+
+        if(Kill_Slider != null && task == "敵を倒そう")
+        {
+            task = Task_Text.text = task + "\n" + now_kill_num + " / " + kill_enemy_num;
+            Kill_Slider.SetActive(true);
+        }
+        else if(Kill_Slider != null)
+        {
+            Kill_Slider.SetActive(false);
         }
     }
 
     void Show_Task()
     {
         task = change_task;
+        if (task == "敵を倒そう")
+            task = change_task + "\n" + now_kill_num + " / " + kill_enemy_num;
         Task_Text.text = task;
         Actionassist_Text.text = assist_text;
         if (task != "現在タスクはありません。")

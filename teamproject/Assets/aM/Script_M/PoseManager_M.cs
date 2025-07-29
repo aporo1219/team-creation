@@ -43,6 +43,7 @@ public class PoseManager_M : MonoBehaviour
     [SerializeField] Image Passive;             //パッシブスキル画像
     [SerializeField] Image Active;              //アクティブスキル画像
     [SerializeField] Image Comment_Panel;       //説明パネル画像
+    [SerializeField] RectTransform Kill_Slider;
 
     [SerializeField] GameObject Frame;          //セレクターのフレーム画像
 
@@ -73,7 +74,7 @@ public class PoseManager_M : MonoBehaviour
         poseClick = InputSystem.actions.FindAction("PoseClick");
         poseCancel = InputSystem.actions.FindAction("PoseCancel");
 
-        UI_pos = new Vector3[8];
+        UI_pos = new Vector3[9];
 
         UI_pos[0] = new Vector3(-800, 250, 0);
         UI_pos[1] = new Vector3(-370, 250, 0);
@@ -83,6 +84,7 @@ public class PoseManager_M : MonoBehaviour
         UI_pos[5] = new Vector3(2450, 135, 0);
         UI_pos[6] = new Vector3(2450, 370, 0);
         UI_pos[7] = new Vector3(1400, 1350, 0);
+        UI_pos[8] = new Vector3(440, 600, 0);
     }
     //1350
     // Update is called once per frame
@@ -97,6 +99,7 @@ public class PoseManager_M : MonoBehaviour
         Passive.rectTransform.position = UI_pos[5];
         Active.rectTransform.position = UI_pos[6];
         Comment_Panel.rectTransform.position = UI_pos[7];
+        Kill_Slider.anchoredPosition3D = UI_pos[8];
 
         //Escapeキーの入力でポーズ画面の切り替えを行う
         //コントローラーのポーズボタンでポーズ画面の切り替えを行う
@@ -145,6 +148,7 @@ public class PoseManager_M : MonoBehaviour
                     UI_pos[i].x -= 35;
                 }
                 UI_pos[i].y -= 19;
+                UI_pos[i + 1].y -= 17;
             }
             else
             {
@@ -223,6 +227,7 @@ public class PoseManager_M : MonoBehaviour
                     {
                         comment_move_time++;
                         UI_pos[7].y += 19;
+                        UI_pos[8].y += 17;
                     }
                     if (comment_move_time > 0 && comment_move)
                     {
@@ -254,6 +259,7 @@ public class PoseManager_M : MonoBehaviour
                     {
                         comment_move_time--;
                         UI_pos[7].y -= 19;
+                        UI_pos[8].y -= 17;
                     }
                     if (comment_move_time == 30)
                     {
@@ -294,6 +300,7 @@ public class PoseManager_M : MonoBehaviour
                     UI_pos[i].x += 35;
                 }
                 UI_pos[i].y += 19;
+                UI_pos[i + 1].y += 17;
             }
             //UIが非表示になったらゲーム内を動かす
             if(pose_start == 0)

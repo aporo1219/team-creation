@@ -4,7 +4,7 @@ public class KillTaskSystem : MonoBehaviour
 {
     public string text;
 
-    [SerializeField] ShowTaskSystem tasksystem;
+    public ShowTaskSystem tasksystem;
     EnemySpawnManager spawnmanager;
     DualEnemySpawnManager dualspawnmanager;
 
