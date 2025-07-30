@@ -69,6 +69,8 @@ public class DualEnemySpawnManager : MonoBehaviour
                 if (!do_spawn)
                 {
                     spawn_count = Random.Range(spawn_min, spawn_max);
+                    if (killtasksystem != null)
+                        killtasksystem.tasksystem.kill_enemy_num = spawn_count;
                     Spawn_Num();
                     for (int i = 0; i < nspawn_num; i++)
                     {
@@ -127,6 +129,7 @@ public class DualEnemySpawnManager : MonoBehaviour
 
         if(spawn_count != 0 && killtasksystem != null)
         {
+            killtasksystem.tasksystem.now_kill_num = death_num;
             Kill_Slider.value = (float)death_num / (float)spawn_count;
         }
     }

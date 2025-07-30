@@ -93,7 +93,7 @@ public class ShowTaskSystem : MonoBehaviour
 
         if(Kill_Slider != null && task == "“G‚ğ“|‚»‚¤")
         {
-            task = Task_Text.text = task + "\n" + now_kill_num + " / " + kill_enemy_num;
+            Task_Text.text = task + "\n" + now_kill_num + " / " + kill_enemy_num;
             Kill_Slider.SetActive(true);
         }
         else if(Kill_Slider != null)
@@ -106,7 +106,7 @@ public class ShowTaskSystem : MonoBehaviour
     {
         task = change_task;
         if (task == "“G‚ğ“|‚»‚¤")
-            task = change_task + "\n" + now_kill_num + " / " + kill_enemy_num;
+            Task_Text.text = task + "\n" + now_kill_num + " / " + kill_enemy_num;
         Task_Text.text = task;
         Actionassist_Text.text = assist_text;
         if (task != "Œ»İƒ^ƒXƒN‚Í‚ ‚è‚Ü‚¹‚ñB")

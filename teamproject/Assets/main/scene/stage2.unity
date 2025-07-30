@@ -6907,13 +6907,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4552804879840360688, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 454899333}
   m_SourcePrefab: {fileID: 100100000, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
 --- !u!4 &454899331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5251896714765440282, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
   m_PrefabInstance: {fileID: 454899330}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &454899332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4552804879840360688, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+  m_PrefabInstance: {fileID: 454899330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &454899333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454899332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84355294ca038344ea114b955887806e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deleteobj: {fileID: 467443298}
 --- !u!1 &455007578
 GameObject:
   m_ObjectHideFlags: 0
@@ -7145,6 +7166,11 @@ PrefabInstance:
 --- !u!4 &467443297 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4488867939013082445, guid: 891cf551098891c41843ce66bada7d81, type: 3}
+  m_PrefabInstance: {fileID: 467443296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &467443298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5673247684674024868, guid: 891cf551098891c41843ce66bada7d81, type: 3}
   m_PrefabInstance: {fileID: 467443296}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &470663280 stripped
@@ -13200,6 +13226,10 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: Kill_Slider
+      value: 
+      objectReference: {fileID: 1049168833}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: fry_enemy_flag
       value: 1
       objectReference: {fileID: 0}
@@ -14237,6 +14267,10 @@ PrefabInstance:
       propertyPath: spawn_time
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      propertyPath: Kill_Slider
+      value: 
+      objectReference: {fileID: 1049168833}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: fry_enemy_flag
       value: 1
@@ -29048,6 +29082,10 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      propertyPath: Kill_Slider
+      value: 
+      objectReference: {fileID: 1049168833}
+    - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: fry_enemy_flag
       value: 1
       objectReference: {fileID: 0}
@@ -29228,7 +29266,7 @@ MonoBehaviour:
   text: "\u6575\u3092\u5012\u305D\u3046"
   now_task: "\u63A2\u7D22\u3057\u3088\u3046"
   dualspawnmanager: {fileID: 2044444369}
-  tasksystem: {fileID: 0}
+  tasksystem: {fileID: 134064438}
 --- !u!114 &2044444371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29241,8 +29279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b156e1a391a612d449096e363e01588a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: 
-  tasksystem: {fileID: 0}
+  text: "\u63A2\u7D22\u3057\u3088\u3046"
+  tasksystem: {fileID: 134064438}
 --- !u!4 &2056814187 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3745930820889834233, guid: d20d3f5752430044895c999e83229d3a, type: 3}

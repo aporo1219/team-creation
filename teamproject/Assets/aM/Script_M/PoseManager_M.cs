@@ -106,6 +106,8 @@ public class PoseManager_M : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Escape) || poseAction.WasPressedThisFrame()) && !Click_UI && SceneChenger.gameState == "playing")
         {
             Comment_Text.text = tasksystem.task;
+            if (tasksystem.task == "“G‚ð“|‚»‚¤")
+                Comment_Text.text = tasksystem.task + "\n" + tasksystem.now_kill_num + " / " + tasksystem.kill_enemy_num;
             showing_pose++;
         }
 
@@ -402,6 +404,8 @@ public class PoseManager_M : MonoBehaviour
             case 0:
                 Comment_Text.fontSize = 60;
                 Comment_Text.text = tasksystem.task;
+                if (tasksystem.task == "“G‚ð“|‚»‚¤")
+                    Comment_Text.text = tasksystem.task + "\n" + tasksystem.now_kill_num + " / " + tasksystem.kill_enemy_num;
                 break;
             case 1:
                 Comment_Text.fontSize = 60;
