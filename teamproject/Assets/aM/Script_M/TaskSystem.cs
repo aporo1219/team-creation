@@ -9,11 +9,13 @@ public class TaskSystem : MonoBehaviour
     [SerializeField] ShowTaskSystem tasksystem;
     EnemySpawnManager spawnmanager;
     DualEnemySpawnManager dualspawnmanager;
+    ButtonSystem buttonsystem;
 
     private void Start()
     {
         spawnmanager = GetComponent<EnemySpawnManager>();
         dualspawnmanager = GetComponent<DualEnemySpawnManager>();
+        buttonsystem = GetComponent<ButtonSystem>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -58,6 +60,15 @@ public class TaskSystem : MonoBehaviour
                     Destroy(gameObject);
                 else
                     Destroy(this);
+            }
+        }
+        else if(buttonsystem != null)
+        {
+            if((other.gameObject.name == "GC" ||  other.gameObject.name == "GF") && now_text == tasksystem.task)
+            {
+                tasksystem.change_task = text;
+                tasksystem.change_task_flag = true;
+                Destroy(this);
             }
         }
         else

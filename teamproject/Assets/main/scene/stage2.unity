@@ -853,6 +853,7 @@ Transform:
   - {fileID: 1087424251}
   - {fileID: 901425992}
   - {fileID: 454899331}
+  - {fileID: 1247665291}
   m_Father: {fileID: 1421862239}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &63639892
@@ -1421,7 +1422,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1782,6 +1783,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 134064444}
+  - component: {fileID: 134064445}
   - component: {fileID: 134064443}
   - component: {fileID: 134064442}
   - component: {fileID: 134064441}
@@ -2098,6 +2100,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -6.427, y: 8.335, z: 0}
+--- !u!114 &134064445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134064436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd5e87962f45ed49972f2dbec3c1f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &134243487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3745930820889834233, guid: d20d3f5752430044895c999e83229d3a, type: 3}
@@ -6766,19 +6780,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: spawn_time
-      value: -1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      propertyPath: Kill_Slider
+      value: 
+      objectReference: {fileID: 1049168833}
+    - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: fry_enemy_flag
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      propertyPath: killtasksystem
+      value: 
+      objectReference: {fileID: 454899335}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.x
       value: -400
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.z
@@ -6787,6 +6809,10 @@ PrefabInstance:
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.x
       value: -350
+      objectReference: {fileID: 0}
+    - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      propertyPath: minspawn_pos.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.z
@@ -6806,7 +6832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.z
@@ -6815,6 +6841,10 @@ PrefabInstance:
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.x
       value: -280
+      objectReference: {fileID: 0}
+    - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      propertyPath: dualminspawn_pos.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.z
@@ -6910,6 +6940,12 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4552804879840360688, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 454899336}
+    - targetCorrespondingSourceObject: {fileID: 4552804879840360688, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 454899335}
+    - targetCorrespondingSourceObject: {fileID: 4552804879840360688, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 454899333}
   m_SourcePrefab: {fileID: 100100000, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
 --- !u!4 &454899331 stripped
@@ -6935,6 +6971,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deleteobj: {fileID: 467443298}
+--- !u!114 &454899334 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+  m_PrefabInstance: {fileID: 454899330}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454899332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9b12e3ff3041a469916bb80d855999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &454899335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454899332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b156e1a391a612d449096e363e01588a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: "\u63A2\u7D22\u3057\u3088\u3046"
+  tasksystem: {fileID: 134064438}
+--- !u!114 &454899336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454899332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91349efe088832b4399ca0e027d81282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finish_task: 0
+  text: "\u6575\u3092\u5012\u305D\u3046"
+  now_task: "\u63A2\u7D22\u3057\u3088\u3046"
+  dualspawnmanager: {fileID: 454899334}
+  tasksystem: {fileID: 134064438}
 --- !u!1 &455007578
 GameObject:
   m_ObjectHideFlags: 0
@@ -13223,7 +13301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: spawn_time
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: Kill_Slider
@@ -13243,7 +13321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: maxspawn_pos.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: maxspawn_pos.z
@@ -13255,7 +13333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: minspawn_pos.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: minspawn_pos.z
@@ -13263,7 +13341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: wheel_enemy_flag
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: normal_enemy_flag
@@ -14265,7 +14343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: spawn_time
-      value: -1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: Kill_Slider
@@ -14273,7 +14351,7 @@ PrefabInstance:
       objectReference: {fileID: 1049168833}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: fry_enemy_flag
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: killtasksystem
@@ -14285,7 +14363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.z
@@ -14294,6 +14372,10 @@ PrefabInstance:
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.x
       value: -350
+      objectReference: {fileID: 0}
+    - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      propertyPath: minspawn_pos.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.z
@@ -14313,7 +14395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.z
@@ -14322,6 +14404,10 @@ PrefabInstance:
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.x
       value: -280
+      objectReference: {fileID: 0}
+    - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      propertyPath: dualminspawn_pos.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.z
@@ -15635,11 +15721,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: spawn_time
-      value: -1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: fry_enemy_flag
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: maxspawn_pos.x
@@ -15647,7 +15733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: maxspawn_pos.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: maxspawn_pos.z
@@ -15659,7 +15745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: minspawn_pos.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: minspawn_pos.z
@@ -15667,7 +15753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: wheel_enemy_flag
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
       propertyPath: normal_enemy_flag
@@ -18701,6 +18787,128 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d20d3f5752430044895c999e83229d3a, type: 3}
+--- !u!1001 &1247665290
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 61928134}
+    m_Modifications:
+    - target: {fileID: 1175360812628712319, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_Name
+      value: Enemy_Spawn (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: spawn_max
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: spawn_min
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: spawn_time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: fry_enemy_flag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: maxspawn_pos.x
+      value: -500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: maxspawn_pos.y
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: maxspawn_pos.z
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: minspawn_pos.x
+      value: -600
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: minspawn_pos.y
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: minspawn_pos.z
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: wheel_enemy_flag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134901927137720200, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: normal_enemy_flag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221089006317535336, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221089006317535336, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_Size.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221089006317535336, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_Size.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751668936472713198, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -335.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751668936472713198, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 68.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751668936472713198, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -18.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751668936472713198, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751668936472713198, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751668936472713198, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751668936472713198, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751668936472713198, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751668936472713198, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751668936472713198, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+--- !u!4 &1247665291 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3751668936472713198, guid: f21e336cc807a9a48ae11f8fbf4c7e19, type: 3}
+  m_PrefabInstance: {fileID: 1247665290}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1248136524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26021,7 +26229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4488867939013082445, guid: 891cf551098891c41843ce66bada7d81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -106.1
+      value: -109.8
       objectReference: {fileID: 0}
     - target: {fileID: 4488867939013082445, guid: 891cf551098891c41843ce66bada7d81, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26029,7 +26237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4488867939013082445, guid: 891cf551098891c41843ce66bada7d81, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 250.6
+      value: 252.5
       objectReference: {fileID: 0}
     - target: {fileID: 4488867939013082445, guid: 891cf551098891c41843ce66bada7d81, type: 3}
       propertyPath: m_LocalRotation.w
@@ -29079,7 +29287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: spawn_time
-      value: -1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: Kill_Slider
@@ -29087,7 +29295,7 @@ PrefabInstance:
       objectReference: {fileID: 1049168833}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: fry_enemy_flag
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: killtasksystem
@@ -29099,7 +29307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: maxspawn_pos.z
@@ -29108,6 +29316,10 @@ PrefabInstance:
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.x
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      propertyPath: minspawn_pos.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: minspawn_pos.z
@@ -29127,7 +29339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualmaxspawn_pos.z
@@ -29136,6 +29348,10 @@ PrefabInstance:
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.x
       value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
+      propertyPath: dualminspawn_pos.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 188225742620726797, guid: 6c342f0720a3eaa46aa37d8246ec8184, type: 3}
       propertyPath: dualminspawn_pos.z

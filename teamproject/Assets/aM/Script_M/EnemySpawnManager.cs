@@ -62,7 +62,7 @@ public class EnemySpawnManager : MonoBehaviour
         {
             if (in_player)
             {
-                if (!do_spawn)
+                if (!do_spawn && spawn_time != 0)
                 {
                     spawn_count = Random.Range(spawn_min, spawn_max);
                     if (killtasksystem != null)
@@ -111,33 +111,27 @@ public class EnemySpawnManager : MonoBehaviour
     {
         Vector3 pos = new Vector3(Random.Range(minspawn_pos.x, maxspawn_pos.x), Random.Range(minspawn_pos.y, maxspawn_pos.y), Random.Range(minspawn_pos.z, maxspawn_pos.z));
 
-        if(spawn_time == -1 || spawn_time > 0)
-        {
-            Instantiate(normal_enemy, pos, Quaternion.identity, spawn_obj.transform);
-            Debug.Log("’Êí“G¢Š«™œc");
-        }
+        Instantiate(normal_enemy, pos, Quaternion.identity, spawn_obj.transform);
+        Debug.Log("’Êí“G¢Š«™œc");
+
     }
 
     void Wheel_Spawn()
     {
         Vector3 pos = new Vector3(Random.Range(minspawn_pos.x, maxspawn_pos.x), Random.Range(minspawn_pos.y, maxspawn_pos.y), Random.Range(minspawn_pos.z, maxspawn_pos.z));
 
-        if (spawn_time == -1 || spawn_time > 0)
-        {
-            Instantiate(wheel_enemy, pos, Quaternion.identity, spawn_obj.transform);
-            Debug.Log("Ô—Ö“G¢Š«™œc");
-        }
+        Instantiate(wheel_enemy, pos, Quaternion.identity, spawn_obj.transform);
+        Debug.Log("Ô—Ö“G¢Š«™œc");
+
     }
 
     void Fry_Spawn()
     {
         Vector3 pos = new Vector3(Random.Range(minspawn_pos.x, maxspawn_pos.x), Random.Range(minspawn_pos.y, maxspawn_pos.y), Random.Range(minspawn_pos.z, maxspawn_pos.z));
 
-        if (spawn_time == -1 || spawn_time > 0)
-        {
-            Instantiate(fry_enemy, pos, Quaternion.identity, spawn_obj.transform);
-            Debug.Log("‹ó’†“G¢Š«™œc");
-        }
+        Instantiate(fry_enemy, pos, Quaternion.identity, spawn_obj.transform);
+        Debug.Log("‹ó’†“G¢Š«™œc");
+
     }
 
     void Spawn_Num()
@@ -145,7 +139,7 @@ public class EnemySpawnManager : MonoBehaviour
         int max = (int)spawn_count;
         if (normal_enemy_flag)
         {
-            if(wheel_enemy_flag || fry_enemy_flag)
+            if (wheel_enemy_flag || fry_enemy_flag)
             {
                 nspawn_num = Random.Range(1, max);
                 max -= nspawn_num;
@@ -157,7 +151,7 @@ public class EnemySpawnManager : MonoBehaviour
         }
         if (wheel_enemy_flag)
         {
-            if(fry_enemy_flag)
+            if (fry_enemy_flag)
             {
                 wspawn_num = Random.Range(1, max);
                 max -= wspawn_num;
@@ -175,7 +169,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == "Player" && !do_spawn)
+        if (other.name == "Player" && !do_spawn)
         {
             in_player = true;
         }
