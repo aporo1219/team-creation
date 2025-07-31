@@ -25,11 +25,14 @@ public class PlayerStatus : MonoBehaviour
 
     public ColliderMode ColliderStste;
 
+    private BuffList_Manager BuffList;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ColliderStste = ColliderMode.Neutral;
+
+        BuffList = FindAnyObjectByType<BuffList_Manager>();
 
         AttackRate = 1.0f;
         DefenseRate = 1.0f;
@@ -90,11 +93,19 @@ public class PlayerStatus : MonoBehaviour
     /// <returns></returns>
     public IEnumerator SetAttackRate(float ratevalue, float second)
     {
+        if (ratevalue > 1.0f)
+            BuffList.BuffInput(BuffList_Manager.BuffCategory.AttackUP, second);
+        else
+            BuffList.BuffInput(BuffList_Manager.BuffCategory.AttackDOWN, second);
+
         if (ratevalue >= 0)
         {
             AttackRate += ratevalue - 1.0f;
 
-            for (float i = 0.0f; i < second; i += Time.deltaTime) ;
+            for (float i = 0.0f; i < second; i += Time.deltaTime)
+            {
+                yield return null;
+            }
 
             AttackRate -= ratevalue - 1.0f;
         }
@@ -109,11 +120,19 @@ public class PlayerStatus : MonoBehaviour
     /// <returns></returns>
     public IEnumerator SetDefenseRate(float ratevalue, float second)
     {
+        if (ratevalue > 1.0f)
+            BuffList.BuffInput(BuffList_Manager.BuffCategory.DefenseUP, second);
+        else
+            BuffList.BuffInput(BuffList_Manager.BuffCategory.DefenseDOWN, second);
+
         if (ratevalue >= 0)
         {
             DefenseRate += ratevalue - 1.0f;
 
-            for (float i = 0.0f; i < second; i += Time.deltaTime) ;
+            for (float i = 0.0f; i < second; i += Time.deltaTime)
+            {
+                yield return null;
+            }
 
             DefenseRate -= ratevalue - 1.0f;
         }
