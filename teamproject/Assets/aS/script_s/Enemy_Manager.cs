@@ -8,7 +8,6 @@ public class Enemy_Manager : MonoBehaviour
     private static Dictionary<int, Enemy_Status> Enemys = new();
    
     public static Enemy_Manager Instance;
-    
 
     //インスタンスの代入
     void Awake()

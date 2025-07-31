@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2573715872253118944}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.69, y: -1.34, z: 3.57}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -221,7 +221,7 @@ Transform:
   m_GameObject: {fileID: 4656293334966425020}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.24, y: 1.9, z: 22.940374}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -289,7 +289,7 @@ Transform:
   m_GameObject: {fileID: 7754545004076104879}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.99975044, z: -0, w: -0.022339787}
-  m_LocalPosition: {x: 5.2994165, y: 1.2902721, z: 4.120375}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -367,15 +367,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1622965573552232972, guid: d8743d6741734af41be8040b22e58111, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.6594167
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1622965573552232972, guid: d8743d6741734af41be8040b22e58111, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.50972784
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1622965573552232972, guid: d8743d6741734af41be8040b22e58111, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.040375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1622965573552232972, guid: d8743d6741734af41be8040b22e58111, type: 3}
       propertyPath: m_LocalRotation.w
@@ -637,6 +637,7 @@ MonoBehaviour:
   Die_Enemy: {fileID: 2573715872253118944}
   Attack_Erea: {fileID: 2770575457592104277}
   Enemy_HP: 0
+  Enemy_Power: 5
   shotInterval: 2
   AS: {fileID: 4304269253222655401}
   Attack_SE: {fileID: 8300000, guid: 5ef982f69331e2a4a9c4534c1c6cb907, type: 3}

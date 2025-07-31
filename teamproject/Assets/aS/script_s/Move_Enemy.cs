@@ -137,7 +137,7 @@ public class Move_Enemy : MonoBehaviour
         }
 
         //è„ï˚å¸ÇÃêßå‰
-        if (Initial_Value.y < this.transform.position.y  && gameObject.tag == "FlyEnemy")
+        if (Initial_Value.y < this.transform.position.y && gameObject.tag == "FlyEnemy")
         {
             Debug.Log("è„ï˚å¸Ç…à⁄ìÆÇµÇƒÇ¢ÇÈÇΩÇﬂíÜé~");
             rd.linearVelocity = Vector3.zero;
@@ -145,15 +145,15 @@ public class Move_Enemy : MonoBehaviour
             if (this.transform.position.y > 1)
             {
                 Debug.Log("â∫ç~");
-                rd.AddForce(0,-50,0);
-            } 
+                rd.AddForce(0, -50, 0);
+            }
         }
 
 
         //î≠å©
-        if (OnGround)
-        {
-            if (Search_Enemy.Find && !Not_Move)
+        if ((gameObject.tag == "FlyEnemy" || OnGround) && !Not_Move)
+        { 
+            if (Search_Enemy.Find )
             {
                 Discovery();
                 //AS.PlayOneShot(Find);
@@ -190,10 +190,6 @@ public class Move_Enemy : MonoBehaviour
         else if (gameObject.tag == "WheellEnemy")
         {
             Anim.SetBool("Walk_1", true);
-        }
-        else if (gameObject.tag == "FlyEnemy")
-        {
-           
         }
 
         Vector3 Distance = MainCharacter.transform.position - ModelRoot.transform.position;
