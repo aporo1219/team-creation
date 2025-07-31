@@ -20,7 +20,7 @@ public class Door : MonoBehaviour
 
     public int MovePosition = 0;
     public int Door_Speed = 10;
-    public int Close = 2;
+    public int CloseStart = 2;
     private void Start()
     {
         Door_Pos = door.position;
@@ -58,11 +58,11 @@ public class Door : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            if (!isOpening && !isClosing)
+            if (!isOpening)
             {
                 //RotationのY軸の角度テェック
                 float yRot = Door_Rotation.eulerAngles.y;
@@ -83,6 +83,31 @@ public class Door : MonoBehaviour
         }
     }
 
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            if(!isClosing)
+            {
+                //RotationのY軸の角度テェック
+                float yRot = Door_Rotation.eulerAngles.y;
+
+                //SEを流す
+                AS.PlayOneShot(DoorSE);
+                if (yRot == 0 || yRot == 180)
+                {
+                    CX_OR_Z = 1;
+                }
+                else if (yRot == 90 || yRot == 270)
+                {
+                    CX_OR_Z = 2;
+                }
+
+                Close(CX_OR_Z);
+            }
+        }
+    }
     //ドアの動き
     void MoveDoorTowards(Vector3 target)
     {
@@ -97,14 +122,11 @@ public class Door : MonoBehaviour
             if (isOpening)
             {
                 isOpening = false;
-                Invoke(nameof(StartClosing), Close);
             }
             //閉じるとき
             else if (isClosing)
             {
                 isClosing = false;
-                CX_OR_Z = 0;
-                X_OR_Z = 0;
             }
         }
     }
@@ -113,16 +135,14 @@ public class Door : MonoBehaviour
     void Open(int direction)
     {
         isOpening = true;
-        isClosing = false;
-        CX_OR_Z = direction; // 閉じるときに使う方向
         Debug.Log("開く");
     }
 
-    //閉める開始
-    void StartClosing()
+    //閉める
+    void Close(int direction)
     {
-        Debug.Log("閉じる");
-        isOpening = false;
         isClosing = true;
+        Debug.Log("閉じる");
     }
+
 }
