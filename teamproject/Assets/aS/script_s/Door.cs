@@ -6,7 +6,6 @@ public class Door : MonoBehaviour
 
     private Vector3 Door_Pos;
     private Quaternion Door_Rotation;
-    private int Door_Speed = 10;
     private Vector3 Goal_Pos_X;
     private Vector3 Goal_Pos_Z;
 
@@ -18,13 +17,17 @@ public class Door : MonoBehaviour
 
     [SerializeField] AudioSource AS;
     [SerializeField] AudioClip DoorSE;
+
+    public int MovePosition = 0;
+    public int Door_Speed = 10;
+    public int Close = 2;
     private void Start()
     {
         Door_Pos = door.position;
         Door_Rotation = door.rotation;
 
-        Goal_Pos_X = new Vector3(door.position.x + 20, door.position.y, door.position.z);
-        Goal_Pos_Z = new Vector3(door.position.x, door.position.y, door.position.z + 20);
+        Goal_Pos_X = new Vector3(door.position.x + MovePosition, door.position.y, door.position.z);
+        Goal_Pos_Z = new Vector3(door.position.x, door.position.y, door.position.z + MovePosition);
     }
 
     private void Update()
@@ -94,7 +97,7 @@ public class Door : MonoBehaviour
             if (isOpening)
             {
                 isOpening = false;
-                Invoke(nameof(StartClosing), 2.0f);
+                Invoke(nameof(StartClosing), Close);
             }
             //•Â‚¶‚é‚Æ‚«
             else if (isClosing)
