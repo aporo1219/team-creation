@@ -18,6 +18,11 @@ public class PlayerController_y1 : MonoBehaviour
 
     [HideInInspector] public Rigidbody rb;
 
+    //SE
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip AvoidanceSE;
+    [SerializeField] AudioClip JumpSE;
+
     //ステータス変数---------------------------------------
     public float MoveSpeed = 5.0f;          //移動速度
     public float DashSpeed = 10.0f;         //移動速度
@@ -365,6 +370,7 @@ public class PlayerController_y1 : MonoBehaviour
                 //ジャンプ中に
                 isJump = true;
                 //
+               
                 animator.SetBool("Jump", true);
                 if (Dash)
                 {
@@ -382,6 +388,7 @@ public class PlayerController_y1 : MonoBehaviour
                     onGround = false;
                     //ジャンプする
                     rb.linearVelocity = new Vector3(rb.linearVelocity.x, JumpPower, rb.linearVelocity.z);
+                    AS.PlayOneShot(JumpSE);
 
                     JumpTime++;
 
@@ -528,6 +535,7 @@ public class PlayerController_y1 : MonoBehaviour
                 canAction = false;
 
                 //
+                AS.PlayOneShot(AvoidanceSE);
                 
 
                 StartCoroutine("DodgeMove", 1.0f);
@@ -549,6 +557,7 @@ public class PlayerController_y1 : MonoBehaviour
                 //rb.linearVelocity = transform.forward * DodgeSpeed;
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
 
+                AS.PlayOneShot(AvoidanceSE);
                 StartCoroutine("AirDodgeMove", 0.3f);
                 AirDodgeTimeCount = 0;
             }

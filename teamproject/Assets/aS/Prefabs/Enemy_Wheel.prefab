@@ -203,8 +203,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2907805202244241303}
-  - component: {fileID: 7543767395855133797}
   - component: {fileID: 2770575457592104277}
+  - component: {fileID: 6470581366421909291}
   m_Layer: 0
   m_Name: AttackErea
   m_TagString: Untagged
@@ -222,13 +222,27 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4778531955590413283}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7543767395855133797
-BoxCollider:
+--- !u!114 &2770575457592104277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656293334966425020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb9f0aeb3e9884a4e98a36bf29343ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyPos: {fileID: 668759991348343304}
+  Find: 0
+--- !u!136 &6470581366421909291
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -245,23 +259,11 @@ BoxCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5, y: 5, z: 5}
+  serializedVersion: 2
+  m_Radius: 4
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2770575457592104277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4656293334966425020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb9f0aeb3e9884a4e98a36bf29343ed5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyPos: {fileID: 668759991348343304}
-  Find: 0
 --- !u!1 &7754545004076104879
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +619,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Ground_Distance: 0.2
+  StopDis: 2
   Local_Space_Vec: {x: 0, y: 0, z: 0}
   AS: {fileID: 4304269253222655401}
   BeHit_SE: {fileID: 8300000, guid: 11d14c63ca287ac46bbd397e696ba42c, type: 3}

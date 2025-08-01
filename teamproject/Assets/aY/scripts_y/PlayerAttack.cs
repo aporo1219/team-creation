@@ -24,6 +24,10 @@ public class PlayerAttack : MonoBehaviour
     private float[] AttackEndTime = new float[8] { 0.23f, 0.26f, 0.23f, 0.23f, 0.23f, 0.26f, 0.23f, 0.23f };
     private float[] FinishAfterTime = new float[2] { 0.2f, 0.2f };
 
+    //SE
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip AttackSE;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -143,6 +147,9 @@ public class PlayerAttack : MonoBehaviour
                         {
                             PlayerCont.rb.linearVelocity = new Vector3(PlayerCont.rb.linearVelocity.x, a, PlayerCont.rb.linearVelocity.z);
                         }
+
+                        //
+                        AS.PlayOneShot(AttackSE);
                     }
                     Finish.SetActive(true);
                     Trail.SetActive(true);
@@ -175,6 +182,9 @@ public class PlayerAttack : MonoBehaviour
                         {
                             PlayerCont.rb.linearVelocity = new Vector3(PlayerCont.rb.linearVelocity.x, a, PlayerCont.rb.linearVelocity.z);
                         }
+
+                        //
+                        AS.PlayOneShot(AttackSE);
                     }
 
                     Combo.SetActive(true);

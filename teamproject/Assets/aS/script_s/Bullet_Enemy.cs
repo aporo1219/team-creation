@@ -70,16 +70,4 @@ public class Bullet_Enemy : MonoBehaviour
             Destroy(_Bullet, 3.0f);
     }
 
-   
-
-    //�v���C���[�Ƃ��������������
-    void OnTriggerEnter(Collider other)
-    {
-       if(other.gameObject.tag == ("Player"))
-       {
-            Debug.Log("当たった");
-            Destroy(_Bullet);
-       }
-    }
-        
 }

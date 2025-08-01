@@ -10,8 +10,6 @@ public class Enemy_Status : MonoBehaviour
     private int Count;
     private Enemy_Manager Enemy_manager;
     private Animator Anim;//アニメーター取得の変数
-    private int CoolTime;//攻撃のクールタイム
-    private int time = 0;
 
     [SerializeField] AttackErea Attack_Erea;
     //public static Enemy_Status Instance;
@@ -22,7 +20,7 @@ public class Enemy_Status : MonoBehaviour
     public int Enemy_Power = 5;
 
     private float nextShotTime = 0f; // 次に撃てる時刻
-    [SerializeField] float shotInterval = 2f; // 発射間隔（秒）
+    [SerializeField] int  shotInterval = 10; // 発射間隔（秒）
     Vector3 Distance;//プレイヤーの距離の計算ベクトル
 
     //SE
@@ -36,7 +34,6 @@ public class Enemy_Status : MonoBehaviour
         Count = 5;
         Enemy_HP = 10;//仮数値
         Enemy_ID = Enemy_Manager.Entry_Enemy_ID(this);//IDの登録
-        CoolTime = 5;
         Die_Enemy.SetActive(false);
     }
 

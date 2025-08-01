@@ -28,6 +28,7 @@ public class bullet : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerStatus.Instance.PlayerDamage(Damege);
+            Destroy(gameObject);
         }
     }
 }

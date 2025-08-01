@@ -37,7 +37,8 @@ public class Move_Enemy : MonoBehaviour
     private Rigidbody rd;
     [SerializeField] LayerMask GroundLayer;//レイヤーの取得
     [SerializeField] float Ground_Distance = 0.2f;
-    private bool Not_Move = false;//動きを止める(trueならば止まる)
+    private bool Not_Move = false;//動きを止める(trueならば止まる)]
+    public int StopDis = 0;//敵の動きを止める距離の変数
     
 
     Vector3 Goal_Position;//目標時点の座標変数（雑魚敵）
@@ -181,6 +182,7 @@ public class Move_Enemy : MonoBehaviour
         time += (float)Time.deltaTime;
         Debug.Log("見つけた");
         Time_Lapse = 0;
+        //アニメーション再生
         if(gameObject.tag == "Enemy")
         {
            Anim.SetBool("Walk", true);
@@ -192,20 +194,20 @@ public class Move_Enemy : MonoBehaviour
             Anim.SetBool("Walk_1", true);
         }
 
+        //プレイヤーから敵の距離を求める
         Vector3 Distance = MainCharacter.transform.position - ModelRoot.transform.position;
         
-            Distance = new Vector3(Distance.x, 0, Distance.z);
+        Distance = new Vector3(Distance.x, 0, Distance.z);
 
-            Quaternion Rotation = Quaternion.LookRotation(new Vector3(Distance.z,0,Distance.x * -1));
-
-        //Vector3 rot = Rotation.eulerAngles;
-
-        //transform.rotation = Rotation;
+        //プレイヤーの方向に回転計算
+        Quaternion Rotation = Quaternion.LookRotation(new Vector3(Distance.z,0,Distance.x * -1));
 
         x = Rotation.x;
         y = Rotation.y;
         z = Rotation.z;
         w = Rotation.w;
+     
+        //回転
         if (Rotation.y <= 1)
         {
             Rotation = new Quaternion(Rotation.x, Rotation.y, Rotation.z, Rotation.w);
@@ -217,11 +219,12 @@ public class Move_Enemy : MonoBehaviour
 
         //Rotation = new Quaternion(Rotation.x, Rotation.y + 0.5f, Rotation.z, Rotation.w);
 
+        //回転した値をトランスフォームに入れる
         transform.rotation = Rotation;
 
-            Debug.Log("旋回");
+       Debug.Log("旋回");
         
-
+        //正規化
         Distance.Normalize();
         //目標時点まで移動する（Goal_Positionの値をPlayerの座標にすればPlayerに向かう）
         this.rd.linearVelocity = Distance * Speed_Enemy;
