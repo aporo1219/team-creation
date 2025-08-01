@@ -22,6 +22,7 @@ public class PlayerController_y1 : MonoBehaviour
     [SerializeField] AudioSource AS;
     [SerializeField] AudioClip AvoidanceSE;
     [SerializeField] AudioClip JumpSE;
+    [SerializeField] AudioClip GuardSE;
 
     //ステータス変数---------------------------------------
     public float MoveSpeed = 5.0f;          //移動速度
@@ -388,6 +389,7 @@ public class PlayerController_y1 : MonoBehaviour
                     onGround = false;
                     //ジャンプする
                     rb.linearVelocity = new Vector3(rb.linearVelocity.x, JumpPower, rb.linearVelocity.z);
+                    //ジャンプSE
                     AS.PlayOneShot(JumpSE);
 
                     JumpTime++;
@@ -421,7 +423,8 @@ public class PlayerController_y1 : MonoBehaviour
             {
                 //ジャンプする
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, DoubleJumpPower, rb.linearVelocity.z);
-
+                //ジャンプSE
+                AS.PlayOneShot(JumpSE);
                 JumpTime++;
 
                 yield return null;
@@ -534,7 +537,7 @@ public class PlayerController_y1 : MonoBehaviour
                 canRotate = false;
                 canAction = false;
 
-                //
+                //回避SE
                 AS.PlayOneShot(AvoidanceSE);
                 
 
@@ -556,7 +559,7 @@ public class PlayerController_y1 : MonoBehaviour
 
                 //rb.linearVelocity = transform.forward * DodgeSpeed;
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
-
+                //回避SE
                 AS.PlayOneShot(AvoidanceSE);
                 StartCoroutine("AirDodgeMove", 0.3f);
                 AirDodgeTimeCount = 0;
@@ -576,9 +579,11 @@ public class PlayerController_y1 : MonoBehaviour
             if(onGround)
             {
                 rb.linearVelocity = new Vector3(0.0f, rb.linearVelocity.y, 0.0f);
-
+                
                 animator.SetBool("Guard", true);
                 AnimationPlay("Guard-In");
+                //ガードSE
+                AS.PlayOneShot(GuardSE);
                 for (float i = 0; i < 0.3f; i += Time.deltaTime)
                 {
                     yield return null;
@@ -596,7 +601,6 @@ public class PlayerController_y1 : MonoBehaviour
             }
             yield return null;
         }
-
         animator.SetBool("Guard", false);
 
         Barrier.SetActive(false);

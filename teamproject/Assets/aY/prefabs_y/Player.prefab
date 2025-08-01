@@ -320,7 +320,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   AS: {fileID: 8912326256563861856}
   AvoidanceSE: {fileID: 8300000, guid: ce539f3068150864580f6437988fcec4, type: 3}
-  JumpSE: {fileID: 8300000, guid: 401b83185031d8c4d8079d3aa49b33be, type: 3}
+  JumpSE: {fileID: 8300000, guid: 64bda2b0601a88d4aa3f05e73b428f97, type: 3}
+  GuardSE: {fileID: 8300000, guid: 50d1d9606fa7b7f4e97a74ab04ae38ac, type: 3}
   MoveSpeed: 5
   DashSpeed: 10
   JumpPower: 20

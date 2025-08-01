@@ -78,6 +78,7 @@ public class SkillController_y : MonoBehaviour
             if (time > 0.45f && !useSkill)
             {
                 EquipActiveSkills[select].UseSkill();
+                //
                 useSkill = true;
             }
 

@@ -148,7 +148,7 @@ public class PlayerAttack : MonoBehaviour
                             PlayerCont.rb.linearVelocity = new Vector3(PlayerCont.rb.linearVelocity.x, a, PlayerCont.rb.linearVelocity.z);
                         }
 
-                        //
+                        //アタックSE
                         AS.PlayOneShot(AttackSE);
                     }
                     Finish.SetActive(true);
@@ -183,7 +183,7 @@ public class PlayerAttack : MonoBehaviour
                             PlayerCont.rb.linearVelocity = new Vector3(PlayerCont.rb.linearVelocity.x, a, PlayerCont.rb.linearVelocity.z);
                         }
 
-                        //
+                        //アタックSE
                         AS.PlayOneShot(AttackSE);
                     }
 
