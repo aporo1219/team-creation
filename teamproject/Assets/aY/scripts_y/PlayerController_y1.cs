@@ -645,7 +645,7 @@ public class PlayerController_y1 : MonoBehaviour
 
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, -10, rb.linearVelocity.z);
 
-            time += Time.deltaTime;
+            time += Time.deltaTime * 1.5f;
             yield return null;
         }
 
@@ -662,11 +662,26 @@ public class PlayerController_y1 : MonoBehaviour
 
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, -10, rb.linearVelocity.z);
 
-            time += Time.deltaTime; 
+            time += Time.deltaTime * 1.5f; 
             yield return null; 
         }
 
         animator.SetBool("Dodge", false);
+
+        while (time < actiontime * 0.9f)
+        {
+
+            if (!GroundHit && rb.linearVelocity.y > 0)
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            }
+
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x * 0.9f, -10, rb.linearVelocity.z * 0.9f);
+
+            time += Time.deltaTime * 1.5f;
+            yield return null;
+        }
+
         Status.ColliderStste = PlayerStatus.ColliderMode.Neutral;
 
         while (time < actiontime)
@@ -679,7 +694,7 @@ public class PlayerController_y1 : MonoBehaviour
 
             rb.linearVelocity = new Vector3(rb.linearVelocity.x*0.9f, -10, rb.linearVelocity.z*0.9f);
 
-            time += Time.deltaTime;
+            time += Time.deltaTime * 1.5f;
             yield return null;
         }
 

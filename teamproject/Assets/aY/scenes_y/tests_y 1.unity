@@ -2182,6 +2182,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2060089240815554863, guid: 203fa31c03d76d14eb26e189107f0c5d, type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5079997237540472302, guid: 203fa31c03d76d14eb26e189107f0c5d, type: 3}
       propertyPath: m_Name
       value: HP_Bar
