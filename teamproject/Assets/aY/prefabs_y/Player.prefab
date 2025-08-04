@@ -385,7 +385,9 @@ MonoBehaviour:
   DefenseRate: 0
   Attack: 0
   Defense: 0
+  SC: {fileID: 5233394250858072286, guid: cc60f3f40a9a6384f9452a44ff199b81, type: 3}
   ColliderStste: 0
+  BuffList: {fileID: 0}
 --- !u!114 &-1768000193555337359
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -17,8 +18,9 @@ public class PlayerStatus : MonoBehaviour
     public float DefenseRate;       //防御力倍率
     public int Attack;              //最終攻撃力(ダメージ計算にはこれを用いる)
     public int Defense;             //最終防御力(ダメージ計算にはこれを用いる)
-    //------------------------------------
+                                    //------------------------------------
 
+    [SerializeField] SceneChenger SC;
     //当たり判定の種類
     [HideInInspector] public enum ColliderMode
     {
@@ -66,6 +68,9 @@ public class PlayerStatus : MonoBehaviour
         else if(HP <= 0)
         {
             HP = 0;
+            //ゲームオーバーシーンに切り替え
+            Debug.Log("ゲームオーバー");
+            SceneManager.LoadScene("GameOver");
         }
 
         Attack = (int)(DefaultAttack * AttackRate);
