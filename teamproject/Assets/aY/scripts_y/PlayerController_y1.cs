@@ -381,7 +381,9 @@ public class PlayerController_y1 : MonoBehaviour
                 {
                     AnimationPlay("Jump");
                 }
-                   
+
+                //ジャンプSE
+                AS.PlayOneShot(JumpSE);
 
                 while (((JumpTime < LongJumpLimit && jumpAction.IsPressed()) || JumpTime < 3) && canJump)
                 {
@@ -389,8 +391,7 @@ public class PlayerController_y1 : MonoBehaviour
                     onGround = false;
                     //ジャンプする
                     rb.linearVelocity = new Vector3(rb.linearVelocity.x, JumpPower, rb.linearVelocity.z);
-                    //ジャンプSE
-                    AS.PlayOneShot(JumpSE);
+                    
 
                     JumpTime++;
 
@@ -416,15 +417,16 @@ public class PlayerController_y1 : MonoBehaviour
             {
                 AnimationPlay("Jump-Flip");
             }
-                
+
+            //ジャンプSE
+            AS.PlayOneShot(JumpSE);
             //空中回避のクールタイムをなくす
             AirDodgeTimeCount = AirDodgeCoolTime;
             while (JumpTime < 17 && canJump)
             {
                 //ジャンプする
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, DoubleJumpPower, rb.linearVelocity.z);
-                //ジャンプSE
-                AS.PlayOneShot(JumpSE);
+               
                 JumpTime++;
 
                 yield return null;
@@ -572,7 +574,7 @@ public class PlayerController_y1 : MonoBehaviour
 
     private IEnumerator Guard()
     {
-        
+        bool playse = false;
 
         while (guardAction.IsPressed())
         {
@@ -582,14 +584,21 @@ public class PlayerController_y1 : MonoBehaviour
                 
                 animator.SetBool("Guard", true);
                 AnimationPlay("Guard-In");
-                //ガードSE
-                AS.PlayOneShot(GuardSE);
+                
                 for (float i = 0; i < 0.3f; i += Time.deltaTime)
                 {
                     yield return null;
                 }
 
                 Barrier.SetActive(true);
+
+                if(!playse)
+                {
+                    //ガードSE
+                    AS.PlayOneShot(GuardSE);
+                    playse = true;
+                }
+
                 Status.ColliderStste = PlayerStatus.ColliderMode.Guard;
 
                 canMove = false;

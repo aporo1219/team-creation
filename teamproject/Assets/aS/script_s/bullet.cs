@@ -7,6 +7,9 @@ public class bullet : MonoBehaviour
 
     private int Damege;
 
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip Hit;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,6 +32,8 @@ public class bullet : MonoBehaviour
         {
             PlayerStatus.Instance.PlayerDamage(Damege);
             Destroy(gameObject);
+            //SE
+            AS.PlayOneShot(Hit);
         }
     }
 }

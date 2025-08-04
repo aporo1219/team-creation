@@ -174,15 +174,6 @@ public class StageSelectUI : MonoBehaviour
         return false;
     }
 
-    //ステージ解放
-    bool Release(int stage)
-    {
-        return PlayerPrefs.GetInt("Release_" + stage, 0) == 1;
-
-        PlayerPrefs.SetInt("StageUnlocked_1", 1); // ステージ1を解放
-        PlayerPrefs.Save();
-    }
-
     //ボタンが押された時の処理
     public void OnButtonPressed(int floor)
     {

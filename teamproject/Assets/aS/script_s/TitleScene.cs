@@ -53,7 +53,7 @@ public class TitleScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerpos_changetime != 0) 
+        if (playerpos_changetime != 0)
             playerpos_changetime--;
         if (playerpos_changetime == 1)
         {
@@ -65,27 +65,27 @@ public class TitleScene : MonoBehaviour
             rb.isKinematic = false;
         }
 
-        if (selectAction.WasPressedThisFrame() && !On_Click)
-        {
-            OnButtonPressed();
-            On_Click = true;
-            Default = TargetImage.color;
-            TargetImage.color = Color.yellow;
-        }
-        if(selectAction.WasReleasedThisFrame())
-        {
-            TargetImage.color = Default;
-        }
+        //if (selectAction.WasPressedThisFrame() && !On_Click)
+        //{
+        //    OnButtonPressed();
+        //    On_Click = true;
+        //    Default = TargetImage.color;
+        //    TargetImage.color = Color.yellow;
+        //}
+        //if (selectAction.WasReleasedThisFrame())
+        //{
+        //    TargetImage.color = Default;
+        //}
     }
 
     private void FixedUpdate()
     {
-        /*GameObject Selected = EventSystem.current.currentSelectedGameObject;
+        GameObject Selected = EventSystem.current.currentSelectedGameObject;
         GameObject CrossKey = EventSystem.current.currentSelectedGameObject;
 
         //押されたときに色変更
         //if()
-        if(Gamepad.current.buttonSouth.wasPressedThisFrame)
+        if (Gamepad.current.buttonSouth.wasPressedThisFrame)
         {
             Default = TargetImage.color;
             TargetImage.color = Color.yellow;
@@ -106,7 +106,7 @@ public class TitleScene : MonoBehaviour
         // 現在の選択が無効 or null なら復帰
         if (Selected == null)
         {
-            if (LB!= null)
+            if (LB != null)
             {
                 EventSystem.current.SetSelectedGameObject(LB);
             }
@@ -120,7 +120,7 @@ public class TitleScene : MonoBehaviour
         {
             // 有効なUIボタンが選ばれていれば記録しておく
             LB = Selected;
-        }*/
+        }
     }
 
     void OnButtonPressed()
