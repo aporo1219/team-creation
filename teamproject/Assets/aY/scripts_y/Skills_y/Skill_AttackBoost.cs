@@ -6,7 +6,8 @@ public class Skill_AttackBoost : SkillManager
     PlayerController_y1 PlayerCont;
 
     public GameObject AttackBoost;
-
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip AttackBufSE;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,6 +31,8 @@ public class Skill_AttackBoost : SkillManager
         {
             Instantiate(AttackBoost, new Vector3(PlayerCont.transform.position.x, PlayerCont.transform.position.y - 1.0f, PlayerCont.transform.position.z), PlayerCont.transform.rotation);
             StartCoroutine(PlayerCont.Status.SetAttackRate(1.2f, 20));
+            //SE
+            AS.PlayOneShot(AttackBufSE);
             TimeCount = 0;
         }
 

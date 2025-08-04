@@ -6,6 +6,9 @@ public class Skill_Heal : SkillManager
 
     public GameObject Heal;
 
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip HeaSE;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,6 +32,7 @@ public class Skill_Heal : SkillManager
         {
             Instantiate(Heal, new Vector3(PlayerCont.transform.position.x, PlayerCont.transform.position.y - 1.0f, PlayerCont.transform.position.z), PlayerCont.transform.rotation);
             PlayerCont.Status.HP += (int)(PlayerCont.Status.MaxHP * 0.4f);
+            AS.PlayOneShot(HeaSE);
             TimeCount = 0;
         }
 

@@ -5,6 +5,8 @@ public class Skill_Thunder : SkillManager
     PlayerController_y1 PlayerCont;
 
     public GameObject Thunder;
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip ThunSE;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,6 +33,8 @@ public class Skill_Thunder : SkillManager
         if (TimeCount >= CoolTime)
         {
             Instantiate(Thunder, PlayerCont.transform.position + PlayerCont.transform.forward * 10, PlayerCont.transform.rotation);
+            //SE
+            AS.PlayOneShot(ThunSE);
             TimeCount = 0;
         }
 

@@ -554,6 +554,8 @@ MonoBehaviour:
   Damage: 0
   HealValue: 0
   AttackBoost: {fileID: 3591765684353758444, guid: 8f6e507b6b6c67542aeae516a7b78a16, type: 3}
+  AS: {fileID: 8912326256563861856}
+  AttackBufSE: {fileID: 8300000, guid: 032e56f7412a3bf4e8ebb0b67a52b38a, type: 3}
 --- !u!1 &5142570421365392714
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,6 +831,8 @@ MonoBehaviour:
   Damage: 0
   HealValue: 0
   Fireball: {fileID: 896024239160105329, guid: 2d6435aee284fea499b7959517951848, type: 3}
+  AS: {fileID: 8912326256563861856}
+  FireSE: {fileID: 8300000, guid: ed6b50a23fde9504a8def1c1ee0b98b2, type: 3}
 --- !u!1 &6840673716583542121
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,6 +883,8 @@ MonoBehaviour:
   Damage: 0
   HealValue: 0
   Thunder: {fileID: 7545315647080500942, guid: d53954c2f9b84e845a49368300aabf2b, type: 3}
+  AS: {fileID: 8912326256563861856}
+  ThunSE: {fileID: 8300000, guid: b97c96ce8f8243149afd2731ea0b80e6, type: 3}
 --- !u!1 &7576580568917246873
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,6 +935,8 @@ MonoBehaviour:
   Damage: 0
   HealValue: 0
   Heal: {fileID: 4554972078764500126, guid: f853a34b44416e04f923e131c6d3adb8, type: 3}
+  AS: {fileID: 8912326256563861856}
+  HeaSE: {fileID: 8300000, guid: 8a5efd6ad1bf3094e97bd3e94a2ef5d7, type: 3}
 --- !u!1 &8142831644456180862
 GameObject:
   m_ObjectHideFlags: 0

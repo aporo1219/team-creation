@@ -5,6 +5,8 @@ public class Skill_FireBall : SkillManager
     PlayerController_y1 PlayerCont;
 
     public GameObject Fireball;
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip FireSE;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,6 +34,8 @@ public class Skill_FireBall : SkillManager
             Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2, PlayerCont.transform.rotation);
             Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2 + PlayerCont.transform.right * 2, PlayerCont.transform.rotation);
             Instantiate(Fireball, PlayerCont.transform.position + PlayerCont.transform.forward * 2 + PlayerCont.transform.right * -2, PlayerCont.transform.rotation);
+            //SE
+            AS.PlayOneShot(FireSE);
             TimeCount = 0;
         }
         
