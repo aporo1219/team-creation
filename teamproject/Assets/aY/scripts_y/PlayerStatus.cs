@@ -6,34 +6,40 @@ public class PlayerStatus : MonoBehaviour
 {
     public static PlayerStatus Instance;
 
-    public int Level = 1;
-    private int Exp = 0;
-    public int MaxHP = 50;
-    public int HP = 50;
-    private int DefaultAttack = 5;
-    private int DefaultDefense = 5;
-    public float AttackRate;
-    public float DefenseRate;
-    public int Attack;
-    public int Defense;
+    //プレイヤーのステータス変数----------
+    public int Level = 1;           //レベル
+    private int Exp = 0;            //獲得経験値
+    public int MaxHP = 50;          //最大体力
+    public int HP = 50;             //現在体力
+    private int DefaultAttack = 5;  //基礎攻撃力
+    private int DefaultDefense = 5; //基礎防御力
+    public float AttackRate;        //攻撃力倍率
+    public float DefenseRate;       //防御力倍率
+    public int Attack;              //最終攻撃力(ダメージ計算にはこれを用いる)
+    public int Defense;             //最終防御力(ダメージ計算にはこれを用いる)
+    //------------------------------------
 
-    [HideInInspector]
-    public enum ColliderMode
+    //当たり判定の種類
+    [HideInInspector] public enum ColliderMode
     {
-        Neutral,Guard,Invincible,
+        Neutral,    //通常
+        Guard,      //ガード
+        Invincible, //無敵
     }
 
+    //プレイヤーの当たり判定
     public ColliderMode ColliderStste;
-
-    private BuffList_Manager BuffList;
+    //UIのバフリスト
+   [SerializeField] private BuffList_Manager BuffList;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //当たり判定初期化
         ColliderStste = ColliderMode.Neutral;
-
+        //バフリスト取得
         BuffList = FindAnyObjectByType<BuffList_Manager>();
-
+        //攻撃力・防御力倍率初期化
         AttackRate = 1.0f;
         DefenseRate = 1.0f;
 
@@ -43,6 +49,12 @@ public class PlayerStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(BuffList == null)
+        {
+            BuffList = FindAnyObjectByType<BuffList_Manager>();
+        }
+
         if(HP > MaxHP)
         {
             HP = MaxHP;
