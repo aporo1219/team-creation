@@ -29,6 +29,11 @@ public class UI_SkillManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(skillController == null)
+        {
+            skillController = FindAnyObjectByType<SkillController_y>();
+        }
+
         GetCard();
 
         SetCard();
