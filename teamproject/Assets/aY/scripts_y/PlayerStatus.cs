@@ -42,9 +42,11 @@ public class PlayerStatus : MonoBehaviour
         //攻撃力・防御力倍率初期化
         AttackRate = 1.0f;
         DefenseRate = 1.0f;
-
+        //インスタンス設定
         Instance = this; 
     }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -55,11 +57,13 @@ public class PlayerStatus : MonoBehaviour
             BuffList = FindAnyObjectByType<BuffList_Manager>();
         }
 
+        //現在HPが最大HPを超えたら
         if(HP > MaxHP)
         {
             HP = MaxHP;
         }
-        else if(HP < 0)
+        //HPが0以下になったら
+        else if(HP <= 0)
         {
             HP = 0;
         }

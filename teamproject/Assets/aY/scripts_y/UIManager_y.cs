@@ -27,6 +27,15 @@ public class UIManager_y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerStatus == null)
+        {
+            playerStatus = FindAnyObjectByType<PlayerStatus>();
+        }
+        if(skillController == null)
+        {
+            skillController = FindAnyObjectByType<SkillController_y>();
+        }
+
         HP_Ber_Control();
         HP_Text_Control();
     }
