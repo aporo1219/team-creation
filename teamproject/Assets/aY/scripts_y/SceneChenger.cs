@@ -100,6 +100,27 @@ public class SceneChenger : MonoBehaviour
         else
             Gameend = true;
 
+
+        switch (i)
+        {
+        case 2:
+        case 3:
+        case 4:
+
+            PlayerController_y1.GameState = "playing";
+
+            break;
+
+            default:
+
+                PlayerController_y1.GameState = "stop";
+                break;
+
+        
+        
+        }
+
+
         cla = sr.color.a;
         while (cla < 1f)
         {
