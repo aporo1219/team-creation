@@ -73,7 +73,7 @@ public class ShowTaskSystem : MonoBehaviour
         if(remove_time > 0)
         {
             remove_time--;
-            task_pos.y += 14;
+            task_pos.y += 13;
         }
         if(stay_time == 0 && pop_now && remove_time == 0)
         {
