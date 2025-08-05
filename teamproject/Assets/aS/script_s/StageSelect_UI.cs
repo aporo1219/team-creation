@@ -151,7 +151,7 @@ public class StageSelectUI : MonoBehaviour
         {
             Debug.Log("OnButtonPressed");
             Push_Button = true;
-            if(floor == Button[0])
+            if(floor == G_Button[0])
             {
                 Debug.Log("チュートリアルステージへ");
                 Invoke(nameof(ChangeScene1), 0.1f);
@@ -163,7 +163,7 @@ public class StageSelectUI : MonoBehaviour
                 AS.PlayOneShot(Push_SE);
                 AS.volume = Push_SE_v;
             }
-            else if(floor == Button[1])
+            else if(floor == G_Button[1])
             {
                 Debug.Log("1ステージへ");
                 Invoke(nameof(ChangeScene1), 0.1f);
@@ -175,7 +175,7 @@ public class StageSelectUI : MonoBehaviour
                 AS.PlayOneShot(Push_SE);
                 AS.volume = Push_SE_v;
             }
-            else if(floor == Button[2])
+            else if(floor == G_Button[2])
             {
                 Debug.Log("2ステージへ");
                 Invoke(nameof(ChangeScene1), 0.1f);
@@ -187,7 +187,7 @@ public class StageSelectUI : MonoBehaviour
                 AS.PlayOneShot(Push_SE);
                 AS.volume = Push_SE_v;
             }
-            else if(floor == Button[3])
+            else if(floor == G_Button[3])
             {
                 Debug.Log("最終ステージへ");
                 Invoke(nameof(ChangeScene1), 0.1f);
