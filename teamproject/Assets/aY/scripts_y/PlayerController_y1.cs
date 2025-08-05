@@ -10,6 +10,8 @@ public class PlayerController_y1 : MonoBehaviour
 {
     public static PlayerController_y1 instance;
 
+    public static string GameState = "";
+
     public PlayerStatus Status;
 
     [SerializeField] private GameObject Barrier;
@@ -145,6 +147,11 @@ public class PlayerController_y1 : MonoBehaviour
             return;
         }
 
+        if(GameState !="playing")
+        {
+            return;
+        }
+
         PlayAnime = "";
 
         //左スティック入力取得
@@ -258,7 +265,10 @@ public class PlayerController_y1 : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        if (GameState != "playing")
+        {
+            return;
+        }
 
         //カメラの方向からX-Z平面の単位ベクトルを取得
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
