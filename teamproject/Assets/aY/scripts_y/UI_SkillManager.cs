@@ -41,6 +41,9 @@ public class UI_SkillManager : MonoBehaviour
         SetCursor();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     void GetCard()
     {
         for(int i = 0; i < skillController.EquipActiveSkills.Count; i++)
@@ -58,18 +61,25 @@ public class UI_SkillManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// スキルカードをリスト内に均等に並べる関数
+    /// </summary>
     void SetCard()
     {
+        //スキルカードの枚数分繰り返す
         for(int i=0;i< SkillCards.Count;i++)
         {
+            //カードのRectTransform取得
             RectTransform Rect = SkillCards[i].GetComponent<RectTransform>();
-
+            //選択中のカードは少し位置をあげる
             if (skillController.SelectSkill == i)
             {
+                //リストの横幅をカードの枚数+1で割った幅で配置する
                 Rect.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (i + 1), 55, 0);
             }
             else
             {
+                //リストの横幅をカードの枚数+1で割った幅で配置する
                 Rect.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (i + 1), 45, 0);
             }
                 
@@ -79,6 +89,9 @@ public class UI_SkillManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// 選んでいるスキルカードにカーソルを合わせる関数
+    /// </summary>
     void SetCursor()
     {
         Cursor.rectTransform.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (skillController.SelectSkill + 1), 55, 0);
