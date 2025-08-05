@@ -2184,6 +2184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 460302187}
+  Enemy1: {fileID: 0}
+  Enemy2: {fileID: 0}
 --- !u!1 &366563006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2942,6 +2944,7 @@ MonoBehaviour:
   now_kill_num: 0
   change_task_flag: 0
   Tutorial: {fileID: 1892433244}
+  Invisible: {fileID: 34137056}
   Main_Show_Task: {fileID: 782642416}
   Task_Text: {fileID: 600684783}
   Actionassist: {fileID: 1682068258}
@@ -4706,6 +4709,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 460302187}
+  Enemy1: {fileID: 0}
+  Enemy2: {fileID: 0}
 --- !u!1001 &632156185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5134,6 +5139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 460302187}
+  Enemy1: {fileID: 621536659}
+  Enemy2: {fileID: 15754283}
 --- !u!1 &702521669 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100050, guid: e57e9b8cd5e115f4f8d7736473e5c7fd, type: 3}
@@ -5178,6 +5185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 460302187}
+  Enemy1: {fileID: 0}
+  Enemy2: {fileID: 0}
 --- !u!1 &708625244
 GameObject:
   m_ObjectHideFlags: 0
@@ -5826,6 +5835,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 460302187}
+  Enemy1: {fileID: 0}
+  Enemy2: {fileID: 0}
 --- !u!1001 &987381257
 PrefabInstance:
   m_ObjectHideFlags: 0

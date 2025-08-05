@@ -23,6 +23,7 @@ public class ShowTaskSystem : MonoBehaviour
     bool pop_now = false;
 
     [SerializeField] GameObject Tutorial;
+    [SerializeField] GameObject Invisible;
 
     [SerializeField] GameObject Main_Show_Task;
     [SerializeField] Text Task_Text;
@@ -88,6 +89,7 @@ public class ShowTaskSystem : MonoBehaviour
             {
                 manager.Tutorial_Clear(6);
                 now_kill_num = kill_enemy_num = 0;
+                Invisible.SetActive(false);
             }
         }
 
