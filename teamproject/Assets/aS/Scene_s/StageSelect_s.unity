@@ -1474,8 +1474,8 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1981571891}
         m_TargetAssemblyTypeName: StageSelectUI, Assembly-CSharp
-        m_MethodName: OnButtonPressed2
-        m_Mode: 3
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

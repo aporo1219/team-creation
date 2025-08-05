@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Cinemachine;
 
 public class FloorChecker : MonoBehaviour
 {
@@ -7,12 +8,20 @@ public class FloorChecker : MonoBehaviour
     public static FloorChecker Instance;
     public  int Current_Floor = 0;
 
+    GameObject Player;
+    GameObject CinemachineCamera;
+    CinemachinePanTilt cinemachine;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        
+        //ÉvÉåÉCÉÑÅ[èÓïÒÇÃéÊìæ
+        CinemachineCamera = GameObject.Find("CinemachineCamera");
+        cinemachine = CinemachineCamera.GetComponent<CinemachinePanTilt>();
+        Player = GameObject.Find("Player");
 
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -25,5 +34,10 @@ public class FloorChecker : MonoBehaviour
         {
             Current_Floor = 2;
         }
+    }
+
+    public void Scene_Player()
+    {
+
     }
 }

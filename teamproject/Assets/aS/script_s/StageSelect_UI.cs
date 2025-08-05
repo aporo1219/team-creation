@@ -18,12 +18,16 @@ public class StageSelectUI : MonoBehaviour
     [SerializeField] GameObject First_Button;
     private GameObject Last_Button;
 
+    private bool Push_Button;
+
     GameObject cinemachineCamera;
     CinemachinePanTilt cinemachine;
 
     GameObject player;
     int playerpos_changetime = 0;
     int floor_num;
+
+    InputAction Select;
 
     //SE
     [SerializeField] private AudioSource AS;
@@ -40,11 +44,15 @@ public class StageSelectUI : MonoBehaviour
 
         player = GameObject.Find("Player");
 
+        Select = InputSystem.actions.FindAction("Select");
+
         FloorDisplay(Level_Floor);
         //コントローラとUIボタンの紐づけ
         EventSystem.current.SetSelectedGameObject(First_Button);
 
         Last_Button = First_Button;
+
+        Push_Button = false;
 
         f = 0;
         //ボタンの管理
@@ -56,18 +64,7 @@ public class StageSelectUI : MonoBehaviour
                 Debug.LogError($"GB[{i}] が設定されていません！");
             }
             else
-            {
-                int index = i;
-                Button[i].onClick.AddListener(() => OnButtonPressed(index));
-                //G_Button[i].SetActive(false);
-                //if (Release(index) || G_Button[i] == First_Button || i == 2|| i == 1)
-                //{
-                //    G_Button[i].SetActive(true);
-                //}
-                //else
-                //{
-                //    G_Button[i].SetActive(false);
-                //}
+            { 
                 Debug.Log($"Button[{i}] にリスナー登録完了");
                 Debug.Log($"GB[{i}] にリスナー登録完了");
             }
@@ -81,7 +78,6 @@ public class StageSelectUI : MonoBehaviour
         //{
         //    return;
         //}
-
         if (playerpos_changetime != 0) playerpos_changetime--;
         if (playerpos_changetime == 1)
         {
@@ -99,7 +95,7 @@ public class StageSelectUI : MonoBehaviour
                 cinemachine.PanAxis.Value = 0;
                 cinemachine.TiltAxis.Value = 10;
             }
-            if(floor_num == 0)
+            if (floor_num == 0)
             {
                 player.gameObject.transform.position = new Vector3(-118, 22, 5);
                 player.gameObject.transform.rotation = new Quaternion(0, 180, 0, 0);
@@ -107,57 +103,29 @@ public class StageSelectUI : MonoBehaviour
                 cinemachine.TiltAxis.Value = 10;
             }
         }
+        //Bボタンがおされた処理
+        if (Select != null && Select.WasPressedThisFrame())
+        {
+            GameObject selected = EventSystem.current.currentSelectedGameObject;
+
+            if (selected != null)
+            {
+                for (int i = 0; i < Button.Length; i++)
+                {
+                    if (Button[i] != null && Button[i].gameObject == selected)
+                    {
+                        Debug.Log("Bボタンで選択中のボタンを決定！");
+                        OnButtonPressed(G_Button[i]);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
     {
-        GameObject Selected = EventSystem.current.currentSelectedGameObject;
-        GameObject CrossKey = EventSystem.current.currentSelectedGameObject;
 
-        //ゲームパッドの入力
-        GP = Gamepad.current;
-        if (GP == null)
-        {
-            return;
-        }
-
-        //スティックの方向取得
-        Vector2 Right_Stick = GP.rightStick.ReadValue();
-        //十字キーの方向取得
-        Vector2 Cross = GP.dpad.ReadValue();
-
-
-        //ボタンの色の変更
-        for (int i = 0; i < Button.Length; i++)
-        {
-            if (Button[i] != null)
-            {
-                if (Button[i].GetComponent<Button_s>() == null)
-                {
-                    Button[i].gameObject.AddComponent<Button_s>();
-
-                }
-            }
-        }
-
-        // 現在の選択が無効 or null なら復帰
-        if (Selected == null || !IsButtonCheck(Selected))
-        {
-            if (Last_Button != null)
-            {
-                EventSystem.current.SetSelectedGameObject(Last_Button);
-            }
-            else
-            {
-                // 最後の選択が未設定なら First_Button に戻す
-                EventSystem.current.SetSelectedGameObject(First_Button);
-            }
-        }
-        else
-        {
-            // 有効なUIボタンが選ばれていれば記録しておく
-            Last_Button = Selected;
-        }
     }
 
     //gameObjectがUIボタン配列に入っているかの確認
@@ -175,11 +143,52 @@ public class StageSelectUI : MonoBehaviour
     }
 
     //ボタンが押された時の処理
-    public void OnButtonPressed(int floor)
+    public void OnButtonPressed(GameObject floor)
     {
-        switch(floor)
+       
+        int FloorNum = 0;
+        if (!Push_Button)
         {
-            case 3:
+            Debug.Log("OnButtonPressed");
+            Push_Button = true;
+            if(floor == Button[0])
+            {
+                Debug.Log("チュートリアルステージへ");
+                Invoke(nameof(ChangeScene1), 0.1f);
+                f = 0;
+                Level_Floor = 0;
+                FloorDisplay(Level_Floor);
+                FloorNum = 0;
+                //SE
+                AS.PlayOneShot(Push_SE);
+                AS.volume = Push_SE_v;
+            }
+            else if(floor == Button[1])
+            {
+                Debug.Log("1ステージへ");
+                Invoke(nameof(ChangeScene1), 0.1f);
+                f = 1;
+                Level_Floor = 2;
+                FloorDisplay(Level_Floor);
+                FloorNum = 1;
+                //SE
+                AS.PlayOneShot(Push_SE);
+                AS.volume = Push_SE_v;
+            }
+            else if(floor == Button[2])
+            {
+                Debug.Log("2ステージへ");
+                Invoke(nameof(ChangeScene1), 0.1f);
+                f = 2;
+                Level_Floor = 1;
+                FloorDisplay(Level_Floor);
+                FloorNum = 2;
+                //SE
+                AS.PlayOneShot(Push_SE);
+                AS.volume = Push_SE_v;
+            }
+            else if(floor == Button[3])
+            {
                 Debug.Log("最終ステージへ");
                 Invoke(nameof(ChangeScene1), 0.1f);
                 f = 3;
@@ -188,44 +197,11 @@ public class StageSelectUI : MonoBehaviour
                 //SE
                 AS.PlayOneShot(Push_SE);
                 AS.volume = Push_SE_v;
-                break;
-            case 2:
-                Debug.Log("2ステージへ");
-                Invoke(nameof(ChangeScene1), 0.1f);
-                f = 2;
-                Level_Floor = 1;
-                FloorDisplay(Level_Floor);
-                //SE
-                AS.PlayOneShot(Push_SE);
-                AS.volume = Push_SE_v;
-                break;
-            case 1:
-                Debug.Log("1ステージへ");
-                Invoke(nameof(ChangeScene1), 0.1f);
-                f = 1;
-                Level_Floor = 2;
-                FloorDisplay(Level_Floor);
-                //SE
-                AS.PlayOneShot(Push_SE);
-                AS.volume = Push_SE_v;
-                break;
-            case 0:
-                Debug.Log("チュートリアルステージへ");
-                Invoke(nameof(ChangeScene1), 0.1f);
-                f = 0;
-                Level_Floor = 0;
-                FloorDisplay(Level_Floor);
-                //SE
-                AS.PlayOneShot(Push_SE);
-                AS.volume = Push_SE_v;
-                break;
-        }
-    }
+            }
 
-    public void OnButtonPressed2(int floor)
-    {
-        floor_num = floor;
-        playerpos_changetime = 35;
+            floor_num = FloorNum;
+            playerpos_changetime = 35;
+        }
     }
 
     //シーン移動

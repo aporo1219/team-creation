@@ -10,6 +10,7 @@ using UnityEngine.InputSystem.Switch;
 public class GameOver : MonoBehaviour
 {
     [SerializeField] Button[] Button;
+    [SerializeField] GameObject[] G_Button;
     [SerializeField] GameObject GB;
     [SerializeField] Text GO;
     [SerializeField] AudioSource AS;
@@ -35,12 +36,13 @@ public class GameOver : MonoBehaviour
     void Start()
     {
        
-
-        player = GameObject.Find("Player");
-        rb = player.GetComponent<Rigidbody>();
-        cinemachineCamera = GameObject.Find("CinemachineCamera");
-        cinemachine = cinemachineCamera.GetComponent<CinemachinePanTilt>();
-
+        if(player == null)
+        { 
+        //player = GameObject.Find("Player");
+        //rb = player.GetComponent<Rigidbody>();
+        //cinemachineCamera = GameObject.Find("CinemachineCamera");
+        //cinemachine = cinemachineCamera.GetComponent<CinemachinePanTilt>();
+        }
         selectAction = InputSystem.actions.FindAction("Select");
 
         //コントローラとUIボタンの紐づけ
@@ -49,101 +51,79 @@ public class GameOver : MonoBehaviour
         //ボタンの登録
         for (int i = 0; i < Button.Length; i++)
         {
-            int index = i;
-            Button[i].onClick.AddListener(() => OnButtonPressed(index));
-            if (Button != null)
+            if (Button[i] == null && G_Button[i] == null)
             {
-                TargetImage = Button[i].targetGraphic as Image;
+                Debug.LogError($"Button[{i}] が設定されていません！");
+                Debug.LogError($"GB[{i}] が設定されていません！");
+            }
+            else
+            {
+                Debug.Log($"Button[{i}] にリスナー登録完了");
+                Debug.Log($"GB[{i}] にリスナー登録完了");
             }
         }
-
+        
         Display_TEXT();
     }
+
+        
+    
 
     // Update is called once per frame
     void Update()
     {
-
+        
+        //Bボタンがおされた処理
+        if (selectAction != null && selectAction.WasPressedThisFrame())
+        {
+            Debug.Log("あ");
+            GameObject selected = EventSystem.current.currentSelectedGameObject;
+            
+            if (selected != null)
+            {
+                for (int i = 0; i < Button.Length; i++)
+                {
+                    if (Button[i] != null && Button[i].gameObject == selected)
+                    {
+                        Debug.Log("Bボタンで選択中のボタンを決定！");
+                        OnButtonPressed(G_Button[i]);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
     {
-        GameObject Selected = EventSystem.current.currentSelectedGameObject;
-        GameObject CrossKey = EventSystem.current.currentSelectedGameObject;
-
-        //押されたときに色変更
-        //if()
-        if (Gamepad.current.buttonSouth.wasPressedThisFrame)
-        {
-            Default = TargetImage.color;
-            TargetImage.color = Color.yellow;
-            GameObject selected = EventSystem.current.currentSelectedGameObject;
-            if (selected != null)
-            {
-                var button = selected.GetComponent<Button>();
-                if (button != null)
-                {
-                    button.onClick.Invoke(); // UIボタンのクリックイベントを実行
-                }
-            }
-        }
-
-        //デフォルト
-        if (Gamepad.current.buttonSouth.wasReleasedThisFrame)
-        {
-            TargetImage.color = Default;
-        }
-        //ゲームパッドの入力
-        Gp = Gamepad.current;
-        if (Gp == null)
-        {
-            return;
-        }
-
-        // 現在の選択が無効 or null なら復帰
-        if (Selected == null)
-        {
-            if (LB != null)
-            {
-                EventSystem.current.SetSelectedGameObject(LB);
-            }
-            else
-            {
-                // 最後の選択が未設定なら First_Button に戻す
-                EventSystem.current.SetSelectedGameObject(GB);
-            }
-        }
-        else
-        {
-            // 有効なUIボタンが選ばれていれば記録しておく
-            LB = Selected;
-        }
+       
     }
 
-    void OnButtonPressed(int b)
+    //ボタンが押されたら
+    void OnButtonPressed(GameObject b)
     {
-        switch(b)
-        {
-            case 0:
-                SceneChenger.instance.ChangeScene(0);
-                AS.PlayOneShot(Push_Button);
-                break;
-            case 1:
-                if(FloorChecker.Instance.Current_Floor == 1)
-                {
-                    SceneChenger.instance.ChangeScene(3);
-                }
-                else if (FloorChecker.Instance.Current_Floor == 2)
-                {
-                    SceneChenger.instance.ChangeScene(4);
-                }
-                break;
+       if(b == G_Button[0])
+       {
+            SceneChenger.instance.ChangeScene(0);
+            AS.PlayOneShot(Push_Button);
+       }
+       else if(b == G_Button[1])
+       {
+            if (FloorChecker.Instance.Current_Floor == 1)
+            {
+                SceneChenger.instance.ChangeScene(3);
+            }
+            else if (FloorChecker.Instance.Current_Floor == 2)
+            {
+                SceneChenger.instance.ChangeScene(4);
+            }
         }
+        
     }
 
     //テキスト表示関数
     void Display_TEXT()
     {
-        GO.text = "スコアは :";
+        GO.text = "ゲームオーバー";
     }
 }
