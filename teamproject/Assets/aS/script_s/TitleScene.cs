@@ -41,7 +41,7 @@ public class TitleScene : MonoBehaviour
         selectAction = InputSystem.actions.FindAction("Select");
 
         //コントローラとUIボタンの紐づけ
-        EventSystem.current.SetSelectedGameObject(GB);
+        //EventSystem.current.SetSelectedGameObject(GB);
         LB = GB;
         Button.onClick.AddListener(() => OnButtonPressed());
         if (Button != null)

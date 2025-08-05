@@ -27,6 +27,8 @@ public class ClearScene : MonoBehaviour
     GameObject Timeobj;
     TimeManager time;
 
+
+    bool On_Click = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,16 +51,14 @@ public class ClearScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //押されたときに色変更,タイトルへ戻る
-        if (Select != null && Select.WasPressedThisFrame())
+        if (Select.WasPressedThisFrame() && !On_Click)
         {
+            OnButtonPressed();
+            On_Click = true;
             Default = TargetImage.color;
             TargetImage.color = Color.yellow;
-            OnButtonPressed();
         }
-
-        //デフォルト
-        if (Select != null && Select.WasReleasedThisFrame())
+        if (Select.WasReleasedThisFrame())
         {
             TargetImage.color = Default;
         }

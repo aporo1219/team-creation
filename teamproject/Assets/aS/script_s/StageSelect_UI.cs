@@ -208,7 +208,7 @@ public class StageSelectUI : MonoBehaviour
     private void ChangeScene1()
     {
        switch(f)
-        {
+       {     
             case 3:
                 SceneManager.LoadScene("Finalstage");
                 break;
