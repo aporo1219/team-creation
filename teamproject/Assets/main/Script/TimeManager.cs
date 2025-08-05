@@ -8,6 +8,9 @@ public class TimeManager : MonoBehaviour
     public int minute;
     public int hour;
 
+    GameObject ClearObj;
+    ClearScene clear;
+
     // Update is called once per frame
     void Update()
     {

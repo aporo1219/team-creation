@@ -41,11 +41,11 @@ public class ShowTaskSystem : MonoBehaviour
     void Start()
     {
         task = change_task = "現在タスクはありません。";
-        task_pos = new Vector3(960, 1180, 0);
+        task_pos = new Vector3(Main_Show_Task.transform.position.x, 1130, 0);
         if (now_scene == 0)
-            assist_pos = new Vector3(960, 300, 0);
+            assist_pos = new Vector3(Actionassist.transform.position.x, 300, 0);
         else
-            assist_pos = new Vector3(960, -300, 0);
+            assist_pos = new Vector3(Actionassist.transform.position.x, -300, 0);
     }
 
     // Update is called once per frame
