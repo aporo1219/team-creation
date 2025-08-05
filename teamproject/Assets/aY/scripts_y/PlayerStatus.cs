@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,7 +19,11 @@ public class PlayerStatus : MonoBehaviour
     public float DefenseRate;       //防御力倍率
     public int Attack;              //最終攻撃力(ダメージ計算にはこれを用いる)
     public int Defense;             //最終防御力(ダメージ計算にはこれを用いる)
-                                    //------------------------------------
+    //------------------------------------
+
+    private bool dead = false;
+
+    PlayerController_y1 PlayerCont;
 
     [SerializeField] SceneChenger SC;
     //当たり判定の種類
@@ -37,6 +42,8 @@ public class PlayerStatus : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PlayerCont = GetComponent<PlayerController_y1>();
+
         //当たり判定初期化
         ColliderStste = ColliderMode.Neutral;
         //バフリスト取得
@@ -68,9 +75,12 @@ public class PlayerStatus : MonoBehaviour
         else if(HP <= 0)
         {
             HP = 0;
-            //ゲームオーバーシーンに切り替え
-            Debug.Log("ゲームオーバー");
-            SceneManager.LoadScene("GameOver");
+
+
+            if(!dead)
+            StartCoroutine(GameOver());
+
+            dead = true;
         }
 
         Attack = (int)(DefaultAttack * AttackRate);
@@ -157,6 +167,29 @@ public class PlayerStatus : MonoBehaviour
 
             DefenseRate -= ratevalue - 1.0f;
         }
+        yield return null;
+    }
+
+    private IEnumerator GameOver()
+    {
+        PlayerCont.AnimationPlay("aaaa");
+
+        PlayerCont.canAction = false;
+        PlayerCont.canMove = false;
+        PlayerCont.canRotate = false;
+
+        
+
+        for(float i=0;i<2.0f;i+=Time.deltaTime)
+        {
+            PlayerCont.rb.linearVelocity = Vector3.zero;
+            yield return null;
+        }
+
+        //ゲームオーバーシーンに切り替え
+        Debug.Log("ゲームオーバー");
+        SceneManager.LoadScene("GameOver");
+
         yield return null;
     }
 }
