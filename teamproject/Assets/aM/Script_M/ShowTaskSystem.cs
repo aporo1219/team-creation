@@ -23,7 +23,6 @@ public class ShowTaskSystem : MonoBehaviour
     bool pop_now = false;
 
     [SerializeField] GameObject Tutorial;
-    [SerializeField] GameObject Invisible;
 
     [SerializeField] GameObject Main_Show_Task;
     [SerializeField] Text Task_Text;
@@ -88,7 +87,6 @@ public class ShowTaskSystem : MonoBehaviour
             if(assist_text == "Xボタンを押して攻撃\nRTボタンを押して回避")
             {
                 manager.Tutorial_Clear(6);
-                Invisible.SetActive(false);
                 now_kill_num = kill_enemy_num = 0;
             }
         }
