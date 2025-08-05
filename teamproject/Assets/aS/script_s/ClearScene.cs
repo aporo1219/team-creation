@@ -24,6 +24,9 @@ public class ClearScene : MonoBehaviour
 
     private InputAction Select;
 
+    GameObject Timeobj;
+    TimeManager time;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,6 +41,9 @@ public class ClearScene : MonoBehaviour
         Display_TEXT();
 
         Select = InputSystem.actions.FindAction("Select");
+
+        Timeobj = GameObject.Find("PlayTime");
+        time = Timeobj.GetComponent<TimeManager>();
     }
 
     // Update is called once per frame
@@ -78,6 +84,6 @@ public class ClearScene : MonoBehaviour
     //テキスト表示関数
     void Display_TEXT()
     {
-        Result.text = "スコアは :" + Isscore;
+        Result.text = "プレイ時間：" + time.hour + "時間" + time.minute + "分" + time.second + "秒" + time.time;
     }
 }
