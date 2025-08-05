@@ -3,6 +3,8 @@ using UnityEngine;
 public class TutorialRouteCollider: MonoBehaviour
 {
     [SerializeField] TutorialManager manager;
+    [SerializeField] GameObject Enemy1;
+    [SerializeField] GameObject Enemy2;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,6 +29,8 @@ public class TutorialRouteCollider: MonoBehaviour
             if (this.name == "route5")
             {
                 manager.Tutorial_Clear(5);
+                Enemy1.SetActive(true);
+                Enemy2.SetActive(true);
             }
         }
     }
