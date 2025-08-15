@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TreasureBox_y : MonoBehaviour
@@ -6,11 +11,19 @@ public class TreasureBox_y : MonoBehaviour
 
     Animator animator;
 
+    bool IsOpen = false;
+
     [SerializeField] private AudioSource AS;
     [SerializeField] private AudioClip Open;
 
     [SerializeField] ShowTaskSystem tasksystem;
     [SerializeField] TutorialManager manager;
+
+    [SerializeField] List<GameObject> Skills = new List<GameObject>();
+
+    [SerializeField] bool IsContentFixed = false;
+
+    [SerializeField] GameObject FixedContent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,7 +41,7 @@ public class TreasureBox_y : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "GC" || collision.gameObject.name == "GF")
+        if ((collision.gameObject.name == "GC" || collision.gameObject.name == "GF") && !IsOpen)
         {
             rb.linearVelocity = new Vector3(0, 3, 0);
             animator.SetBool("Hit", true);
@@ -38,6 +51,24 @@ public class TreasureBox_y : MonoBehaviour
                 manager.Tutorial_Clear(7);
                
             }
+
+            GameObject Card;
+
+            if (IsContentFixed && FixedContent != null)
+            {
+                Card = Instantiate(FixedContent, transform.position, transform.rotation);
+            }
+            else
+            {
+                Card = Instantiate(Skills[UnityEngine.Random.RandomRange(0, Skills.Count)], transform.position, transform.rotation);
+            }
+            
+
+            Rigidbody Cardrb = Card.GetComponent<Rigidbody>();
+
+            Cardrb.linearVelocity= new Vector3(0, 10, 0);
+
+            IsOpen = true;
         }
     }
 }

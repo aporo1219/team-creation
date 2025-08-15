@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4492262298237205796, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
+      propertyPath: EquipActiveSkills.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6994619166277509466, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
       propertyPath: DashSpeed
       value: 15
@@ -196,7 +200,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2477260510817031846, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
+    - {fileID: 7576580568917246873, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
+    - {fileID: 6840673716583542121, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
+    - {fileID: 6581816373778792377, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}

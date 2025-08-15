@@ -213,6 +213,11 @@ MonoBehaviour:
   Open: {fileID: 8300000, guid: 651d3eca707224d4d8f0a30c82f7211f, type: 3}
   tasksystem: {fileID: 0}
   manager: {fileID: 0}
+  Skills:
+  - {fileID: 803936296682282817, guid: c2368659a7dfc5e4e92035e903aa246d, type: 3}
+  - {fileID: 2535141670509160346, guid: 47ae1815c4c53824ba57e1706c25bc80, type: 3}
+  - {fileID: 2042538011336205287, guid: d3cb9fce5ad38524ea7d554187b237e9, type: 3}
+  - {fileID: 700600182617344362, guid: 4f67cfed196a90044b3dac00f0a06174, type: 3}
 --- !u!82 &5757209124305773412
 AudioSource:
   m_ObjectHideFlags: 0
