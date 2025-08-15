@@ -13,6 +13,8 @@ public class Skill_Thunder : SkillManager
     {
         PlayerCont = FindAnyObjectByType<PlayerController_y1>();
 
+        AS = GetComponentInParent<AudioSource>();
+
         CoolTime = 600;
 
         TimeCount = CoolTime;

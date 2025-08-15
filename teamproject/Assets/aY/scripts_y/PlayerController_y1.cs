@@ -13,6 +13,7 @@ public class PlayerController_y1 : MonoBehaviour
     public static string GameState = "";
 
     public PlayerStatus Status;
+    public SkillController_y SkillCont;
 
     [SerializeField] private GameObject Barrier;
     [SerializeField] private GameObject ActiveSword;
@@ -107,6 +108,8 @@ public class PlayerController_y1 : MonoBehaviour
         Application.targetFrameRate = 60;
 
         Status = GetComponent<PlayerStatus>();
+        SkillCont = GetComponent<SkillController_y>();
+        SkillCont = GetComponentInChildren<SkillController_y>();
 
         //RigidbodyŽæ“¾
         rb = GetComponent<Rigidbody>();
@@ -351,6 +354,18 @@ public class PlayerController_y1 : MonoBehaviour
     //        {
     //            Status.HP -= 0;
     //        }
+    //    }
+    //}
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    GameObject Object = collision.gameObject;
+
+    //    SkillController_y Skill = Object.GetComponent<SkillController_y>();
+
+    //    if(Skill != null)
+    //    {
+    //        SkillCont.AddSkill(Object);
     //    }
     //}
 

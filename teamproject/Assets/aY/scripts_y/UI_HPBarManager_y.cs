@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager_y : MonoBehaviour
+public class UI_HPBarManager_y : MonoBehaviour
 {
     //ƒNƒ‰ƒX
     PlayerStatus playerStatus;
     SkillController_y skillController;
 
     //
-    public Slider HP_Ber;
+    public Slider HP_Bar;
     public Image BerContent;
     public Text HPValue_Text;
     public Text HP_Text;
@@ -43,9 +43,9 @@ public class UIManager_y : MonoBehaviour
     void HP_Ber_Control()
     {
         HP_Percentage = (float)playerStatus.HP / (float)playerStatus.MaxHP;
-        HP_Ber.value = HP_Percentage;
+        HP_Bar.value = HP_Percentage;
 
-        if (HP_Ber.value > 0.2f )
+        if (HP_Bar.value > 0.2f )
         {
             BerContent.color = Color.green;
         }

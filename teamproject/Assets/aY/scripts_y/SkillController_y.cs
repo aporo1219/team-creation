@@ -19,7 +19,7 @@ public class SkillController_y : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PlayerCont = GetComponent<PlayerController_y1>();
+        PlayerCont = GetComponentInParent<PlayerController_y1>();
 
         SkillAction = InputSystem.actions.FindAction("Skill");
         NextAction = InputSystem.actions.FindAction("NextSkill");
@@ -54,6 +54,13 @@ public class SkillController_y : MonoBehaviour
         {
             PreviousSkill();
         }
+    }
+
+    public void AddSkill(GameObject skill)
+    {
+        GameObject value = Instantiate(skill, this.gameObject.transform);
+
+        EquipActiveSkills.Add(value.GetComponent<SkillManager>());
     }
 
     IEnumerator UseSkill(int select)

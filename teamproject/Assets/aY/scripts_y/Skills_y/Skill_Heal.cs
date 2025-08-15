@@ -14,6 +14,8 @@ public class Skill_Heal : SkillManager
     {
         PlayerCont = FindAnyObjectByType<PlayerController_y1>();
 
+        AS = GetComponentInParent<AudioSource>();
+
         CoolTime = 1800;
         TimeCount = CoolTime;
     }

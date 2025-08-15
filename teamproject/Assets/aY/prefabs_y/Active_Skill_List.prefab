@@ -544,6 +544,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillCardObj: {fileID: 5916002826192228476, guid: 2f54e78ee18fb904a8e3b0311a8c8af8, type: 3}
   Cursor: {fileID: 9036975335786324646}
+  CursorArrows:
+  - {fileID: 2506840630783979325}
+  - {fileID: 3253541715621092023}
   skillController: {fileID: 0}
   UI_skillcooltime: []
   Skills: []

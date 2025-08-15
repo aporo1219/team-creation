@@ -9,6 +9,7 @@ public class UI_SkillManager : MonoBehaviour
     private RectTransform r;
     [SerializeField] private GameObject SkillCardObj;
     [SerializeField] private Image Cursor;
+    [SerializeField] private Image[] CursorArrows = new Image[2];
 
     public SkillController_y skillController;
     public List<UI_SkillCoolTime> UI_skillcooltime = new List<UI_SkillCoolTime>();
@@ -95,5 +96,16 @@ public class UI_SkillManager : MonoBehaviour
     void SetCursor()
     {
         Cursor.rectTransform.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (skillController.SelectSkill + 1), 55, 0);
+
+        if(SkillCards.Count > 1)
+        {
+            CursorArrows[0].gameObject.SetActive(true);
+            CursorArrows[1].gameObject.SetActive(true);
+        }
+        else
+        {
+            CursorArrows[0].gameObject.SetActive(false);
+            CursorArrows[1].gameObject.SetActive(false);
+        }
     }
 }

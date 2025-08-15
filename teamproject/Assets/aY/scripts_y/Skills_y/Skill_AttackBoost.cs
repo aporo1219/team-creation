@@ -13,6 +13,8 @@ public class Skill_AttackBoost : SkillManager
     {
         PlayerCont = FindAnyObjectByType<PlayerController_y1>();
 
+        AS = GetComponentInParent<AudioSource>();
+
         CoolTime = 3600;
         TimeCount = CoolTime;
     }
