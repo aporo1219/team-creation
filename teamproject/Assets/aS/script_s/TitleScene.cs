@@ -29,6 +29,7 @@ public class TitleScene : MonoBehaviour
     InputAction selectAction;
 
     bool On_Click = false;
+    int GameStartTime = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,6 +49,7 @@ public class TitleScene : MonoBehaviour
         {
             TargetImage = Button.targetGraphic as Image;
         }
+        GameStartTime = 30;
     }
 
     // Update is called once per frame
@@ -65,14 +67,16 @@ public class TitleScene : MonoBehaviour
             rb.isKinematic = false;
         }
 
-        if (selectAction.WasPressedThisFrame() && !On_Click)
+        if (GameStartTime != 0) GameStartTime--;
+
+        if (selectAction.WasPressedThisFrame() && !On_Click && GameStartTime == 0)
         {
             OnButtonPressed();
             On_Click = true;
             Default = TargetImage.color;
             TargetImage.color = Color.yellow;
         }
-        if (selectAction.WasReleasedThisFrame())
+        if (selectAction.WasReleasedThisFrame() && GameStartTime == 0)
         {
             TargetImage.color = Default;
         }

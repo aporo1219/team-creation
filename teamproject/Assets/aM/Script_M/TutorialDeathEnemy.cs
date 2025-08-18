@@ -3,7 +3,7 @@ using UnityEngine;
 public class TutorialDeathEnemy : MonoBehaviour
 {
     [SerializeField] GameObject viability_obj;
-    [SerializeField] ShowTaskSystem tasksystem;
+    [SerializeField] TutorialShowTaskSystem tasksystem;
 
     bool num_puls = false;
 

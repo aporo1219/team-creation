@@ -64,6 +64,7 @@ public class PlayerController_y1 : MonoBehaviour
     public bool canRotate = true;   //回転
     public bool canJump = true;     //ジャンプ
     public bool canAction = true;   //アクション
+    public bool canForce = true;    //重力
     //-----------------------------------------------------
 
     bool ATK = false;
@@ -259,7 +260,7 @@ public class PlayerController_y1 : MonoBehaviour
             }
         }
         //ジャンプ以外で少し浮いた時に下向きに強い力を与える
-        if (onGround && !isJump && !GroundHit && canMove)
+        if (onGround && !isJump && !GroundHit && canMove && canForce)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, -10, rb.linearVelocity.z);
         }
@@ -326,8 +327,12 @@ public class PlayerController_y1 : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(moveForward);
             }
         }
-        //重力強化
-        rb.AddForce(new Vector3(0, -5, 0));
+        //プレイヤーがステージにいる場合
+        if (canForce)
+        {
+            //重力強化
+            rb.AddForce(new Vector3(0, -5, 0));
+        }
         //地上回避クールタイム
         if (DodgeTimeCount < DodgeCoolTime)
             DodgeTimeCount++;

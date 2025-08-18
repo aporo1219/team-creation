@@ -7,7 +7,7 @@ public class TutorialButtonSystem : MonoBehaviour
     [SerializeField] GameObject Pusher;
     [SerializeField] List<GameObject> Move_Obj = new List<GameObject>();
 
-    [SerializeField] ShowTaskSystem tasksystem;
+    [SerializeField] TutorialShowTaskSystem tasksystem;
     [SerializeField] TutorialManager manager;
 
     [SerializeField] AudioSource AS;

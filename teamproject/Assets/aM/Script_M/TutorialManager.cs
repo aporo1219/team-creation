@@ -8,7 +8,7 @@ public class TutorialManager : MonoBehaviour
     public List<bool> tutorial_clear = new List<bool>();
     [SerializeField] List<GameObject> Tutorial_Obj = new List<GameObject>();
 
-    [SerializeField] ShowTaskSystem tasksystem;
+    [SerializeField] TutorialShowTaskSystem tasksystem;
 
     [SerializeField] BoxCollider button;
 
@@ -47,7 +47,7 @@ public class TutorialManager : MonoBehaviour
             case 1:
                 tasksystem.change_task = "影を追いかけよう";
                 tasksystem.change_task_flag = true;
-                tasksystem.assist_text = "Lスティックの傾きによって\nキャラの移動方向も変わる";
+                tasksystem.assist_text = "Lスティックを押し込んで\nダッシュの切り替え";
                 break;
             case 2:
                 tasksystem.change_task = "影を追いかけよう";

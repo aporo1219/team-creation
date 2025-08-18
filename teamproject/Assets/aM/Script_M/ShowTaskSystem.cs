@@ -22,17 +22,12 @@ public class ShowTaskSystem : MonoBehaviour
 
     bool pop_now = false;
 
-    [SerializeField] GameObject Tutorial;
-    [SerializeField] GameObject Invisible;
-
     [SerializeField] GameObject Main_Show_Task;
     [SerializeField] Text Task_Text;
     [SerializeField] GameObject Actionassist;
     [SerializeField] Text Actionassist_Text;
 
     [SerializeField] GameObject Kill_Slider;
-
-    [SerializeField] TutorialManager manager;
 
     Vector3 task_pos;
     Vector3 assist_pos;
@@ -41,21 +36,13 @@ public class ShowTaskSystem : MonoBehaviour
     void Start()
     {
         task = change_task = "現在タスクはありません。";
-        task_pos = new Vector3(Main_Show_Task.transform.position.x, 1130, 0);
-        if (now_scene == 0)
-            assist_pos = new Vector3(Actionassist.transform.position.x, 300, 0);
-        else
-            assist_pos = new Vector3(Actionassist.transform.position.x, -300, 0);
+        task_pos = new Vector3(Main_Show_Task.transform.position.x, 1150, 0);
+        Actionassist.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //チュートリアルが最後まで来た場合文字サイズを少し小さくする
-        if (change_task == "エレベーターまで行こう") Actionassist_Text.fontSize = 55;
-        else Actionassist_Text.fontSize = 60;
-        Actionassist.transform.position = assist_pos;
-
         Main_Show_Task.transform.position = task_pos;
 
         //現在のタスクと変更前のタスクが違う場合同じにしてポップする
@@ -79,18 +66,6 @@ public class ShowTaskSystem : MonoBehaviour
         {
             remove_time = 30;
             pop_now = false;
-        }
-
-        //敵を倒すタスクの処理
-        if(kill_enemy_num != 0 && now_kill_num == kill_enemy_num)
-        {
-            //チュートリアル
-            if(assist_text == "Xボタンを押して攻撃\nRTボタンを押して回避")
-            {
-                manager.Tutorial_Clear(6);
-                now_kill_num = kill_enemy_num = 0;
-                Invisible.SetActive(false);
-            }
         }
 
         if(Kill_Slider != null && task == "敵を倒そう")

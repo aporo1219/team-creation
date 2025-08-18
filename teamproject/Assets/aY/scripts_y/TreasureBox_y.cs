@@ -16,7 +16,7 @@ public class TreasureBox_y : MonoBehaviour
     [SerializeField] private AudioSource AS;
     [SerializeField] private AudioClip Open;
 
-    [SerializeField] ShowTaskSystem tasksystem;
+    [SerializeField] TutorialShowTaskSystem tasksystem;
     [SerializeField] TutorialManager manager;
 
     [SerializeField] List<GameObject> Skills = new List<GameObject>();
@@ -46,10 +46,13 @@ public class TreasureBox_y : MonoBehaviour
             rb.linearVelocity = new Vector3(0, 3, 0);
             animator.SetBool("Hit", true);
             AS.PlayOneShot(Open);
-            if (tasksystem.task == "•ó” ‚ðŠJ‚¯‚æ‚¤")
+            if (tasksystem != null)
             {
-                manager.Tutorial_Clear(7);
-               
+                if (tasksystem.task == "•ó” ‚ðŠJ‚¯‚æ‚¤")
+                {
+                    manager.Tutorial_Clear(7);
+
+                }
             }
 
             GameObject Card;
