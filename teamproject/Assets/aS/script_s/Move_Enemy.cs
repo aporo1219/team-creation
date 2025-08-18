@@ -37,8 +37,7 @@ public class Move_Enemy : MonoBehaviour
     private Rigidbody rd;
     [SerializeField] LayerMask GroundLayer;//レイヤーの取得
     [SerializeField] float Ground_Distance = 0.2f;
-    private bool Not_Move = false;//動きを止める(trueならば止まる)]
-    public int StopDis = 0;//敵の動きを止める距離の変数
+    private bool Not_Move = false;//動きを止める(trueならば止まる)
     
 
     Vector3 Goal_Position;//目標時点の座標変数（雑魚敵）
@@ -49,6 +48,8 @@ public class Move_Enemy : MonoBehaviour
 
 
     [SerializeField] Vector3 Local_Space_Vec;//前方基準のローカル空間ベクトル
+
+   private float StopDis = 10.0f;
 
     //SE
     [SerializeField] private AudioSource AS;
@@ -224,13 +225,22 @@ public class Move_Enemy : MonoBehaviour
 
        Debug.Log("旋回");
         
-        //正規化
-        Distance.Normalize();
-        //目標時点まで移動する（Goal_Positionの値をPlayerの座標にすればPlayerに向かう）
-        this.rd.linearVelocity = Distance * Speed_Enemy;
-
-
-        Mode_Serch = true;
+        //プレイヤーとの距離がStopDisより遠かったら動く
+        if (Distance.magnitude > StopDis)
+        {
+            //正規化
+            Distance.Normalize();
+            //目標時点まで移動する（Goal_Positionの値をPlayerの座標にすればPlayerに向かう）
+            this.rd.linearVelocity = Distance * Speed_Enemy;
+            Debug.Log("動く");
+        }
+        //プレイヤーとの距離がStopDisよりも近かったら止める
+        else
+        {
+            this.rd.linearVelocity = Vector3.zero;
+            Debug.Log("止まる");
+        }
+            Mode_Serch = true;
     }
 
     //主人王を見失たった時の関数

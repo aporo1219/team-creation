@@ -69,6 +69,7 @@ public class StageSelectUI : MonoBehaviour
                 Debug.Log($"GB[{i}] にリスナー登録完了");
             }
         }
+
     }
 
     // Update is called once per frame
@@ -103,6 +104,40 @@ public class StageSelectUI : MonoBehaviour
                 cinemachine.TiltAxis.Value = 10;
             }
         }
+
+        // 現在選択されているオブジェクト
+        GameObject current = EventSystem.current.currentSelectedGameObject;
+
+        //すべてのOutlineフレームを非表示
+        foreach(var btn in Button)
+        {
+            if(btn != null)
+            {
+                var OL = btn.GetComponent<Outline>();
+                if(OL != null)
+                {
+                    OL.enabled = false;
+                }
+            }
+        }
+        // 無効または配列外なら最後に選択していたボタンに戻す
+        if (current == null || !IsButtonCheck(current))
+        {
+            EventSystem.current.SetSelectedGameObject(Last_Button);
+        }
+        else
+        {
+            //OutLineをＯｎ
+            var OL = current.GetComponent<Outline>();
+            if(OL != null)
+            {
+                OL.enabled = true;
+            }
+            // 有効なボタンなら更新
+            Last_Button = current;
+        }
+
+
         //Bボタンがおされた処理
         if (Select != null && Select.WasPressedThisFrame())
         {

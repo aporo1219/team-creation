@@ -48,6 +48,7 @@ public class GameOver : MonoBehaviour
         //コントローラとUIボタンの紐づけ
         EventSystem.current.SetSelectedGameObject(GB);
         LB = GB;
+
         //ボタンの登録
         for (int i = 0; i < Button.Length; i++)
         {
@@ -72,7 +73,39 @@ public class GameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // 現在選択されているオブジェクト
+        GameObject current = EventSystem.current.currentSelectedGameObject;
+
+        //すべてのOutlineフレームを非表示
+        foreach (var btn in Button)
+        {
+            if (btn != null)
+            {
+                var OL = btn.GetComponent<Outline>();
+                if (OL != null)
+                {
+                    OL.enabled = false;
+                }
+            }
+        }
+
+        // 無効または配列外なら最後に選択していたボタンに戻す
+        if (current == null || !IsButtonCheck(current))
+        {
+            EventSystem.current.SetSelectedGameObject(LB);
+        }
+        else
+        {
+            //OutLineをＯｎ
+            var OL = current.GetComponent<Outline>();
+            if (OL != null)
+            {
+                OL.enabled = true;
+            }
+            // 有効なボタンなら更新
+            LB = current;
+        }
+
         //Bボタンがおされた処理
         if (selectAction != null && selectAction.WasPressedThisFrame())
         {
@@ -125,5 +158,19 @@ public class GameOver : MonoBehaviour
     void Display_TEXT()
     {
         GO.text = "ゲームオーバー";
+    }
+
+    //ボタンが配列に入っているかのチェック
+    bool IsButtonCheck(GameObject b)
+    {
+        foreach (var bt in Button)
+        {
+            if (bt != null && bt.gameObject == b)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -8,7 +8,7 @@ public class Button_s : MonoBehaviour
 {
     private Image TargetImage;
     private Button Button;
-    private Color Default = Color.gray;
+    private Color Default = Color.white;
     private Color Hover = Color.yellow;
     private Color Choice = Color.black;
     private bool IsHover = false;
