@@ -36,6 +36,11 @@ public class SkillController_y : MonoBehaviour
             return;
         }
 
+        if (PlayerController_y1.GameState != "playing")
+        {
+            return;
+        }
+
         if (SkillAction.WasPressedThisFrame() && PlayerCont.canAction)
         {
             if (EquipActiveSkills[SelectSkill].TimeCount >= EquipActiveSkills[SelectSkill].CoolTime)
