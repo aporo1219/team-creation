@@ -31,122 +31,6 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: "Caterpillar_L|Body_Material\u30A2\u30AF\u30B7\u30E7\u30F3"
-      takeName: "Caterpillar_L|Body_Material\u30A2\u30AF\u30B7\u30E7\u30F3"
-      internalID: 6314588064436588674
-      firstFrame: 0
-      lastFrame: 0
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Caterpillar_L|Caterpillar_L_Move
-      takeName: Caterpillar_L|Caterpillar_L_Move
-      internalID: -8801858498969942453
-      firstFrame: 0
-      lastFrame: 0
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Caterpillar_L|Caterpillar_R_Move
-      takeName: Caterpillar_L|Caterpillar_R_Move
-      internalID: -373029727908453702
-      firstFrame: 0
-      lastFrame: 0
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: "Caterpillar_L|\u30AD\u30E3\u30BF\u30D4\u30E9(\u30D9\u30EB\u30C8)\u30A2\u30AF\u30B7\u30E7\u30F3"
-      takeName: "Caterpillar_L|\u30AD\u30E3\u30BF\u30D4\u30E9(\u30D9\u30EB\u30C8)\u30A2\u30AF\u30B7\u30E7\u30F3"
-      internalID: -3400666725284028306
-      firstFrame: 0
-      lastFrame: 0
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
       name: "Caterpillar_R|Body_Material\u30A2\u30AF\u30B7\u30E7\u30F3"
       takeName: "Caterpillar_R|Body_Material\u30A2\u30AF\u30B7\u30E7\u30F3"
       internalID: -5936436689198857860
@@ -176,11 +60,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Caterpillar_R|Caterpillar_L_Move
-      takeName: Caterpillar_R|Caterpillar_L_Move
-      internalID: 499736038550652020
+      name: Caterpillar_R|Caterpillar_R_Walk
+      takeName: Caterpillar_R|Caterpillar_R_Walk
+      internalID: -3813284051215450517
       firstFrame: 0
-      lastFrame: 0
+      lastFrame: 159
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -205,38 +89,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Caterpillar_R|Caterpillar_R_Move
-      takeName: Caterpillar_R|Caterpillar_R_Move
-      internalID: -4251947221906165195
-      firstFrame: 0
-      lastFrame: 0
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: "Caterpillar_R|\u30AD\u30E3\u30BF\u30D4\u30E9(\u30D9\u30EB\u30C8)\u30A2\u30AF\u30B7\u30E7\u30F3"
-      takeName: "Caterpillar_R|\u30AD\u30E3\u30BF\u30D4\u30E9(\u30D9\u30EB\u30C8)\u30A2\u30AF\u30B7\u30E7\u30F3"
-      internalID: -9200284559234154520
+      name: "Caterpillar_R|\u30A2\u30AF\u30B7\u30E7\u30F3"
+      takeName: "Caterpillar_R|\u30A2\u30AF\u30B7\u30E7\u30F3"
+      internalID: -5894913408986076882
       firstFrame: 0
       lastFrame: 0
       wrapMode: 0
@@ -292,11 +147,40 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_L_Move"
-      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_L_Move"
-      internalID: -7466390868389119745
+      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_L_Idle"
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_L_Idle"
+      internalID: 8909931635343232106
       firstFrame: 0
       lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_L_Walk"
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_L_Walk"
+      internalID: -2914651889678763849
+      firstFrame: 0
+      lastFrame: 159
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -321,11 +205,98 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_R_Move"
-      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_R_Move"
-      internalID: 1633672047916917701
+      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_L_Walk.001"
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_L_Walk.001"
+      internalID: -23979872131302445
+      firstFrame: 0
+      lastFrame: 159
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_R_Idle"
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_R_Idle"
+      internalID: -3332435739098762312
       firstFrame: 0
       lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_R_Walk"
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Caterpillar_R_Walk"
+      internalID: -3363042223362967430
+      firstFrame: 0
+      lastFrame: 159
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Hammer_Idle.001"
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Hammer_Idle.001"
+      internalID: 6048905925231652385
+      firstFrame: 0
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -354,7 +325,36 @@ ModelImporter:
       takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Idle"
       internalID: -2594830005207816443
       firstFrame: 0
-      lastFrame: 6
+      lastFrame: 9
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Idle.001"
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Idle.001"
+      internalID: -8877200424890781773
+      firstFrame: 0
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -382,35 +382,6 @@ ModelImporter:
       name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|\u30A2\u30AF\u30B7\u30E7\u30F3"
       takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|\u30A2\u30AF\u30B7\u30E7\u30F3"
       internalID: 6756163884670735776
-      firstFrame: 0
-      lastFrame: 6
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|\u30AD\u30E3\u30BF\u30D4\u30E9(\u30D9\u30EB\u30C8)\u30A2\u30AF\u30B7\u30E7\u30F3"
-      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|\u30AD\u30E3\u30BF\u30D4\u30E9(\u30D9\u30EB\u30C8)\u30A2\u30AF\u30B7\u30E7\u30F3"
-      internalID: -6102503062060334390
       firstFrame: 0
       lastFrame: 0
       wrapMode: 0
