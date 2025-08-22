@@ -8,11 +8,18 @@ public class SkillManager : MonoBehaviour
 
     public Sprite image;
 
+    private int Level = 1;
+
     public int Damage;
     public int HealValue;
 
     public virtual void UseSkill()
     {
 
+    }
+
+    public virtual void LevalUp()
+    {
+        Level++;
     }
 }

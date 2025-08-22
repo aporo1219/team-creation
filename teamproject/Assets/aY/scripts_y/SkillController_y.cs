@@ -63,9 +63,18 @@ public class SkillController_y : MonoBehaviour
 
     public void AddSkill(GameObject skill)
     {
-        GameObject value = Instantiate(skill, this.gameObject.transform);
+        if(EquipActiveSkills.Contains(skill.GetComponent<SkillManager>()))
+        {
+            int index = EquipActiveSkills.IndexOf(skill.GetComponent<SkillManager>());
+            EquipActiveSkills[index].LevalUp();
+        }
+        else
+        {
+            GameObject value = Instantiate(skill, this.gameObject.transform);
 
-        EquipActiveSkills.Add(value.GetComponent<SkillManager>());
+            EquipActiveSkills.Add(value.GetComponent<SkillManager>());
+        }
+            
     }
 
     IEnumerator UseSkill(int select)
