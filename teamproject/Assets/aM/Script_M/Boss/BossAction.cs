@@ -47,10 +47,15 @@ public class BossAction : MonoBehaviour
                 direction.y = 0;
 
                 var lookRotation = Quaternion.LookRotation(direction, Vector3.up);
-                gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, lookRotation, MOVE_ROTATION_TIME);
+                //gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, lookRotation, MOVE_ROTATION_TIME);
+
+                //if(lookRotation <= 1)
+                lookRotation = new Quaternion(lookRotation.x, lookRotation.y, lookRotation.z, lookRotation.w);
+
+                gameObject.transform.rotation = lookRotation;
 
                 //プレイヤーの方向へ移動
-                Vector3 velocity = gameObject.transform.rotation * new Vector3(0, 0, status.Speed);
+                Vector3 velocity = gameObject.transform.forward * status.Speed;
                 //プレイヤーから遠いと近づく
                 PB_length = Vector_Lnegth(gameObject.transform.position, player_pos);
                 if (PB_length > MOVE_STOP_LENGTH)

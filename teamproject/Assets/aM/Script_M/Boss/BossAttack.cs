@@ -10,6 +10,8 @@ public class BossAttack : MonoBehaviour
 
     BossAction action;
     [SerializeField] BossHitCheck hitcheck;
+    [SerializeField] GameObject hitobj;
+    Rigidbody rb;
 
     public int charge_time = 0;
     public int rush_time = 0;
@@ -26,6 +28,8 @@ public class BossAttack : MonoBehaviour
     private void Start()
     {
         action = GetComponent<BossAction>();
+
+        rb = GetComponentInChildren<Rigidbody>();
     }
 
     private void Update()
@@ -52,28 +56,31 @@ public class BossAttack : MonoBehaviour
             now_charge = false;
             //突進する速度を保存
             rush_length = Speed_Lnegth(action.player_pos, gameObject.transform.position);
-            
+            hitobj.SetActive(true); 
             now_rush = true;
         }
         //突進中
         if (now_rush)
         {
             rush_time--;
-            Vector3 velocity = gameObject.transform.rotation * new Vector3(0, 0, rush_length);
+            Vector3 velocity = gameObject.transform.forward * rush_length * RUSH_TIME;
             Vector3 target = gameObject.transform.position + velocity * RUSH_BOOST_SPEED;
-            if (!hitcheck.wall_hit)
-            {
-                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, RUSH_BOOST_SPEED);
-            }
-            else
-            {
-                gameObject.transform.position -= velocity * RUSH_BOOST_SPEED * 2;
-                hitcheck.wall_hit = false;
-            }
+
+            rb.linearVelocity = velocity;
+            //if (!hitcheck.wall_hit)
+            //{
+            //    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, RUSH_BOOST_SPEED);
+            //}
+            //else
+            //{
+            //    gameObject.transform.position -= velocity * RUSH_BOOST_SPEED * 2;
+            //    hitcheck.wall_hit = false;
+            //}
         }
         //突進硬直開始
         if(rush_time ==  0 && now_rush)
         {
+            hitobj.SetActive(false);
             action.bossanim.SetFloat("MoveSpeed", 0.0f);
             now_freeze = true;
             now_rush = false;
