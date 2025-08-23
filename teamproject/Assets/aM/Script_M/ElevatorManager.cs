@@ -27,7 +27,7 @@ public class ElevatorManager : MonoBehaviour
 
         if (playerpos_changetime != 0) playerpos_changetime--;
         if (playerpos_changetime == 1)
-            player.gameObject.transform.position = new Vector3(17, 15, -18);
+            player.gameObject.transform.position = new Vector3(0, 0, 0);
     }
 
     private void OnTriggerEnter(Collider other)

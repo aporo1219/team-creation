@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viability_obj: {fileID: 15754284}
-  tasksystem: {fileID: 437327294}
+  tasksystem: {fileID: 437327297}
 --- !u!1 &29265406
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,6 +738,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4163053220528200, guid: 3904b9d628543824ab5d604bef929475, type: 3}
   m_PrefabInstance: {fileID: 1724823724}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &89229034
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3298608010343982190, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: m_Name
+      value: Scene
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125624277244643065, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: scene
+      value: Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903258449130552683, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -32.897274
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903258449130552683, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 23.113188
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903258449130552683, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.3630805
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903258449130552683, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903258449130552683, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903258449130552683, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903258449130552683, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903258449130552683, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903258449130552683, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903258449130552683, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c140758cc8e35ce49a57d004a850aca7, type: 3}
 --- !u!1 &104406911 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3164662375717310761, guid: 1433fb96fdd0f1246bee8006103cd904, type: 3}
@@ -1862,7 +1923,7 @@ PrefabInstance:
     - target: {fileID: 4464519159008998657, guid: 77d2ba1d6723935449a9b99528eb5b07, type: 3}
       propertyPath: tasksystem
       value: 
-      objectReference: {fileID: 437327294}
+      objectReference: {fileID: 437327297}
     - target: {fileID: 5090944404337651363, guid: 77d2ba1d6723935449a9b99528eb5b07, type: 3}
       propertyPath: m_Name
       value: TreasureBox
@@ -2169,8 +2230,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 2.5, z: 1.5}
-  m_Center: {x: 0, y: 1.25, z: 0}
+  m_Size: {x: 10, y: 5, z: 10}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &360860702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2737,6 +2798,7 @@ GameObject:
   - component: {fileID: 437327292}
   - component: {fileID: 437327293}
   - component: {fileID: 437327294}
+  - component: {fileID: 437327297}
   - component: {fileID: 437327295}
   m_Layer: 0
   m_Name: Main Camera
@@ -2931,7 +2993,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437327287}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fb66af513ce68a47a798c0303964276, type: 3}
   m_Name: 
@@ -2943,14 +3005,11 @@ MonoBehaviour:
   kill_enemy_num: 0
   now_kill_num: 0
   change_task_flag: 0
-  Tutorial: {fileID: 1892433244}
-  Invisible: {fileID: 34137056}
   Main_Show_Task: {fileID: 782642416}
   Task_Text: {fileID: 600684783}
   Actionassist: {fileID: 1682068258}
   Actionassist_Text: {fileID: 1181716153}
   Kill_Slider: {fileID: 0}
-  manager: {fileID: 460302187}
 --- !u!82 &437327295
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3060,6 +3119,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd5e87962f45ed49972f2dbec3c1f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &437327297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437327287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364e2a4e737d2664bbe84ab4f312d192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  task: 
+  change_task: 
+  assist_text: 
+  kill_enemy_num: 0
+  now_kill_num: 0
+  change_task_flag: 0
+  Tutorial: {fileID: 1892433244}
+  Invisible: {fileID: 34137056}
+  Main_Show_Task: {fileID: 782642416}
+  Task_Text: {fileID: 600684783}
+  Actionassist: {fileID: 1682068258}
+  Actionassist_Text: {fileID: 1181716153}
+  Kill_Slider: {fileID: 1152257292}
+  manager: {fileID: 460302187}
 --- !u!1001 &441828962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3190,7 +3277,7 @@ MonoBehaviour:
   - {fileID: 360860699}
   - {fileID: 623976316}
   - {fileID: 689055564}
-  tasksystem: {fileID: 437327294}
+  tasksystem: {fileID: 437327297}
   button: {fileID: 663023103}
 --- !u!1001 &460970082
 PrefabInstance:
@@ -4581,7 +4668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viability_obj: {fileID: 621536660}
-  tasksystem: {fileID: 437327294}
+  tasksystem: {fileID: 437327297}
 --- !u!1001 &623976314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4694,8 +4781,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 2.5, z: 1.5}
-  m_Center: {x: 0, y: 1.25, z: 0}
+  m_Size: {x: 10, y: 5, z: 10}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &623976319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4924,7 +5011,7 @@ MonoBehaviour:
   Move_Obj:
   - {fileID: 34168648}
   - {fileID: 211578710}
-  tasksystem: {fileID: 437327294}
+  tasksystem: {fileID: 437327297}
   manager: {fileID: 460302187}
   AS: {fileID: 0}
   Push: {fileID: 0}
@@ -5124,8 +5211,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 2.5, z: 1.5}
-  m_Center: {x: 0, y: 1.25, z: 0}
+  m_Size: {x: 10, y: 5, z: 10}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &689055567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5170,8 +5257,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 2.5, z: 1.5}
-  m_Center: {x: 0, y: 1.25, z: 0}
+  m_Size: {x: 10, y: 5, z: 10}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &702521674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5820,8 +5907,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 2.5, z: 1.5}
-  m_Center: {x: 0, y: 1.25, z: 0}
+  m_Size: {x: 10, y: 5, z: 10}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &984338253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14127,3 +14214,4 @@ SceneRoots:
   - {fileID: 15754282}
   - {fileID: 2013236382}
   - {fileID: 34137060}
+  - {fileID: 89229034}

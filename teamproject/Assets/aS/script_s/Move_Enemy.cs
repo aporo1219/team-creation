@@ -113,8 +113,6 @@ public class Move_Enemy : MonoBehaviour
         {
             return;
         }
-
-        
     }
 
     // Update is called once per frame

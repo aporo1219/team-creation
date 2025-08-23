@@ -487,7 +487,7 @@ MonoBehaviour:
   RUSH_TIME: 180
   FREEZE_TIME: 10
   hitcheck: {fileID: 5089436993224874556}
-  hitobj: {fileID: 0}
+  hitobj: {fileID: 8232016300610634752}
   charge_time: 0
   rush_time: 0
   freeze_time: 0
