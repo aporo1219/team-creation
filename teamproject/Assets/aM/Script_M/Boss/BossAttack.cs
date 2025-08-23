@@ -25,6 +25,12 @@ public class BossAttack : MonoBehaviour
 
     Vector3 rush_direction;
 
+
+    //SE
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip ChargeSE;//突進中SE
+    [SerializeField] AudioClip AccumulateSE;//突進チャージSE
+
     private void Start()
     {
         action = GetComponent<BossAction>();
@@ -45,6 +51,8 @@ public class BossAttack : MonoBehaviour
             direction.y = 0;
             var lookRotation = Quaternion.LookRotation(direction, Vector3.up);
             gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, lookRotation, action.MOVE_ROTATION_TIME);
+            //SEを流す
+            AS.PlayOneShot(AccumulateSE);
         }
         //突進開始
         if (charge_time == CHARGE_TIME)
@@ -58,6 +66,8 @@ public class BossAttack : MonoBehaviour
             rush_length = Speed_Lnegth(action.player_pos, gameObject.transform.position);
             hitobj.SetActive(true); 
             now_rush = true;
+            //SEを流す
+            AS.PlayOneShot(ChargeSE);
         }
         //突進中
         if (now_rush)
