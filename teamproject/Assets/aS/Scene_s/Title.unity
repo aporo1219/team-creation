@@ -244,6 +244,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 159177245}
   pc: {fileID: 159868406}
+  status: {fileID: 159868408}
+  Now_Scene: 
 --- !u!114 &159868406 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6994619166277509466, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
@@ -253,6 +255,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb2bff2959b4d0f4fa9a7a9c10dc2bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &159868408 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 973185730918463769, guid: eb4859f7fc05d684f9468fefdef78f07, type: 3}
+  m_PrefabInstance: {fileID: 159177243}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159177244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d5ecd9eb438f6489a6c98dd8c8aeed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &345513849
@@ -1501,6 +1514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1281584469}
+  - component: {fileID: 1281584470}
   m_Layer: 0
   m_Name: PlayTime
   m_TagString: Untagged
@@ -1523,6 +1537,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1101509684}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1281584470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281584468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df909a84504ed34baa0d77c62da92a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  second: 0
+  minute: 0
+  hour: 0
 --- !u!1 &1495077384
 GameObject:
   m_ObjectHideFlags: 0

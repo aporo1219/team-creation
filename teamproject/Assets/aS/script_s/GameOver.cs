@@ -25,6 +25,9 @@ public class GameOver : MonoBehaviour
     private bool IsHover = false;
 
     GameObject player;
+    PlayerController_y1 controller;
+    PlayerStatus status;
+    PlayerSceneChecker scenechecker;
     int playerpos_changetime = 0;
     Rigidbody rb;
     GameObject cinemachineCamera;
@@ -35,14 +38,17 @@ public class GameOver : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       
-        if(player == null)
-        { 
-        //player = GameObject.Find("Player");
-        //rb = player.GetComponent<Rigidbody>();
-        //cinemachineCamera = GameObject.Find("CinemachineCamera");
-        //cinemachine = cinemachineCamera.GetComponent<CinemachinePanTilt>();
+        player = GameObject.Find("Player");
+        if(player != null)
+        {
+            status = player.GetComponent<PlayerStatus>();
+            scenechecker = player.GetComponent<PlayerSceneChecker>();
+            controller = player.GetComponent<PlayerController_y1>();
         }
+
+        cinemachineCamera = GameObject.Find("CinemachineCamera");
+        cinemachine = cinemachineCamera.GetComponent<CinemachinePanTilt>();
+
         selectAction = InputSystem.actions.FindAction("Select");
 
         //コントローラとUIボタンの紐づけ
@@ -137,17 +143,41 @@ public class GameOver : MonoBehaviour
     {
        if(b == G_Button[0])
        {
+            controller.AnimationPlay("Idle");
+            controller.canAction = true;
+            controller.canMove = true;
+            controller.canRotate = true;
             SceneChenger.instance.ChangeScene(0);
             AS.PlayOneShot(Push_Button);
        }
        else if(b == G_Button[1])
        {
-            if (FloorChecker.Instance.Current_Floor == 1)
+            if (status != null)
+                status.HP = status.MaxHP;
+            if (scenechecker.Now_Scene == "Stage1")
             {
+                //エレベーター前でリスポーン
+                controller.AnimationPlay("Idle");
+                player.gameObject.transform.position = new Vector3(-52, 1.5f, -58);
+                player.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                cinemachine.PanAxis.Value = 0;
+                cinemachine.TiltAxis.Value = 10;
+                controller.canAction = true;
+                controller.canMove = true;
+                controller.canRotate = true;
                 SceneChenger.instance.ChangeScene(3);
             }
-            else if (FloorChecker.Instance.Current_Floor == 2)
+            else if (scenechecker.Now_Scene == "Stage2")
             {
+                //エレベーター前でリスポーン
+                controller.AnimationPlay("Idle");
+                player.gameObject.transform.position = new Vector3(0, 1.5f, 23);
+                player.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                cinemachine.PanAxis.Value = 0;
+                cinemachine.TiltAxis.Value = 10;
+                controller.canAction = true;
+                controller.canMove = true;
+                controller.canRotate = true;
                 SceneChenger.instance.ChangeScene(4);
             }
         }

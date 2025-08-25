@@ -60,7 +60,7 @@ public class TitleScene : MonoBehaviour
         if (playerpos_changetime == 1)
         {
             rb.isKinematic = true;
-            player.transform.position = new Vector3(0, 1.7f, 0);
+            player.transform.position = new Vector3(0, 1.5f, 0);
             player.transform.rotation = new Quaternion(0, 0, 0, 0);
             cinemachine.PanAxis.Value = 0;
             cinemachine.TiltAxis.Value = 10;
