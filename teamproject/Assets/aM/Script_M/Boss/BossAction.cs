@@ -26,6 +26,13 @@ public class BossAction : MonoBehaviour
     [SerializeField] int ATTACK_MIN_TIME;               //攻撃をする最短の時間
     [SerializeField] int ATTACK_MAX_TIME;               //攻撃をする最大の時間
 
+    //SE関連
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip FootSE;
+
+    private bool CheckFoot = false;//足音のSEが重ならないための変数
+    private int SEtimerFoot;//足音のタイム
+
     private void Start()
     {
         bossanim = GetComponentInChildren<Animator>();
@@ -56,6 +63,14 @@ public class BossAction : MonoBehaviour
 
                 //プレイヤーの方向へ移動
                 Vector3 velocity = gameObject.transform.forward * status.Speed;
+                //SE
+                if (!CheckFoot)
+                {
+                    AS.PlayOneShot(FootSE);
+                    CheckFoot = true;
+                    Invoke(nameof(FootCheckSE), 4);
+                }
+
                 //プレイヤーから遠いと近づく
                 PB_length = Vector_Lnegth(gameObject.transform.position, player_pos);
                 if (PB_length > MOVE_STOP_LENGTH)
@@ -113,4 +128,10 @@ public class BossAction : MonoBehaviour
         return length;
     }
 
+    //足音のチェック
+    private void FootCheckSE()
+    {
+        //時間チェック
+        CheckFoot = false;
+    }
 }

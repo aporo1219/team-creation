@@ -66,8 +66,7 @@ public class BossAttack : MonoBehaviour
             rush_length = Speed_Lnegth(action.player_pos, gameObject.transform.position);
             hitobj.SetActive(true); 
             now_rush = true;
-            //SEÇó¨Ç∑
-            AS.PlayOneShot(ChargeSE);
+            
         }
         //ìÀêiíÜ
         if (now_rush)
@@ -77,6 +76,9 @@ public class BossAttack : MonoBehaviour
             Vector3 target = gameObject.transform.position + velocity * RUSH_BOOST_SPEED;
 
             rb.linearVelocity = velocity;
+
+            //SEÇó¨Ç∑
+            AS.PlayOneShot(ChargeSE);
             //if (!hitcheck.wall_hit)
             //{
             //    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, RUSH_BOOST_SPEED);

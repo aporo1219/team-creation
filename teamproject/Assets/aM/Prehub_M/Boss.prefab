@@ -470,6 +470,8 @@ MonoBehaviour:
   MOVE_ROTATION_TIME: 0.1
   ATTACK_MIN_TIME: 200
   ATTACK_MAX_TIME: 200
+  AS: {fileID: 7550164452001119737}
+  FootSE: {fileID: 8300000, guid: 1bc583422abaff243a6c2cca4ff17069, type: 3}
 --- !u!114 &3592651129475648015
 MonoBehaviour:
   m_ObjectHideFlags: 0
