@@ -76,12 +76,12 @@ public class UI_SkillManager : MonoBehaviour
             if (skillController.SelectSkill == i)
             {
                 //リストの横幅をカードの枚数+1で割った幅で配置する
-                Rect.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (i + 1), 55, 0);
+                Rect.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (i + 1), 38, 0);
             }
             else
             {
                 //リストの横幅をカードの枚数+1で割った幅で配置する
-                Rect.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (i + 1), 45, 0);
+                Rect.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (i + 1), 33, 0);
             }
                 
 
@@ -95,7 +95,7 @@ public class UI_SkillManager : MonoBehaviour
     /// </summary>
     void SetCursor()
     {
-        Cursor.rectTransform.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (skillController.SelectSkill + 1), 55, 0);
+        Cursor.rectTransform.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (skillController.SelectSkill + 1), 38, 0);
 
         if(SkillCards.Count > 1)
         {
