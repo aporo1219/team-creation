@@ -71,14 +71,16 @@ public class PlayerStatus : MonoBehaviour
         {
             HP = MaxHP;
         }
+        if (HP == MaxHP)
+            dead = false;
         //HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç
-        else if(HP <= 0)
+        else if (HP <= 0)
         {
             HP = 0;
 
 
-            if(!dead)
-            StartCoroutine(GameOver());
+            if (!dead)
+                StartCoroutine(GameOver());
 
             dead = true;
         }

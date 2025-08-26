@@ -31,8 +31,8 @@ public class TutorialShowTaskSystem : MonoBehaviour
     void Start()
     {
         task = change_task = "現在タスクはありません。";
-        Main_Show_Task.transform.position = new Vector3(970, 840, 0);
-        Actionassist.transform.position = new Vector3(970, 365, 0);
+        Main_Show_Task.transform.position = new Vector3(970, 1000, 0);
+        Actionassist.transform.position = new Vector3(970, 850, 0);
     }
 
     // Update is called once per frame
