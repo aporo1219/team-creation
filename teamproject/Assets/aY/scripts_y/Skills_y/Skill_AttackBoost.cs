@@ -15,6 +15,8 @@ public class Skill_AttackBoost : SkillManager
 
         AS = GetComponentInParent<AudioSource>();
 
+        skillName = SkillName.AttackBoost;
+
         CoolTime = 3600;
         TimeCount = CoolTime;
     }
@@ -32,7 +34,7 @@ public class Skill_AttackBoost : SkillManager
         if (TimeCount >= CoolTime)
         {
             Instantiate(AttackBoost, new Vector3(PlayerCont.transform.position.x, PlayerCont.transform.position.y - 1.0f, PlayerCont.transform.position.z), PlayerCont.transform.rotation);
-            StartCoroutine(PlayerCont.Status.SetAttackRate(1.2f, 20));
+            StartCoroutine(PlayerCont.Status.SetAttackRate((1.0f + (0.2f * Level)), (15 + (5 * Level))));
             //SE
             AS.PlayOneShot(AttackBufSE);
             TimeCount = 0;

@@ -47,8 +47,10 @@ MonoBehaviour:
   CoolTime: 0
   TimeCount: 0
   image: {fileID: 21300000, guid: 4117e996724b00d4e94cbd4cfdeeea50, type: 3}
+  Level: 1
   Damage: 0
   HealValue: 0
+  skillName: 3
   AttackBoost: {fileID: 3591765684353758444, guid: 8f6e507b6b6c67542aeae516a7b78a16, type: 3}
   AS: {fileID: 0}
   AttackBufSE: {fileID: 8300000, guid: 032e56f7412a3bf4e8ebb0b67a52b38a, type: 3}

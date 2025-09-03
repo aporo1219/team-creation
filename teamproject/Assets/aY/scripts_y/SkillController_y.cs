@@ -63,12 +63,21 @@ public class SkillController_y : MonoBehaviour
 
     public void AddSkill(GameObject skill)
     {
-        if(EquipActiveSkills.Contains(skill.GetComponent<SkillManager>()))
+        bool none = true;
+
+        for(int i=0;i<EquipActiveSkills.Count;i++)
         {
-            int index = EquipActiveSkills.IndexOf(skill.GetComponent<SkillManager>());
-            EquipActiveSkills[index].LevalUp();
+            if (EquipActiveSkills[i].skillName == (skill.GetComponent<SkillManager>()).skillName)
+            {
+                //int index = EquipActiveSkills.IndexOf(skill.GetComponent<SkillManager>());
+                EquipActiveSkills[i].LevalUp();
+
+                none = false;
+            }
+            
         }
-        else
+
+        if (none)
         {
             GameObject value = Instantiate(skill, this.gameObject.transform);
 

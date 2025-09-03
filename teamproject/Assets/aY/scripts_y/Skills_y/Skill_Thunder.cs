@@ -15,6 +15,8 @@ public class Skill_Thunder : SkillManager
 
         AS = GetComponentInParent<AudioSource>();
 
+        skillName = SkillName.Thunder;
+
         CoolTime = 600;
 
         TimeCount = CoolTime;
@@ -22,7 +24,9 @@ public class Skill_Thunder : SkillManager
 
     private void FixedUpdate()
     {
-        Damage = (int)(PlayerCont.Status.Attack * 6.0f);
+        //ダメージ計算
+        //式：(5 + (5 * レベル)) + (攻撃力 * 1.2)
+        Damage = (int)((10 + (5 * Level)) + (PlayerCont.Status.Attack * 2.0f));
 
         if (TimeCount < CoolTime)
         {

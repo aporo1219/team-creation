@@ -47,8 +47,10 @@ MonoBehaviour:
   CoolTime: 0
   TimeCount: 0
   image: {fileID: 21300000, guid: a834068accf966349850d536b96028ee, type: 3}
+  Level: 1
   Damage: 0
   HealValue: 0
+  skillName: 2
   Heal: {fileID: 4554972078764500126, guid: f853a34b44416e04f923e131c6d3adb8, type: 3}
   AS: {fileID: 0}
   HeaSE: {fileID: 8300000, guid: 8a5efd6ad1bf3094e97bd3e94a2ef5d7, type: 3}

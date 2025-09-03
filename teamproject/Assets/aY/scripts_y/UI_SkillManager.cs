@@ -84,6 +84,9 @@ public class UI_SkillManager : MonoBehaviour
                 Rect.anchoredPosition = new Vector3((Width / (SkillCards.Count + 1)) * (i + 1), 33, 0);
             }
                 
+            Text leveltext = SkillCards[i].GetComponentInChildren<Text>();
+
+            leveltext.text = ("Lv." + Skills[i].Level);
 
             UI_skillcooltime[i].Skill = skillController.EquipActiveSkills[i].GetComponent<SkillManager>();
         }

@@ -47,8 +47,10 @@ MonoBehaviour:
   CoolTime: 0
   TimeCount: 0
   image: {fileID: 21300000, guid: a10be7e75f843d841972ae603c9bd83d, type: 3}
+  Level: 1
   Damage: 0
   HealValue: 0
+  skillName: 1
   Thunder: {fileID: 7545315647080500942, guid: d53954c2f9b84e845a49368300aabf2b, type: 3}
   AS: {fileID: 0}
   ThunSE: {fileID: 8300000, guid: b97c96ce8f8243149afd2731ea0b80e6, type: 3}

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,10 +9,20 @@ public class SkillManager : MonoBehaviour
 
     public Sprite image;
 
-    private int Level = 1;
+    public int Level = 1;
 
     public int Damage;
     public int HealValue;
+
+    [HideInInspector] public enum SkillName
+    { 
+        FireBall,
+        Thunder,
+        Heal,
+        AttackBoost,
+    }
+
+    public SkillName skillName;
 
     public virtual void UseSkill()
     {

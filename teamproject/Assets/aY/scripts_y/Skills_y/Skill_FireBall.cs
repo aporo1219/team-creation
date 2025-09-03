@@ -15,13 +15,17 @@ public class Skill_FireBall : SkillManager
 
         AS = GetComponentInParent<AudioSource>();
 
+        skillName = SkillName.FireBall;
+
         CoolTime = 300;
         TimeCount = CoolTime;
     }
 
     private void FixedUpdate()
     {
-        Damage = (int)(PlayerCont.Status.Attack * 3.0f);
+        //ダメージ計算
+        //式：(5 + (5 * レベル)) + (攻撃力 * 1.2)
+        Damage = (int)((5 + (5 * Level)) + (PlayerCont.Status.Attack * 1.2f));
 
         if (TimeCount < CoolTime)
         {
