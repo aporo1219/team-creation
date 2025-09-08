@@ -40,12 +40,12 @@ public class ClearScene : MonoBehaviour
             TargetImage = Button.targetGraphic as Image;
         }
 
-        Display_TEXT();
-
         Select = InputSystem.actions.FindAction("Select");
 
         Timeobj = GameObject.Find("PlayTime");
         time = Timeobj.GetComponent<TimeManager>();
+
+        Display_TEXT();
     }
 
     // Update is called once per frame

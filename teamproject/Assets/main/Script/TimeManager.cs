@@ -11,14 +11,20 @@ public class TimeManager : MonoBehaviour
     GameObject ClearObj;
     ClearScene clear;
 
+    GameObject scene;
+    SceneNameChecker scenename;
+
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Title")
+        scene = GameObject.Find("Scene");
+        scenename = scene.GetComponent<SceneNameChecker>();
+
+        if (scenename.scene == "Title")
         {
             time = 0;
         }
-        if(SceneManager.GetActiveScene().name != "Title" && SceneManager.GetActiveScene().name == "Result" && SceneManager.GetActiveScene().name == "GameOver")
+        if(scenename.scene != "Title" && scenename.scene != "Result" && scenename.scene != "GameOver")
         {
             time++;
         }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BossAttackHItCheck : MonoBehaviour
 {
+    public BossStatus bs;
     PlayerStatus ps;
 
     private void OnTriggerEnter(Collider other)
@@ -11,7 +12,8 @@ public class BossAttackHItCheck : MonoBehaviour
             ps = other.GetComponent<PlayerStatus>();
             if (ps != null)
             {
-                ps.PlayerDamage(20);
+                ps.PlayerDamage(bs.Attack);
+                this.gameObject.SetActive(false);
             }
         }
     }
