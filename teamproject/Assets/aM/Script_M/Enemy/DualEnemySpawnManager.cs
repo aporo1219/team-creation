@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemySpawnManager : MonoBehaviour
+public class DualEnemySpawnManager : MonoBehaviour
 {
     public bool normal_enemy_flag = true;
     public bool wheel_enemy_flag = false;
@@ -12,7 +11,8 @@ public class EnemySpawnManager : MonoBehaviour
     int wspawn_num;
     int fspawn_num;
 
-    bool in_player = false;
+    public bool in_player = false;
+    public bool dual_in_player = false;
     public bool do_spawn = false;
 
     int remove_player = 0;
@@ -28,8 +28,9 @@ public class EnemySpawnManager : MonoBehaviour
 
     public Vector3 maxspawn_pos;
     public Vector3 minspawn_pos;
+    public Vector3 dualmaxspawn_pos;
+    public Vector3 dualminspawn_pos;
 
-    [SerializeField] BoxCollider boxcol;
     [SerializeField] GameObject spawn_obj;
 
     [SerializeField] GameObject normal_enemy;
@@ -38,7 +39,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     [SerializeField] Slider Kill_Slider;
 
-    [SerializeField] KillTaskSystem killtasksystem;
+    [SerializeField] KillTaskSystem_a killtasksystem;
 
     private void OnDrawGizmos()
     {
@@ -48,9 +49,12 @@ public class EnemySpawnManager : MonoBehaviour
         //ƒ{ƒbƒNƒX‚Ì’†S‚ÆƒTƒCƒY‚ğŒvZ
         Vector3 center = (minspawn_pos + maxspawn_pos) * 0.5f;
         Vector3 size = maxspawn_pos - minspawn_pos;
+        Vector3 dualcenter = (dualminspawn_pos + dualmaxspawn_pos) * 0.5f;
+        Vector3 dualsize = dualmaxspawn_pos - dualminspawn_pos;
 
         //ƒƒCƒ„[ƒtƒŒ[ƒ€ƒ{ƒbƒNƒX‚ğ•`‰æ
         Gizmos.DrawWireCube(center, size);
+        Gizmos.DrawWireCube(dualcenter, dualsize);
     }
 
     private void Update()
@@ -62,7 +66,7 @@ public class EnemySpawnManager : MonoBehaviour
         {
             if (in_player)
             {
-                if (!do_spawn && spawn_time != 0)
+                if (!do_spawn)
                 {
                     spawn_count = Random.Range(spawn_min, spawn_max);
                     if (killtasksystem != null)
@@ -84,8 +88,31 @@ public class EnemySpawnManager : MonoBehaviour
                     if (spawn_time > 0)
                         spawn_time--;
                 }
-                in_player = false;
             }
+            if (dual_in_player)
+            {
+                if (!do_spawn)
+                {
+                    spawn_count = Random.Range(spawn_min, spawn_max);
+                    Spawn_Num();
+                    for (int i = 0; i < nspawn_num; i++)
+                    {
+                        Dual_Normal_Spawn();
+                    }
+                    for (int i = 0; i < wspawn_num; i++)
+                    {
+                        Dual_Wheel_Spawn();
+                    }
+                    for (int i = 0; i < fspawn_num; i++)
+                    {
+                        Dual_Fry_Spawn();
+                    }
+                    do_spawn = true;
+                    if (spawn_time > 0)
+                        spawn_time--;
+                }
+            }
+            in_player = dual_in_player = false;
         }
 
         if (death_num != spawn_count && spawn_count != 0) remove_player = wait_spawn;
@@ -100,7 +127,7 @@ public class EnemySpawnManager : MonoBehaviour
                 killtasksystem.Next_Task();
         }
 
-        if (spawn_count != 0 && killtasksystem != null)
+        if(spawn_count != 0 && killtasksystem != null)
         {
             killtasksystem.tasksystem.now_kill_num = death_num;
             Kill_Slider.value = (float)death_num / (float)spawn_count;
@@ -111,27 +138,66 @@ public class EnemySpawnManager : MonoBehaviour
     {
         Vector3 pos = new Vector3(Random.Range(minspawn_pos.x, maxspawn_pos.x), Random.Range(minspawn_pos.y, maxspawn_pos.y), Random.Range(minspawn_pos.z, maxspawn_pos.z));
 
-        Instantiate(normal_enemy, pos, Quaternion.identity, spawn_obj.transform);
-        Debug.Log("’Êí“G¢Š«™œc");
-
+        if (spawn_time == -1 || spawn_time > 0)
+        {
+            Instantiate(normal_enemy, pos, Quaternion.identity, spawn_obj.transform);
+            Debug.Log("’Êí“G¢Š«™œc");
+        }
     }
 
     void Wheel_Spawn()
     {
         Vector3 pos = new Vector3(Random.Range(minspawn_pos.x, maxspawn_pos.x), Random.Range(minspawn_pos.y, maxspawn_pos.y), Random.Range(minspawn_pos.z, maxspawn_pos.z));
 
-        Instantiate(wheel_enemy, pos, Quaternion.identity, spawn_obj.transform);
-        Debug.Log("Ô—Ö“G¢Š«™œc");
-
+        if (spawn_time == -1 || spawn_time > 0)
+        {
+            Instantiate(wheel_enemy, pos, Quaternion.identity, spawn_obj.transform);
+            Debug.Log("Ô—Ö“G¢Š«™œc");
+        }
     }
 
     void Fry_Spawn()
     {
         Vector3 pos = new Vector3(Random.Range(minspawn_pos.x, maxspawn_pos.x), Random.Range(minspawn_pos.y, maxspawn_pos.y), Random.Range(minspawn_pos.z, maxspawn_pos.z));
 
-        Instantiate(fry_enemy, pos, Quaternion.identity, spawn_obj.transform);
-        Debug.Log("‹ó’†“G¢Š«™œc");
+        if (spawn_time == -1 || spawn_time > 0)
+        {
+            Instantiate(fry_enemy, pos, Quaternion.identity, spawn_obj.transform);
+            Debug.Log("‹ó’†“G¢Š«™œc");
+        }
+    }
 
+    void Dual_Normal_Spawn()
+    {
+        Vector3 pos = new Vector3(Random.Range(dualminspawn_pos.x, dualmaxspawn_pos.x), Random.Range(dualminspawn_pos.y, dualmaxspawn_pos.y), Random.Range(dualminspawn_pos.z, dualmaxspawn_pos.z));
+
+        if (spawn_time == -1 || spawn_time > 0)
+        {
+            Instantiate(normal_enemy, pos, Quaternion.identity, spawn_obj.transform);
+            Debug.Log("’Êí“G¢Š«™œc");
+        }
+    }
+
+    void Dual_Wheel_Spawn()
+    {
+        Vector3 pos = new Vector3(Random.Range(dualminspawn_pos.x, dualmaxspawn_pos.x), Random.Range(dualminspawn_pos.y, dualmaxspawn_pos.y), Random.Range(dualminspawn_pos.z, dualmaxspawn_pos.z));
+
+        if (spawn_time == -1 || spawn_time > 0)
+        {
+            Instantiate(wheel_enemy, pos, Quaternion.identity, spawn_obj.transform);
+            Debug.Log("Ô—Ö“G¢Š«™œc");
+        }
+    }
+
+    void Dual_Fry_Spawn()
+    {
+        Vector3 pos = new Vector3(Random.Range(dualminspawn_pos.x, dualmaxspawn_pos.x), Random.Range(dualminspawn_pos.y, dualmaxspawn_pos.y), Random.Range(dualminspawn_pos.z, dualmaxspawn_pos.z));
+
+        if (spawn_time == -1 || spawn_time > 0)
+        {
+            Instantiate(fry_enemy, pos, Quaternion.identity, spawn_obj.transform);
+            Debug.Log("‹ó’†“G¢Š«™œc");
+        }
     }
 
     void Spawn_Num()
@@ -164,14 +230,6 @@ public class EnemySpawnManager : MonoBehaviour
         if (fry_enemy_flag)
         {
             fspawn_num = max;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.name == "Player" && !do_spawn)
-        {
-            in_player = true;
         }
     }
 }

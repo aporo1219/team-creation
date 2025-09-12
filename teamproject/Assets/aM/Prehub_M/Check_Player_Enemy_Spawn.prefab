@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1255768578508825946
+--- !u!1 &1175360812628712319
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,51 +8,77 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6405885103410836227}
-  - component: {fileID: 3910536076379637552}
+  - component: {fileID: 3751668936472713198}
+  - component: {fileID: 3221089006317535336}
+  - component: {fileID: 3134901927137720200}
   m_Layer: 0
-  m_Name: Enemy_Spawn
+  m_Name: Check_Player_Enemy_Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6405885103410836227
+--- !u!4 &3751668936472713198
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255768578508825946}
+  m_GameObject: {fileID: 1175360812628712319}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3910536076379637552
+--- !u!65 &3221089006317535336
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175360812628712319}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3134901927137720200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255768578508825946}
+  m_GameObject: {fileID: 1175360812628712319}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 756bf62ecdfeba2408d0004e7a747751, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d87f75a11196c24d8cee41a9aad3c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normal_enemy_flag: 1
+  normal_enemy_flag: 0
   wheel_enemy_flag: 0
   fry_enemy_flag: 0
+  do_spawn: 0
+  spawn_time: 0
   spawn_count: 0
-  spawn_max: 15
+  spawn_max: 0
+  spawn_min: 0
   death_num: 0
   maxspawn_pos: {x: 0, y: 0, z: 0}
   minspawn_pos: {x: 0, y: 0, z: 0}
-  spawn_obj: {fileID: 1255768578508825946}
+  boxcol: {fileID: 3221089006317535336}
+  spawn_obj: {fileID: 1175360812628712319}
   normal_enemy: {fileID: 5714690653104014428, guid: 4a2a99a71e48b4e4a856b2848318d5ad, type: 3}
   wheel_enemy: {fileID: 3587917099420412790, guid: 77cfc61eaa6702d4f8f7093863204d49, type: 3}
   fry_enemy: {fileID: 7827168785373322010, guid: 37a5ed73fdd7d1545bc91f3c295589e8, type: 3}

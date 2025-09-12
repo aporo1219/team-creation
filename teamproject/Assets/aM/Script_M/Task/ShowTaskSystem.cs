@@ -11,9 +11,12 @@ public class ShowTaskSystem : MonoBehaviour
     public string task;
     public string change_task;
     public string assist_text;
+    public string previous_text = "null";
 
     public float kill_enemy_num = 0;
     public float now_kill_num = 0;
+
+    public bool now_kill_task = false;
 
     int move_time = 0;
     int remove_time = 0;
@@ -28,6 +31,10 @@ public class ShowTaskSystem : MonoBehaviour
     [SerializeField] Text Actionassist_Text;
 
     [SerializeField] GameObject Kill_Slider;
+    [SerializeField] Slider Slider;
+
+    public GameObject tasks;
+    public GameObject destroy_obj;
 
     Vector3 task_pos;
     Vector3 assist_pos;
@@ -53,29 +60,47 @@ public class ShowTaskSystem : MonoBehaviour
             task_pos.y -= 13;
             stay_time = 120;
         }
-        if(move_time == 0 && stay_time > 0)
+        if (move_time == 0 && stay_time > 0)
         {
             stay_time--;
         }
-        if(remove_time > 0)
+        if (remove_time > 0)
         {
             remove_time--;
             task_pos.y += 13;
         }
-        if(stay_time == 0 && pop_now && remove_time == 0)
+        if (stay_time == 0 && pop_now && remove_time == 0)
         {
             remove_time = 30;
             pop_now = false;
         }
 
-        if(Kill_Slider != null && task == "“G‚ð“|‚»‚¤")
+        if (Kill_Slider != null && task == "“G‚ð“|‚»‚¤")
         {
             Task_Text.text = task + "\n" + now_kill_num + " / " + kill_enemy_num;
+            Slider.value = (float)now_kill_num / (float)kill_enemy_num;
             Kill_Slider.SetActive(true);
         }
-        else if(Kill_Slider != null)
+        else if (Kill_Slider != null)
         {
             Kill_Slider.SetActive(false);
+        }
+
+        //
+        if (now_kill_num >= kill_enemy_num && kill_enemy_num != 0)
+        {
+            now_kill_task = false;
+            kill_enemy_num = now_kill_num = 0;
+            Kill_Slider.SetActive(false);
+            change_task = previous_text;
+            previous_text = "null";
+            if (destroy_obj != null)
+            {
+                destroy_obj.SetActive(false);
+                destroy_obj = null;
+            }
+            tasks.SetActive(true);
+            Show_Task();
         }
     }
 

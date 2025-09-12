@@ -10,6 +10,7 @@ public class ClearScene : MonoBehaviour
     [SerializeField] Button Button;
     [SerializeField] GameObject GB;
     [SerializeField] Text Result;
+    [SerializeField] Text Score;
     [SerializeField] AudioSource AS;
     [SerializeField] AudioClip Push_Button;
 
@@ -24,8 +25,8 @@ public class ClearScene : MonoBehaviour
 
     private InputAction Select;
 
-    GameObject Timeobj;
-    TimeManager time;
+    GameObject Scoreobj;
+    ScoreManager scoremanager;
 
 
     bool On_Click = false;
@@ -33,7 +34,7 @@ public class ClearScene : MonoBehaviour
     void Start()
     {
         //コントローラとUIボタンの紐づけ
-        EventSystem.current.SetSelectedGameObject(GB);
+        //EventSystem.current.SetSelectedGameObject(GB);
         LB = GB;
         if (Button != null)
         {
@@ -42,8 +43,8 @@ public class ClearScene : MonoBehaviour
 
         Select = InputSystem.actions.FindAction("Select");
 
-        Timeobj = GameObject.Find("PlayTime");
-        time = Timeobj.GetComponent<TimeManager>();
+        Scoreobj = GameObject.Find("Score");
+        scoremanager = Scoreobj.GetComponent<ScoreManager>();
 
         Display_TEXT();
     }
@@ -84,6 +85,7 @@ public class ClearScene : MonoBehaviour
     //テキスト表示関数
     void Display_TEXT()
     {
-        Result.text = "プレイ時間：" + time.hour + "時間" + time.minute + "分" + time.second + "秒" + time.time;
+        Result.text = "プレイ時間：" + scoremanager.hour + "時間" + scoremanager.minute + "分" + scoremanager.second + "秒" + scoremanager.time;
+        Score.text = "敵キル数：" + scoremanager.kill;
     }
 }

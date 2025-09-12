@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class KillTaskSystem : MonoBehaviour
+public class KillTaskSystem_a : MonoBehaviour
 {
     public string text;
 

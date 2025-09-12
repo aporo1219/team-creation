@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7214362182668690668
 Transform:
   m_ObjectHideFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4778531955590413283}
+  m_Father: {fileID: 4072522005190354397}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3587917099420412790
 GameObject:
@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 5691171179512127105}
   - component: {fileID: 6363206878876685984}
   - component: {fileID: 4304269253222655401}
+  - component: {fileID: 3641128385062201802}
   m_Layer: 0
   m_Name: Enemy_Wheel
   m_TagString: Enemy
@@ -63,10 +64,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 194147244394099095}
-  - {fileID: 7214362182668690668}
-  - {fileID: 2276330216608095373}
-  - {fileID: 2907805202244241303}
+  - {fileID: 4072522005190354397}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5691171179512127105
@@ -194,6 +192,62 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &3641128385062201802
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3587917099420412790}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4382950396830180029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4072522005190354397}
+  m_Layer: 0
+  m_Name: Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4072522005190354397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4382950396830180029}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0000009536743, y: 0, z: 0.0000006556511}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 194147244394099095}
+  - {fileID: 7214362182668690668}
+  - {fileID: 2276330216608095373}
+  - {fileID: 2907805202244241303}
+  m_Father: {fileID: 4778531955590413283}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4656293334966425020
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +279,7 @@ Transform:
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4778531955590413283}
+  m_Father: {fileID: 4072522005190354397}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2770575457592104277
 MonoBehaviour:
@@ -295,7 +349,7 @@ Transform:
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 4778531955590413283}
+  m_Father: {fileID: 4072522005190354397}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &440878278835571997
 MonoBehaviour:
@@ -341,7 +395,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4778531955590413283}
+    m_TransformParent: {fileID: 4072522005190354397}
     m_Modifications:
     - target: {fileID: 79425219818983086, guid: d8743d6741734af41be8040b22e58111, type: 3}
       propertyPath: m_Layer
@@ -619,7 +673,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Ground_Distance: 0.2
-  StopDis: 2
   Local_Space_Vec: {x: 0, y: 0, z: 0}
   AS: {fileID: 4304269253222655401}
   BeHit_SE: {fileID: 8300000, guid: 11d14c63ca287ac46bbd397e696ba42c, type: 3}

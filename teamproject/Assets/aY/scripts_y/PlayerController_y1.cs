@@ -260,9 +260,13 @@ public class PlayerController_y1 : MonoBehaviour
             }
         }
         //ジャンプ以外で少し浮いた時に下向きに強い力を与える
-        if (onGround && !isJump && !GroundHit && canMove && canForce)
+        if (onGround && !isJump && !GroundHit && canMove && canForce && AttackState == AttackType.None)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -10, rb.linearVelocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -15, rb.linearVelocity.z);
+        }
+        else if (AttackState != AttackType.None)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         }
 
     }
@@ -331,7 +335,7 @@ public class PlayerController_y1 : MonoBehaviour
         if (canForce)
         {
             //重力強化
-            rb.AddForce(new Vector3(0, -5, 0));
+            rb.AddForce(new Vector3(0, -20, 0));
         }
         //地上回避クールタイム
         if (DodgeTimeCount < DodgeCoolTime)

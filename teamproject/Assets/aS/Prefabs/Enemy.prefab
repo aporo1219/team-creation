@@ -237,7 +237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5257545100471245903
 Transform:
   m_ObjectHideFlags: 0
@@ -251,7 +251,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7156261173769157853}
+  m_Father: {fileID: 2614390237928413379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2312034280031857237
 GameObject:
@@ -380,7 +380,7 @@ Transform:
   m_LocalScale: {x: 7, y: 7, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7156261173769157853}
+  m_Father: {fileID: 2614390237928413379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1071795074990912282
 MonoBehaviour:
@@ -679,6 +679,41 @@ Transform:
   - {fileID: 1245348930398783849}
   m_Father: {fileID: 5081703877412791106}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
+--- !u!1 &4958450714879095142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2614390237928413379}
+  m_Layer: 0
+  m_Name: Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2614390237928413379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4958450714879095142}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0000014305115, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5081703877412791106}
+  - {fileID: 5257545100471245903}
+  - {fileID: 7436958184143112157}
+  - {fileID: 7352007262453780576}
+  m_Father: {fileID: 7156261173769157853}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5028421609978018432
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +777,7 @@ Transform:
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 7156261173769157853}
+  m_Father: {fileID: 2614390237928413379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9148624765791399377
 MonoBehaviour:
@@ -888,6 +923,7 @@ GameObject:
   - component: {fileID: 350264408186009404}
   - component: {fileID: 8790187623474419236}
   - component: {fileID: 4713694004404022146}
+  - component: {fileID: 2529663898860559888}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -908,10 +944,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5081703877412791106}
-  - {fileID: 5257545100471245903}
-  - {fileID: 7436958184143112157}
-  - {fileID: 7352007262453780576}
+  - {fileID: 2614390237928413379}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &350264408186009404
@@ -1039,6 +1072,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &2529663898860559888
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5714690653104014428}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5880869778800872639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,7 +1130,7 @@ Transform:
   m_Children:
   - {fileID: 6282935932953448585}
   - {fileID: 2788580950008742065}
-  m_Father: {fileID: 7156261173769157853}
+  m_Father: {fileID: 2614390237928413379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1986587489064588658
 Animator:
@@ -1197,7 +1251,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Ground_Distance: 0.2
-  StopDis: 2
   Local_Space_Vec: {x: 0, y: 0, z: 0}
   AS: {fileID: 4713694004404022146}
   BeHit_SE: {fileID: 8300000, guid: 11d14c63ca287ac46bbd397e696ba42c, type: 3}

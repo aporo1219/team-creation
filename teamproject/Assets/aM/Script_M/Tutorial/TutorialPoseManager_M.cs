@@ -2,12 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class PoseManager_M : MonoBehaviour
+public class TutorialPoseManager_M : MonoBehaviour
 {
     //public int x = 0;
     //public int y = 0;
 
-    [SerializeField] ShowTaskSystem tasksystem;
+    [SerializeField] TutorialShowTaskSystem tasksystem;
 
     public int showing_pose;//ポーズが表示されてるか
 
@@ -84,7 +84,7 @@ public class PoseManager_M : MonoBehaviour
         UI_pos[5] = new Vector3(2450, 135, 0);
         UI_pos[6] = new Vector3(2450, 370, 0);
         UI_pos[7] = new Vector3(1400, 1350, 0);
-        UI_pos[8] = new Vector3(440, 600, 0);
+        UI_pos[8] = new Vector3(440, 600, 100);
     }
     //1350
     // Update is called once per frame

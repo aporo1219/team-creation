@@ -30,6 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1567930266394077817}
+  - {fileID: 1594771716844706460}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8015323975349707397
@@ -58,12 +59,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8015323975349707397}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: 0, w: 0.7071067}
+  m_LocalRotation: {x: 0.00017461182, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.005122991, y: 0.0026371349, z: 0.034094863}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1567930266394077817}
+  m_Father: {fileID: 183988075209217591}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6834774842144628437
 BoxCollider:
@@ -103,7 +104,7 @@ MonoBehaviour:
   DoorSE: {fileID: 8300000, guid: 6b9f7fd7be682c64fb5be6c328f6de50, type: 3}
   MovePosition: 5
   Door_Speed: 10
-  Close: 2
+  CloseStart: 2
 --- !u!1001 &1317532931060518290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -166,10 +167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 51c80b4332f15b745a4fc1dd9dce054e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1594771716844706460}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 51c80b4332f15b745a4fc1dd9dce054e, type: 3}
       insertIndex: -1

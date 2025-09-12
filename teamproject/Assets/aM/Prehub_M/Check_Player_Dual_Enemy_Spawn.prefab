@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5251896714765440282}
   - component: {fileID: 188225742620726797}
   m_Layer: 0
-  m_Name: Dual_Enemy_Spawn
+  m_Name: Check_Player_Dual_Enemy_Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

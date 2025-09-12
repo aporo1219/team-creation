@@ -235,6 +235,7 @@ Transform:
   - {fileID: 8833219850076064858}
   - {fileID: 4733518629828936195}
   - {fileID: 6732288162720576346}
+  - {fileID: 2029486878568751017}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &7262160204386673963
@@ -344,6 +345,7 @@ MonoBehaviour:
   canRotate: 1
   canJump: 1
   canAction: 1
+  canForce: 1
   AttackNum: 0
   AttackState: 0
   animator: {fileID: 0}
@@ -485,6 +487,61 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &2727464774505300669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2029486878568751017}
+  - component: {fileID: 1847261491878754447}
+  m_Layer: 8
+  m_Name: EnemyShowErea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2029486878568751017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2727464774505300669}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8245418336972001371}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1847261491878754447
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2727464774505300669}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 200
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5142570421365392714
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +815,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7b419714fcc8d4b9d9a0cf9ea98813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerSkillBuffer: {fileID: 8142831644456180862}
   EquipActiveSkills:
   - {fileID: 7923583291506330629}
   - {fileID: 5791706382903394930}

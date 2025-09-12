@@ -6,4 +6,9 @@ public class FPSSetting : MonoBehaviour
     {
         Application.targetFrameRate = 60;
     }
+
+    private void Update()
+    {
+        Application.targetFrameRate = 60;
+    }
 }

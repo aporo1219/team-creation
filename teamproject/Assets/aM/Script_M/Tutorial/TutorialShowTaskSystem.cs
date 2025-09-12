@@ -25,6 +25,8 @@ public class TutorialShowTaskSystem : MonoBehaviour
 
     [SerializeField] GameObject Kill_Slider;
 
+    [SerializeField] Slider slider;
+
     [SerializeField] TutorialManager manager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,7 +41,8 @@ public class TutorialShowTaskSystem : MonoBehaviour
     void Update()
     {
         //表示タスクの変更
-        if (change_task_flag) Show_Task();
+        if (change_task_flag)
+            Show_Task();
 
         //敵を倒すタスクの処理
         if (kill_enemy_num != 0 && now_kill_num == kill_enemy_num)
@@ -48,6 +51,18 @@ public class TutorialShowTaskSystem : MonoBehaviour
             now_kill_num = kill_enemy_num = 0;
             Invisible.SetActive(false);
         }
+
+        if (Kill_Slider != null && task == "敵を倒そう")
+        {
+            Task_Text.text = task + "\n" + now_kill_num + " / " + kill_enemy_num;
+            slider.value = (float)now_kill_num / (float)kill_enemy_num;
+            Kill_Slider.SetActive(true);
+        }
+        else if (Kill_Slider != null)
+        {
+            Kill_Slider.SetActive(false);
+        }
+
     }
 
     //タスク変更
