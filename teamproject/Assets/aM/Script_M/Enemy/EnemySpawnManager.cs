@@ -169,7 +169,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player" && !do_spawn)
+        if (other.name == "Player" && other.tag == "Player" && !do_spawn)
         {
             in_player = true;
         }

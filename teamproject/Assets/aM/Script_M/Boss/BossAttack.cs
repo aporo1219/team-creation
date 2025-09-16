@@ -38,7 +38,7 @@ public class BossAttack : MonoBehaviour
         rb = GetComponentInChildren<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!action.now_attack) hitcheck.wall_hit = false;
         //ìÀêiçUåÇ================================================

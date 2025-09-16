@@ -22,7 +22,7 @@ public class TaskSystem : MonoBehaviour
     {
         if (spawnmanager != null)
         {
-            if (other.tag == "Player" && now_text == tasksystem.task && spawnmanager.spawn_count != 0)
+            if (other.tag == "Player" && other.name == "Player" && now_text == tasksystem.task && spawnmanager.spawn_count != 0)
             {
                 tasksystem.change_task = text;
                 tasksystem.change_task_flag = true;
@@ -43,7 +43,7 @@ public class TaskSystem : MonoBehaviour
         }
         else if(dualspawnmanager != null)
         {
-            if (other.tag == "Player" && now_text == tasksystem.task && dualspawnmanager.spawn_count != 0)
+            if (other.tag == "Player" && other.name == "Player" && now_text == tasksystem.task && dualspawnmanager.spawn_count != 0)
             {
                 tasksystem.change_task = text;
                 tasksystem.change_task_flag = true;
@@ -64,7 +64,7 @@ public class TaskSystem : MonoBehaviour
         }
         else if(buttonsystem != null)
         {
-            if((other.gameObject.name == "GC" ||  other.gameObject.name == "GF") && now_text == tasksystem.task)
+            if((other.name == "GC" ||  other.name == "GF") && now_text == tasksystem.task)
             {
                 tasksystem.change_task = text;
                 tasksystem.change_task_flag = true;
@@ -73,7 +73,7 @@ public class TaskSystem : MonoBehaviour
         }
         else
         {
-            if (other.tag == "Player" && now_text == tasksystem.task)
+            if (other.tag == "Player" && other.name == "Player" && now_text == tasksystem.task)
             {
                 tasksystem.change_task = text;
                 tasksystem.change_task_flag = true;

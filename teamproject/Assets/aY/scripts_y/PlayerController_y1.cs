@@ -243,6 +243,11 @@ public class PlayerController_y1 : MonoBehaviour
             {
                 StartCoroutine("Jump");
             }
+
+            if(jumpAction.WasPressedThisFrame())
+            {
+                Debug.Log("Aƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½");
+            }
             //’ÊíUŒ‚
             if (attackAction.WasPressedThisFrame() && canAction && AttackState == AttackType.None)
             {

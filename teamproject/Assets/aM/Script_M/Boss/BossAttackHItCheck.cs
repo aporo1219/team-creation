@@ -12,7 +12,7 @@ public class BossAttackHItCheck : MonoBehaviour
             ps = other.GetComponent<PlayerStatus>();
             if (ps != null)
             {
-                ps.PlayerDamage(bs.Attack);
+                ps.PlayerDamage(bs.Attack); 
                 this.gameObject.SetActive(false);
             }
         }

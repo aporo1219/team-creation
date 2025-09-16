@@ -40,7 +40,7 @@ public class BossAction : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Debug.Log(now_attack);
 

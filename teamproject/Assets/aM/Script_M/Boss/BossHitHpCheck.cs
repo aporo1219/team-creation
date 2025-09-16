@@ -1,29 +1,16 @@
 using UnityEngine;
 
-public class BossHitHpCheck : MonoBehaviour
+public class BossHitHPCheck : MonoBehaviour
 {
-    public BossStatus status;
     bool hit = false;
 
-    private void OnCollisionEnter(Collision collision)
+    [SerializeField] BossStatus status;
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.name == "GC" && !hit)
+        if(other.tag == "PlayerAttack")
         {
             status.HP -= 3;
-            hit = true;
-        }
-        if (collision.gameObject.name == "GF" && !hit)
-        {
-            status.HP -= 4;
-            hit = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.name == "GC" || collision.gameObject.name == "GF")
-        {
-            hit = false;
         }
     }
 }
