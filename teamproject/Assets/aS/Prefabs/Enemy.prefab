@@ -1256,6 +1256,7 @@ MonoBehaviour:
   BeHit_SE: {fileID: 8300000, guid: 11d14c63ca287ac46bbd397e696ba42c, type: 3}
   HitThunder_SE: {fileID: 8300000, guid: a5b52904a9ff62844ad0a1d5c105fecb, type: 3}
   HitFireBall_SE: {fileID: 8300000, guid: a414081b78497f24aa22e7393a92e594, type: 3}
+  HitEffect: {fileID: 983026335284912973, guid: eaf1f96986fb77b4ab6560eda5aade37, type: 3}
 --- !u!114 &8400297569591447614
 MonoBehaviour:
   m_ObjectHideFlags: 0

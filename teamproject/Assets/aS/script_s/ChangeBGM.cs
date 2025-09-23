@@ -40,15 +40,15 @@ public class ChangeBGM : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
 
-        if (other.gameObject.tag == "Player")
-        {
-            //プレイヤーが出たら流れていたBGMをミュートにし、別のＢＧＭを流す
-            Debug.Log("出た");
-            ASAfter.mute = true;
-            BGM = false;
-            //2秒後にBGM切り替え   
-            Invoke(nameof(Change), ChangeTime);
-        }
+        //if (other.gameObject.tag == "Player")
+        //{
+        //    //プレイヤーが出たら流れていたBGMをミュートにし、別のＢＧＭを流す
+        //    Debug.Log("出た");
+        //    ASAfter.mute = true;
+        //    BGM = false;
+        //    //2秒後にBGM切り替え   
+        //    Invoke(nameof(Change), ChangeTime);
+        //}
     }
 
     private void Change()

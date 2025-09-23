@@ -48,6 +48,7 @@ public class Enemy_Status : MonoBehaviour
 
         if (Time.time >= nextShotTime && Attack_Erea.Find)
         {
+            shotInterval = Random.Range(1, 3) * 10;
             nextShotTime = Time.time + shotInterval;
 
             // 攻撃アニメーション再生

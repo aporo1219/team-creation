@@ -9,6 +9,7 @@ public class TutorialShowTaskSystem : MonoBehaviour
     public string task;
     public string change_task;
     public string assist_text;
+    public int text_size;
 
     public float kill_enemy_num = 0;
     public float now_kill_num = 0;
@@ -69,6 +70,7 @@ public class TutorialShowTaskSystem : MonoBehaviour
     void Show_Task()
     {
         task = change_task;
+        Actionassist_Text.fontSize = text_size;
         if (task == "“G‚ð“|‚»‚¤")
             Task_Text.text = task + "\n" + now_kill_num + " / " + kill_enemy_num;
         Task_Text.text = task;

@@ -34,11 +34,6 @@ public class TitleScene : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = GameObject.Find("Player");
-        rb = player.GetComponent<Rigidbody>();
-        cinemachineCamera = GameObject.Find("CinemachineCamera");
-        cinemachine = cinemachineCamera.GetComponent<CinemachinePanTilt>();
-
         selectAction = InputSystem.actions.FindAction("Select");
 
         //コントローラとUIボタンの紐づけ
@@ -71,6 +66,20 @@ public class TitleScene : MonoBehaviour
 
         if (selectAction.WasPressedThisFrame() && !On_Click && GameStartTime == 0)
         {
+            player = GameObject.Find("singleton").transform.GetChild(0).gameObject;
+            if (player != null)
+            {
+                player.SetActive(true);
+                Debug.Log("見つかったよ");
+                rb = player.GetComponent<Rigidbody>();
+            }
+            else
+            {
+                Debug.Log("見つかんねぇよ");
+            }
+            cinemachineCamera = GameObject.Find("CinemachineCamera");
+            cinemachine = cinemachineCamera.GetComponent<CinemachinePanTilt>();
+
             OnButtonPressed();
             On_Click = true;
             Default = TargetImage.color;

@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -39,15 +40,27 @@ public class PoseManager_M : MonoBehaviour
     [SerializeField] Image ReStart;             //再開画像
     [SerializeField] Image Status;              //ステータス画像
     [SerializeField] Image OperationMethod;     //操作確認画像
-    [SerializeField] Image FinishStage;         //ステージ終了画像
+    [SerializeField] Image ResetStage;          //ステージ終了画像
+    [SerializeField] Image FinishGame;          //ゲーム終了画像
     [SerializeField] Image Passive;             //パッシブスキル画像
     [SerializeField] Image Active;              //アクティブスキル画像
     [SerializeField] Image Comment_Panel;       //説明パネル画像
     [SerializeField] RectTransform Kill_Slider;
+    [SerializeField] RectTransform OperationPict;
 
     [SerializeField] GameObject Frame;          //セレクターのフレーム画像
 
-    [SerializeField] Text Comment_Text;         //説明パネルの文字
+    [SerializeField] Text Comment_Text1;
+    [SerializeField] Text Comment_Text2;         //説明パネルの文字
+
+    [SerializeField] GameObject text2_obj;
+    [SerializeField] GameObject opepict_obj;
+
+    GameObject player;
+    GameObject cinemachineCamera;
+    CinemachinePanTilt cinemachine;
+
+    [SerializeField] FloorChecker FC;
 
     Vector3[] UI_pos;                           //UIの位置
     int pose_start = 0;                         //ポーズ画面のフェードイン＆フェードアウトの時間
@@ -55,9 +68,16 @@ public class PoseManager_M : MonoBehaviour
     enum Selector_ID
     {
         RESTART,
+        RESETSTAGE,
         STATUS,
         OPERATIONMETHOD,
-        FINISHSTAGE
+        FINISHGAME,
+        PASSIVE,
+        ACTIVE,
+        COMMENTPANEL,
+        SLIDER,
+        OPERATIONPICT,
+        FINISHID
     }
 
     private void Awake()
@@ -74,40 +94,42 @@ public class PoseManager_M : MonoBehaviour
         poseClick = InputSystem.actions.FindAction("PoseClick");
         poseCancel = InputSystem.actions.FindAction("PoseCancel");
 
-        UI_pos = new Vector3[9];
+        UI_pos = new Vector3[(int)Selector_ID.FINISHID];
 
-        UI_pos[0] = new Vector3(-800, 250, 0);
-        UI_pos[1] = new Vector3(-370, 250, 0);
-        UI_pos[2] = new Vector3(-800, 90, 0);
-        UI_pos[3] = new Vector3(-370, 90, 0);
-        UI_pos[4] = new Vector3(-600, 700, 0);
-        UI_pos[5] = new Vector3(2450, 135, 0);
-        UI_pos[6] = new Vector3(2450, 370, 0);
-        UI_pos[7] = new Vector3(1400, 1350, 0);
-        UI_pos[8] = new Vector3(440, 600, 0);
+        UI_pos[(int)Selector_ID.RESTART] = new Vector3(-800, 400, 0);
+        UI_pos[(int)Selector_ID.RESETSTAGE] = new Vector3(-370, 400, 0);
+        UI_pos[(int)Selector_ID.STATUS] = new Vector3(-800, 240, 0);
+        UI_pos[(int)Selector_ID.OPERATIONMETHOD] = new Vector3(-370, 240, 0);
+        UI_pos[(int)Selector_ID.FINISHGAME] = new Vector3(-600, 90, 0);
+        UI_pos[(int)Selector_ID.PASSIVE] = new Vector3(2450, 135, 0);
+        UI_pos[(int)Selector_ID.ACTIVE] = new Vector3(2450, 370, 0);
+        UI_pos[(int)Selector_ID.COMMENTPANEL] = new Vector3(950, 1350, 0);
+        UI_pos[(int)Selector_ID.SLIDER] = new Vector3(0, 635, 100);
+        UI_pos[(int)Selector_ID.OPERATIONPICT] = new Vector3(-50, 820, 100);
     }
     //1350
     // Update is called once per frame
     void Update()
     {
         //UIの移動処理
-        ReStart.rectTransform.position = UI_pos[0];
-        Status.rectTransform.position = UI_pos[1];
-        OperationMethod.rectTransform.position = UI_pos[2];
-        FinishStage.rectTransform.position = UI_pos[3];
-        Map.rectTransform.position = UI_pos[4];
-        Passive.rectTransform.position = UI_pos[5];
-        Active.rectTransform.position = UI_pos[6];
-        Comment_Panel.rectTransform.position = UI_pos[7];
-        Kill_Slider.anchoredPosition3D = UI_pos[8];
+        ReStart.rectTransform.position = UI_pos[(int)Selector_ID.RESTART];
+        Status.rectTransform.position = UI_pos[(int)Selector_ID.STATUS];
+        OperationMethod.rectTransform.position = UI_pos[(int)Selector_ID.OPERATIONMETHOD];
+        ResetStage.rectTransform.position = UI_pos[(int)Selector_ID.RESETSTAGE];
+        FinishGame.rectTransform.position = UI_pos[(int)Selector_ID.FINISHGAME];
+        Passive.rectTransform.position = UI_pos[(int)Selector_ID.PASSIVE];
+        Active.rectTransform.position = UI_pos[(int)Selector_ID.ACTIVE];
+        Comment_Panel.rectTransform.position = UI_pos[(int)Selector_ID.COMMENTPANEL];
+        Kill_Slider.anchoredPosition3D = UI_pos[(int)Selector_ID.SLIDER];
+        OperationPict.anchoredPosition3D = UI_pos[(int)Selector_ID.OPERATIONPICT];
 
         //Escapeキーの入力でポーズ画面の切り替えを行う
         //コントローラーのポーズボタンでポーズ画面の切り替えを行う
         if ((Input.GetKeyDown(KeyCode.Escape) || poseAction.WasPressedThisFrame()) && !Click_UI && SceneChenger.gameState == "playing")
         {
-            Comment_Text.text = tasksystem.task;
+            Comment_Text2.text = tasksystem.task;
             if (tasksystem.task == "敵を倒そう")
-                Comment_Text.text = tasksystem.task + "\n" + tasksystem.now_kill_num + " / " + tasksystem.kill_enemy_num;
+                Comment_Text2.text = tasksystem.task + "\n" + tasksystem.now_kill_num + " / " + tasksystem.kill_enemy_num;
             showing_pose++;
         }
 
@@ -119,13 +141,13 @@ public class PoseManager_M : MonoBehaviour
             showing_pose = 0;
 
         //ポーズ画面に移動したら数値が200になるまで背景の透明度を変更する
-        if(showing_pose == 1 && alpha_time < 200)
+        if (showing_pose == 1 && alpha_time < 200)
         {
             alpha_time += 8;
             BackGround.color = new Color32(0, 0, 0, (byte)alpha_time);
         }
         //ポーズ画面から離れたら背景の透明度を０に戻す
-        else if(showing_pose == 0 && alpha_time > 0)
+        else if (showing_pose == 0 && alpha_time > 0)
         {
             alpha_time -= 8;
             BackGround.color = new Color32(0, 0, 0, (byte)alpha_time);
@@ -150,7 +172,8 @@ public class PoseManager_M : MonoBehaviour
                     UI_pos[i].x -= 35;
                 }
                 UI_pos[i].y -= 19;
-                UI_pos[i + 1].y -= 17;
+                UI_pos[i + 1].y -= 19;
+                UI_pos[i + 2].y -= 19;
             }
             else
             {
@@ -162,14 +185,14 @@ public class PoseManager_M : MonoBehaviour
                     //セレクターの連続の動きを15秒に１度にする
                     if (selector_move_time >= 15) selector_move_time = 0;
                     //左スティックが左に倒されたらカーソルを左に動かす
-                    if (selectValue.x < -0.5 && selector_move_time == 0 && selector_pos != 2)
+                    if (selectValue.x < -0.5 && selector_move_time == 0 && selector_pos != 2 && selector_pos < 4)
                     {
                         selector_pos--;
                         if (selector_pos < 0) selector_pos = 0;
                         Debug.Log("selector_moveleft");
                     }
                     //左スティックが右に倒されたらカーソルを右に動かす
-                    if (selectValue.x > 0.5 && selector_move_time == 0 && selector_pos != 1)
+                    if (selectValue.x > 0.5 && selector_move_time == 0 && selector_pos != 1 && selector_pos < 4)
                     {
                         selector_pos++;
                         if (selector_pos > 3) selector_pos = 3;
@@ -186,7 +209,7 @@ public class PoseManager_M : MonoBehaviour
                     if (selectValue.y < -0.5 && selector_move_time == 0)
                     {
                         selector_pos += 2;
-                        if (selector_pos > 3) selector_pos -= 2;
+                        if (selector_pos > 5) selector_pos -= 2;
                         Debug.Log("selector_movedown");
                     }
                     //左スティックが上下に傾けられたらselector_move_timeを１ずつ増やす
@@ -213,12 +236,12 @@ public class PoseManager_M : MonoBehaviour
                 }
 
                 //キャンセルボタンが押されたら
-                if(poseCancel.WasPressedThisFrame() && !push_selector && comment_num == selector_pos)
+                if (poseCancel.WasPressedThisFrame() && !push_selector && comment_num == selector_pos)
                 {
                     push_cancel = true;
                 }
                 //キャンセルボタンが離されたら
-                if(poseCancel.WasReleasedThisFrame() && push_selector && !push_cancel)
+                if (poseCancel.WasReleasedThisFrame() && push_selector && !push_cancel)
                 {
                     push_selector = false;
                 }
@@ -229,12 +252,14 @@ public class PoseManager_M : MonoBehaviour
                     {
                         comment_move_time++;
                         UI_pos[7].y += 19;
-                        UI_pos[8].y += 17;
+                        UI_pos[8].y += 19;
+                        UI_pos[9].y += 19;
                     }
                     if (comment_move_time > 0 && comment_move)
                     {
                         comment_move_time--;
                         UI_pos[7].y -= 19;
+                        UI_pos[9].y -= 19;
                     }
                     if (comment_move_time == 30)
                     {
@@ -248,20 +273,49 @@ public class PoseManager_M : MonoBehaviour
                         comment_num = selector_pos;
                     }
                 }
+                if(Click_UI && selector_pos == (int)Selector_ID.RESETSTAGE)
+                {
+                    player = GameObject.Find("Player");
+                    cinemachineCamera = GameObject.Find("CinemachineCamera");
+                    cinemachine = cinemachineCamera.GetComponent<CinemachinePanTilt>();
+
+                    if (FC.Current_Floor == 1)
+                    {
+                        player.gameObject.transform.position = new Vector3(-52, 1.5f, -58);
+                        player.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                        cinemachine.PanAxis.Value = 0;
+                        cinemachine.TiltAxis.Value = 10;
+                    }
+                    if(FC.Current_Floor == 2)
+                    {
+                        player.gameObject.transform.position = new Vector3(0, 1.5f, 23);
+                        player.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+                        cinemachine.PanAxis.Value = 0;
+                        cinemachine.TiltAxis.Value = 10;
+                    }
+
+                    Click_UI = false;
+                    push_selector = false;
+                    showing_pose = 0;
+                    ResetStage.color = new Color32(255, 255, 255, 255);
+                    Change_Pose(showing_pose);
+                }
                 //UIがキャンセルされたら
-                if(push_cancel && (selector_pos == 1 || selector_pos == 2))
+                if (push_cancel && (selector_pos == (int)Selector_ID.OPERATIONMETHOD || selector_pos == (int)Selector_ID.STATUS))
                 {
                     push_selector = true;
                     if (comment_move_time < 30 && !comment_move)
                     {
                         comment_move_time++;
                         UI_pos[7].y += 19;
+                        UI_pos[9].y += 19;
                     }
                     if (comment_move_time > 0 && comment_move)
                     {
                         comment_move_time--;
                         UI_pos[7].y -= 19;
-                        UI_pos[8].y -= 17;
+                        UI_pos[8].y -= 19;
+                        UI_pos[9].y -= 19;
                     }
                     if (comment_move_time == 30)
                     {
@@ -270,12 +324,12 @@ public class PoseManager_M : MonoBehaviour
                     }
                     if (comment_move_time == 0)
                     {
+                        Click_UI = false;
                         comment_move = false;
                         push_selector = false;
                         comment_num = 0;
                         push_cancel = false;
                         comment_num = 0;
-                        Click_UI = false;
                         Remove_Color(selector_pos);
                     }
                 }
@@ -302,10 +356,11 @@ public class PoseManager_M : MonoBehaviour
                     UI_pos[i].x += 35;
                 }
                 UI_pos[i].y += 19;
-                UI_pos[i + 1].y += 17;
+                UI_pos[i + 1].y += 19;
+                UI_pos[i + 2].y += 19;
             }
             //UIが非表示になったらゲーム内を動かす
-            if(pose_start == 0)
+            if (pose_start == 0)
             {
                 Time.timeScale = 1.0f;
                 selector_pos = 0;
@@ -335,7 +390,8 @@ public class PoseManager_M : MonoBehaviour
     //セレクターフレームの位置を変更する関数
     void Show_Selector(int spos)
     {
-        switch(spos)
+        if (spos == 5) spos = (int)Selector_ID.FINISHGAME;
+        switch (spos)
         {
             case (int)Selector_ID.RESTART:
                 Frame.transform.position = ReStart.transform.position;
@@ -346,8 +402,11 @@ public class PoseManager_M : MonoBehaviour
             case (int)Selector_ID.OPERATIONMETHOD:
                 Frame.transform.position = OperationMethod.transform.position;
                 break;
-            case (int)Selector_ID.FINISHSTAGE:
-                Frame.transform.position = FinishStage.transform.position;
+            case (int)Selector_ID.RESETSTAGE:
+                Frame.transform.position = ResetStage.transform.position;
+                break;
+            case (int)Selector_ID.FINISHGAME:
+                Frame.transform.position = FinishGame.transform.position;
                 break;
         }
     }
@@ -355,10 +414,11 @@ public class PoseManager_M : MonoBehaviour
     //選択された場所の色を暗くする
     void Click_Select(int spos)
     {
+        if (spos == 5) spos = (int)Selector_ID.FINISHGAME;
         switch (spos)
         {
             case (int)Selector_ID.RESTART:
-                ReStart.color = new Color32(100, 100, 100,255);
+                ReStart.color = new Color32(100, 100, 100, 255);
                 break;
             case (int)Selector_ID.STATUS:
                 Status.color = new Color32(100, 100, 100, 255);
@@ -368,8 +428,13 @@ public class PoseManager_M : MonoBehaviour
                 OperationMethod.color = new Color32(100, 100, 100, 255);
                 Click_UI = true;
                 break;
-            case (int)Selector_ID.FINISHSTAGE:
-                FinishStage.color = new Color32(100, 100, 100, 255);
+            case (int)Selector_ID.RESETSTAGE:
+                ResetStage.color = new Color32(100, 100, 100, 255);
+                Click_UI = true;
+                break;
+            case (int)Selector_ID.FINISHGAME:
+                FinishGame.color = new Color32(100, 100, 100, 255);
+                SceneChenger.instance.ChangeScene(0);
                 break;
         }
     }
@@ -377,6 +442,7 @@ public class PoseManager_M : MonoBehaviour
     //時間が過ぎたら色を戻す
     void Remove_Color(int spos)
     {
+        if (spos == 5) spos = (int)Selector_ID.FINISHGAME;
         switch (spos)
         {
             case (int)Selector_ID.RESTART:
@@ -390,8 +456,11 @@ public class PoseManager_M : MonoBehaviour
             case (int)Selector_ID.OPERATIONMETHOD:
                 OperationMethod.color = new Color32(255, 255, 255, 255);
                 break;
-            case (int)Selector_ID.FINISHSTAGE:
-                FinishStage.color = new Color32(255, 255, 255, 255);
+            case (int)Selector_ID.RESETSTAGE:
+                ResetStage.color = new Color32(255, 255, 255, 255);
+                break;
+            case (int)Selector_ID.FINISHGAME:
+                FinishGame.color = new Color32(255, 255, 255, 255);
                 break;
         }
     }
@@ -399,23 +468,26 @@ public class PoseManager_M : MonoBehaviour
     //説明パネルの文字を変える
     void Change_Text(int spos)
     {
-        switch(spos)
+        switch (spos)
         {
             case 0:
-                Comment_Text.fontSize = 60;
-                Comment_Text.text = tasksystem.task;
+                text2_obj.SetActive(true);
+                opepict_obj.SetActive(false);
+                Comment_Text1.text = "現在のタスク";
+                Comment_Text2.fontSize = 100;
+                Comment_Text2.text = tasksystem.task;
                 if (tasksystem.task == "敵を倒そう")
-                    Comment_Text.text = tasksystem.task + "\n" + tasksystem.now_kill_num + " / " + tasksystem.kill_enemy_num;
+                    Comment_Text2.text = tasksystem.task + "\n" + tasksystem.now_kill_num + " / " + tasksystem.kill_enemy_num;
                 break;
-            case 1:
-                Comment_Text.fontSize = 60;
-                Comment_Text.text = "テスト２";
+            case (int)Selector_ID.STATUS:
+                Comment_Text1.text = "ステータス";
+                Comment_Text2.fontSize = 100;
+                Comment_Text2.text = "テスト２";
                 break;
-            case 2:
-                Comment_Text.fontSize = 40;
-                Comment_Text.text = "\n\n移動：左スティック｜攻撃：Xボタン\n\n" +
-                                    "視点：右スティック｜ジャンプ：Aボタン\n\n" +
-                                    "回避：RTボタン｜ダッシュ：左スティック押し込み\n\n";
+            case (int)Selector_ID.OPERATIONMETHOD:
+                Comment_Text1.text = "操作説明";
+                text2_obj.SetActive(false);
+                opepict_obj.SetActive(true);
                 break;
         }
     }

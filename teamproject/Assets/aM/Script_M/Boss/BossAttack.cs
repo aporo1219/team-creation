@@ -51,8 +51,6 @@ public class BossAttack : MonoBehaviour
             direction.y = 0;
             var lookRotation = Quaternion.LookRotation(direction, Vector3.up);
             gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, lookRotation, action.MOVE_ROTATION_TIME);
-            //SEを流す
-            AS.PlayOneShot(AccumulateSE);
         }
         //突進開始
         if (charge_time == CHARGE_TIME)
@@ -64,7 +62,9 @@ public class BossAttack : MonoBehaviour
             now_charge = false;
             //突進する速度を保存
             rush_length = Speed_Lnegth(action.player_pos, gameObject.transform.position);
-            hitobj.SetActive(true); 
+            hitobj.SetActive(true);
+            //SEを流す
+            AS.PlayOneShot(ChargeSE);
             now_rush = true;
             
         }
@@ -77,8 +77,6 @@ public class BossAttack : MonoBehaviour
 
             rb.linearVelocity = velocity;
 
-            //SEを流す
-            AS.PlayOneShot(ChargeSE);
             //if (!hitcheck.wall_hit)
             //{
             //    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target, RUSH_BOOST_SPEED);
@@ -117,6 +115,8 @@ public class BossAttack : MonoBehaviour
         action.bossanim.SetFloat("MoveSpeed", -1.0f);
         rush_time = RUSH_TIME / RUSH_BOOST_SPEED;
         now_charge = true;
+        //SEを流す
+        AS.PlayOneShot(AccumulateSE);
     }
 
     //突撃スピード

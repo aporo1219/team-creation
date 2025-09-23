@@ -7,7 +7,10 @@ public class BossEreaBarrier : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        bar1.SetActive(true);
-        //bar2.SetActive(true);
+        if (other.gameObject.tag == "Player")
+        {
+            bar1.SetActive(true);
+            //bar2.SetActive(true);
+        }
     }
 }

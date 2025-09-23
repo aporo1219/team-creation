@@ -60,6 +60,8 @@ public class Move_Enemy : MonoBehaviour
     private float Be_Hit_v = 2.0f;
     private float HitThunder_v = 2.0f;
     private float HitFireBall_v = 2.0f;
+
+    [SerializeField] GameObject HitEffect;
     void Start()
     {
         //èâä˙âª
@@ -303,8 +305,9 @@ public class Move_Enemy : MonoBehaviour
             Enemy.Be_Attack(combo);
             Debug.Log("hit,C");
             //çUåÇÇéÛÇØÇΩSEÇó¨Ç∑
-            AS.PlayOneShot(BeHit_SE);
+            //AS.PlayOneShot(BeHit_SE);
             AS.volume = Be_Hit_v;
+            Instantiate(HitEffect, new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z), Quaternion.identity);
         }
 
         if (collision.gameObject.name == "GF")
@@ -320,8 +323,9 @@ public class Move_Enemy : MonoBehaviour
             Enemy.Be_Attack(combo);
             Debug.Log("hit,F");
             //çUåÇÇéÛÇØÇΩSEÇó¨Ç∑
-            AS.PlayOneShot(BeHit_SE);
+            //AS.PlayOneShot(BeHit_SE);
             AS.volume = Be_Hit_v;
+            Instantiate(HitEffect, new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z), Quaternion.identity);
         }
 
         string Skill = "";
@@ -334,8 +338,9 @@ public class Move_Enemy : MonoBehaviour
             Enemy.Be_Skill(Skill);
             Debug.Log("hit,FB");
             //HitSE
-            AS.PlayOneShot(HitFireBall_SE);
+            //AS.PlayOneShot(HitFireBall_SE);
             AS.volume = HitFireBall_v;
+            Instantiate(HitEffect, new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z), Quaternion.identity);
         }
         //ÉTÉìÉ_Å[
         if (collision.gameObject.name == "Lightning")
@@ -347,8 +352,9 @@ public class Move_Enemy : MonoBehaviour
             Not_Move = true;
             Invoke(nameof(Mobile), 2.0f);
             //SE
-            AS.PlayOneShot(HitThunder_SE);
+            //AS.PlayOneShot(HitThunder_SE);
             AS.volume = HitThunder_v;
+            Instantiate(HitEffect, new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z), Quaternion.identity);
         }
     }
 

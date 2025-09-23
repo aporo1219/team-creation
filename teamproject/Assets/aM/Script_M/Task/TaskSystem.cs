@@ -11,6 +11,8 @@ public class TaskSystem : MonoBehaviour
     DualEnemySpawnManager dualspawnmanager;
     ButtonSystem buttonsystem;
 
+    public GameObject tasks;
+
     private void Start()
     {
         spawnmanager = GetComponent<EnemySpawnManager>();
@@ -77,6 +79,7 @@ public class TaskSystem : MonoBehaviour
             {
                 tasksystem.change_task = text;
                 tasksystem.change_task_flag = true;
+                tasks.SetActive(false);
 
                 if (gameObject.name == "Task")
                     Destroy(gameObject);
