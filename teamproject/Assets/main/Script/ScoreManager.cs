@@ -12,6 +12,7 @@ public class ScoreManager : MonoBehaviour
     [Header("“G‚ÌƒLƒ‹”")]
     public int kill;
     public int kill_puls;
+    public int Boss_kill;
 
     GameObject ClearObj;
     ClearScene clear;
