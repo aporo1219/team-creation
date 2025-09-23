@@ -2810,6 +2810,7 @@ MonoBehaviour:
   text: "\u6575\u3092\u5012\u305D\u3046"
   now_text: "\u968E\u6BB5\u3078\u5411\u304B\u304A\u3046"
   tasksystem: {fileID: 437327294}
+  tasks: {fileID: 0}
 --- !u!114 &232917220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9724,6 +9725,7 @@ MonoBehaviour:
   text: "\u968E\u6BB5\u3078\u623B\u308D\u3046"
   now_text: "\u968E\u6BB5\u3092\u958B\u653E\u3057\u3088\u3046"
   tasksystem: {fileID: 437327294}
+  tasks: {fileID: 0}
 --- !u!95 &965159527
 Animator:
   serializedVersion: 7
@@ -17094,6 +17096,73 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d20d3f5752430044895c999e83229d3a, type: 3}
+--- !u!1 &1582572180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1582572183}
+  - component: {fileID: 1582572182}
+  - component: {fileID: 1582572181}
+  m_Layer: 0
+  m_Name: DeathErea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1582572181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582572180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eedc807b68ba95241a73fa31c807d715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stairs: 1
+--- !u!65 &1582572182
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582572180}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10000, y: 1, z: 10000}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1582572183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582572180}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -50, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1588714277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22138,6 +22207,7 @@ MonoBehaviour:
   text: "\u968E\u6BB5\u3078\u623B\u308D\u3046"
   now_text: "\u968E\u6BB5\u3092\u958B\u653E\u3057\u3088\u3046"
   tasksystem: {fileID: 437327294}
+  tasks: {fileID: 0}
 --- !u!95 &2006934021
 Animator:
   serializedVersion: 7
@@ -22194,6 +22264,7 @@ MonoBehaviour:
   text: "\u968E\u6BB5\u3078\u5411\u304B\u304A\u3046"
   now_text: "\u73FE\u5728\u30BF\u30B9\u30AF\u306F\u3042\u308A\u307E\u305B\u3093\u3002"
   tasksystem: {fileID: 437327294}
+  tasks: {fileID: 0}
 --- !u!65 &2008081630
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23881,3 +23952,4 @@ SceneRoots:
   - {fileID: 2103886156}
   - {fileID: 1824271880}
   - {fileID: 446275609}
+  - {fileID: 1582572183}

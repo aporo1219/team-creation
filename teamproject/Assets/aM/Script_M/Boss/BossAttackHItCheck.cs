@@ -2,8 +2,15 @@ using UnityEngine;
 
 public class BossAttackHItCheck : MonoBehaviour
 {
+    [SerializeField] GameObject Boss;
+
     public BossStatus bs;
     PlayerStatus ps;
+
+    private void Update()
+    {
+        this.gameObject.transform.position = Boss.transform.position;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

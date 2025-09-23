@@ -10,7 +10,7 @@ public class BossEreaBarrier : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             bar1.SetActive(true);
-            //bar2.SetActive(true);
+            bar2.SetActive(true);
         }
     }
 }

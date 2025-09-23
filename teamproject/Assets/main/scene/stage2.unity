@@ -19002,6 +19002,73 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d20d3f5752430044895c999e83229d3a, type: 3}
+--- !u!1 &1082300610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1082300612}
+  - component: {fileID: 1082300611}
+  - component: {fileID: 1082300613}
+  m_Layer: 0
+  m_Name: DeathErea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1082300611
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082300610}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10000, y: 1, z: 10000}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1082300612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082300610}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -50, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1082300613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082300610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eedc807b68ba95241a73fa31c807d715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stairs: 2
 --- !u!4 &1084423106 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3745930820889834233, guid: d20d3f5752430044895c999e83229d3a, type: 3}
@@ -23988,13 +24055,37 @@ PrefabInstance:
       value: 3.04
       objectReference: {fileID: 0}
     - target: {fileID: 1503485167297038868, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
+      propertyPath: m_Center.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1503485167297038868, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
+      propertyPath: m_Center.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1503485167297038868, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610378570262939897, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
+      propertyPath: m_Center.y
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3662353258985342345, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3782670862400883289, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
       propertyPath: HP
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 3782670862400883289, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
+      propertyPath: Attack
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812780423450169509, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
+      propertyPath: Boss
+      value: 
+      objectReference: {fileID: 1341282551}
     - target: {fileID: 3967740673903588538, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
       propertyPath: m_Height
       value: 2.6
@@ -24002,6 +24093,14 @@ PrefabInstance:
     - target: {fileID: 3967740673903588538, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
       propertyPath: m_Center.y
       value: 2.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334206274142269849, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334206274142269849, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4396842503572087593, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
       propertyPath: m_LocalScale.x
@@ -24055,6 +24154,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6850968687002071616, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
+      propertyPath: Boss
+      value: 
+      objectReference: {fileID: 1341282551}
     - target: {fileID: 7301028741302546233, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -24073,7 +24176,7 @@ PrefabInstance:
       objectReference: {fileID: 216494836}
     - target: {fileID: 8232016300610634752, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2709404926186017479, guid: c91b3cc73da8cb843855aabc1300ccec, type: 3}
@@ -24173,6 +24276,7 @@ MonoBehaviour:
   wall2: {fileID: 1960473592}
   Boss: {fileID: 216494836}
   status: {fileID: 1341282550}
+  effect: {fileID: 31973248564637412, guid: 7f3e6454fd221254cbc56508816a924b, type: 3}
   BossAS: {fileID: 1584912357}
   EreaAS: {fileID: 134064437}
 --- !u!1001 &1341742760
@@ -36062,3 +36166,4 @@ SceneRoots:
   - {fileID: 1286711491}
   - {fileID: 1592812023}
   - {fileID: 293337886}
+  - {fileID: 1082300612}

@@ -7,6 +7,7 @@ public class DestroyBoss : MonoBehaviour
 
     [SerializeField] GameObject Boss;
     [SerializeField] BossStatus status;
+    [SerializeField] GameObject effect;
 
     [SerializeField] AudioSource BossAS;
     [SerializeField] AudioSource EreaAS;
@@ -26,6 +27,8 @@ public class DestroyBoss : MonoBehaviour
             BossAS.mute = true;
             EreaAS.mute = false;
             EreaAS.Play();
+
+            Instantiate(effect, new Vector3(this.transform.position.x, this.transform.position.y + 10, this.transform.position.z), Quaternion.identity);
 
             //爆発アニメーションをしてオブジェクトを消す
             Destroy(Boss);

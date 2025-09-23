@@ -3,6 +3,12 @@ using UnityEngine;
 public class BossSearchPlayer : MonoBehaviour
 {
     public BossAction action;
+    public GameObject Boss;
+
+    private void Update()
+    {
+        this.gameObject.transform.position = Boss.transform.position;
+    }
 
     private void OnTriggerStay(Collider other)
     {
